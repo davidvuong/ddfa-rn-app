@@ -2,7 +2,7 @@
 
 **Welcome to ddfa-app!**
 
-This is the frontend component of the DDFA (Double D Food Adventures) app. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
+This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in React Native and currently only supports iOS devices. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
 
 ## Installation
 
@@ -29,11 +29,34 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. You c
     react-native link
     ```
 
-    *NOTE: Every time you install a new dependency, you need to `react-native link`!*
+    **NOTE:** Pure JavaScript dependencies don't require `react-native link` however, you still need to restart your packager. All other dependencies like `react-native-splash-screen` need an `react-native link`. Usually the dependency will tell you if you need to `react-native link`.
+
+    I found it also helped to remove the build directory and recompiling after adding a dependency:
+
+    ```bash
+    rm -rf ./ios/build && npm run ios
+    ```
+
+    There were times where I got very bizarre errors when adding a new dependency. If all else fails, nuke it and reinstall from scratch:
+
+    ```bash
+    rm -rf ./ios/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i
+    npm run ios
+    ```
 
 1. Run the React Native application:
 
+    I prefer to run the packager myself (more control over my terminal):
+
+    ```bash
+    npm run ios
+    npm start
+    ```
+
+    Alternatively, `react-native run-ios` will open up the `packager` in a new `Terminal.app` window:
+
     ```bash
     react-native run-ios
-    react-native run-android
     ```
+
+    **NOTE:** If `npm run ios` doesn't start up the simulator app, just open it yourself and then click on the DDFA app.
