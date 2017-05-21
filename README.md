@@ -29,7 +29,11 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     react-native link
     ```
 
-    **NOTE:** Pure JavaScript dependencies don't require `react-native link` however, you still need to restart your packager. All other dependencies like `react-native-splash-screen` need an `react-native link`. Usually the dependency will tell you if you need to `react-native link`.
+    **A couple gotchas! when installing new dependencies:**
+
+    1. Pure JavaScript dependencies don't require `react-native link` (e.g. includes assets or custom Java/ObjectiveC code)
+    1. Make sure to restart your `packager` after installing a new dependency
+    1. Sometimes you also need to restart your simulator, especially when you `react-native link`
 
     I found it also helped to remove the build directory and recompiling after adding a dependency:
 
