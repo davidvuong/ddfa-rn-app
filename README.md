@@ -26,7 +26,6 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     ```bash
     npm install
-    react-native link
     ```
 
     **A couple gotchas! when installing new dependencies:**
