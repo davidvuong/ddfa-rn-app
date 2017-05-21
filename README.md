@@ -6,7 +6,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 ## Installation
 
-1. Install [React Native](https://facebook.github.io/react-native/docs/getting-started.html)
+1. Install [React Native](https://facebook.github.io/react-native/docs/getting-started.html):
 
     ```bash
     brew install nvm
@@ -30,7 +30,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     **A couple gotchas! when installing new dependencies:**
 
-    1. Pure JavaScript dependencies don't require `react-native link` (e.g. includes assets or custom Java/ObjectiveC code)
+    1. Pure JavaScript dependencies don't require `react-native link`
     1. Make sure to restart your `packager` after installing a new dependency
     1. Sometimes you also need to restart your simulator, especially when you `react-native link`
 
