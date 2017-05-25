@@ -37,14 +37,14 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     I found it also helped to remove the build directory and recompiling after adding a dependency:
 
     ```bash
-    rm -rf ./ios/build && npm run ios
+    rm -rf ./ios/build && npm run build:ios
     ```
 
     There were times where I got very bizarre errors when adding a new dependency. If all else fails, nuke it and reinstall from scratch:
 
     ```bash
     rm -rf ./ios/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i
-    npm run ios
+    npm run build:ios
     ```
 
 1. Run the React Native application:
@@ -52,7 +52,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     I prefer to run the packager myself (more control over my terminal):
 
     ```bash
-    npm run ios
+    npm run build:ios
     npm start
     ```
 
