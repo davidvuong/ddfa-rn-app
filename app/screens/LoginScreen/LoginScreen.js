@@ -8,12 +8,10 @@ import {
   StyleSheet
 } from 'react-native';
 
-export default class LogInScreen extends Component {
-  constructor(authenticationService) {
-    super();
-
-    this.authenticationService = authenticationService;
-  }
+export default class LoginScreen extends Component {
+  static navigationOptions = {
+    title: 'Login',
+  };
 
   render() {
     return (
