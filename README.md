@@ -68,7 +68,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 Below are a few pain points I experienced while developing this React Native app... some have solutions, others do not, some are just rants:
 
-1. Missing stack traces in your remote JS debug console.
+1. **Missing stack traces in your remote JS debug console.**
 
     According to their own documentation (deep inside `ExceptionsManager.js`):
 
@@ -79,13 +79,13 @@ Below are a few pain points I experienced while developing this React Native app
     // `throw '<error message>'` somewhere in your codebase.
     ```
 
-    Most of the time, exceptions occur outside of my own codebase (3rd party library or part of React Native). Running `grep -ie 'throw <error_message>'` IMO is not really a workaround.
+    Most of the time exceptions don't occur due to `throw X`. They typically occur because I done something I didn't think through or because I misused a 3rd party library. More often, these exceptions also tend to be unexpected like `can't access x of undefined`. `ExceptionsManager` catches these exceptions too. Expecting the developer to run `grep -ie 'throw <error_message>'` is not really a workaround...
 
-1. The inspection tool inside the simulator is extremely limited.
+1. **The inspection tool inside the simulator is extremely limited.**
 
     You can click on elements in the screen, sort of read the DOM hierarchy and layout but that's about it. You can't really do very much and doesn't seem very useful.
 
-1. Many popular libraries have outdated documentation.
+1. **Many popular libraries have outdated documentation.**
 
     I feel like this is just an inherit issue with using bleeding edge technology. Everything breaks, documentation is never up to date or reliable. The solution is to read the source.
 
@@ -93,21 +93,21 @@ Below are a few pain points I experienced while developing this React Native app
 
     To add to this point, a lot of popular libraries are also in the middle of a big refactor. It's likely what you write now will no longer be relevant 6 months later. This seems akin to the rest of the JavaScript ecosystem.
 
-1. When hot reloading sometimes works, it's awesome. However, it doesn't work all the time.
+1. **When hot reloading sometimes works, it's awesome. However, it doesn't work all the time.**
 
     This makes the feature unreliable and I'm hesitant to use it. I'll get into a situation where the bug that I thought I fixed is still occurring. Is this because I didn't fix it or because hot reload didn't pick up the change?
 
-1. The `EDITOR` environment variable isn't respected when opening files in terminal via simulator
+1. **The `EDITOR` environment variable isn't respected when opening files in terminal via simulator.**
 
-    The solution is to use `REACT_EDITOR`. It's also super unclear that (https://github.com/facebook/react-native/pull/13443) there's a PR to address it though.
+    The solution is to use `REACT_EDITOR`. It's also super unclear... (https://github.com/facebook/react-native/pull/13443) there's a PR to address it though.
 
-1. The act of opening files in my terminal editor by clicking on links inside a smartphone simulator...
+1. **The act of opening files in my _terminal editor_ by clicking on links inside a _smartphone simulator_...**
 
     IMO, this is possibly the worst part about the React Native development experience. There's one main reason, it breaks my terminal session when I try to reload the app if a file is open.
 
     The solution is to close your session, open a new terminal, `lsof -i :8081` and `kill -9` the packager. There are also a bunch of other reasons:
 
-    - Why open inside a terminal? Why not inside remote js debugger? I can't use Chrome DevTools
+    - Why open inside a terminal? Why not inside remote js debugger? Can't use Chrome DevTools
     - Opening more than one file before closing the previous file first also breaks my terminal
     - By default opening the editor in `nano` doesn't jump you to the line and column the error occurred
     - Clicking on the same file more than once spawns a new process instead of replacing the current buffer (accidentally clicking on the same error more than once is a common occurrence)
