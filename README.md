@@ -62,7 +62,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     react-native run-ios
     ```
 
-    **NOTE:** If `npm run ios` doesn't start up the simulator app, just open it yourself and then click on the DDFA app.
+    **NOTE:** If `npm run build:ios` does not start up the simulator app, open it yourself and click on the DDFA app.
 
 ## React Native Pain Points
 
