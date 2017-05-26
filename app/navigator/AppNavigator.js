@@ -14,7 +14,7 @@ class AppWithNavigationState extends Component {
   render() {
     return (
       <AppNavigator navigation={addNavigationHelpers({
-        display: this.props.dispatch,
+        dispatch: this.props.dispatch,
         state: this.props.navigation,
       })} />
     );
