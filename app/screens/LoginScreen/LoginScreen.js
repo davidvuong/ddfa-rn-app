@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import {
   View,
-  Text,
   TextInput,
   Button,
   StyleSheet
@@ -49,9 +48,7 @@ export default class LoginScreen extends Component {
             secureTextEntry
             style={styles.input}
           />
-          <Button title="Log in" onPress={this.onLogin}>
-            <Text>Log in</Text>
-          </Button>
+          <Button title="Log in" onPress={this.onLogin} />
         </View>
       </View>
     );
