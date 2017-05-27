@@ -10,6 +10,12 @@ export default class HomeScreen extends Component {
     title: 'Home',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render() {
     return (
       <View>
