@@ -13,7 +13,7 @@ class AuthenticationService {
         .send({ username, password })
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          err && !res.ok ? reject(err) : resolve(res.body.token);
+          err ? reject(err) : resolve(res.body.token);
         });
     });
   }
