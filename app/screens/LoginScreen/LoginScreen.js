@@ -6,6 +6,7 @@ import {
   Button,
   StyleSheet
 } from 'react-native';
+import { NavigationActions } from 'react-navigation'
 
 import AuthenticationService from '../../services/AuthenticationService';
 
@@ -25,9 +26,16 @@ export default class LoginScreen extends Component {
     const { username, password } = this.state;
     if (!username || !password) { return; }
 
-    AuthenticationService.login(username, password).then((token) => {
-      console.log(token);
-      this.props.navigation.navigate('Home');
+    AuthenticationService.login(username, password).then(() => {
+      this.setState({ password: null });
+
+      // Replace the navigation stack, start from the Home page.
+      this.props.navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ]
+      }));
     }, (error) => {
       console.log(error);
     });
