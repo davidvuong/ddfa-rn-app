@@ -6,15 +6,21 @@ import Config from './Config';
 import AuthenticationService from './services/AuthenticationService';
 
 import ConfigureStore from './store/ConfigureStore';
-import NavigationReducer from './reducers/NavigationReducer';
-import AppWithNavigationState from './navigator/AppNavigator';
+
+import {
+  TabNavigationReducer,
+  StackNavigationReducer
+} from './reducers/NavigationReducer';
+
+import AppNavigator from './navigator/AppNavigator';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.store = ConfigureStore(combineReducers({
-      navigation: NavigationReducer,
+      tabNavigation: TabNavigationReducer,
+      stackNavigation: StackNavigationReducer,
     }), {});
 
     AuthenticationService.initialize(Config.HOST);
@@ -23,7 +29,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <AppWithNavigationState />
+        <AppNavigator />
       </Provider>
     );
   }

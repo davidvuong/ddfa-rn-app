@@ -1,13 +1,25 @@
-import { NavigationActions } from 'react-navigation';
-import { AppNavigator } from '../navigator/AppNavigator';
+import {
+  TabNavigator, StackNavigator
+} from '../navigator/Navigators';
 
-const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('Login')
+/* TabNavigator initial state and reducer... */
+
+const tabInitialState = TabNavigator.router.getStateForAction(
+  TabNavigator.router.getActionForPathAndParams('Home')
 );
 
-export default function NavigationReducer(state = initialState, action) {
-  const nextState = AppNavigator.router.getStateForAction(action, state);
+export function TabNavigationReducer(state = tabInitialState, action) {
+  const nextState = TabNavigator.router.getStateForAction(action, state);
+  return nextState || state;
+}
 
-  // Simply return the original `state` if `nextState` is null or undefined.
+/* StackNavigator initial state and reducer... */
+
+const stackInitialState = StackNavigator.router.getStateForAction(
+  StackNavigator.router.getActionForPathAndParams('Login')
+);
+
+export function StackNavigationReducer(state = stackInitialState, action) {
+  const nextState = StackNavigator.router.getStateForAction(action, state);
   return nextState || state;
 }

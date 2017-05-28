@@ -1,28 +1,48 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers } from 'react-navigation';
 
-import LoginScreen from '../screens/LoginScreen/LoginScreen';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import { TabNavigator, StackNavigator } from './Navigators';
+import AuthenticationService from '../services/AuthenticationService';
 
-export const AppNavigator = StackNavigator({
-  Login: { screen: LoginScreen },
-  Home: { screen: HomeScreen },
-});
+class AppNavigator extends Component {
+  constructor(props) {
+    super(props);
 
-class AppWithNavigationState extends Component {
+    this.state = { isLoggedIn: null };
+  }
+
+  componentDidMount() {
+    AuthenticationService.isLoggedIn().then((isLoggedIn) => {
+      this.setState({ isLoggedIn });
+    }, (error) => {
+      console.error(error);
+      this.setState({ isLoggedIn: false });
+    });
+  }
+
   render() {
+    const { isLoggedIn } = this.state;
+    if (_.isNull(isLoggedIn)) {
+      return null;
+    }
+
+    const { tabNavigation, stackNavigation } = this.props;
+    const AppWithNavigationState = isLoggedIn ? TabNavigator : StackNavigator;
     return (
-      <AppNavigator navigation={addNavigationHelpers({
+      <AppWithNavigationState navigation={addNavigationHelpers({
         dispatch: this.props.dispatch,
-        state: this.props.navigation,
+        state: isLoggedIn ? tabNavigation : stackNavigation,
       })} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  navigation: state.navigation,
+  tabNavigation: state.tabNavigation,
+  stackNavigation: state.stackNavigation,
 });
 
-export default connect(mapStateToProps)(AppWithNavigationState);
+export default connect(mapStateToProps)(AppNavigator);
