@@ -5,7 +5,9 @@ import {
   Screen,
   TextInput,
   Button,
-  Text
+  Text,
+  Caption,
+  Divider
 } from '@shoutem/ui';
 import { NavigationActions } from 'react-navigation'
 
@@ -44,6 +46,9 @@ export default class LoginScreen extends Component {
     return (
       <View styleName="fill-parent">
         <Screen>
+          <Divider styleName="section-header">
+            <Caption>LOG INTO DD Food Adventures</Caption>
+          </Divider>
           <TextInput
             onChangeText={(username) => this.setState({ username })}
             placeholder="Username"
@@ -55,6 +60,7 @@ export default class LoginScreen extends Component {
             value={this.state.password}
             secureTextEntry
           />
+          <Divider />
           <Button styleName="secondary" onPress={this.onLogin}>
             <Text styleName="bold bright h-center">LOGIN</Text>
           </Button>
