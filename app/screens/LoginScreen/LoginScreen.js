@@ -2,23 +2,24 @@ import React, { Component } from 'react';
 
 import {
   View,
+  Screen,
   TextInput,
   Button,
-  StyleSheet
-} from 'react-native';
+  Text
+} from '@shoutem/ui';
 import { NavigationActions } from 'react-navigation'
 
 import AuthenticationService from '../../services/AuthenticationService';
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
-    title: 'Login',
+    headerMode: 'none',
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { username: null, password: null };
     this.onLogin = this.onLogin.bind(this);
   }
 
@@ -41,32 +42,24 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View>
+      <View styleName="fill-parent">
+        <Screen>
           <TextInput
             onChangeText={(username) => this.setState({ username })}
             placeholder="Username"
-            style={styles.input}
+            value={this.state.username}
           />
           <TextInput
             onChangeText={(password) => this.setState({ password })}
             placeholder="Password"
+            value={this.state.password}
             secureTextEntry
-            style={styles.input}
           />
-          <Button title="Log in" onPress={this.onLogin} />
-        </View>
+          <Button styleName="secondary" onPress={this.onLogin}>
+            <Text styleName="bold bright h-center">LOGIN</Text>
+          </Button>
+        </Screen>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  input: {
-    height: 40
-  }
-});

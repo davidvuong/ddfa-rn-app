@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  View,
-  Text
-} from 'react-native';
+import { Examples } from '@shoutem/ui'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -18,9 +15,7 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Welcome to the home screen</Text>
-      </View>
+      <Examples />
     );
   }
 }
