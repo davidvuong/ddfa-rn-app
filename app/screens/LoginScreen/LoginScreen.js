@@ -37,7 +37,7 @@ export default class LoginScreen extends Component {
           NavigationActions.navigate({ routeName: 'Home' })
         ]
       }));
-    }, console.error);
+    }, console.warn);
   }
 
   render() {
