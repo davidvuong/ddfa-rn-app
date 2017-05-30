@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
 
-import { TabNavigator, StackNavigator } from './Navigators';
+import { Navigator } from './Navigator';
 import AuthenticationService from '../services/AuthenticationService';
 
 class AppNavigator extends Component {
@@ -29,20 +29,17 @@ class AppNavigator extends Component {
       return null;
     }
 
-    const { tabNavigation, stackNavigation } = this.props;
-    const AppWithNavigationState = isLoggedIn ? TabNavigator : StackNavigator;
     return (
-      <AppWithNavigationState navigation={addNavigationHelpers({
+      <Navigator navigation={addNavigationHelpers({
         dispatch: this.props.dispatch,
-        state: isLoggedIn ? tabNavigation : stackNavigation,
+        state: this.props.navigation,
       })} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  tabNavigation: state.tabNavigation,
-  stackNavigation: state.stackNavigation,
+  navigation: state.navigation,
 });
 
 export default connect(mapStateToProps)(AppNavigator);

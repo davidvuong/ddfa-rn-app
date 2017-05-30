@@ -1,25 +1,10 @@
-import {
-  TabNavigator, StackNavigator
-} from '../navigator/Navigators';
+import { Navigator } from '../navigator/Navigator';
 
-/* TabNavigator initial state and reducer... */
-
-const tabInitialState = TabNavigator.router.getStateForAction(
-  TabNavigator.router.getActionForPathAndParams('Home')
+const stackInitialState = Navigator.router.getStateForAction(
+  Navigator.router.getActionForPathAndParams('Login')
 );
 
-export function TabNavigationReducer(state = tabInitialState, action) {
-  const nextState = TabNavigator.router.getStateForAction(action, state);
-  return nextState || state;
-}
-
-/* StackNavigator initial state and reducer... */
-
-const stackInitialState = StackNavigator.router.getStateForAction(
-  StackNavigator.router.getActionForPathAndParams('Login')
-);
-
-export function StackNavigationReducer(state = stackInitialState, action) {
-  const nextState = StackNavigator.router.getStateForAction(action, state);
+export function NavigationReducer(state = stackInitialState, action) {
+  const nextState = Navigator.router.getStateForAction(action, state);
   return nextState || state;
 }
