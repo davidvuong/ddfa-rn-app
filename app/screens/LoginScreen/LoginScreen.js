@@ -15,7 +15,7 @@ import AuthenticationService from '../../services/AuthenticationService';
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
-    headerMode: 'none',
+    title: 'DDFA Login'
   };
 
   constructor(props) {
@@ -46,9 +46,6 @@ export default class LoginScreen extends Component {
     return (
       <View styleName="fill-parent">
         <Screen>
-          <Divider styleName="section-header">
-            <Caption>LOG INTO DD Food Adventures</Caption>
-          </Divider>
           <TextInput
             onChangeText={(username) => this.setState({ username })}
             placeholder="Username"
@@ -64,6 +61,8 @@ export default class LoginScreen extends Component {
           <Button styleName="secondary" onPress={this.onLogin}>
             <Text styleName="bold bright h-center">LOGIN</Text>
           </Button>
+          <Divider />
+          <Caption styleName="h-center">Double D Food Adventures</Caption>
         </Screen>
       </View>
     );
