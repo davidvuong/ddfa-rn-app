@@ -18,8 +18,8 @@ export default class App extends Component {
     super(props);
 
     // Temporary until I add a log-out button...
-    const AsyncStorage = require('react-native').AsyncStorage;
-    AsyncStorage.clear();
+    // const AsyncStorage = require('react-native').AsyncStorage;
+    // AsyncStorage.clear();
 
     this.store = ConfigureStore(combineReducers({
       navigation: NavigationReducer,
