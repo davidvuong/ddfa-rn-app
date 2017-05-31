@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import {
   View,
@@ -7,7 +8,8 @@ import {
   Button,
   Text,
   Caption,
-  Divider
+  Divider,
+  Spinner
 } from '@shoutem/ui';
 import { NavigationActions } from 'react-navigation'
 
@@ -21,8 +23,30 @@ export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { username: null, password: null };
+    this.state = {
+      username: null,
+      password: null,
+      isLoggedIn: null,
+    };
     this.onLogin = this.onLogin.bind(this);
+  }
+
+  componentDidMount() {
+    AuthenticationService.isLoggedIn().then((isLoggedIn) => {
+      this.setState({ isLoggedIn });
+      this._navigateToHomePage();
+    }, () => {
+      this.setState({ isLoggedIn: false });
+    });
+  }
+
+  _navigateToHomePage() {
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' })
+      ]
+    }));
   }
 
   onLogin() {
@@ -31,18 +55,19 @@ export default class LoginScreen extends Component {
 
     AuthenticationService.login(username, password).then(() => {
       this.setState({ password: null });
-
-      // Replace the navigation stack, start from the Home page.
-      this.props.navigation.dispatch(NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
-        ]
-      }));
+      this._navigateToHomePage();
     }, console.warn);
   }
 
   render() {
+    if (_.isNull(this.state.isLoggedIn) || this.state.isLoggedIn) {
+      return (
+        <View styleName="fill-parent vertical v-center">
+          <Spinner style={styles.spinner} />
+        </View>
+      );
+    }
+
     return (
       <View styleName="fill-parent">
         <Screen>
@@ -68,3 +93,9 @@ export default class LoginScreen extends Component {
     );
   }
 }
+
+const styles = {
+  spinner: {
+    size: 'large'
+  },
+};

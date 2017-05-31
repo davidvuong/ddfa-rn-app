@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
-import { Examples } from '@shoutem/ui'
+import {
+  View,
+  Text
+} from '@shoutem/ui'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -15,7 +18,9 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <Examples />
+      <View styleName="fill-parent vertical horizontal v-center">
+        <Text>Welcome to the home screen!</Text>
+      </View>
     );
   }
 }
