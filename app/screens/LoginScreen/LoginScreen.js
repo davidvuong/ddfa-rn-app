@@ -34,7 +34,9 @@ export default class LoginScreen extends Component {
   componentDidMount() {
     AuthenticationService.isLoggedIn().then((isLoggedIn) => {
       this.setState({ isLoggedIn });
-      this._navigateToHomePage();
+      if (this.state.isLoggedIn) {
+        this._navigateToHomePage();
+      }
     }, () => {
       this.setState({ isLoggedIn: false });
     });
