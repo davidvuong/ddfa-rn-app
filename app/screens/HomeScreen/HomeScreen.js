@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 
 import {
   View,
-  Text
+  Text,
+  Icon
 } from '@shoutem/ui'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
+    tabBarLabel: 'home',
+    tabBarIcon: () => (
+      <Icon name="photo" />
+    )
   };
 
   constructor(props) {

@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addNavigationHelpers } from 'react-navigation';
+import {
+  StackNavigator,
+  TabNavigator
+} from 'react-navigation';
 
-import { Navigator } from './Navigator';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import CheckInScreen from '../screens/CheckInScreen/CheckInScreen';
 
-class AppNavigator extends Component {
-  render() {
-    return (
-      <Navigator navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state: this.props.navigation,
-      })} />
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  navigation: state.navigation,
+const BottomTabNavigator = TabNavigator({
+  Home: { screen: HomeScreen },
+  CheckInScreen: { screen: CheckInScreen },
 });
 
-export default connect(mapStateToProps)(AppNavigator);
+export default StackNavigator({
+  Login: { screen: LoginScreen },
+  BottomTabNavigator: { screen: BottomTabNavigator },
+});

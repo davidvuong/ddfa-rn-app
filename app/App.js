@@ -8,8 +8,8 @@ import AuthenticationService from './services/AuthenticationService';
 import ConfigureStore from './store/ConfigureStore';
 
 import {
-  NavigationReducer
-} from './reducers/NavigationReducer';
+  TemporaryReducer
+} from './reducers/TemporaryReducer';
 
 import AppNavigator from './navigator/AppNavigator';
 
@@ -22,7 +22,7 @@ export default class App extends Component {
     // AsyncStorage.clear();
 
     this.store = ConfigureStore(combineReducers({
-      navigation: NavigationReducer,
+      temporaryReducer: TemporaryReducer,
     }), {});
 
     AuthenticationService.initialize(Config.HOST);

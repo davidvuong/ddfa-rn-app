@@ -46,7 +46,7 @@ export default class LoginScreen extends Component {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'Home' })
+        NavigationActions.navigate({ routeName: 'BottomTabNavigator' })
       ]
     }));
   }
