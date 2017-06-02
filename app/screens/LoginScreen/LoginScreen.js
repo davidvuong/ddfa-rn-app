@@ -35,14 +35,14 @@ export default class LoginScreen extends Component {
     AuthenticationService.isLoggedIn().then((isLoggedIn) => {
       this.setState({ isLoggedIn });
       if (this.state.isLoggedIn) {
-        this._navigateToHomePage();
+        this._navigateToMainPage();
       }
     }, () => {
       this.setState({ isLoggedIn: false });
     });
   }
 
-  _navigateToHomePage() {
+  _navigateToMainPage() {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
@@ -57,7 +57,7 @@ export default class LoginScreen extends Component {
 
     AuthenticationService.login(username, password).then(() => {
       this.setState({ password: null });
-      this._navigateToHomePage();
+      this._navigateToMainPage();
     }, console.warn);
   }
 
