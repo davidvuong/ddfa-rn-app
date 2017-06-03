@@ -6,16 +6,15 @@ import {
   Text,
   Title,
   Icon,
-  Button,
-  Divider
+  Button
 } from '@shoutem/ui'
 
 import AuthenticationService from '../../services/AuthenticationService';
 
-export default class HomeScreen extends Component {
+export default class FeedScreen extends Component {
   static navigationOptions = {
-    title: <Title>Home</Title>,
-    tabBarLabel: 'home',
+    title: <Title>Feed</Title>,
+    tabBarLabel: 'feed',
     tabBarIcon: () => (
       <Icon name="rss-feed" />
     )
@@ -46,8 +45,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View styleName="fill-parent vertical horizontal v-center">
-        <Text>Welcome to the home screen!</Text>
-        <Divider />
+        <Text>Welcome to the feed screen!</Text>
         <Button styleName="secondary" onPress={this.onLogout}>
           <Text>LOGOUT</Text>
         </Button>

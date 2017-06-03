@@ -4,13 +4,13 @@ import {
 } from 'react-navigation';
 
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import FeedScreen from '../screens/FeedScreen/FeedScreen';
 import CheckInScreen from '../screens/CheckInScreen/CheckInScreen';
 import ReviewsScreen from '../screens/ReviewsScreen/ReviewsScreen';
 
 // https://github.com/react-community/react-navigation/blob/master/docs/api/navigators/TabNavigator.md#tabnavigatorconfig
 const BottomTabNavigator = TabNavigator({
-  Home: { screen: HomeScreen },
+  Feed: { screen: FeedScreen },
   CheckInScreen: { screen: CheckInScreen },
   ReviewsScreen: { screen: ReviewsScreen },
 }, {
