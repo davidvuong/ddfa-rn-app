@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "build:ios": "node node_modules/react-native/local-cli/cli.js run-ios --no-packager"
+    "build:ios": "node node_modules/react-native/local-cli/cli.js run-ios --no-packager",
+    "eslint": "./node_modules/.bin/eslint ./app"
   },
   "dependencies": {
     "@shoutem/ui": "0.14.3",
@@ -17,6 +18,8 @@
     "superagent": "3.5.2"
   },
   "devDependencies": {
-    "babel-preset-react-native": "1.9.2"
+    "babel-preset-react-native": "1.9.2",
+    "eslint": "3.19.0",
+    "eslint-plugin-react": "7.0.1"
   }
 }
