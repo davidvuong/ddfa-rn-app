@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
   View,
   Icon,
+  Title,
   Text,
   Spinner
 } from '@shoutem/ui';
@@ -20,7 +21,7 @@ const CURRENT_POSITION_STATUS = {
 
 export default class CheckInScreen extends Component {
   static navigationOptions = {
-    title: 'Check-in',
+    title: <Title>Check-In</Title>,
     tabBarLabel: 'check-in',
     tabBarIcon: () => (
       <Icon name="address-full" />

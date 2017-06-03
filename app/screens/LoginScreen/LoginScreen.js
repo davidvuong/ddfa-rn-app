@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   Text,
+  Title,
   Caption,
   Divider,
   Spinner
@@ -17,7 +18,7 @@ import AuthenticationService from '../../services/AuthenticationService';
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
-    title: 'DDFA Login'
+    title: <Title>DDFA Login</Title>
   };
 
   constructor(props) {

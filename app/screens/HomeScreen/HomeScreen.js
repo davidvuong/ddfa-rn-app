@@ -4,6 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import {
   View,
   Text,
+  Title,
   Icon,
   Button,
   Divider
@@ -13,7 +14,7 @@ import AuthenticationService from '../../services/AuthenticationService';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: <Title>Home</Title>,
     tabBarLabel: 'home',
     tabBarIcon: () => (
       <Icon name="photo" />
