@@ -68,7 +68,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 This project uses a few 3rd parties. Below are a few links to help you use the right library/tool to extend DDFA.
 
-1. I use `[react-native-vector](https://github.com/oblador/react-native-vector-icons)` icons:
+1. I use [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) icons:
 
     react-native-vector-icons bundle a few icon sets including FontAwesome and Entypo. I'm using [Ionicons](http://ionicframework.com/docs/ionicons/) for all icons in this app.
 
