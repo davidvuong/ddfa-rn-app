@@ -24,8 +24,9 @@ class GeoLocationService {
     const latitudeDelta = distance / oneDegreeOfLatitudeInMeters;
     const longitudeDelta = Math.abs(Math.atan2(
       Math.sin(angularDistance) * Math.cos(latitude),
-      Math.cos(angularDistance) - Math.sin(latitude) * Math.sin(latitude)));
-    return { latitude, longitude, latitudeDelta, longitudeDelta }
+      Math.cos(angularDistance) - Math.sin(latitude) * Math.sin(latitude)
+    ));
+    return { latitude, longitude, latitudeDelta, longitudeDelta };
   }
 
   getCurrentLocation() {
