@@ -8,7 +8,7 @@
     "eslint": "./node_modules/.bin/eslint ./app"
   },
   "dependencies": {
-    "@shoutem/ui": "0.14.3",
+    "@shoutem/ui": "0.15.0",
     "bluebird": "3.5.0",
     "lodash": "4.17.4",
     "react": "16.0.0-alpha.6",

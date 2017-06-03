@@ -33,7 +33,7 @@ export default class CheckInScreen extends Component {
     title: <Title>Check-In</Title>,
     tabBarLabel: 'check-in',
     tabBarIcon: () => (
-      <Icon name="address-full" />
+      <Icon name="address" />
     )
   };
 
@@ -99,7 +99,7 @@ export default class CheckInScreen extends Component {
   renderPlacesRow(place) {
     return (
       <Row styleName="small" style={{ height: 60 }}>
-        <Icon name="address-full"/>
+        <Icon name="address"/>
         <View styleName="vertical">
           <Subtitle styleName="bold">{place.name}</Subtitle>
           <Caption numberOfLines={1}>{place.address}</Caption>
