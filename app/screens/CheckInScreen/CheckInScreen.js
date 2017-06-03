@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import {
   View,
   ListView,
-  Icon,
   Spinner,
   Row
 } from '@shoutem/ui';
-
 import {
   Title,
   Text,
   Subtitle,
   Caption
 } from '@shoutem/ui';
+import { Icon as UIIcon } from '@shoutem/ui';
 
 import { View as RNView } from 'react-native';
 
@@ -31,9 +32,11 @@ const CURRENT_POSITION_STATUS = {
 export default class CheckInScreen extends Component {
   static navigationOptions = {
     title: <Title>Check-In</Title>,
-    tabBarLabel: 'check-in',
+    tabBarLabel: ({ focused }) => {
+      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>check-in</Caption>;
+    },
     tabBarIcon: () => (
-      <Icon name="pin" />
+      <Icon name="ios-pin" size={24} />
     )
   };
 
@@ -99,12 +102,12 @@ export default class CheckInScreen extends Component {
   renderPlacesRow(place) {
     return (
       <Row styleName="small" style={{ height: 60 }}>
-        <Icon name="pin" />
+        <UIIcon name="pin" />
         <View styleName="vertical">
           <Subtitle styleName="bold">{place.name}</Subtitle>
           <Caption numberOfLines={1}>{place.address}</Caption>
         </View>
-        <Icon styleName="disclosure" name="right-arrow"/>
+        <UIIcon styleName="disclosure" name="right-arrow"/>
       </Row>
     );
   }

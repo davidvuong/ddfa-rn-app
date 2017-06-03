@@ -4,15 +4,18 @@ import {
   View,
   Text,
   Title,
-  Icon,
+  Caption,
 } from '@shoutem/ui'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class ReviewsScreen extends Component {
   static navigationOptions = {
     title: <Title>Reviews</Title>,
-    tabBarLabel: 'reviews',
+    tabBarLabel: ({ focused }) => {
+      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>reviews</Caption>;
+    },
     tabBarIcon: () => (
-      <Icon name="activity" />
+      <Icon name="ios-chatboxes" size={24} />
     )
   };
 

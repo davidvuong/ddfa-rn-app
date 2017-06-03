@@ -5,18 +5,21 @@ import {
   View,
   Text,
   Title,
-  Icon,
+  Caption,
   Button
 } from '@shoutem/ui'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import AuthenticationService from '../../services/AuthenticationService';
 
 export default class FeedScreen extends Component {
   static navigationOptions = {
     title: <Title>Feed</Title>,
-    tabBarLabel: 'feed',
+    tabBarLabel: ({ focused }) => {
+      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>feed</Caption>;
+    },
     tabBarIcon: () => (
-      <Icon name="rss-feed" />
+      <Icon name="ios-paper" size={24} />
     )
   };
 
