@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 import {
-  View,
-  Text,
   Icon
-} from '@shoutem/ui'
+} from '@shoutem/ui';
 
+import {
+  StyleSheet
+} from 'react-native';
+
+import MapView from 'react-native-maps';
 import GeoLocationService from '../../services/GeoLocationService';
 
 const CURRENT_POSITION_STATUS = {
@@ -56,11 +59,25 @@ export default class CheckInScreen extends Component {
 
   render() {
     return (
-      <View styleName="fill-parent vertical v-center">
-        <Text>Welcome to the check-in screen!</Text>
-        <Text>{this.state.currentPositionStatus}</Text>
-        <Text>{JSON.stringify(this.state.currentPosition)}</Text>
-      </View>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+});
