@@ -33,7 +33,7 @@ export default class CheckInScreen extends Component {
     title: <Title>Check-In</Title>,
     tabBarLabel: 'check-in',
     tabBarIcon: () => (
-      <Icon name="address" />
+      <Icon name="pin" />
     )
   };
 

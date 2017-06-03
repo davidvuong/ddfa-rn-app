@@ -17,7 +17,7 @@ export default class HomeScreen extends Component {
     title: <Title>Home</Title>,
     tabBarLabel: 'home',
     tabBarIcon: () => (
-      <Icon name="photo" />
+      <Icon name="rss-feed" />
     )
   };
 
