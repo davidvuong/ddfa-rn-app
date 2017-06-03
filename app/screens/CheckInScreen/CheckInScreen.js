@@ -99,7 +99,7 @@ export default class CheckInScreen extends Component {
   renderPlacesRow(place) {
     return (
       <Row styleName="small" style={{ height: 60 }}>
-        <Icon name="address"/>
+        <Icon name="pin" />
         <View styleName="vertical">
           <Subtitle styleName="bold">{place.name}</Subtitle>
           <Caption numberOfLines={1}>{place.address}</Caption>
