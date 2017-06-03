@@ -56,10 +56,10 @@ export default class CheckInScreen extends Component {
 
   render() {
     return (
-      <View styleName="fill-parent vertical horizontal v-center">
+      <View styleName="fill-parent vertical v-center">
         <Text>Welcome to the check-in screen!</Text>
         <Text>{this.state.currentPositionStatus}</Text>
-        <Text>{this.state.currentPosition}</Text>
+        <Text>{JSON.stringify(this.state.currentPosition)}</Text>
       </View>
     );
   }
