@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import {
-  Icon
+  View,
+  Icon,
+  Text,
+  Spinner
 } from '@shoutem/ui';
-
-import {
-  StyleSheet
-} from 'react-native';
 
 import MapView from 'react-native-maps';
 import GeoLocationService from '../../services/GeoLocationService';
@@ -57,22 +57,43 @@ export default class CheckInScreen extends Component {
     });
   }
 
+  _shouldShowSpinner() {
+    return _.includes([
+      CURRENT_POSITION_STATUS.IN_PROGRESS,
+      CURRENT_POSITION_STATUS.PENDING
+    ], this.state.currentPositionStatus);
+  }
+
   render() {
+    if (this._shouldShowSpinner()) {
+      return (
+        <View styleName="fill-parent vertical v-center">
+          <Spinner style={styles.spinner} />
+        </View>
+      );
+    }
+    if (this.state.currentPositionStatus === CURRENT_POSITION_STATUS.ERROR) {
+      return (
+        <View styleName="fill-parent vertical v-center">
+          <Text>Allow location services to enable check-in feature.</Text>
+        </View>
+      );
+    }
+
+    const { currentPosition } = this.state;
+    const { latitude, longitude, latitudeDelta, longitudeDelta } = currentPosition;
     return (
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      <View styleName="fill-parent">
+        <MapView
+          style={styles.map}
+          initialRegion={{ latitude, longitude, latitudeDelta, longitudeDelta }}
+        />
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   map: {
     position: 'absolute',
     top: 0,
@@ -80,4 +101,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-});
+  spinner: {
+    size: 'large',
+  },
+};
