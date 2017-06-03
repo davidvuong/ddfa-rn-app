@@ -40,4 +40,4 @@ class HttpRequestService {
   }
 }
 
-export default new HttpRequestService()
+export default new HttpRequestService();
