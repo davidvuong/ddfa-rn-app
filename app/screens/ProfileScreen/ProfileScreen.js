@@ -11,8 +11,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default class ProfileScreen extends Component {
   static navigationOptions = {
     title: <Title>Profile</Title>,
-    tabBarLabel: ({ focused }) => {
-      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>profile</Caption>;
+    tabBarLabel: () => {
+      return <Caption styleName="h-center">Profile</Caption>;
     },
     tabBarIcon: () => (
       <Icon name="ios-contact" size={24} />

@@ -15,8 +15,8 @@ import AuthenticationService from '../../services/AuthenticationService';
 export default class FeedScreen extends Component {
   static navigationOptions = {
     title: <Title>Feed</Title>,
-    tabBarLabel: ({ focused }) => {
-      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>feed</Caption>;
+    tabBarLabel: () => {
+      return <Caption styleName="h-center">Feed</Caption>;
     },
     tabBarIcon: () => (
       <Icon name="ios-paper" size={24} />

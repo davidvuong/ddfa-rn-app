@@ -11,8 +11,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default class ReviewsScreen extends Component {
   static navigationOptions = {
     title: <Title>Reviews</Title>,
-    tabBarLabel: ({ focused }) => {
-      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>reviews</Caption>;
+    tabBarLabel: () => {
+      return <Caption styleName="h-center">Reviews</Caption>;
     },
     tabBarIcon: () => (
       <Icon name="ios-chatboxes" size={24} />
