@@ -55,6 +55,8 @@ export default class CheckInScreen extends Component {
     this.setCurrentLocation = this.setCurrentLocation.bind(this);
     this.renderPlacesRow = this.renderPlacesRow.bind(this);
     this.renderPlacesList = this.renderPlacesList.bind(this);
+    this.renderMap = this.renderMap.bind(this);
+    this.renderMapMarkers = this.renderMapMarkers.bind(this);
   }
 
   componentDidMount() {
@@ -103,6 +105,33 @@ export default class CheckInScreen extends Component {
     );
   }
 
+  renderMapMarkers() {
+    return _.map(this.state.places, (place, index) => {
+      return (
+        <MapView.Marker
+          title={place.name}
+          description={place.address}
+          pinColor="blue"
+          coordinate={{ latitude: place.latitude, longitude: place.longitude }}
+          key={index}
+        />
+      );
+    });
+  }
+
+  renderMap() {
+    const { latitude, longitude, latitudeDelta, longitudeDelta } = this.state.currentPosition;
+    return (
+      <MapView
+        style={styles.map}
+        initialRegion={{ latitude, longitude, latitudeDelta, longitudeDelta }}
+      >
+        {this.renderMapMarkers()}
+        <MapView.Marker coordinate={{ latitude, longitude }} />
+      </MapView>
+    );
+  }
+
   renderPlacesList() {
     const { places } = this.state;
     if (!places || !places.length) {
@@ -126,15 +155,9 @@ export default class CheckInScreen extends Component {
         </View>
       );
     }
-
-    const { currentPosition } = this.state;
-    const { latitude, longitude, latitudeDelta, longitudeDelta } = currentPosition;
     return (
       <RNView style={styles.container}>
-        <MapView
-          style={styles.map}
-          initialRegion={{ latitude, longitude, latitudeDelta, longitudeDelta }}
-        />
+        {this.renderMap()}
         <View style={styles.placesContainer}>
           {this.renderPlacesList()}
         </View>
