@@ -10,7 +10,6 @@ import {
   Row
 } from '@shoutem/ui';
 import {
-  Title,
   Text,
   Subtitle,
   Caption
@@ -21,6 +20,7 @@ import { View as RNView } from 'react-native';
 
 import MapView from 'react-native-maps';
 import GeoLocationService from '../../services/GeoLocationService';
+import GoogleMapsService from '../../services/GoogleMapsService';
 
 const CURRENT_POSITION_STATUS = {
   PENDING: 'PENDING',
@@ -28,6 +28,8 @@ const CURRENT_POSITION_STATUS = {
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS'
 };
+
+const PLACES_SEARCH_RADIUS = 200;
 
 export default class CheckInScreen extends Component {
   static navigationOptions = {
@@ -46,45 +48,34 @@ export default class CheckInScreen extends Component {
     this.state = {
       currentPosition: null,
       currentPositionStatus: CURRENT_POSITION_STATUS.PENDING,
-      places: [ // Hard coding these here just to build the UI.
-        {
-          "name": "Gaspar Brasserie",
-          "address": "185 Sutter St, San Francisco, CA 94109",
-        },
-        {
-          "name": "Chalk Point Kitchen",
-          "address": "527 Broome St, New York, NY 10013",
-        },
-        {
-          "name": "My boy's place",
-          "address": "71 Pilgrim Avenue Chevy Chase, MD 20815",
-        },
-        {
-          "name": "Chin Chin",
-          "address": "44 Shirley Ave. West Chicago, IL 60185",
-        },
-      ],
+      places: [],
     };
 
     this.shouldShowSpinner = this.shouldShowSpinner.bind(this);
-    this.getCurrentLocation = this.getCurrentLocation.bind(this);
+    this.setCurrentLocation = this.setCurrentLocation.bind(this);
     this.renderPlacesRow = this.renderPlacesRow.bind(this);
+    this.renderPlacesList = this.renderPlacesList.bind(this);
   }
 
   componentDidMount() {
-    this.getCurrentLocation();
+    this.setCurrentLocation();
   }
 
-  getCurrentLocation() {
+  setCurrentLocation() {
     this.setState({ currentPositionStatus: CURRENT_POSITION_STATUS.IN_PROGRESS });
 
-    GeoLocationService.promptLocationAccess().then(() => {
+    return GeoLocationService.promptLocationAccess().then(() => {
       return GeoLocationService.getCurrentLocation();
     }).then((position) => {
       this.setState({
         currentPosition: position,
         currentPositionStatus: CURRENT_POSITION_STATUS.SUCCESS,
       });
+      return GoogleMapsService.getNearby(
+        position.latitude, position.longitude, PLACES_SEARCH_RADIUS
+      );
+    }).then((places) => {
+      this.setState({ places });
     }, () => {
       this.setState({
         currentPositionStatus: CURRENT_POSITION_STATUS.ERROR,
@@ -112,6 +103,14 @@ export default class CheckInScreen extends Component {
     );
   }
 
+  renderPlacesList() {
+    const { places } = this.state;
+    if (!places || !places.length) {
+      return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>;
+    }
+    return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />;
+  }
+
   render() {
     if (this.shouldShowSpinner()) {
       return (
@@ -137,10 +136,7 @@ export default class CheckInScreen extends Component {
           initialRegion={{ latitude, longitude, latitudeDelta, longitudeDelta }}
         />
         <View style={styles.placesContainer}>
-          <ListView
-            data={this.state.places}
-            renderRow={this.renderPlacesRow}
-          />
+          {this.renderPlacesList()}
         </View>
       </RNView>
     );

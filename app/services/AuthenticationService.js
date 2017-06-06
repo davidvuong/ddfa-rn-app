@@ -8,6 +8,12 @@ class AuthenticationService {
     this.host = host;
   }
 
+  get token() {
+    return new Promise((resolve, reject) => {
+      return AsyncStorage.getItem('@user.token').then(resolve, reject);
+    });
+  }
+
   isLoggedIn() {
     return new Promise((resolve, reject) => {
       return AsyncStorage.getItem('@user.token').then((token) => { resolve(!!token); }, reject);
@@ -16,7 +22,7 @@ class AuthenticationService {
 
   logout() {
     return new Promise((resolve, reject) => {
-      return AsyncStorage.removeItem('@user.token').then(resolve, reject);
+      return AsyncStorage.clear().then(resolve, reject);
     });
   }
 

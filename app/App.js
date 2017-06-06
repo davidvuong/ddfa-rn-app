@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import Config from './Config';
 import AuthenticationService from './services/AuthenticationService';
+import GoogleMapsService from './services/GoogleMapsService';
 
 import ConfigureStore from './store/ConfigureStore';
 
@@ -22,6 +23,9 @@ export default class App extends Component {
     }), {});
 
     AuthenticationService.initialize(Config.HOST);
+    AuthenticationService.token.then((token) => {
+      GoogleMapsService.initialize(Config.HOST, token);
+    });
   }
 
   render() {
