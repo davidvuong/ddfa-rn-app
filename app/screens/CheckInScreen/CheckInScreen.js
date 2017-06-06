@@ -94,7 +94,7 @@ export default class CheckInScreen extends Component {
 
   renderPlacesRow(place) {
     return (
-      <Row styleName="small" style={{ height: 60 }}>
+      <Row styleName="small" style={styles.placesListRow}>
         <UIIcon name="pin" />
         <View styleName="vertical">
           <Subtitle styleName="bold">{place.name}</Subtitle>
@@ -172,10 +172,13 @@ const styles = {
     flexDirection: 'column',
   },
   map: {
-    flex: 0.6,
+    flex: 0.7,
   },
   placesContainer: {
-    flex: 0.4,
+    flex: 0.3,
+  },
+  placesListRow: {
+    height: 50,
   },
   spinner: {
     size: 'large',
