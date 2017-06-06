@@ -184,3 +184,21 @@ const styles = {
     size: 'large',
   },
 };
+
+/**
+ * TODO
+ *
+ * Improvements
+ *
+ * 1. Refactor this component, spitting out the list and map component
+ * 2. Integrate Redux into all 3 components using dispatch to query
+ * 3. Better error/pending states when querying results
+ *
+ * Features
+ *
+ * 1. Tapping on an item on the list should animate me to the position on the map
+ * 2. Display the price and rating for places near me
+ * 3. Scrolling on the map possibly should progressively load more places
+ * 4. Load previous check-ins and merge those with the ones displayed
+ *
+ */
