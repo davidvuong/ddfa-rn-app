@@ -31,9 +31,9 @@ const CURRENT_POSITION_STATUS = {
 
 export default class CheckInScreen extends Component {
   static navigationOptions = {
-    title: <Title>Check-In</Title>,
-    tabBarLabel: ({ focused }) => {
-      return <Caption styleName={`h-center ${focused ? 'bold' : ''}`}>check-in</Caption>;
+    header: null,
+    tabBarLabel: () => {
+      return <Caption styleName="h-center">Check-in</Caption>;
     },
     tabBarIcon: () => (
       <Icon name="ios-pin" size={24} />
