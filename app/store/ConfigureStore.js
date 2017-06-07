@@ -1,8 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-export default function ConfigureStore(reducer, initialState) {
+import CheckInsReducer from '../reducers/CheckInsReducer';
+
+export default function ConfigureStore() {
   return createStore(
-    reducer,
-    initialState
+    combineReducers({
+      checkIns: CheckInsReducer,
+    }), {}
   );
 }
