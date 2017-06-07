@@ -4,9 +4,7 @@ import request from './HttpRequestService';
 class GoogleMapsService {
   initialize(host, token) {
     this.host = host;
-    this.headers = {
-      'Authorization': token,
-    };
+    this.headers = { 'Authorization': token };
   }
 
   getNearby(latitude, longitude, radius) {
