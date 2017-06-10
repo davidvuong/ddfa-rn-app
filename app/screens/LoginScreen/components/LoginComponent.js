@@ -37,7 +37,7 @@ export default class LoginComponent extends Component {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'BottomTabNavigator' })
+        NavigationActions.navigate({ routeName: 'Feed' })
       ]
     }));
   }

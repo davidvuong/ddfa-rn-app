@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
 import {
   View,
   ListView,
@@ -34,12 +32,6 @@ const PLACES_SEARCH_RADIUS = 200;
 export default class CheckInScreen extends Component {
   static navigationOptions = {
     header: null,
-    tabBarLabel: () => {
-      return <Caption styleName="h-center">Check-in</Caption>;
-    },
-    tabBarIcon: () => (
-      <Icon name="ios-pin" size={24} />
-    )
   };
 
   constructor(props) {
