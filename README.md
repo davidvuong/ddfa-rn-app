@@ -2,7 +2,7 @@
 
 **Welcome to ddfa-app!**
 
-This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in React Native and currently only supports iOS devices. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
+This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in JavaScript (ES6) using [React Native](https://facebook.github.io/react-native/) and currently **only supports iOS devices**. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
 
 ## Installation
 
