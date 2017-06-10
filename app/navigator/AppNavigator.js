@@ -1,6 +1,5 @@
 import {
-  StackNavigator,
-  TabNavigator
+  StackNavigator, TabNavigator
 } from 'react-navigation';
 
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
@@ -19,7 +18,13 @@ const BottomTabNavigator = TabNavigator({
   lazy: true,
 });
 
-export default StackNavigator({
-  Login: { screen: LoginScreen },
-  BottomTabNavigator: { screen: BottomTabNavigator },
-});
+export function getNavigator(isLoggedIn) {
+  if (isLoggedIn === null) { return null; }
+
+  return StackNavigator({
+    Login: { screen: LoginScreen },
+    BottomTabNavigator: { screen: BottomTabNavigator },
+  }, {
+    initialRouteName: isLoggedIn ? 'BottomTabNavigator' : 'Login',
+  });
+}
