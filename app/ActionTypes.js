@@ -1,3 +1,3 @@
-export const LOG_IN_USER_REQUEST = 'LOG_IN_USER_REQUEST';
-export const LOG_IN_USER_SUCCESS = 'LOG_IN_USER_SUCCESS';
-export const LOG_IN_USER_ERROR = 'LOG_IN_USER_ERROR';
+export const LOGIN_USER_REQUEST = 'authentication/LOGIN_USER_REQUEST';
+export const LOGIN_USER_SUCCESS = 'authentication/LOGIN_USER_SUCCESS';
+export const LOGIN_USER_ERROR = 'authentication/LOGIN_USER_ERROR';
