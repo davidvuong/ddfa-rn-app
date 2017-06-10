@@ -8,8 +8,8 @@ import CheckInScreen from '../screens/CheckInScreen/CheckInScreen';
 
 // https://github.com/react-community/react-navigation/blob/master/docs/api/navigators/TabNavigator.md#tabnavigatorconfig
 const BottomTabNavigator = TabNavigator({
-  FeedScreen: { screen: FeedScreen },
-  CheckInScreen: { screen: CheckInScreen },
+  Feed: { screen: FeedScreen },
+  CheckIn: { screen: CheckInScreen },
 }, {
   lazy: true,
 });

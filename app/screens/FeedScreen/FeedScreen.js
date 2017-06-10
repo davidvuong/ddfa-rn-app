@@ -9,6 +9,7 @@ import {
   Button
 } from '@shoutem/ui'
 import Icon from 'react-native-vector-icons/Ionicons';
+import ActionButton from 'react-native-action-button';
 
 import AuthenticationService from '../../services/AuthenticationService';
 
@@ -26,8 +27,8 @@ export default class FeedScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-    this.onLogout = this.onLogout.bind(this)
+    this.onLogout = this.onLogout.bind(this);
+    this.onActionButtonPress = this.onActionButtonPress.bind(this);
   }
 
   _navigateToLoginPage() {
@@ -45,13 +46,19 @@ export default class FeedScreen extends Component {
     }, console.warn);
   }
 
+  onActionButtonPress() {
+    console.log('I pressed the action button!!!');
+  }
+
   render() {
     return (
-      <View styleName="fill-parent vertical horizontal v-center">
+      <View styleName="fill-parent">
         <Text>Welcome to the feed screen!</Text>
         <Button styleName="secondary" onPress={this.onLogout}>
           <Text>LOGOUT</Text>
         </Button>
+
+        <ActionButton onPress={this.onActionButtonPress} />
       </View>
     );
   }
