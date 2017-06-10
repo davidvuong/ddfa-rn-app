@@ -39,7 +39,7 @@ export default class FeedScreen extends Component {
   }
 
   onActionButtonPress() {
-    console.log('I pressed the action button!!!');
+    this.props.navigation.navigate('CheckIn');
   }
 
   render() {
