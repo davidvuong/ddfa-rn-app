@@ -5,7 +5,8 @@ import {
   View,
   ListView,
   Spinner,
-  Row
+  Row,
+  Button
 } from '@shoutem/ui';
 import {
   Text,
@@ -14,7 +15,7 @@ import {
 } from '@shoutem/ui';
 import { Icon as UIIcon } from '@shoutem/ui';
 
-import { View as RNView } from 'react-native';
+import { View as RNView, StatusBar } from 'react-native';
 
 import MapView from 'react-native-maps';
 import GeoLocationService from '../../services/GeoLocationService';
@@ -49,6 +50,7 @@ export default class CheckInScreen extends Component {
     this.renderPlacesList = this.renderPlacesList.bind(this);
     this.renderMap = this.renderMap.bind(this);
     this.renderMapMarkers = this.renderMapMarkers.bind(this);
+    this.renderActionButtons = this.renderActionButtons.bind(this);
   }
 
   componentDidMount() {
@@ -125,10 +127,29 @@ export default class CheckInScreen extends Component {
 
   renderPlacesList() {
     const { places } = this.state;
-    if (!places || !places.length) {
-      return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>;
-    }
-    return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />;
+    return (
+      <View style={styles.placesContainer}>
+        {
+          (!places || !places.length) ?
+            <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>
+            :
+            <ListView data={this.state.places} renderRow={this.renderPlacesRow} />
+        }
+      </View>
+    );
+  }
+
+  renderActionButtons() {
+    return (
+      <View styleName="horizontal" style={styles.actionButtonsContainer}>
+        <Button styleName="confirmation border">
+          <Text>CANCEL</Text>
+        </Button>
+        <Button styleName="confirmation border secondary">
+          <Text>CONFIRM</Text>
+        </Button>
+      </View>
+    );
   }
 
   render() {
@@ -148,10 +169,10 @@ export default class CheckInScreen extends Component {
     }
     return (
       <RNView style={styles.container}>
+        <StatusBar hidden />
         {this.renderMap()}
-        <View style={styles.placesContainer}>
-          {this.renderPlacesList()}
-        </View>
+        {this.renderPlacesList()}
+        {this.renderActionButtons()}
       </RNView>
     );
   }
@@ -163,13 +184,17 @@ const styles = {
     flexDirection: 'column',
   },
   map: {
-    flex: 0.65,
+    flex: 0.58,
   },
   placesContainer: {
     flex: 0.35,
   },
   placesListRow: {
     height: 48,
+  },
+  actionButtonsContainer: {
+    flex: 0.07,
+    paddingBottom: 6,
   },
   spinner: {
     size: 'large',
