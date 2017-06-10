@@ -5,6 +5,8 @@ import { Spinner } from '@shoutem/ui';
 
 import Config from './Config';
 import ConfigureStore from './store/ConfigureStore';
+import getReducer from './Reducer';
+
 import { getNavigator } from './navigator/AppNavigator';
 
 import AuthenticationService from './services/AuthenticationService';
@@ -15,7 +17,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.store = ConfigureStore();
+    this.store = ConfigureStore(getReducer());
     this.state = { isLoggedIn: null };
 
     /* Initialize app services. */
