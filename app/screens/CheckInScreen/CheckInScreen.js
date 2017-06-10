@@ -41,7 +41,7 @@ export default class CheckInScreen extends Component {
     this.state = {
       currentPosition: null,
       currentPositionStatus: CURRENT_POSITION_STATUS.PENDING,
-      places: [],
+      places: null,
     };
 
     this.shouldShowSpinner = this.shouldShowSpinner.bind(this);
@@ -132,14 +132,18 @@ export default class CheckInScreen extends Component {
   }
 
   renderPlacesList() {
-    const { places } = this.state;
     return (
       <View style={styles.placesContainer}>
         {
-          (!places || !places.length) ?
-            <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>
-            :
-            <ListView data={this.state.places} renderRow={this.renderPlacesRow} />
+          (() => {
+            if (this.state.places === null) {
+              return <Spinner style={styles.spinner} />
+            }
+            if (this.state.places.length === 0) {
+              return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>
+            }
+            return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />
+          })()
         }
       </View>
     );
