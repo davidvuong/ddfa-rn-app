@@ -13,7 +13,6 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     nvm install 6.10
 
     brew install watchman
-    npm install -g react-native-cli
     ```
 
 1. Clone this repository:
@@ -54,12 +53,6 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     ```bash
     npm run build:ios
     npm start
-    ```
-
-    Alternatively, `react-native run-ios` will open up the `packager` in a new `Terminal.app` window:
-
-    ```bash
-    react-native run-ios
     ```
 
     **NOTE:** If `npm run build:ios` does not start up the simulator app, open it yourself and click on the DDFA app.
