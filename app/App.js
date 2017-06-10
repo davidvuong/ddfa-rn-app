@@ -18,6 +18,7 @@ export default class App extends Component {
     this.store = ConfigureStore();
     this.state = { isLoggedIn: null };
 
+    /* Initialize app services. */
     AuthenticationService.initialize(Config.HOST);
     AuthenticationService.token.then((token) => {
       this.setState({ isLoggedIn: !!token });
@@ -28,6 +29,7 @@ export default class App extends Component {
   }
 
   render() {
+    // _.isNull(NavigatorComponent) is true if !this.state.isLoggedIn
     const NavigatorComponent = getNavigator(this.state.isLoggedIn);
     return (
       <Provider store={this.store}>
