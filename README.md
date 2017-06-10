@@ -97,6 +97,8 @@ Below are a few pain points I experienced while developing this React Native app
 
     You can click on elements in the screen, sort of read the DOM hierarchy and layout but that's about it. You can't really do very much and doesn't seem very useful.
 
+    Turns out there's a way to get React DevTools working. See [here](http://facebook.github.io/react-native/docs/debugging.html#react-developer-tools)... it works fairly well but a little buggy.
+
 1. **Many popular libraries have outdated documentation.**
 
     I feel like this is just an inherit issue with using bleeding edge technology. Everything breaks, documentation is never up to date or reliable. The solution is to read the source.
