@@ -68,9 +68,13 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 This project uses a few 3rd parties. Below are a few links to help you use the right library/tool to extend DDFA.
 
-1. I use [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) icons:
+1. [`@shoutem/ui`](https://shoutem.github.io/docs/ui-toolkit/introduction) for common React components:
 
-    react-native-vector-icons bundle a few icon sets including FontAwesome and Entypo. I'm using [Ionicons](http://ionicframework.com/docs/ionicons/) for all icons in this app.
+    `@shoutem/ui` provides a few useful components to make cross platform development a bit easier. For example typography (title, subtitle, text), spinners, buttons, text input etc.
+
+1. [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) for icons:
+
+    `react-native-vector-icons` bundle a few icon sets including FontAwesome and Entypo. I'm using [Ionicons](http://ionicframework.com/docs/ionicons/) for all icons in this app.
 
 ## React Native Pain Points
 
