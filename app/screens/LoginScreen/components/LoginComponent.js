@@ -10,15 +10,15 @@ import {
 } from '@shoutem/ui';
 import {
   Text,
-  Title,
   Caption
 } from '@shoutem/ui';
-
 import { NavigationActions } from 'react-navigation';
+
+import styles from '../Style';
 
 export default class LoginComponent extends Component {
   static navigationOptions = {
-    title: <Title>DDFA Login</Title>
+    header: null,
   };
 
   constructor(props) {
@@ -54,7 +54,7 @@ export default class LoginComponent extends Component {
 
   render() {
     return (
-      <View styleName="fill-parent">
+      <View styleName="fill-parent" style={styles.container}>
         <Screen>
           <TextInput
             onChangeText={(username) => this.setState({ username })}
