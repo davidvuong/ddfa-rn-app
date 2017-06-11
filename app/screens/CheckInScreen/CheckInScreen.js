@@ -21,19 +21,19 @@ import MapView from 'react-native-maps';
 import GeoLocationService from '../../services/GeoLocationService';
 import GoogleMapsService from '../../services/GoogleMapsService';
 
+import navigationOptions from './NavigationOptions';
+import styles from './Styles';
+
 const CURRENT_POSITION_STATUS = {
   PENDING: 'PENDING',
   IN_PROGRESS: 'IN_PROGRESS',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS'
 };
-
 const PLACES_SEARCH_RADIUS = 200;
 
 export default class CheckInScreen extends Component {
-  static navigationOptions = {
-    header: null,
-  };
+  static navigationOptions = navigationOptions;
 
   constructor(props) {
     super(props);
@@ -187,29 +187,6 @@ export default class CheckInScreen extends Component {
     );
   }
 }
-
-const styles = {
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  map: {
-    flex: 0.58,
-  },
-  placesContainer: {
-    flex: 0.35,
-  },
-  placesListRow: {
-    height: 48,
-  },
-  actionButtonsContainer: {
-    flex: 0.07,
-    paddingBottom: 6,
-  },
-  spinner: {
-    size: 'large',
-  },
-};
 
 /**
  * TODO
