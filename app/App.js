@@ -9,6 +9,7 @@ import getReducer from './Reducer';
 
 import { getNavigator } from './navigator/AppNavigator';
 
+import HttpService from './services/HttpRequestService';
 import AuthenticationService from './services/AuthenticationService';
 import GoogleMapsService from './services/GoogleMapsService';
 import CheckInsService from './services/CheckInsService';
@@ -21,12 +22,12 @@ export default class App extends Component {
     this.state = { isLoggedIn: null };
 
     /* Initialize app services. */
-    AuthenticationService.initialize(Config.HOST);
-    AuthenticationService.token.then((token) => {
+    AuthenticationService.initialize(Config.HOST, HttpService);
+    AuthenticationService.getTokenFromStorage().then((token) => {
       this.setState({ isLoggedIn: !!token });
 
-      GoogleMapsService.initialize(Config.HOST, token);
-      CheckInsService.initialize(Config.HOST, token);
+      GoogleMapsService.initialize(Config.HOST, AuthenticationService, HttpService);
+      CheckInsService.initialize(Config.HOST, AuthenticationService, HttpService);
     });
   }
 

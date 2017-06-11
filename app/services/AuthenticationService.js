@@ -1,22 +1,32 @@
-import request from './HttpRequestService';
 import Promise from 'bluebird';
-
 import { AsyncStorage } from 'react-native';
 
 class AuthenticationService {
-  initialize(host) {
+  initialize(host, httpService) {
     this.host = host;
+    this.token = null;
+    this.http = httpService;
   }
 
-  get token() {
+  getAuthenticationHeader() {
+    return { 'Authorization': this.token };
+  }
+
+  getTokenFromStorage() {
     return new Promise((resolve, reject) => {
-      return AsyncStorage.getItem('@user.token').then(resolve, reject);
+      return AsyncStorage.getItem('@user.token').then((token) => {
+        this.token = token;
+        resolve(token);
+      }, reject);
     });
   }
 
   logout() {
     return new Promise((resolve, reject) => {
-      return AsyncStorage.clear().then(resolve, reject);
+      return AsyncStorage.clear().then(() => {
+        this.token = null;
+        resolve();
+      }, reject);
     });
   }
 
@@ -25,9 +35,15 @@ class AuthenticationService {
     const payload = { username, password };
 
     return new Promise((resolve, reject) => {
-      request.post(endpoint, payload).then((res) => {
-        return AsyncStorage.setItem('@user.token', res.body.token);
-      }).then(() => resolve(), reject);
+      this.http.post(endpoint, payload).then((res) => {
+        return Promise.all([
+          AsyncStorage.setItem('@user.token', res.body.token),
+          res.body.token,
+        ]);
+      }).spread((_, token) => {
+        this.token = token;
+        resolve();
+      }, reject);
     });
   }
 }

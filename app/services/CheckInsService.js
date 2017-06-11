@@ -1,18 +1,19 @@
 import Promise from 'bluebird';
-import request from './HttpRequestService';
 
 class CheckInService {
-  initialize(host, token) {
+  initialize(host, authenticationService, httpService) {
     this.host = host;
-    this.headers = { 'Authorization': token };
+    this.authenticationService = authenticationService;
+    this.http = httpService;
   }
 
   checkIn(latitude, longitude, address, name) {
     const endpoint = `${this.host}/check-ins`;
+    const headers = this.authenticationService.getAuthenticationHeader();
     const payload = { latitude, longitude, address, name };
 
     return Promise((resolve, reject) => {
-      request.post(endpoint, payload, this.headers).then((res) => {
+      this.http.post(endpoint, payload, headers).then((res) => {
         resolve(res.body);
       }, reject);
     });
