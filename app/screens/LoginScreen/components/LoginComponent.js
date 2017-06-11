@@ -15,11 +15,10 @@ import {
 import { NavigationActions } from 'react-navigation';
 
 import styles from '../Style';
+import navigationOptions from '../NavigationOptions';
 
 export default class LoginComponent extends Component {
-  static navigationOptions = {
-    header: null,
-  };
+  static navigationOptions = navigationOptions;
 
   constructor(props) {
     super(props);
