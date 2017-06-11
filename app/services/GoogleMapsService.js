@@ -8,7 +8,7 @@ class GoogleMapsService {
   }
 
   getNearby(latitude, longitude, radius) {
-    const endpoint = `${this.host}/vendor/google-maps/nearby`;
+    const endpoint = `${this.host}/vendor/maps/nearby`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const query = `latitude=${latitude}&longitude=${longitude}&radius=${radius}`;
 
@@ -17,6 +17,10 @@ class GoogleMapsService {
         resolve(response.body.places || []);
       }, reject);
     });
+  }
+
+  reverseGeocode(latitude, longitude) {
+
   }
 }
 
