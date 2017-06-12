@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-} from '@shoutem/ui'
+  Spinner,
+  TextInput,
+} from '@shoutem/ui';
+import { StatusBar } from 'react-native';
 
 import navigationOptions from '../NavigationOptions';
 import GeoLocationService from '../../../services/GeoLocationService';
+
 import ActionButtons from './ActionButtons';
+import ActionText from './ActionText';
+import Header from './Header';
 
 export default class CheckIn extends Component {
   static navigationOptions = navigationOptions;
@@ -18,6 +23,9 @@ export default class CheckIn extends Component {
 
     this.state = {
       selectedLocation: null,
+      comment: null,
+      isPaying: false,
+      amountPaid: null,
     };
 
     /* Internal */
@@ -53,12 +61,35 @@ export default class CheckIn extends Component {
   }
 
   render() {
+    const { selectedLocation } = this.state;
+
+    if (!selectedLocation) {
+      return (
+        <View styleName="fill-parent horizontal h-center vertical v-center">
+          <StatusBar hidden />
+          <Spinner />
+        </View>
+      )
+    }
+
     return (
       <View styleName="fill-parent">
-        <Text>Welcome to the check-in screen!</Text>
-        <Text>{JSON.stringify(this.props.currentLocation)}</Text>
-        <Text>{JSON.stringify(this.state.selectedLocation)}</Text>
-
+        <StatusBar hidden />
+        <Header
+          name={selectedLocation.name}
+          address={selectedLocation.address}
+          price={selectedLocation.price}
+          rating={selectedLocation.rating}
+        />
+        <ActionText />
+        <View>
+          <TextInput
+            placeholder="Is there something else you would like to add?"
+            style={{ height: 300 }}
+            multiline={true}
+            value={this.state.comment}
+          />
+        </View>
         <ActionButtons
           onCancel={() => { this.props.navigation.goBack() }}
           onCheckIn={this.onCheckIn}
