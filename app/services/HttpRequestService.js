@@ -22,7 +22,7 @@ class HttpRequestService {
 
     return new Promise((resolve, reject) => {
       request.end((err, res) => {
-        err ? reject(err) : resolve(res);
+        err ? reject(new Error(JSON.parse(res.text).error)) : resolve(res);
       });
     });
   }
