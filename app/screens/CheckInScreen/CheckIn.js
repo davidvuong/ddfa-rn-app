@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   return {
     isFetchingLocation: geolocation.isFetchingLocation,
     locationFetchErrorStatus: geolocation.locationFetchErrorStatus,
-    location: geolocation.location,
+    currentLocation: geolocation.currentLocation,
 
     isFetchingNearby: geolocation.isFetchingNearby,
     nearbyFetchErrorStatus: geolocation.nearbyFetchErrorStatus,

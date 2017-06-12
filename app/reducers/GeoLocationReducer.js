@@ -3,7 +3,7 @@ import * as actions from '../ActionTypes';
 const initialState = {
   isFetchingLocation: null,
   locationFetchErrorStatus: null,
-  location: null,
+  currentLocation: null,
 
   isFetchingNearby: null,
   nearbyFetchErrorStatus: null,
@@ -21,7 +21,7 @@ export default function GeoLocationReducer(state = initialState, action) {
       ...state,
       isFetchingLocation: false,
       locationFetchErrorStatus: null,
-      location: action.location,
+      currentLocation: action.location,
     };
   case actions.GET_CURRENT_LOCATION_ERROR:
     return { ...state, isFetchingLocation: false, locationFetchErrorStatus: action.error };
