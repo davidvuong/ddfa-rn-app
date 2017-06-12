@@ -1,13 +1,8 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
-import {
-  Text,
-  Button
-} from '@shoutem/ui'
-import { Alert } from 'react-native';
+import { Alert, Button } from 'react-native';
 
 import AuthenticationService from '../../services/AuthenticationService';
-import styles from './Style';
 
 export default ({ navigation }) => {
   function logoutUser() {
@@ -24,7 +19,7 @@ export default ({ navigation }) => {
   function onPromptLogoutAlert() {
     Alert.alert(
       null,
-      'Are you sure you want to log out?',
+      'Are you sure you want to exit?',
       [
         { text: 'Yes', onPress: logoutUser },
         { text: 'Cancel', style: 'cancel' },
@@ -34,9 +29,8 @@ export default ({ navigation }) => {
 
   return {
     headerRight: (
-      <Button styleName="secondary" onPress={onPromptLogoutAlert} style={styles.logoutButton}>
-        <Text>LOGOUT</Text>
-      </Button>
+      <Button onPress={onPromptLogoutAlert} title="Exit" />
     ),
+    title: 'DDFA Feed',
   };
 };
