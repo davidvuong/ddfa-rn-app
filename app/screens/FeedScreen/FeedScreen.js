@@ -16,7 +16,7 @@ export default class FeedScreen extends Component {
   }
 
   onActionButtonPress() {
-    this.props.navigation.navigate('LocationPicker');
+    this.props.navigation.navigate('CheckIn');
   }
 
   render() {
