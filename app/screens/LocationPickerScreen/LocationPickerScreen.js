@@ -74,10 +74,11 @@ export default class LocationPickerScreen extends Component {
       );
     }).then((places) => {
       this.setState({ places });
-    }, () => {
+    }, (error) => {
       this.setState({
         currentPositionStatus: CURRENT_POSITION_STATUS.ERROR,
       });
+      console.warn(error);
     });
   }
 
