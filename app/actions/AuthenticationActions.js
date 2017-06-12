@@ -24,6 +24,7 @@ export function loginUser(username, password) {
       dispatch(loginSuccess());
     }, (error) => {
       dispatch(loginError(error));
+      throw error;
     });
   };
 }

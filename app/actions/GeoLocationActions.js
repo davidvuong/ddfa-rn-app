@@ -50,6 +50,7 @@ export function getCurrentLocation() {
       dispatch(getCurrentLocationSuccess({ ...location, latitudeDelta, longitudeDelta }));
     }, (error) => {
       dispatch(getCurrentLocationError(error));
+      throw error;
     });
   };
 }
@@ -61,6 +62,7 @@ export function getNearby(latitude, longitude, radius) {
       dispatch(getNearbySuccess(places));
     }, (error) => {
       dispatch(getNearbyError(error));
+      throw error;
     });
   };
 }
