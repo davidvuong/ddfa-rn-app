@@ -7,14 +7,23 @@ class CheckInService {
     this.http = httpService;
   }
 
-  checkIn(latitude, longitude, address, name, comment, rating, isPaying, amountPaid) {
+  checkIn(
+    latitude,
+    longitude,
+    address,
+    name,
+    comment,
+    rating,
+    isPaying,
+    amountPaid
+  ) {
     const endpoint = `${this.host}/check-ins`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
       latitude, longitude, address, name, comment, rating, isPaying, amountPaid,
     };
 
-    return Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.http.post(endpoint, payload, headers).then((res) => {
         resolve(res.body);
       }, reject);
