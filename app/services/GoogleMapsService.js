@@ -20,7 +20,15 @@ class GoogleMapsService {
   }
 
   reverseGeocode(latitude, longitude) {
+    const endpoint = `${this.host}/vendor/maps/reverse-geocode`;
+    const headers = this.authenticationService.getAuthenticationHeader();
+    const query = `latitude=${latitude}&longitude=${longitude}`;
 
+    return new Promise((resolve, reject) => {
+      this.http.get(`${endpoint}?${query}`, headers).then((response) => {
+        resolve(response.body.places[0] || null);
+      }, reject);
+    });
   }
 }
 
