@@ -9,3 +9,7 @@ export const GET_CURRENT_LOCATION_ERROR = 'location/GET_CURRENT_LOCATION_ERROR';
 export const GET_NEARBY_REQUEST = 'places/GET_NEARBY_REQUEST';
 export const GET_NEARBY_SUCCESS = 'places/GET_NEARBY_SUCCESS';
 export const GET_NEARBY_ERROR = 'places/GET_NEARBY_ERROR';
+
+export const CHECK_IN_REQUEST = 'checkIn/CHECK_IN_REQUEST';
+export const CHECK_IN_SUCCESS = 'checkIn/CHECK_IN_SUCCESS';
+export const CHECK_IN_ERROR = 'checkIn/CHECK_IN_ERROR';

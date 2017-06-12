@@ -26,6 +26,7 @@ export default class CheckIn extends Component {
       comment: null,
       isPaying: false,
       amountPaid: null,
+      rating: null,
     };
 
     /* Internal */
@@ -53,16 +54,28 @@ export default class CheckIn extends Component {
         this.props.currentLocation.longitude
       )[0];
       this.setState({ selectedLocation });
-    });
+    }, console.warn);
   }
 
   onCheckIn() {
-    this.props.navigation.goBack();
+    const { comment, isPaying, amountPaid, rating, selectedLocation } = this.state;
+    const { latitude, longitude, name, address } = selectedLocation;
+    this.props.checkIn(
+      latitude,
+      longitude,
+      address,
+      name,
+      comment,
+      rating,
+      isPaying,
+      amountPaid
+    ).then(() => {
+      this.props.navigation.goBack();
+    }, console.warn);
   }
 
   render() {
     const { selectedLocation } = this.state;
-
     if (!selectedLocation) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
@@ -71,7 +84,6 @@ export default class CheckIn extends Component {
         </View>
       )
     }
-
     return (
       <View styleName="fill-parent">
         <StatusBar hidden />
