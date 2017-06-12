@@ -32,7 +32,7 @@ const CURRENT_POSITION_STATUS = {
 };
 const PLACES_SEARCH_RADIUS = 200;
 
-export default class CheckInScreen extends Component {
+export default class LocationPickerScreen extends Component {
   static navigationOptions = navigationOptions;
 
   constructor(props) {
