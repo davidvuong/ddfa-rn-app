@@ -11,6 +11,7 @@
     "@shoutem/ui": "0.15.0",
     "bluebird": "3.5.0",
     "lodash": "4.17.4",
+    "prop-types": "15.5.10",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
     "react-native-action-button": "2.6.10",
