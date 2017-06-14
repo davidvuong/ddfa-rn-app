@@ -1,4 +1,4 @@
-export default styles = {
+export default {
   container: {
     marginTop: 80,
   },
