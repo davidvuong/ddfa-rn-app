@@ -76,6 +76,10 @@ This project uses a few 3rd parties. Below are a few links to help you use the r
 
     `react-native-vector-icons` bundle a few icon sets including FontAwesome and Entypo. I'm using [Ionicons](http://ionicframework.com/docs/ionicons/) for all icons in this app.
 
+1. [`eslint`](http://eslint.org/) for linting:
+
+    `eslint` is the preferred linter. The [documentation](http://eslint.org/docs/user-guide/configuring#configuring-rules) does a good job at describing how to alter the `.eslint` config file.
+
 ## React Native Pain Points
 
 Below are a few pain points I experienced while developing this React Native app... some have solutions, others do not, some are just rants:
