@@ -15,8 +15,5 @@ export default styles = {
   actionButtonsContainer: {
     flex: 0.07,
     paddingBottom: 6,
-  },
-  spinner: {
-    size: 'large',
-  },
+  }
 };

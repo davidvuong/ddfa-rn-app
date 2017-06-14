@@ -132,7 +132,7 @@ export default class LocationPickerScreen extends Component {
         {
           (() => {
             if (this.state.places === null) {
-              return <Spinner style={styles.spinner} />
+              return <Spinner />
             }
             if (this.state.places.length === 0) {
               return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>
@@ -164,7 +164,7 @@ export default class LocationPickerScreen extends Component {
     if (this.shouldShowSpinner()) {
       return (
         <View styleName="fill-parent vertical v-center">
-          <Spinner style={styles.spinner} />
+          <Spinner />
         </View>
       );
     }
