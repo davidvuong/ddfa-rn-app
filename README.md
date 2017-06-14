@@ -69,6 +69,8 @@ This project uses a few 3rd parties. Below are a few links to help you use the r
 1. [`@shoutem/ui`](https://shoutem.github.io/docs/ui-toolkit/introduction) for common React components:
 
     `@shoutem/ui` provides a few useful components to make cross platform development a bit easier. For example typography (title, subtitle, text), spinners, buttons, text input etc.
+    
+    `@shoutem/ui` uses `@shoutem/theme` to define the way shoutem components look. For reference, this is the default [theme.js](https://github.com/shoutem/ui/blob/develop/theme.js).
 
 1. [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) for icons:
 
