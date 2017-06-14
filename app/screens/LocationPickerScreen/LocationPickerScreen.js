@@ -132,12 +132,12 @@ export default class LocationPickerScreen extends Component {
         {
           (() => {
             if (this.state.places === null) {
-              return <Spinner />
+              return <Spinner />;
             }
             if (this.state.places.length === 0) {
-              return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>
+              return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>;
             }
-            return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />
+            return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />;
           })()
         }
       </View>

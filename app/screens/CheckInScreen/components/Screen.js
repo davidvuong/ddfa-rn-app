@@ -82,7 +82,7 @@ export default class CheckIn extends Component {
           <StatusBar hidden />
           <Spinner />
         </View>
-      )
+      );
     }
     return (
       <View styleName="fill-parent">
@@ -104,7 +104,7 @@ export default class CheckIn extends Component {
           />
         </View>
         <ActionButtons
-          onCancel={() => { this.props.navigation.goBack() }}
+          onCancel={() => { this.props.navigation.goBack(); }}
           onCheckIn={this.onCheckIn}
         />
       </View>

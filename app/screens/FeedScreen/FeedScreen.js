@@ -6,7 +6,7 @@ import {
   Text,
   Button,
   Divider,
-} from '@shoutem/ui'
+} from '@shoutem/ui';
 import ActionButton from 'react-native-action-button';
 import navigationOptions from './NavigationOptions';
 
