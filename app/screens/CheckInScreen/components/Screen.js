@@ -92,6 +92,7 @@ export default class CheckIn extends Component {
           address={selectedLocation.address}
           price={selectedLocation.price}
           rating={selectedLocation.rating}
+          navigation={this.props.navigation}
         />
         <ActionText />
         <View>

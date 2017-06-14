@@ -6,6 +6,8 @@ import {
   Subtitle,
   Divider,
   Caption,
+  Button,
+  Text,
 } from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -14,6 +16,7 @@ const propTypes = {
   address: PropTypes.string,
   price: PropTypes.number,
   rating: PropTypes.number,
+  navigation: PropTypes.object.required,
 };
 
 export class Header extends Component {
@@ -27,8 +30,14 @@ export class Header extends Component {
           <Icon name="ios-pin-outline"/>
           {this.props.address}
         </Subtitle>
-        <Divider styleName="line small center"/>
-        <Caption>Last checked in 3 days ago</Caption>
+        <Divider styleName="line small center" />
+
+        <View styleName="horizontal">
+          <Caption>Last checked in 3 days ago</Caption>
+          <Button onPress={() => { this.props.navigation.navigate('LocationPicker'); }}>
+            <Text>Change location</Text>
+          </Button>
+        </View>
       </View>
     );
   }

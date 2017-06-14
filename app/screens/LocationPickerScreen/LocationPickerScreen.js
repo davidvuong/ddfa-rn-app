@@ -51,8 +51,6 @@ export default class LocationPickerScreen extends Component {
     this.renderMap = this.renderMap.bind(this);
     this.renderMapMarkers = this.renderMapMarkers.bind(this);
     this.renderActionButtons = this.renderActionButtons.bind(this);
-
-    this.onCancel = this.onCancel.bind(this);
   }
 
   componentDidMount() {
@@ -87,10 +85,6 @@ export default class LocationPickerScreen extends Component {
       CURRENT_POSITION_STATUS.IN_PROGRESS,
       CURRENT_POSITION_STATUS.PENDING
     ], this.state.currentPositionStatus);
-  }
-
-  onCancel() {
-    this.props.navigation.goBack();
   }
 
   renderPlacesRow(place) {
@@ -153,7 +147,10 @@ export default class LocationPickerScreen extends Component {
   renderActionButtons() {
     return (
       <View styleName="horizontal" style={styles.actionButtonsContainer}>
-        <Button styleName="confirmation border" onPress={this.onCancel}>
+        <Button
+          styleName="confirmation border"
+          onPress={() => { this.props.navigation.goBack(); }}
+        >
           <Text>CANCEL</Text>
         </Button>
         <Button styleName="confirmation border secondary">
