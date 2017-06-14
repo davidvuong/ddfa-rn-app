@@ -25,6 +25,7 @@
     "superagent": "3.5.2"
   },
   "devDependencies": {
+    "babel-eslint": "6.1.2",
     "babel-preset-react-native": "1.9.2",
     "eslint": "3.19.0",
     "eslint-plugin-react": "7.0.1",
