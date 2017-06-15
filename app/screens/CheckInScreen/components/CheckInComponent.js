@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Spinner,
@@ -12,6 +13,23 @@ import GeoLocationService from '../../../services/GeoLocationService';
 import ActionButtons from './ActionButtons';
 import ActionText from './ActionText';
 import Header from './Header';
+
+const propTypes = {
+  isFetchingLocation: PropTypes.bool,
+  locationFetchErrorStatus: PropTypes.string,
+  currentLocation: PropTypes.object,
+
+  isFetchingNearby: PropTypes.bool,
+  nearbyFetchErrorStatus: PropTypes.string,
+  places: PropTypes.array,
+
+  isCheckingIn: PropTypes.bool,
+  checkInErrorStatus: PropTypes.string,
+
+  getCurrentLocation: PropTypes.func.isRequired,
+  getNearby: PropTypes.func.isRequired,
+  checkIn: PropTypes.func.isRequied,
+};
 
 export default class CheckIn extends Component {
   static navigationOptions = navigationOptions;
@@ -111,3 +129,5 @@ export default class CheckIn extends Component {
     );
   }
 }
+
+CheckIn.PropTypes = propTypes;

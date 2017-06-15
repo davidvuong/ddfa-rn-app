@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
-import Screen from './components/Screen';
+import CheckIn from './components/CheckInComponent';
 
-import { getCurrentLocation, getNearby } from '../../actions/GeoLocationActions';
+import {
+  getCurrentLocation,
+  getNearby,
+} from '../../actions/GeoLocationActions';
 import { checkIn } from '../../actions/CheckInsActions';
 
 const mapStateToProps = (state) => {
@@ -46,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Screen);
+)(CheckIn);
