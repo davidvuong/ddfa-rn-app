@@ -22,7 +22,11 @@ class HttpRequestService {
 
     return new Promise((resolve, reject) => {
       request.end((err, res) => {
-        err ? reject(new Error(JSON.parse(res.text).error)) : resolve(res);
+        if (err && !res) {  // Unable to connect to server, undefined response.
+          reject(err);
+        } else {
+          err ? reject(new Error(JSON.parse(res.text).error)) : resolve(res);
+        }
       });
     });
   }
