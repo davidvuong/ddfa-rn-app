@@ -19,7 +19,7 @@ const propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default class Header extends Component {
+export default class CheckInHeader extends Component {
   render() {
     return (
       <View>
@@ -43,4 +43,4 @@ export default class Header extends Component {
   }
 }
 
-Header.propTypes = propTypes;
+CheckInHeader.propTypes = propTypes;

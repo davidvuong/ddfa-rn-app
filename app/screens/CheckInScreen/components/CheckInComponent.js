@@ -12,7 +12,7 @@ import GeoLocationService from '../../../services/GeoLocationService';
 
 import ActionButtons from './ActionButtons';
 import ActionText from './ActionText';
-import Header from './Header';
+import CheckInHeader from './CheckInHeader';
 
 const propTypes = {
   isFetchingLocation: PropTypes.bool,
@@ -105,7 +105,7 @@ export default class CheckIn extends Component {
     return (
       <View styleName="fill-parent">
         <StatusBar hidden />
-        <Header
+        <CheckInHeader
           name={selectedLocation.name}
           address={selectedLocation.address}
           price={selectedLocation.price}
