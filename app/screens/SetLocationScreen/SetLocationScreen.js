@@ -189,17 +189,19 @@ export default class SetLocationScreen extends Component {
 /**
  * TODO
  *
- * Improvements
+ * 1. Create components/Maps component to store map and markers
+ * 2. Add PropTypes to all components in this screen
+ * 3. Create components/ActionButtons to store lower 2 buttons
+ * 4. Update Redux store to keep track of the currentSelectedLocation
+ * 5. Make sure Redux currentSelectedLocation is cleared on checkin
+ * 6. Pull in places and currentSelectedLocation into this Screen
+ * 7. Remove all calls to Maps API services
+ * 8. Tapping on a marker or item in the list will set the "new" currentLocation
+ * 9. Pressing confirm will update the Redux store to set the new selectedLocation
+ * 10. Use information from Google Maps to show more info when tapping on cursor (price, rating)
+ * 11. Possibly also show the distance between current location and newly selected location
  *
- * 1. Refactor this component, spitting out the list and map component
- * 2. Integrate Redux into all 3 components using dispatch to query
- * 3. Better error/pending states when querying results
+ * Future:
  *
- * Features
- *
- * 1. Tapping on an item on the list should animate me to the position on the map
- * 2. Display the price and rating for places near me
- * 3. Scrolling on the map possibly should progressively load more places
- * 4. Load previous check-ins and merge those with the ones displayed
- *
+ * 1. Query previous checkins and merge two sets together.
  */
