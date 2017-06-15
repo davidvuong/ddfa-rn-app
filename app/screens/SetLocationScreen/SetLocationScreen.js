@@ -24,14 +24,14 @@ import GoogleMapsService from '../../services/GoogleMapsService';
 import navigationOptions from './NavigationOptions';
 import styles from './Styles';
 
-export default class LocationPickerScreen extends Component {
+export default class SetLocationScreen extends Component {
   static navigationOptions = navigationOptions;
 
   CURRENT_POSITION_STATUS = {
     PENDING: 'PENDING',
     IN_PROGRESS: 'IN_PROGRESS',
     ERROR: 'ERROR',
-    SUCCESS: 'SUCCESS'
+    SUCCESS: 'SUCCESS',
   };
   PLACES_SEARCH_RADIUS = 200;
 
@@ -83,7 +83,7 @@ export default class LocationPickerScreen extends Component {
   shouldShowSpinner() {
     return _.includes([
       this.CURRENT_POSITION_STATUS.IN_PROGRESS,
-      this.CURRENT_POSITION_STATUS.PENDING
+      this.CURRENT_POSITION_STATUS.PENDING,
     ], this.state.currentPositionStatus);
   }
 

@@ -34,7 +34,7 @@ export default class CheckInHeader extends Component {
 
         <View styleName="horizontal">
           <Caption>Last checked in 3 days ago</Caption>
-          <Button onPress={() => { this.props.navigation.navigate('LocationPicker'); }}>
+          <Button onPress={() => { this.props.navigation.navigate('SetLocation'); }}>
             <Text>Change location</Text>
           </Button>
         </View>
