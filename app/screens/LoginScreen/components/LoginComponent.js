@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Screen,
@@ -17,6 +18,11 @@ import { NavigationActions } from 'react-navigation';
 
 import styles from '../Style';
 import navigationOptions from '../NavigationOptions';
+
+const propTypes = {
+  isLoggingIn: PropTypes.bool,
+  loginErrorStatus: PropTypes.string,
+};
 
 export default class LoginComponent extends Component {
   static navigationOptions = navigationOptions;
@@ -85,3 +91,5 @@ export default class LoginComponent extends Component {
     );
   }
 }
+
+LoginComponent.PropTypes = propTypes;
