@@ -6,12 +6,12 @@ import {
   ListView,
   Spinner,
   Row,
-  Button
+  Button,
 } from '@shoutem/ui';
 import {
   Text,
   Subtitle,
-  Caption
+  Caption,
 } from '@shoutem/ui';
 import { Icon as UIIcon } from '@shoutem/ui';
 
@@ -24,23 +24,23 @@ import GoogleMapsService from '../../services/GoogleMapsService';
 import navigationOptions from './NavigationOptions';
 import styles from './Styles';
 
-const CURRENT_POSITION_STATUS = {
-  PENDING: 'PENDING',
-  IN_PROGRESS: 'IN_PROGRESS',
-  ERROR: 'ERROR',
-  SUCCESS: 'SUCCESS'
-};
-const PLACES_SEARCH_RADIUS = 200;
-
 export default class LocationPickerScreen extends Component {
   static navigationOptions = navigationOptions;
+
+  CURRENT_POSITION_STATUS = {
+    PENDING: 'PENDING',
+    IN_PROGRESS: 'IN_PROGRESS',
+    ERROR: 'ERROR',
+    SUCCESS: 'SUCCESS'
+  };
+  PLACES_SEARCH_RADIUS = 200;
 
   constructor(props) {
     super(props);
 
     this.state = {
       currentPosition: null,
-      currentPositionStatus: CURRENT_POSITION_STATUS.PENDING,
+      currentPositionStatus: this.CURRENT_POSITION_STATUS.PENDING,
       places: null,
     };
 
@@ -58,23 +58,23 @@ export default class LocationPickerScreen extends Component {
   }
 
   setCurrentLocation() {
-    this.setState({ currentPositionStatus: CURRENT_POSITION_STATUS.IN_PROGRESS });
+    this.setState({ currentPositionStatus: this.CURRENT_POSITION_STATUS.IN_PROGRESS });
 
     return GeoLocationService.promptLocationAccess().then(() => {
       return GeoLocationService.getCurrentLocation();
     }).then((position) => {
       this.setState({
         currentPosition: position,
-        currentPositionStatus: CURRENT_POSITION_STATUS.SUCCESS,
+        currentPositionStatus: this.CURRENT_POSITION_STATUS.SUCCESS,
       });
       return GoogleMapsService.getNearby(
-        position.latitude, position.longitude, PLACES_SEARCH_RADIUS
+        position.latitude, position.longitude, this.PLACES_SEARCH_RADIUS
       );
     }).then((places) => {
       this.setState({ places });
     }, (error) => {
       this.setState({
-        currentPositionStatus: CURRENT_POSITION_STATUS.ERROR,
+        currentPositionStatus: this.CURRENT_POSITION_STATUS.ERROR,
       });
       console.warn(error);
     });
@@ -82,8 +82,8 @@ export default class LocationPickerScreen extends Component {
 
   shouldShowSpinner() {
     return _.includes([
-      CURRENT_POSITION_STATUS.IN_PROGRESS,
-      CURRENT_POSITION_STATUS.PENDING
+      this.CURRENT_POSITION_STATUS.IN_PROGRESS,
+      this.CURRENT_POSITION_STATUS.PENDING
     ], this.state.currentPositionStatus);
   }
 
@@ -135,7 +135,7 @@ export default class LocationPickerScreen extends Component {
               return <Spinner />;
             }
             if (this.state.places.length === 0) {
-              return <Text>{`No places within ${PLACES_SEARCH_RADIUS} metres nearby...`}</Text>;
+              return <Text>{`No places within ${this.PLACES_SEARCH_RADIUS} metres nearby...`}</Text>;
             }
             return <ListView data={this.state.places} renderRow={this.renderPlacesRow} />;
           })()
@@ -168,7 +168,7 @@ export default class LocationPickerScreen extends Component {
         </View>
       );
     }
-    if (this.state.currentPositionStatus === CURRENT_POSITION_STATUS.ERROR) {
+    if (this.state.currentPositionStatus === this.CURRENT_POSITION_STATUS.ERROR) {
       return (
         <View styleName="fill-parent vertical v-center">
           <Text>Allow location services to enable check-in feature.</Text>
