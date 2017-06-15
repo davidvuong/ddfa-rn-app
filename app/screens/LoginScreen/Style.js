@@ -2,7 +2,8 @@ export default {
   container: {
     marginTop: 80,
   },
-  spinner: {
-    size: 'large',
+  loginSpinner: {
+    color: 'white',
+    paddingRight: 6,
   },
 };

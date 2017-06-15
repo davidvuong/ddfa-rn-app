@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {
   View,
-  Screen
+  Screen,
 } from '@shoutem/ui';
 import {
   TextInput,
   Button,
   Divider,
+  Spinner,
 } from '@shoutem/ui';
 import {
   Text,
-  Caption
+  Caption,
 } from '@shoutem/ui';
 import { NavigationActions } from 'react-navigation';
 
@@ -46,12 +47,12 @@ export default class LoginComponent extends Component {
     if (!username || !password) { return; }
 
     this.props.loginUser(username, password).then(() => {
-      this.setState({ password: null });
       this.navigateToMainPage();
     }, console.warn);
   }
 
   render() {
+    const { isLoggingIn } = this.props;
     return (
       <View styleName="fill-parent" style={styles.container}>
         <Screen>
@@ -67,8 +68,15 @@ export default class LoginComponent extends Component {
             secureTextEntry
           />
           <Divider />
-          <Button styleName="secondary" onPress={this.onLogin}>
-            <Text styleName="bold bright h-center">LOGIN</Text>
+          <Button
+            styleName="secondary"
+            onPress={this.onLogin}
+            disabled={isLoggingIn}
+          >
+            {isLoggingIn && <Spinner style={styles.loginSpinner} />}
+            <Text styleName="bold bright h-center">
+              {isLoggingIn ? 'LOGGING IN' : 'LOGIN'}
+            </Text>
           </Button>
           <Divider />
           <Caption styleName="h-center">Double D Food Adventures</Caption>
