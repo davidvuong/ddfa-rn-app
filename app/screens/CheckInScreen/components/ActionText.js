@@ -6,7 +6,7 @@ import {
 
 const propTypes = {};
 
-export class ActionText extends Component {
+export default class ActionText extends Component {
   render() {
     return (
       <View styleName="horizontal h-center space-between">
@@ -17,6 +17,5 @@ export class ActionText extends Component {
     );
   }
 }
-ActionText.PropTypes = propTypes;
 
-export default ActionText;
+ActionText.propTypes = propTypes;

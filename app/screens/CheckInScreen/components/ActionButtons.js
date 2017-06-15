@@ -7,11 +7,11 @@ import {
 } from '@shoutem/ui';
 
 const propTypes = {
-  onCancel: PropTypes.func.required,
-  onCheckIn: PropTypes.func.required,
+  onCancel: PropTypes.func.isRequired,
+  onCheckIn: PropTypes.func.isRequired,
 };
 
-export class ActionButtons extends Component {
+export default class ActionButtons extends Component {
   render() {
     return (
       <View styleName="horizontal flexible">
@@ -31,6 +31,5 @@ export class ActionButtons extends Component {
     );
   }
 }
-ActionButtons.PropTypes = propTypes;
 
-export default ActionButtons;
+ActionButtons.propTypes = propTypes;

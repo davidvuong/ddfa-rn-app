@@ -16,10 +16,10 @@ const propTypes = {
   address: PropTypes.string,
   price: PropTypes.number,
   rating: PropTypes.number,
-  navigation: PropTypes.object.required,
+  navigation: PropTypes.object.isRequired,
 };
 
-export class Header extends Component {
+export default class Header extends Component {
   render() {
     return (
       <View>
@@ -42,6 +42,5 @@ export class Header extends Component {
     );
   }
 }
-Header.PropTypes = propTypes;
 
-export default Header;
+Header.propTypes = propTypes;

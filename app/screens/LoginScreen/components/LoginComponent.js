@@ -92,4 +92,4 @@ export default class LoginComponent extends Component {
   }
 }
 
-LoginComponent.PropTypes = propTypes;
+LoginComponent.propTypes = propTypes;
