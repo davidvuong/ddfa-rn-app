@@ -35,7 +35,7 @@ class AuthenticationService {
     const payload = { username, password };
 
     return new Promise((resolve, reject) => {
-      this.http.post(endpoint, payload).then((res) => {
+      return this.http.post(endpoint, payload).then((res) => {
         return Promise.all([
           AsyncStorage.setItem('@user.token', res.body.token),
           res.body.token,
@@ -43,7 +43,9 @@ class AuthenticationService {
       }).spread((_, token) => {
         this.token = token;
         resolve();
-      }, reject);
+      }).catch((error) => {
+        reject(error);
+      });
     });
   }
 }
