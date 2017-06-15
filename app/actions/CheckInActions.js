@@ -1,5 +1,5 @@
 import * as actions from '../ActionTypes';
-import CheckInsService from '../services/CheckInsService';
+import CheckInService from '../services/CheckInService';
 
 /* Internal */
 
@@ -20,7 +20,7 @@ function checkInError(error) {
 export function checkIn(latitude, longitude, address, name, comment, rating, isPaying, amountPaid) {
   return (dispatch) => {
     dispatch(checkInRequest());
-    return CheckInsService.checkIn(
+    return CheckInService.checkIn(
       latitude,
       longitude,
       address,

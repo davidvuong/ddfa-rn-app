@@ -5,7 +5,7 @@ const initialState = {
   checkInErrorStatus: null,
 };
 
-export default function CheckInsReducer(state = initialState, action) {
+export default function CheckInReducer(state = initialState, action) {
   switch (action.type) {
   case actions.CHECK_IN_REQUEST:
     return { ...state, isCheckingIn: true, checkInErrorStatus: null };

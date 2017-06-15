@@ -5,10 +5,10 @@ import {
   getCurrentLocation,
   getNearby,
 } from '../../actions/GeoLocationActions';
-import { checkIn } from '../../actions/CheckInsActions';
+import { checkIn } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state) => {
-  const { geoLocation, checkIns } = state;
+  const { geoLocation, checkIn } = state;
   return {
     isFetchingLocation: geoLocation.isFetchingLocation,
     locationFetchErrorStatus: geoLocation.locationFetchErrorStatus,
@@ -18,8 +18,8 @@ const mapStateToProps = (state) => {
     nearbyFetchErrorStatus: geoLocation.nearbyFetchErrorStatus,
     places: geoLocation.places,
 
-    isCheckingIn: checkIns.isCheckingIn,
-    checkInErrorStatus: checkIns.checkInErrorStatus,
+    isCheckingIn: checkIn.isCheckingIn,
+    checkInErrorStatus: checkIn.checkInErrorStatus,
   };
 };
 

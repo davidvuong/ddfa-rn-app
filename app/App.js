@@ -12,7 +12,7 @@ import { getNavigator } from './navigator/AppNavigator';
 import HttpService from './services/HttpRequestService';
 import AuthenticationService from './services/AuthenticationService';
 import GoogleMapsService from './services/GoogleMapsService';
-import CheckInsService from './services/CheckInsService';
+import CheckInService from './services/CheckInService';
 
 export default class App extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class App extends Component {
       this.setState({ isLoggedIn: !!token });
 
       GoogleMapsService.initialize(Config.HOST, AuthenticationService, HttpService);
-      CheckInsService.initialize(Config.HOST, AuthenticationService, HttpService);
+      CheckInService.initialize(Config.HOST, AuthenticationService, HttpService);
     });
   }
 
