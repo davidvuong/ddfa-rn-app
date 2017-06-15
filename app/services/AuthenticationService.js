@@ -43,9 +43,7 @@ class AuthenticationService {
       }).spread((_, token) => {
         this.token = token;
         resolve();
-      }).catch((error) => {
-        reject(error);
-      });
+      }).catch(reject);
     });
   }
 }
