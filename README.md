@@ -80,6 +80,10 @@ This project uses a few 3rd parties. Below are a few links to help you use the r
 
     `eslint` is the preferred linter. The [documentation](http://eslint.org/docs/user-guide/configuring#configuring-rules) does a good job at describing how to alter the `.eslint` config file.
 
+1. [`prop-types`](https://github.com/facebook/prop-types) for component property validation:
+
+    I don't use `flow` in ddfa-app but I do use PropTypes as a way to perform basic validation when passing properties (usually view Redux `Provider`) to a component. See [here](https://github.com/facebook/prop-types#usage) for their example usage.
+
 ## React Native Pain Points
 
 Below are a few pain points I experienced while developing this React Native app... some have solutions, others do not, some are just rants:
