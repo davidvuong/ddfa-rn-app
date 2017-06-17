@@ -15,7 +15,28 @@ export default class PlacesNearbyMap extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      selectedLocation: null,
+    };
+
+    /* Helpers */
+    this.onPinPress = this.onPinPress.bind(this);
+    this.isSelected = this.isSelected.bind(this);
+
+    /* Renderer */
     this.renderMapMarkers = this.renderMapMarkers.bind(this);
+  }
+
+  onPinPress(event) {
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    const selectedLocation = this.props.places[_.findIndex(this.props.places, (p) => {
+      return p.latitude === latitude && p.longitude === longitude;
+    })];
+    this.setState({ selectedLocation });
+  }
+
+  isSelected(place) {
+    return place === this.state.selectedLocation;
   }
 
   renderMapMarkers() {
@@ -24,7 +45,8 @@ export default class PlacesNearbyMap extends Component {
         <MapView.Marker
           title={place.name}
           description={place.address}
-          pinColor="blue"
+          onPress={this.onPinPress}
+          pinColor={this.isSelected(place) ? 'orange' : 'blue'}
           coordinate={{ latitude: place.latitude, longitude: place.longitude }}
           key={index}
         />
