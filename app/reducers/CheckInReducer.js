@@ -4,6 +4,7 @@ const initialState = {
   isCheckingIn: null,
   checkInErrorStatus: null,
   selectedLocation: null,
+  selectedLocationTmp: null,
 };
 
 export default function CheckInReducer(state = initialState, action) {
@@ -16,11 +17,14 @@ export default function CheckInReducer(state = initialState, action) {
       isCheckingIn: false,
       checkInErrorStatus: null,
       selectedLocation: null,
+      selectedLocationTmp: null,
     };
   case actions.CHECK_IN_ERROR:
     return { ...state, isCheckingIn: false, checkInErrorStatus: action.error };
   case actions.SET_SELECTED_LOCATION:
     return { ...state, selectedLocation: action.selectedLocation };
+  case actions.SET_SELECTED_LOCATION_TMP:
+    return { ...state, selectedLocationTmp: action.selectedLocationTmp };
   default:
     return state;
   }

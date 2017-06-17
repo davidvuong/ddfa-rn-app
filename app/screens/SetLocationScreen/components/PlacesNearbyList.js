@@ -17,6 +17,9 @@ import styles from '../Styles';
 
 const propTypes = {
   places: PropTypes.array.isRequired,
+
+  selectedLocationTmp: PropTypes.object,
+  setSelectedLocationTmp: PropTypes.func.isRequired,
 };
 
 export default class PlacesNearbyList extends Component {

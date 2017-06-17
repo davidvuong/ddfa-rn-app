@@ -9,6 +9,8 @@ import {
 const propTypes = {
   onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
+
+  selectedLocationTmp: PropTypes.object,
 };
 
 export default class ActionButtons extends Component {
@@ -21,7 +23,10 @@ export default class ActionButtons extends Component {
         >
           <Text>CANCEL</Text>
         </Button>
-        <Button styleName="confirmation border secondary" onPress={this.props.onConfirm}>
+        <Button
+          styleName="confirmation border secondary"
+          onPress={this.props.onConfirm}
+        >
           <Text>CONFIRM</Text>
         </Button>
       </View>

@@ -14,6 +14,9 @@ const propTypes = {
 
   currentLocation: PropTypes.object.isRequired,
   setSelectedLocation: PropTypes.func.isRequired,
+
+  selectedLocationTmp: PropTypes.object,
+  setSelectedLocationTmp: PropTypes.func.isRequired,
 };
 
 export default class SetLocationScreen extends Component {
@@ -26,7 +29,9 @@ export default class SetLocationScreen extends Component {
   }
 
   onConfirm() {
-
+    if (!this.props.selectedLocationTmp) { return; }
+    this.props.setSelectedLocation(this.props.selectedLocationTmp);
+    this.props.navigation.goBack();
   }
 
   render() {
@@ -36,8 +41,14 @@ export default class SetLocationScreen extends Component {
         <PlacesNearbyMap
           places={this.props.places}
           currentLocation={this.props.currentLocation}
+          selectedLocationTmp={this.props.selectedLocationTmp}
+          setSelectedLocationTmp={this.props.setSelectedLocationTmp}
         />
-        <PlacesNearbyList places={this.props.places} />
+        <PlacesNearbyList
+          places={this.props.places}
+          selectedLocationTmp={this.props.selectedLocationTmp}
+          setSelectedLocationTmp={this.props.setSelectedLocationTmp}
+        />
         <ActionButtons
           onCancel={() => { this.props.navigation.goBack(); }}
           onConfirm={this.onConfirm}

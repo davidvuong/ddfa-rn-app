@@ -9,15 +9,14 @@ import styles from '../Styles';
 const propTypes = {
   places: PropTypes.array.isRequired,
   currentLocation: PropTypes.object.isRequired,
+
+  selectedLocationTmp: PropTypes.object,
+  setSelectedLocationTmp: PropTypes.func.isRequired,
 };
 
 export default class PlacesNearbyMap extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      selectedLocation: null,
-    };
 
     /* Helpers */
     this.onPinPress = this.onPinPress.bind(this);
@@ -32,11 +31,11 @@ export default class PlacesNearbyMap extends Component {
     const selectedLocation = this.props.places[_.findIndex(this.props.places, (p) => {
       return p.latitude === latitude && p.longitude === longitude;
     })];
-    this.setState({ selectedLocation });
+    this.props.setSelectedLocationTmp(selectedLocation);
   }
 
   isSelected(place) {
-    return place === this.state.selectedLocation;
+    return place === this.props.selectedLocationTmp;
   }
 
   renderMapMarkers() {
@@ -77,4 +76,3 @@ export default class PlacesNearbyMap extends Component {
 }
 
 PlacesNearbyMap.propTypes = propTypes;
-

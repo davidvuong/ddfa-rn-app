@@ -41,3 +41,7 @@ export function checkIn(latitude, longitude, address, name, comment, rating, isP
 export function setSelectedLocation(selectedLocation) {
   return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
 }
+
+export function setSelectedLocationTmp(selectedLocationTmp) {
+  return { type: actions.SET_SELECTED_LOCATION_TMP, selectedLocationTmp };
+}
