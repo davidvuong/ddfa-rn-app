@@ -18,13 +18,10 @@ export default class FeedScreen extends Component {
   constructor(props) {
     super(props);
 
-    /* Internal */
-
+    /* Helpers */
     this.navigateToLogin = this.navigateToLogin.bind(this);
 
-    /* External */
-
-    this.onActionButtonPress = this.onActionButtonPress.bind(this);
+    /* Render */
     this.onLogout = this.onLogout.bind(this);
   }
 
@@ -37,10 +34,6 @@ export default class FeedScreen extends Component {
         ],
       }));
     }, console.warn);
-  }
-
-  onActionButtonPress() {
-    this.props.navigation.navigate('CheckIn');
   }
 
   onLogout() {
@@ -61,7 +54,7 @@ export default class FeedScreen extends Component {
             <Text>LOGOUT</Text>
           </Button>
         </View>
-        <ActionButton onPress={this.onActionButtonPress} />
+        <ActionButton onPress={() => { this.props.navigation.navigate('CheckIn'); }} />
       </View>
     );
   }
