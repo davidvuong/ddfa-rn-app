@@ -13,3 +13,5 @@ export const GET_NEARBY_ERROR = 'places/GET_NEARBY_ERROR';
 export const CHECK_IN_REQUEST = 'checkIn/CHECK_IN_REQUEST';
 export const CHECK_IN_SUCCESS = 'checkIn/CHECK_IN_SUCCESS';
 export const CHECK_IN_ERROR = 'checkIn/CHECK_IN_ERROR';
+
+export const SET_SELECTED_LOCATION = 'checkIn/SET_SELECTED_LOCATION';

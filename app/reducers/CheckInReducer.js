@@ -3,6 +3,7 @@ import * as actions from '../ActionTypes';
 const initialState = {
   isCheckingIn: null,
   checkInErrorStatus: null,
+  selectedLocation: null,
 };
 
 export default function CheckInReducer(state = initialState, action) {
@@ -10,9 +11,16 @@ export default function CheckInReducer(state = initialState, action) {
   case actions.CHECK_IN_REQUEST:
     return { ...state, isCheckingIn: true, checkInErrorStatus: null };
   case actions.CHECK_IN_SUCCESS:
-    return { ...state, isCheckingIn: false, checkInErrorStatus: null };
+    return {
+      ...state,
+      isCheckingIn: false,
+      checkInErrorStatus: null,
+      selectedLocation: null,
+    };
   case actions.CHECK_IN_ERROR:
-    return { ...state, isCheckingIn: false, checkInErrorStatus: action.error, };
+    return { ...state, isCheckingIn: false, checkInErrorStatus: action.error };
+  case actions.SET_SELECTED_LOCATION:
+    return { ...state, selectedLocation: action.selectedLocation };
   default:
     return state;
   }

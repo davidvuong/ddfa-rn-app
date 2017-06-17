@@ -5,7 +5,10 @@ import {
   getCurrentLocation,
   getNearby,
 } from '../../actions/GeoLocationActions';
-import { checkIn } from '../../actions/CheckInActions';
+import {
+  checkIn,
+  setSelectedLocation,
+} from '../../actions/CheckInActions';
 
 const mapStateToProps = (state) => {
   const { geoLocation, checkIn } = state;
@@ -20,6 +23,8 @@ const mapStateToProps = (state) => {
 
     isCheckingIn: checkIn.isCheckingIn,
     checkInErrorStatus: checkIn.checkInErrorStatus,
+
+    selectedLocation: checkIn.selectedLocation,
   };
 };
 
@@ -42,6 +47,9 @@ const mapDispatchToProps = (dispatch) => {
         isPaying,
         amountPaid
       ));
+    },
+    setSelectedLocation: (location) => {
+      return dispatch(setSelectedLocation(location));
     },
   };
 };

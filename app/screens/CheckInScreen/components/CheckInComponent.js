@@ -29,6 +29,9 @@ const propTypes = {
   getCurrentLocation: PropTypes.func.isRequired,
   getNearby: PropTypes.func.isRequired,
   checkIn: PropTypes.func.isRequied,
+
+  selectedLocation: PropTypes.object,
+  setSelectedLocation: PropTypes.func.isRequired,
 };
 
 export default class CheckIn extends Component {
@@ -40,17 +43,16 @@ export default class CheckIn extends Component {
     super(props);
 
     this.state = {
-      selectedLocation: null,
       comment: null,
       isPaying: false,
       amountPaid: null,
       rating: null,
     };
 
-    /* Internal */
+    /* Helpers */
     this.selectAndSetCurrentLocation = this.selectAndSetCurrentLocation.bind(this);
 
-    /* External */
+    /* Render */
     this.onCheckIn = this.onCheckIn.bind(this);
   }
 
@@ -71,13 +73,13 @@ export default class CheckIn extends Component {
         this.props.currentLocation.latitude,
         this.props.currentLocation.longitude
       )[0];
-      this.setState({ selectedLocation });
+      this.props.setSelectedLocation(selectedLocation);
     }, console.warn);
   }
 
   onCheckIn() {
-    const { comment, isPaying, amountPaid, rating, selectedLocation } = this.state;
-    const { latitude, longitude, name, address } = selectedLocation;
+    const { comment, isPaying, amountPaid, rating } = this.state;
+    const { latitude, longitude, name, address } = this.props.selectedLocation;
     this.props.checkIn(
       latitude,
       longitude,
@@ -93,7 +95,7 @@ export default class CheckIn extends Component {
   }
 
   render() {
-    const { selectedLocation } = this.state;
+    const { selectedLocation } = this.props;
     if (!selectedLocation) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
