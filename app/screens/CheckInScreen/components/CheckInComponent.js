@@ -129,6 +129,7 @@ export default class CheckIn extends Component {
           />
         </ScrollView>
         <ActionButtons
+          isCheckingIn={this.props.isCheckingIn}
           onCancel={() => { this.props.navigation.goBack(); }}
           onCheckIn={this.onCheckIn}
         />
