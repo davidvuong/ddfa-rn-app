@@ -3,6 +3,8 @@ import superagent from 'superagent';
 import Promise from 'bluebird';
 
 class HttpRequestService {
+  DEFAULT_RESPONSE_TIMEOUT = 8000; // 8 seconds.
+
   _request(endpoint, method, payload, headers) {
     const request = {
       get: superagent.get,
@@ -10,6 +12,8 @@ class HttpRequestService {
       put: superagent.put,
       delete: superagent.delete,
     }[method](endpoint);
+
+    request.timeout({ response: this.DEFAULT_RESPONSE_TIMEOUT });
 
     request.set('Content-Type', 'application/json');
     _.map(headers, (value, key) => {
