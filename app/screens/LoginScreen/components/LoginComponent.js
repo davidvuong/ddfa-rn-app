@@ -21,7 +21,7 @@ import navigationOptions from '../NavigationOptions';
 
 const propTypes = {
   isLoggingIn: PropTypes.bool,
-  loginErrorStatus: PropTypes.string,
+  loginErrorStatus: PropTypes.object,
 };
 
 export default class LoginComponent extends Component {
