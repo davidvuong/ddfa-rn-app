@@ -118,6 +118,7 @@ export default class CheckIn extends Component {
         <View>
           <TextInput
             placeholder="Is there something else you would like to add?"
+            onChangeText={(comment) => this.setState({ comment })}
             style={{ height: 300 }}
             multiline={true}
             value={this.state.comment}
