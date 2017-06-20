@@ -22,14 +22,15 @@ const propTypes = {
 
 export default class CheckInHeader extends Component {
   render() {
+    const { name, price, rating, address } = this.props;
     return (
       <View onPress={() => { Keyboard.dismiss() }}>
         <Heading>
-          {this.props.name} ({this.props.price}, {this.props.rating}/5)
+          {name || address} ({price || '$ N/A'}, {rating || '???'}/5)
         </Heading>
         <Subtitle>
           <Icon name="ios-pin-outline"/>
-          {this.props.address}
+          {address}
         </Subtitle>
         <Divider styleName="line small center" />
 
