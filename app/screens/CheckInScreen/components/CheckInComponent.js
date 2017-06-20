@@ -5,7 +5,10 @@ import {
   Spinner,
   TextInput,
 } from '@shoutem/ui';
-import { StatusBar } from 'react-native';
+import {
+  StatusBar,
+  ScrollView,
+} from 'react-native';
 
 import navigationOptions from '../NavigationOptions';
 import GeoLocationService from '../../../services/GeoLocationService';
@@ -105,7 +108,7 @@ export default class CheckIn extends Component {
       );
     }
     return (
-      <View styleName="fill-parent">
+      <ScrollView style={{ flex: 1 }} scrollEnabled={false}>
         <StatusBar hidden />
         <CheckInHeader
           name={selectedLocation.name}
@@ -115,20 +118,21 @@ export default class CheckIn extends Component {
           navigation={this.props.navigation}
         />
         <ActionText />
-        <View>
+
+        <ScrollView scrollEnabled={false}>
           <TextInput
             placeholder="Is there something else you would like to add?"
             onChangeText={(comment) => this.setState({ comment })}
-            style={{ height: 300 }}
+            style={{ height: 400 }}
             multiline={true}
             value={this.state.comment}
           />
-        </View>
+        </ScrollView>
         <ActionButtons
           onCancel={() => { this.props.navigation.goBack(); }}
           onCheckIn={this.onCheckIn}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Keyboard } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   View,
@@ -22,7 +23,7 @@ const propTypes = {
 export default class CheckInHeader extends Component {
   render() {
     return (
-      <View>
+      <View onPress={() => { Keyboard.dismiss() }}>
         <Heading>
           {this.props.name} ({this.props.price}, {this.props.rating}/5)
         </Heading>
