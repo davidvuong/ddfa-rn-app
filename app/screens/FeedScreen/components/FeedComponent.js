@@ -44,7 +44,7 @@ export default class FeedScreen extends Component {
   }
 
   onActionButtonPress() {
-    const options = { type: 'establishment' };
+    const options = { type: 'establishments' };
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
       this.props.setSelectedLocation(place);
       this.props.navigation.navigate('CheckIn');
