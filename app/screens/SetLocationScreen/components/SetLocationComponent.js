@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View as RNView, StatusBar } from 'react-native';
+import { View as RNView } from 'react-native';
 
 import ActionButtons from './ActionButtons';
 import PlacesNearbyMap from './PlacesNearbyMap';
@@ -37,7 +37,6 @@ export default class SetLocationScreen extends Component {
   render() {
     return (
       <RNView style={styles.container}>
-        <StatusBar hidden />
         <PlacesNearbyMap
           places={this.props.places}
           currentLocation={this.props.currentLocation}
