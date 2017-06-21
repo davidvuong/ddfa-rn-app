@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -49,6 +48,7 @@
 		D911FE39AD884BF58E099685 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F626ADC71FB45B8A98A4576 /* Rubik-MediumItalic.ttf */; };
 		DE4442E29F524F88921B28DD /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFFF2FFF2BA54994968CFF2A /* Foundation.ttf */; };
 		ED6CE19804444BCB97E92AB7 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5AF8C0F43AC40EE8719B5D3 /* Rubik-LightItalic.ttf */; };
+		F51AA5A58573456CA92BACB3 /* libRNGooglePlaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF83FC90E7EA414F8F1DDC57 /* libRNGooglePlaces.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,6 +326,8 @@
 		F5AF8C0F43AC40EE8719B5D3 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-LightItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
 		F8D46A625E6040DA829E970F /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		F984C2F4DD51408EA58F0A37 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; name = "RNGooglePlaces.xcodeproj"; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EF83FC90E7EA414F8F1DDC57 /* libRNGooglePlaces.a */ = {isa = PBXFileReference; name = "libRNGooglePlaces.a"; path = "libRNGooglePlaces.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 				995F1FEE99D844419CD79CE6 /* libReactNativePermissions.a in Frameworks */,
 				2F3F9383E0AB4B4BA4C41618 /* libAirMaps.a in Frameworks */,
 				B0E56EC14731479F9F7D52E2 /* libReactNativeConfig.a in Frameworks */,
+				F51AA5A58573456CA92BACB3 /* libRNGooglePlaces.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +503,7 @@
 				E13CF3E415404522BE8DD96A /* ReactNativePermissions.xcodeproj */,
 				E5FF1F5A682D43AFB0937808 /* AirMaps.xcodeproj */,
 				C824DCE6376A425F9ADB7FA3 /* ReactNativeConfig.xcodeproj */,
+				1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1037,6 +1041,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 				INFOPLIST_FILE = ddfa/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1045,6 +1050,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1070,6 +1076,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
+					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
 				);
 				INFOPLIST_FILE = ddfa/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1078,6 +1085,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 				);
 				OTHER_LDFLAGS = (

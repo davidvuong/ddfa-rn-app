@@ -16,6 +16,7 @@
     "react-native": "0.43.4",
     "react-native-action-button": "2.6.10",
     "react-native-config": "0.5.0",
+    "react-native-google-places": "2.1.0",
     "react-native-maps": "0.15.2",
     "react-native-permissions": "0.2.7",
     "react-native-vector-icons": "4.2.0",
