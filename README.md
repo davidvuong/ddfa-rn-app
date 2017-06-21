@@ -51,11 +51,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     rm -rf ./ios/build && npm run build:ios
     ```
 
-1. Expose certain required environment variables:
-
-    ```bash
-    export DDFA_GOOGLE_MAPS_API_KEY=
-    ```
+1. Obtain the `.env` file and store it in the root of ddfa-app.
 
 1. Run the React Native application:
 
