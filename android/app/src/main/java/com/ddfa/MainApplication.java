@@ -3,6 +3,7 @@ package com.ddfa;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
 import com.reactnative.photoview.PhotoViewPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeConfigPackage(),
             new MapsPackage(),
             new ReactNativePermissionsPackage(),
             new PhotoViewPackage(),
