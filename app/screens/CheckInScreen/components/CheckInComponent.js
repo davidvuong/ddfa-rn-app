@@ -6,7 +6,6 @@ import {
   TextInput,
 } from '@shoutem/ui';
 import {
-  StatusBar,
   ScrollView,
 } from 'react-native';
 
@@ -41,6 +40,7 @@ export default class CheckIn extends Component {
   static navigationOptions = navigationOptions;
 
   DEFAULT_SEARCH_RADIUS = 200;
+  MAX_DISTANCE_BETWEEN = 100;
 
   constructor(props) {
     super(props);
@@ -71,11 +71,16 @@ export default class CheckIn extends Component {
         this.DEFAULT_SEARCH_RADIUS
       );
     }).then(() => {
-      const selectedLocation = GeoLocationService.sortByDistanceBetween(
+      let selectedLocation = GeoLocationService.sortByDistanceBetween(
         this.props.places,
         this.props.currentLocation.latitude,
         this.props.currentLocation.longitude
       )[0];
+
+      // Make sure we don't do something silly and select something too far away.
+      if (!selectedLocation || selectedLocation.distanceBetween >= this.MAX_DISTANCE_BETWEEN) {
+        selectedLocation = this.props.currentLocation;
+      }
       this.props.setSelectedLocation(selectedLocation);
     }, console.warn);
   }
@@ -102,14 +107,12 @@ export default class CheckIn extends Component {
     if (!selectedLocation) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
-          <StatusBar hidden />
           <Spinner />
         </View>
       );
     }
     return (
       <ScrollView style={{ flex: 1 }} scrollEnabled={false}>
-        <StatusBar hidden />
         <CheckInHeader
           name={selectedLocation.name}
           address={selectedLocation.address}
