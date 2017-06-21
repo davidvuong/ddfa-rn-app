@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { Alert } from 'react-native';
 import {
@@ -8,9 +9,14 @@ import {
   Divider,
 } from '@shoutem/ui';
 import ActionButton from 'react-native-action-button';
+import RNGooglePlaces from 'react-native-google-places';
 import navigationOptions from '../NavigationOptions';
 
 import AuthenticationService from '../../../services/AuthenticationService';
+
+const propTypes = {
+  setSelectedLocation: PropTypes.func.isRequired,
+};
 
 export default class FeedScreen extends Component {
   static navigationOptions = navigationOptions;
@@ -23,6 +29,7 @@ export default class FeedScreen extends Component {
 
     /* Render */
     this.onLogout = this.onLogout.bind(this);
+    this.onActionButtonPress = this.onActionButtonPress.bind(this);
   }
 
   navigateToLogin() {
@@ -33,7 +40,15 @@ export default class FeedScreen extends Component {
           NavigationActions.navigate({ routeName: 'Login' }),
         ],
       }));
-    }, console.warn);
+    }, (error) => { console.error(error.message) });
+  }
+
+  onActionButtonPress() {
+    const options = { type: 'establishment' };
+    RNGooglePlaces.openPlacePickerModal(options).then((place) => {
+      this.props.setSelectedLocation(place);
+      this.props.navigation.navigate('CheckIn');
+    }).catch((error) => { console.log(error.message) });
   }
 
   onLogout() {
@@ -54,8 +69,10 @@ export default class FeedScreen extends Component {
             <Text>LOGOUT</Text>
           </Button>
         </View>
-        <ActionButton onPress={() => { this.props.navigation.navigate('CheckIn'); }} />
+        <ActionButton onPress={this.onActionButtonPress} />
       </View>
     );
   }
 }
+
+FeedScreen.propTypes = propTypes;

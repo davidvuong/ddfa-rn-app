@@ -2,40 +2,20 @@ import { connect } from 'react-redux';
 import CheckIn from './components/CheckInComponent';
 
 import {
-  getCurrentLocation,
-  getNearby,
-} from '../../actions/GeoLocationActions';
-import {
   checkIn,
-  setSelectedLocation,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state) => {
-  const { geoLocation, checkIn } = state;
+  const { checkIn } = state;
   return {
-    isFetchingLocation: geoLocation.isFetchingLocation,
-    locationFetchErrorStatus: geoLocation.locationFetchErrorStatus,
-    currentLocation: geoLocation.currentLocation,
-
-    isFetchingNearby: geoLocation.isFetchingNearby,
-    nearbyFetchErrorStatus: geoLocation.nearbyFetchErrorStatus,
-    places: geoLocation.places,
-
+    selectedLocation: checkIn.selectedLocation,
     isCheckingIn: checkIn.isCheckingIn,
     checkInErrorStatus: checkIn.checkInErrorStatus,
-
-    selectedLocation: checkIn.selectedLocation,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentLocation: () => {
-      return dispatch(getCurrentLocation());
-    },
-    getNearby: (latitude, longitude, radius) => {
-      return dispatch(getNearby(latitude, longitude, radius));
-    },
     checkIn: (latitude, longitude, address, name, comment, rating, isPaying, amountPaid) => {
       return dispatch(checkIn(
         latitude,
@@ -47,9 +27,6 @@ const mapDispatchToProps = (dispatch) => {
         isPaying,
         amountPaid
       ));
-    },
-    setSelectedLocation: (location) => {
-      return dispatch(setSelectedLocation(location));
     },
   };
 };

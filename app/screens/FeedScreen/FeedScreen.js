@@ -1,12 +1,20 @@
 import { connect } from 'react-redux';
 import FeedComponent from './components/FeedComponent';
 
-const mapStateToProps = (state) => {
+import {
+  setSelectedLocation,
+} from '../../actions/CheckInActions';
+
+const mapStateToProps = () => {
   return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    setSelectedLocation: (location) => {
+      return dispatch(setSelectedLocation(location));
+    },
+  };
 };
 
 export default connect(

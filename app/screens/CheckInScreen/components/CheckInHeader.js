@@ -5,10 +5,6 @@ import {
   View,
   Heading,
   Subtitle,
-  Divider,
-  Caption,
-  Button,
-  Text,
 } from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -26,20 +22,12 @@ export default class CheckInHeader extends Component {
     return (
       <View onPress={() => { Keyboard.dismiss() }}>
         <Heading>
-          {name || address} ({price || '$ N/A'}, {rating || '???'}/5)
+          {name} ({price}, {rating || '???'}/5)
         </Heading>
         <Subtitle>
           <Icon name="ios-pin-outline"/>
           {address}
         </Subtitle>
-        <Divider styleName="line small center" />
-
-        <View styleName="horizontal">
-          <Caption>Last checked in 3 days ago</Caption>
-          <Button onPress={() => { this.props.navigation.navigate('SetLocation'); }}>
-            <Text>Change location</Text>
-          </Button>
-        </View>
       </View>
     );
   }
