@@ -59,18 +59,13 @@ class GeoLocationService {
   }
 
   getCurrentLocation() {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 20000,
-      maximumAge: 1000,
-    };
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((position) => {
         resolve(this._calculateRegionDelta(
           position.coords.latitude,
           position.coords.longitude
         ));
-      }, reject, options);
+      }, reject);
     });
   }
 }
