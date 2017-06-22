@@ -5,6 +5,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clean": "rm -rf ./ios/build",
     "build:ios": "node node_modules/react-native/local-cli/cli.js run-ios --no-packager",
+    "build:android": "node node_modules/react-native/local-cli/cli.js run-android --no-packager",
     "eslint": "./node_modules/.bin/eslint ./app"
   },
   "dependencies": {
