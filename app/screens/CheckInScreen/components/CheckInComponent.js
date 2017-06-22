@@ -22,18 +22,20 @@ const propTypes = {
   checkIn: PropTypes.func.isRequied,
 };
 
+const initialState = {
+  comment: null,
+  isPaying: false,
+  amountPaid: null,
+  rating: null,
+};
+
 export default class CheckIn extends Component {
   static navigationOptions = navigationOptions;
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      comment: null,
-      isPaying: false,
-      amountPaid: null,
-      rating: null,
-    };
+    this.state = initialState;
 
     /* Render */
     this.onCheckIn = this.onCheckIn.bind(this);
@@ -52,6 +54,7 @@ export default class CheckIn extends Component {
       isPaying,
       amountPaid
     ).then(() => {
+      this.setState(initialState);
       this.props.navigation.goBack();
     }, (error) => { console.error(error); });
   }
