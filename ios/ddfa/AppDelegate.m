@@ -37,7 +37,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  NSString *googleApiKey = [ReactNativeConfig envFor:@"API_URL"];
+  NSString *googleApiKey = [ReactNativeConfig envFor:@"IOS_GOOGLE_PLACES_API_KEY"];
 
   [GMSPlacesClient provideAPIKey:googleApiKey];
   [GMSServices provideAPIKey:googleApiKey];
