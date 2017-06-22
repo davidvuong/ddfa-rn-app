@@ -75,6 +75,16 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     adb reverse tcp:8081 tcp:8081
     ```
 
+## iOS specific tasks
+
+- You need to install cocoapods to manage hard-iOS dependencies:
+
+    ```bash
+    gem install cocoapods
+    ```
+
+    Most iOS developers suggest [keeping](https://stackoverflow.com/questions/9446644/what-goes-into-your-gitignore-if-youre-using-cocoapods) [Pod](http://www.egeek.me/2012/12/29/should-i-store-cocoapods-products-in-git/) [artifacts](https://www.dzombak.com/blog/2014/03/including-pods-in-source-control.html) in version control. It results in a larger repository but the advantages outweigh it. You'll only ever need cocapods if you need to install a dependency (so when a React Native plugin requires one).
+
 ## 3rd Party Usage Guide
 
 This project uses a few 3rd parties. Below are a few links to help you use the right library/tool to extend DDFA.
