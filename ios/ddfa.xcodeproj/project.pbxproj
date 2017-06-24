@@ -28,6 +28,7 @@
 		26BF50E2B4F34A1083DF2A3A /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21A4B32C84BA4CD0B5525A08 /* Rubik-BlackItalic.ttf */; };
 		2F3F9383E0AB4B4BA4C41618 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEA2628D2354A70916C0137 /* libAirMaps.a */; };
 		3104B7BBE79F4547AD450D5A /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F984C2F4DD51408EA58F0A37 /* Rubik-Medium.ttf */; };
+		44986D8FEFD5415D9C3172A1 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3F1F07C5D64A8D92837E4C /* libRNImagePicker.a */; };
 		583907946C6C4D148FCD302F /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB0D92DBCFE1473CAAB039B8 /* Rubik-BoldItalic.ttf */; };
 		593C2454F3C745BFA45E8137 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A65F3C077D4F40B7A08DAB79 /* libRNShare.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -271,6 +272,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		F1B2E10F1EFC0E9B00978EB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNGooglePlaces;
+		};
+		F1B2E1121EFC0E9B00978EB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1150A97C242942F485F7667E /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -282,8 +297,10 @@
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ddfaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ddfaTests.m; sourceTree = "<group>"; };
+		0B3F1F07C5D64A8D92837E4C /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		0E854C61D4FA4270B82BFC6F /* Rubik-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Black.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Black.ttf"; sourceTree = "<group>"; };
 		0EB8EDDF8AFF4E799FB58107 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		1150A97C242942F485F7667E /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ddfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ddfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,7 +314,7 @@
 		1968740BF1404D128591666A /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1B24FFC2D71A48E39EE58743 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		1BB9B1CF1008F95033343E93 /* libPods-ddfa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ddfa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGooglePlaces.xcodeproj; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; };
+		1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGooglePlaces.xcodeproj; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; };
 		21A4B32C84BA4CD0B5525A08 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-BlackItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
 		27C5E538093B468386CDD1D0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		2E21B4DFE6EF49B2841D5C05 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -329,7 +346,7 @@
 		E13CF3E415404522BE8DD96A /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		E5FF1F5A682D43AFB0937808 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		EB0D92DBCFE1473CAAB039B8 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-BoldItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
-		EF83FC90E7EA414F8F1DDC57 /* libRNGooglePlaces.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = archive.ar; name = libRNGooglePlaces.a; path = libRNGooglePlaces.a; sourceTree = "<group>"; };
+		EF83FC90E7EA414F8F1DDC57 /* libRNGooglePlaces.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGooglePlaces.a; sourceTree = "<group>"; };
 		F5AF8C0F43AC40EE8719B5D3 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-LightItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
 		F8D46A625E6040DA829E970F /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		F984C2F4DD51408EA58F0A37 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -359,6 +376,7 @@
 				B0E56EC14731479F9F7D52E2 /* libReactNativeConfig.a in Frameworks */,
 				F51AA5A58573456CA92BACB3 /* libRNGooglePlaces.a in Frameworks */,
 				EE8A834589ED3242876EC0DC /* libPods-ddfa.a in Frameworks */,
+				44986D8FEFD5415D9C3172A1 /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +545,7 @@
 				E5FF1F5A682D43AFB0937808 /* AirMaps.xcodeproj */,
 				C824DCE6376A425F9ADB7FA3 /* ReactNativeConfig.xcodeproj */,
 				1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */,
+				1150A97C242942F485F7667E /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -639,6 +658,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F1B2E0ED1EFC0E9B00978EB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1B2E1101EFC0E9B00978EB2 /* libRNGooglePlaces.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1B2E0EF1EFC0E9B00978EB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1B2E1131EFC0E9B00978EB2 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -743,6 +778,14 @@
 				{
 					ProductGroup = F1970E771EF8DCFD0000BDA7 /* Products */;
 					ProjectRef = E13CF3E415404522BE8DD96A /* ReactNativePermissions.xcodeproj */;
+				},
+				{
+					ProductGroup = F1B2E0ED1EFC0E9B00978EB2 /* Products */;
+					ProjectRef = 1D50B2EBC15D40178ED0A2DC /* RNGooglePlaces.xcodeproj */;
+				},
+				{
+					ProductGroup = F1B2E0EF1EFC0E9B00978EB2 /* Products */;
+					ProjectRef = 1150A97C242942F485F7667E /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = F1970E751EF8DCFD0000BDA7 /* Products */;
@@ -978,6 +1021,20 @@
 			remoteRef = F1970EA11EF8DCFE0000BDA7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F1B2E1101EFC0E9B00978EB2 /* libRNGooglePlaces.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGooglePlaces.a;
+			remoteRef = F1B2E10F1EFC0E9B00978EB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1B2E1131EFC0E9B00978EB2 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = F1B2E1121EFC0E9B00978EB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1116,6 +1173,7 @@
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = ddfa/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1124,6 +1182,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 				);
@@ -1152,6 +1211,7 @@
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-google-places/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = ddfa/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1160,6 +1220,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 					"\"$(SRCROOT)/ddfa\"",
 				);
