@@ -15,4 +15,10 @@ export default {
   inputTextBox: {
     backgroundColor: 'rgba(255,255,255,0.85)',
   },
+  footer: {
+    position: 'absolute',
+    bottom: 15,
+    left: 0,
+    right: 0,
+  },
 };

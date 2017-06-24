@@ -85,7 +85,7 @@ export default class LoginComponent extends Component {
           </Text>
         </Button>
         <Divider />
-        <Caption styleName="h-center">Double D Food Adventures</Caption>
+        <Caption style={styles.footer} styleName="h-center">Double D Food Adventures</Caption>
       </Image>
     );
   }
