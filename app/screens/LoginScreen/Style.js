@@ -1,16 +1,13 @@
 export default {
-  container: {
-    marginTop: 230,
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
     justifyContent: 'center',
   },
   loginSpinner: {
     color: 'white',
     paddingRight: 6,
-  },
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
   },
   buttonLogin: {
     height: 50,

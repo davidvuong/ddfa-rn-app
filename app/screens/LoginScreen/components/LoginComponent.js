@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View,
-  Screen,
-} from '@shoutem/ui';
-import {
   TextInput,
   Button,
   Divider,
@@ -63,37 +59,33 @@ export default class LoginComponent extends Component {
     const { isLoggingIn } = this.props;
     return (
       <Image source={images.loginBackgroundImage} style={styles.backgroundImage}>
-        <View styleName="overlay" style={styles.container}>
-          <Screen>
-            <TextInput
-              onChangeText={(username) => this.setState({ username })}
-              placeholder="Username"
-              value={this.state.username}
-              style={styles.inputTextBox}
-            />
-            <TextInput
-              onChangeText={(password) => this.setState({ password })}
-              placeholder="Password"
-              value={this.state.password}
-              secureTextEntry
-              style={styles.inputTextBox}
-            />
-            <Divider />
-            <Button
-              styleName="secondary"
-              onPress={this.onLogin}
-              disabled={isLoggingIn}
-              style={styles.buttonLogin}
-            >
-              {isLoggingIn && <Spinner style={styles.loginSpinner} />}
-              <Text styleName="bold bright h-center">
-                {isLoggingIn ? 'LOGGING IN' : 'LOGIN'}
-              </Text>
-            </Button>
-            <Divider />
-            <Caption styleName="h-center">Double D Food Adventures</Caption>
-          </Screen>
-        </View>
+        <TextInput
+          onChangeText={(username) => this.setState({ username })}
+          placeholder="Username"
+          value={this.state.username}
+          style={styles.inputTextBox}
+        />
+        <TextInput
+          onChangeText={(password) => this.setState({ password })}
+          placeholder="Password"
+          value={this.state.password}
+          secureTextEntry
+          style={styles.inputTextBox}
+        />
+        <Divider />
+        <Button
+          styleName="secondary"
+          onPress={this.onLogin}
+          disabled={isLoggingIn}
+          style={styles.buttonLogin}
+        >
+          {isLoggingIn && <Spinner style={styles.loginSpinner} />}
+          <Text styleName="bold bright h-center">
+            {isLoggingIn ? 'LOGGING IN' : 'LOGIN'}
+          </Text>
+        </Button>
+        <Divider />
+        <Caption styleName="h-center">Double D Food Adventures</Caption>
       </Image>
     );
   }
