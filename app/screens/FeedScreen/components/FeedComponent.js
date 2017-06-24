@@ -40,7 +40,7 @@ export default class FeedScreen extends Component {
           NavigationActions.navigate({ routeName: 'Login' }),
         ],
       }));
-    }, (error) => { console.error(error.message) });
+    }, (error) => { console.error(error.message); });
   }
 
   onActionButtonPress() {
@@ -48,7 +48,7 @@ export default class FeedScreen extends Component {
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
       this.props.setSelectedLocation(place);
       this.props.navigation.navigate('CheckIn');
-    }).catch((error) => { console.log(error.message) });
+    }).catch((error) => { console.log(error.message); });
   }
 
   onLogout() {

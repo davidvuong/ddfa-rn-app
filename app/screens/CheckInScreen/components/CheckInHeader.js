@@ -20,7 +20,7 @@ export default class CheckInHeader extends Component {
   render() {
     const { name, price, rating, address } = this.props;
     return (
-      <View onPress={() => { Keyboard.dismiss() }}>
+      <View onPress={() => { Keyboard.dismiss(); }}>
         <Heading>
           {name} ({price}, {rating || '???'}/5)
         </Heading>
