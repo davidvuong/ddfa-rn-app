@@ -58,8 +58,8 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     I prefer to run the packager myself (more control over my terminal):
 
     ```bash
-    npm run build:ios
     npm start
+    npm run build:ios
     ```
 
     **NOTE:** If `npm run build:ios` does not start up the simulator app, open it yourself and click on the DDFA app.
