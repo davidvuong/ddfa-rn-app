@@ -10,13 +10,14 @@ import {
 } from 'react-native';
 
 import navigationOptions from '../NavigationOptions';
+import styles from '../Style';
 
 import ActionButtons from './ActionButtons';
 import ActionText from './ActionText';
 import CheckInHeader from './CheckInHeader';
 
 const propTypes = {
-  selectedLocation: PropTypes.object,
+  selectedLocation: PropTypes.object.isRequired,
   isCheckingIn: PropTypes.bool,
   checkInErrorStatus: PropTypes.string,
   checkIn: PropTypes.func.isRequied,
@@ -69,21 +70,17 @@ export default class CheckIn extends Component {
       );
     }
     return (
-      <ScrollView style={{ flex: 1 }} scrollEnabled={false}>
+      <ScrollView style={styles.container} scrollEnabled={false}>
         <CheckInHeader
-          name={selectedLocation.name}
-          address={selectedLocation.address}
-          price={selectedLocation.price}
-          rating={selectedLocation.rating}
+          location={selectedLocation}
           navigation={this.props.navigation}
         />
         <ActionText />
-
         <ScrollView scrollEnabled={false}>
           <TextInput
             placeholder="Is there something else you would like to add?"
             onChangeText={(comment) => this.setState({ comment })}
-            style={{ height: 400 }}
+            style={{ height: 200 }}
             multiline={true}
             value={this.state.comment}
           />

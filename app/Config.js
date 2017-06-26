@@ -1,3 +1,3 @@
 export default {
-  HOST: 'http://localhost:5000'
+  HOST: 'https://ddfa.davidvuong.me',
 };

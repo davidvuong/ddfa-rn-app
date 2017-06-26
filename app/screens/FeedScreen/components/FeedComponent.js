@@ -13,6 +13,7 @@ import RNGooglePlaces from 'react-native-google-places';
 import navigationOptions from '../NavigationOptions';
 
 import AuthenticationService from '../../../services/AuthenticationService';
+import GeoLocationService from '../../../services/GeoLocationService';
 
 const propTypes = {
   setSelectedLocation: PropTypes.func.isRequired,
@@ -46,6 +47,10 @@ export default class FeedScreen extends Component {
   onActionButtonPress() {
     const options = { type: 'establishments' };
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
+      const delta = GeoLocationService.calculateRegionDelta(place.latitude, place.longitude);
+      place.latitudeDelta = delta.latitudeDelta;
+      place.longitudeDelta = delta.longitudeDelta;
+
       this.props.setSelectedLocation(place);
       this.props.navigation.navigate('CheckIn');
     }).catch((error) => { console.log(error.message); });

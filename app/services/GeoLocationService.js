@@ -17,7 +17,7 @@ class GeoLocationService {
     });
   }
 
-  _calculateRegionDelta(latitude, longitude, distance = 500) {
+  calculateRegionDelta(latitude, longitude, distance = 500) {
     distance = distance / 2;
     const circumference = 40075;
     const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
@@ -61,7 +61,7 @@ class GeoLocationService {
   getCurrentLocation() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((position) => {
-        resolve(this._calculateRegionDelta(
+        resolve(this.calculateRegionDelta(
           position.coords.latitude,
           position.coords.longitude
         ));
