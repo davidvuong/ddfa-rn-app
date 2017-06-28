@@ -7,6 +7,7 @@ import {
 } from '@shoutem/ui';
 import {
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import {
   KeyboardAwareScrollView,
@@ -74,13 +75,14 @@ export default class CheckIn extends Component {
     }
     return (
       <KeyboardAwareScrollView>
+        <StatusBar barStyle="light-content" />
         <ScrollView style={styles.container} scrollEnabled={false}>
           <CheckInHeader
             location={selectedLocation}
             navigation={this.props.navigation}
           />
           <ActionText />
-          <ScrollView scrollEnabled={false}>
+          <View>
             <TextInput
               placeholder="Is there something else you would like to add?"
               onChangeText={(comment) => this.setState({ comment })}
@@ -88,7 +90,7 @@ export default class CheckIn extends Component {
               multiline={true}
               value={this.state.comment}
             />
-          </ScrollView>
+          </View>
           <ActionButtons
             isCheckingIn={this.props.isCheckingIn}
             onCancel={() => { this.props.navigation.goBack(); }}

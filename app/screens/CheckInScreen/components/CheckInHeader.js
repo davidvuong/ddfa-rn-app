@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Heading,
   Subtitle,
+  Overlay,
 } from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MapView from 'react-native-maps';
@@ -31,11 +32,13 @@ export default class CheckInHeader extends Component {
           latitude, longitude, latitudeDelta, longitudeDelta
         }}
       >
-        <Heading>{name}</Heading>
-        <Subtitle style={styles.checkInHeaderSubtitle}>
-          <Icon style={styles.checkInHeaderSubtitleIcon} name="ios-pin" />
-          {address}
-        </Subtitle>
+        <Overlay styleName="fill-parent">
+          <Heading>{name}</Heading>
+          <Subtitle style={styles.checkInHeaderSubtitle}>
+            <Icon style={styles.checkInHeaderSubtitleIcon} name="ios-pin" />
+            {` ${address}`}
+          </Subtitle>
+        </Overlay>
       </MapView>
     );
   }

@@ -3,9 +3,7 @@ export default {
     flex: 1,
   },
   checkInHeaderContainer: {
-    height: 200,
-    padding: 12,
-    paddingTop: 18,
+    height: 160,
   },
   checkInHeaderSubtitle: {
     marginTop: 4,
@@ -13,6 +11,5 @@ export default {
   },
   checkInHeaderSubtitleIcon: {
     fontSize: 16,
-    margin: 6,
   },
 };
