@@ -47,6 +47,8 @@ export default class FeedScreen extends Component {
   onActionButtonPress() {
     const options = { type: 'establishments' };
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
+      place.address = place.address || place.name;
+
       const delta = GeoLocationService.calculateRegionDelta(place.latitude, place.longitude);
       place.latitudeDelta = delta.latitudeDelta;
       place.longitudeDelta = delta.longitudeDelta;
