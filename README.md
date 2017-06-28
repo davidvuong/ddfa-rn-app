@@ -67,7 +67,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 ## Bundle js to run on device (without development server)
 
 ```bash
-react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle
+rm ios/main.jsbundle && rm ios/main.jsbundle.meta && react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle --reset-cache --verbose
 ```
 
 ... and then follow these steps to disable debug mode: http://facebook.github.io/react-native/releases/0.19/docs/debugging.html#debugging-react-native-apps
