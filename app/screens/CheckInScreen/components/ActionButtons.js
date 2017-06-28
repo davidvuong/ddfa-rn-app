@@ -7,6 +7,8 @@ import {
   Spinner,
 } from '@shoutem/ui';
 
+import styles from '../Style';
+
 const propTypes = {
   isCheckingIn: PropTypes.bool,
   onCancel: PropTypes.func.isRequired,
@@ -16,7 +18,7 @@ const propTypes = {
 export default class ActionButtons extends Component {
   render() {
     return (
-      <View styleName="horizontal flexible">
+      <View styleName="horizontal flexible" style={styles.actionButtonsContainer}>
         <Button
           styleName="confirmation"
           onPress={this.props.onCancel}

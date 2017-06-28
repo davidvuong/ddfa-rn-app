@@ -17,10 +17,14 @@ const propTypes = {
 
 export default class CheckInHeader extends Component {
   render() {
-    const { name, address, latitude, longitude, latitudeDelta, longitudeDelta } = this.props.location;
+    const {
+      name, address, latitude, longitude, latitudeDelta, longitudeDelta,
+    } = this.props.location;
+
     return (
       <MapView
         style={styles.checkInHeaderContainer}
+
         zoomEnabled={false}
         rotateEnabled={false}
         scrollEnabled={false}
@@ -29,7 +33,7 @@ export default class CheckInHeader extends Component {
         moveOnMarkerPress={false}
 
         initialRegion={{
-          latitude, longitude, latitudeDelta, longitudeDelta
+          latitude, longitude, latitudeDelta, longitudeDelta,
         }}
       >
         <Overlay styleName="fill-parent">

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   TextInput,
-  View,
   Spinner,
 } from '@shoutem/ui';
 import {
+  View,
   ScrollView,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 import {
   KeyboardAwareScrollView,
@@ -42,8 +43,19 @@ export default class CheckIn extends Component {
 
     this.state = initialState;
 
+    /* Helpers */
+    this.getDescriptionTextInputHeight = this.getDescriptionTextInputHeight.bind(this);
+
     /* Render */
     this.onCheckIn = this.onCheckIn.bind(this);
+  }
+
+  getDescriptionTextInputHeight() {
+    const { height } = Dimensions.get('window');
+    return height
+      - 8 // Make enough room for actionButtons margin (top/bottom).
+      - styles.checkInHeaderContainer.height
+      - styles.actionButtonsContainer.height;
   }
 
   onCheckIn() {
@@ -74,30 +86,26 @@ export default class CheckIn extends Component {
       );
     }
     return (
-      <KeyboardAwareScrollView>
+      <ScrollView style={styles.container} scrollEnabled={false}>
         <StatusBar barStyle="light-content" />
-        <ScrollView style={styles.container} scrollEnabled={false}>
-          <CheckInHeader
-            location={selectedLocation}
-            navigation={this.props.navigation}
-          />
-          <ActionText />
-          <View>
-            <TextInput
-              placeholder="Is there something else you would like to add?"
-              onChangeText={(comment) => this.setState({ comment })}
-              style={{ height: 200 }}
-              multiline={true}
-              value={this.state.comment}
-            />
-          </View>
-          <ActionButtons
-            isCheckingIn={this.props.isCheckingIn}
-            onCancel={() => { this.props.navigation.goBack(); }}
-            onCheckIn={this.onCheckIn}
-          />
-        </ScrollView>
-      </KeyboardAwareScrollView>
+        <CheckInHeader
+          location={selectedLocation}
+          navigation={this.props.navigation}
+        />
+        {/*<ActionText />*/}
+        <TextInput
+          placeholder="Is there something else you would like to add?"
+          onChangeText={(comment) => this.setState({ comment })}
+          multiline={true}
+          style={{ height: this.getDescriptionTextInputHeight() }}
+          value={this.state.comment}
+        />
+        <ActionButtons
+          isCheckingIn={this.props.isCheckingIn}
+          onCancel={() => { this.props.navigation.goBack(); }}
+          onCheckIn={this.onCheckIn}
+        />
+      </ScrollView>
     );
   }
 }
