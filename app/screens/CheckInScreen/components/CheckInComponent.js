@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import {
   TextInput,
   View,
-  Spinner
+  Spinner,
 } from '@shoutem/ui';
 import {
   ScrollView,
 } from 'react-native';
+import {
+  KeyboardAwareScrollView,
+} from 'react-native-keyboard-aware-scroll-view'
 
 import navigationOptions from '../NavigationOptions';
 import styles from '../Style';
@@ -70,27 +73,29 @@ export default class CheckIn extends Component {
       );
     }
     return (
-      <ScrollView style={styles.container} scrollEnabled={false}>
-        <CheckInHeader
-          location={selectedLocation}
-          navigation={this.props.navigation}
-        />
-        <ActionText />
-        <ScrollView scrollEnabled={false}>
-          <TextInput
-            placeholder="Is there something else you would like to add?"
-            onChangeText={(comment) => this.setState({ comment })}
-            style={{ height: 200 }}
-            multiline={true}
-            value={this.state.comment}
+      <KeyboardAwareScrollView>
+        <ScrollView style={styles.container} scrollEnabled={false}>
+          <CheckInHeader
+            location={selectedLocation}
+            navigation={this.props.navigation}
+          />
+          <ActionText />
+          <ScrollView scrollEnabled={false}>
+            <TextInput
+              placeholder="Is there something else you would like to add?"
+              onChangeText={(comment) => this.setState({ comment })}
+              style={{ height: 200 }}
+              multiline={true}
+              value={this.state.comment}
+            />
+          </ScrollView>
+          <ActionButtons
+            isCheckingIn={this.props.isCheckingIn}
+            onCancel={() => { this.props.navigation.goBack(); }}
+            onCheckIn={this.onCheckIn}
           />
         </ScrollView>
-        <ActionButtons
-          isCheckingIn={this.props.isCheckingIn}
-          onCancel={() => { this.props.navigation.goBack(); }}
-          onCheckIn={this.onCheckIn}
-        />
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
