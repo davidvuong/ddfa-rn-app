@@ -1,12 +1,12 @@
-# OSX
-#
 .DS_Store
-
 .env
 
-# Xcode
-#
 build/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# iOS/xcode
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -23,28 +23,11 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+ios/main.jsbundle
+ios/main.jsbundle.meta
 
 # Android/IntelliJ
-#
-build/
 .idea
 .gradle
 local.properties
 *.iml
-
-# node.js
-#
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
