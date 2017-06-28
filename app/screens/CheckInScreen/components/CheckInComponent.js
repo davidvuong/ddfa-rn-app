@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {
   KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view'
+} from 'react-native-keyboard-aware-scrollview'
 
 import navigationOptions from '../NavigationOptions';
 import styles from '../Style';
@@ -86,6 +86,7 @@ export default class CheckIn extends Component {
       );
     }
     return (
+      <KeyboardAwareScrollView>
       <ScrollView style={styles.container} scrollEnabled={false}>
         <StatusBar barStyle="light-content" />
         <CheckInHeader
@@ -106,6 +107,7 @@ export default class CheckIn extends Component {
           onCheckIn={this.onCheckIn}
         />
       </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
