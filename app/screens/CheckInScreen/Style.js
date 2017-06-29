@@ -20,7 +20,11 @@ export default {
   /* action buttons styles */
   actionButtonsContainer: {
     flex: 1,
+    flexDirection: 'row',
     height: 40,
     marginTop: 4,
+  },
+  actionButtonsButton: {
+    marginHorizontal: 4,
   },
 };

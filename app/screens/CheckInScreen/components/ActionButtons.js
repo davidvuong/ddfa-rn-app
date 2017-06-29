@@ -18,9 +18,10 @@ const propTypes = {
 export default class ActionButtons extends Component {
   render() {
     return (
-      <View styleName="horizontal flexible" style={styles.actionButtonsContainer}>
+      <View style={styles.actionButtonsContainer}>
         <Button
           styleName="confirmation"
+          style={styles.actionButtonsButton}
           onPress={this.props.onCancel}
           muted={this.props.isCheckingIn}
           disabled={this.props.isCheckingIn}
@@ -29,6 +30,7 @@ export default class ActionButtons extends Component {
         </Button>
         <Button
           styleName="confirmation secondary"
+          style={styles.actionButtonsButton}
           onPress={this.props.onCheckIn}
           disabled={this.props.isCheckingIn}
         >

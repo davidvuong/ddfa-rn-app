@@ -88,7 +88,7 @@ export default class CheckIn extends Component {
     return (
       <KeyboardAwareScrollView>
       <ScrollView style={styles.container} scrollEnabled={false}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar hidden />
         <CheckInHeader
           location={selectedLocation}
           navigation={this.props.navigation}
