@@ -7,7 +7,7 @@ export default {
   /* header styles */
   checkInHeaderContainer: {
     flex: 1,
-    height: 160,
+    height: 180,
   },
   checkInHeaderSubtitle: {
     marginTop: 4,
