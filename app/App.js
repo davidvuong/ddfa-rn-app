@@ -11,7 +11,6 @@ import { getNavigator } from './navigator/AppNavigator';
 
 import HttpService from './services/HttpRequestService';
 import AuthenticationService from './services/AuthenticationService';
-import GoogleMapsService from './services/GoogleMapsService';
 import CheckInService from './services/CheckInService';
 
 export default class App extends Component {
@@ -25,8 +24,6 @@ export default class App extends Component {
     AuthenticationService.initialize(Config.HOST, HttpService);
     AuthenticationService.getTokenFromStorage().then((token) => {
       this.setState({ isLoggedIn: !!token });
-
-      GoogleMapsService.initialize(Config.HOST, AuthenticationService, HttpService);
       CheckInService.initialize(Config.HOST, AuthenticationService, HttpService);
     });
   }
