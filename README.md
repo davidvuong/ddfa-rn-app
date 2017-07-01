@@ -2,7 +2,7 @@
 
 **Welcome to ddfa-app!**
 
-This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in JavaScript (ES6) using [React Native](https://facebook.github.io/react-native/) and supports both iOS and Android devices. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
+This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in JavaScript (ES6) using [React Native](https://facebook.github.io/react-native/) and only supports iOS. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
 
 ## Installation
 
@@ -64,7 +64,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     **NOTE:** If `npm run build:ios` does not start up the simulator app, open it yourself and click on the DDFA app.
 
-## Bundle js to run on device (without development server)
+## Bundle JS to Run on Device (without development server)
 
 ```bash
 rm ios/main.jsbundle && rm ios/main.jsbundle.meta && react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle --reset-cache --verbose
@@ -83,7 +83,7 @@ rm ios/main.jsbundle && rm ios/main.jsbundle.meta && react-native bundle --platf
     adb reverse tcp:8081 tcp:8081
     ```
 
-## iOS specific tasks
+## iOS Specific Tasks
 
 - You need to install cocoapods to manage hard-iOS dependencies:
 
