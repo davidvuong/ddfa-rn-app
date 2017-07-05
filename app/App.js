@@ -23,8 +23,8 @@ export default class App extends Component {
     /* Initialize app services. */
     AuthenticationService.initialize(Config.HOST, HttpService);
     AuthenticationService.getTokenFromStorage().then((token) => {
-      this.setState({ isLoggedIn: !!token });
       CheckInService.initialize(Config.HOST, AuthenticationService, HttpService);
+      this.setState({ isLoggedIn: !!token });
     });
   }
 
