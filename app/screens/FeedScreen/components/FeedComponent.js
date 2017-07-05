@@ -83,7 +83,7 @@ export default class FeedScreen extends Component {
           resetCheckIns={this.props.resetCheckIns}
           isLoading={this.props.isListingCheckIns}
         />
-        <ActionButton spacing={12}>
+        <ActionButton spacing={12} offsetX={8} offsetY={8}>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
             <Icon name="ios-power" size={14} />
           </ActionButton.Item>
