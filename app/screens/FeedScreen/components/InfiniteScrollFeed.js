@@ -37,8 +37,10 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   componentDidMount() {
-    // Initial load to fetch a couple of check-ins.
-    this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
+    // Initial load to fetch a couple of check-ins (only if nothing exists).
+    if (!this.props.checkIns.length) {
+      this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
+    }
   }
 
   renderRow(checkIn) {
