@@ -4,13 +4,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import last from 'lodash/last';
 
 import React, { Component } from 'react';
-import {
-  StatusBar,
-} from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Title,
   Subtitle,
+  Text,
   Divider,
   Image,
   ListView,
@@ -19,6 +17,7 @@ import {
   Spinner,
 } from '@shoutem/ui';
 
+import styles from '../Styles';
 import images from '../../../Images';
 
 const propTypes = {
@@ -93,14 +92,20 @@ export default class InfiniteScrollFeed extends Component {
     this.performInitialLoad();
   }
 
-  renderRow(checkIn) {
+  renderRow(checkIn, _, counter) {
     return (
       <View>
-        <Image styleName="large-banner" source={this.getBackgroundImage(checkIn.id)}>
+        <Image
+          styleName="large-banner"
+          source={this.getBackgroundImage(checkIn.id)}
+          style={styles.checkInRowItem}
+        >
           <Tile>
             <Title styleName="md-gutter-bottom">{checkIn.name}</Title>
             <Subtitle styleName="sm-gutter-horizontal">{checkIn.address}</Subtitle>
           </Tile>
+          <Text style={styles.checkInTimeAgo}>{checkIn.createdAt}</Text>
+          <Text style={styles.checkInCounter}>{parseInt(counter, 10) + 1}</Text>
         </Image>
         <Divider styleName="line" />
       </View>
@@ -112,7 +117,6 @@ export default class InfiniteScrollFeed extends Component {
     if (isNull(isLoading)) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
-          <StatusBar barStyle="dark-content" />
           <Spinner />
         </View>
       );

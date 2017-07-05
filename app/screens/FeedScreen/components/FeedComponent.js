@@ -76,7 +76,7 @@ export default class FeedScreen extends Component {
     const actionButtonItemSize = 34;
     return (
       <View styleName="fill-parent">
-        <StatusBar barStyle="light-content" />
+        <StatusBar hidden />
         <InfiniteScrollFeed
           checkIns={this.props.checkIns}
           loadMore={this.props.listCheckIns}
