@@ -14,7 +14,7 @@ import navigationOptions from '../NavigationOptions';
 
 import AuthenticationService from '../../../services/AuthenticationService';
 import GeoLocationService from '../../../services/GeoLocationService';
-import InfiniteScrollFeed from "./InfiniteScrollFeed";
+import InfiniteScrollFeed from './InfiniteScrollFeed';
 
 const propTypes = {
   setSelectedLocation: PropTypes.func.isRequired,
