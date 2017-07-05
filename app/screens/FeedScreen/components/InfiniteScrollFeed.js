@@ -102,7 +102,7 @@ export default class InfiniteScrollFeed extends Component {
         >
           <Tile>
             <Title styleName="md-gutter-bottom" numberOfLines={2}>{checkIn.name}</Title>
-            <Subtitle styleName="sm-gutter-horizontal" numberOfLines={4}>{checkIn.address}</Subtitle>
+            <Subtitle styleName="sm-gutter-horizontal" numberOfLines={3}>{checkIn.address}</Subtitle>
           </Tile>
           <Text style={styles.checkInTimeAgo}>{checkIn.createdAt}</Text>
           <Text style={styles.checkInCounter}>{parseInt(counter, 10) + 1}</Text>
