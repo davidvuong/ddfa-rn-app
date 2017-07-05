@@ -8,6 +8,8 @@ import {
   Button,
   Divider,
 } from '@shoutem/ui';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import ActionButton from 'react-native-action-button';
 import RNGooglePlaces from 'react-native-google-places';
 import navigationOptions from '../NavigationOptions';
@@ -30,7 +32,7 @@ export default class FeedScreen extends Component {
 
     /* Render */
     this.onLogout = this.onLogout.bind(this);
-    this.onActionButtonPress = this.onActionButtonPress.bind(this);
+    this.onCheckIn = this.onCheckIn.bind(this);
   }
 
   navigateToLogin() {
@@ -44,7 +46,7 @@ export default class FeedScreen extends Component {
     }, (error) => { console.error(error.message); });
   }
 
-  onActionButtonPress() {
+  onCheckIn() {
     const options = { type: 'establishments' };
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
       place.address = place.address || place.name;
@@ -69,14 +71,14 @@ export default class FeedScreen extends Component {
   render() {
     return (
       <View styleName="fill-parent">
-        <View styleName="fill-parent horizontal h-center vertical v-center">
-          <Text>Activities Feed coming soon!</Text>
-          <Divider style={{ paddingTop: 10 }} />
-          <Button styleName="secondary" onPress={this.onLogout}>
-            <Text>LOGOUT</Text>
-          </Button>
-        </View>
-        <ActionButton onPress={this.onActionButtonPress} />
+        <ActionButton spacing={12}>
+          <ActionButton.Item buttonColor="white" size={44} onPress={this.onLogout}>
+            <Icon name="ios-power" size={22} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor="white" size={44} onPress={this.onCheckIn}>
+            <Icon name="ios-pin" size={22} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }
