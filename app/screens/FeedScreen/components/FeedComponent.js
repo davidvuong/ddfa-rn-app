@@ -64,14 +64,17 @@ export default class FeedScreen extends Component {
   }
 
   render() {
+    const actionButtonItemSize = 44;
+    const actionButtonItemIconSize = 22;
+
     return (
       <View styleName="fill-parent">
         <ActionButton spacing={12}>
-          <ActionButton.Item buttonColor="white" size={44} onPress={this.onLogout}>
-            <Icon name="ios-power" size={22} />
+          <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
+            <Icon name="ios-power" size={actionButtonItemIconSize} />
           </ActionButton.Item>
-          <ActionButton.Item buttonColor="white" size={44} onPress={this.onCheckIn}>
-            <Icon name="ios-pin" size={22} />
+          <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onCheckIn}>
+            <Icon name="ios-pin" size={actionButtonItemIconSize} />
           </ActionButton.Item>
         </ActionButton>
       </View>
