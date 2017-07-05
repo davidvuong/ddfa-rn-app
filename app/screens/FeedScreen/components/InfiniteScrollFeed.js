@@ -1,3 +1,5 @@
+import sample from 'lodash/sample';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -10,28 +12,42 @@ import {
   View,
 } from '@shoutem/ui';
 
+import images from '../../../Images';
+
 const propTypes = {
-  places: PropTypes.array.isRequired,
+  checkIns: PropTypes.array.isRequired,
+  loadMore: PropTypes.func.isRequired,
 };
 
 export default class InfiniteScrollFeed extends Component {
   constructor(props) {
     super(props);
 
+    this.SAMPLE_IMAGES = [
+      images.restaurantImage1,
+      images.restaurantImage2,
+      images.restaurantImage3,
+      images.restaurantImage4,
+      images.restaurantImage5,
+    ];
+    this.PAGINATION_SIZE = 10;
+
     /* Render */
     this.renderRow = this.renderRow.bind(this);
   }
 
-  renderRow(place) {
+  componentDidMount() {
+    // Initial load to fetch a couple of check-ins.
+    this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
+  }
+
+  renderRow(checkIn) {
     return (
       <View>
-        <Image
-          styleName="large-banner"
-          source={{ uri: place.image.url }}
-        >
+        <Image styleName="large-banner" source={sample(this.SAMPLE_IMAGES)}>
           <Tile>
-            <Title styleName="md-gutter-bottom">{place.name}</Title>
-            <Subtitle styleName="sm-gutter-horizontal">{place.address}</Subtitle>
+            <Title styleName="md-gutter-bottom">{checkIn.name}</Title>
+            <Subtitle styleName="sm-gutter-horizontal">{checkIn.address}</Subtitle>
           </Tile>
         </Image>
         <Divider styleName="line" />
@@ -42,7 +58,7 @@ export default class InfiniteScrollFeed extends Component {
   render() {
     return (
       <ListView
-        data={this.props.places}
+        data={this.props.checkIns}
         renderRow={this.renderRow}
       />
     );

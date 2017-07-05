@@ -18,6 +18,10 @@ import InfiniteScrollFeed from "./InfiniteScrollFeed";
 
 const propTypes = {
   setSelectedLocation: PropTypes.func.isRequired,
+  listCheckIns: PropTypes.func.isRequired,
+  checkIns: PropTypes.array.isRequired,
+  isListingCheckIns: PropTypes.bool,
+  checkInListErrorStatus: PropTypes.object,
 };
 
 export default class FeedScreen extends Component {
@@ -32,42 +36,6 @@ export default class FeedScreen extends Component {
     /* Render */
     this.onLogout = this.onLogout.bind(this);
     this.onCheckIn = this.onCheckIn.bind(this);
-
-    /* tmp */
-    this.state = {
-      restaurants: [
-        {
-          "name": "Gaspar Brasserie",
-          "address": "185 Sutter St, San Francisco, CA 94109",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
-        },
-        {
-          "name": "Chalk Point Kitchen",
-          "address": "527 Broome St, New York, NY 10013",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
-        },
-        {
-          "name": "Gaspar Brasserie",
-          "address": "185 Sutter St, San Francisco, CA 94109",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
-        },
-        {
-          "name": "Chalk Point Kitchen",
-          "address": "527 Broome St, New York, NY 10013",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
-        },
-        {
-          "name": "Gaspar Brasserie",
-          "address": "185 Sutter St, San Francisco, CA 94109",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
-        },
-        {
-          "name": "Chalk Point Kitchen",
-          "address": "527 Broome St, New York, NY 10013",
-          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
-        },
-      ],
-    };
   }
 
   navigateToLogin() {
@@ -108,7 +76,10 @@ export default class FeedScreen extends Component {
     return (
       <View styleName="fill-parent">
         <StatusBar barStyle="light-content" />
-        <InfiniteScrollFeed places={this.state.restaurants} />
+        <InfiniteScrollFeed
+          checkIns={this.props.checkIns}
+          loadMore={this.props.listCheckIns}
+        />
         <ActionButton spacing={12}>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
             <Icon name="ios-power" size={14} />

@@ -7,6 +7,17 @@ class CheckInService {
     this.http = httpService;
   }
 
+  list(startTime, limit) {
+    const endpoint = `${this.host}/check-ins/?startTime=${startTime}&limit=${limit}`;
+    const headers = this.authenticationService.getAuthenticationHeader();
+    return new Promise((resolve, reject) => {
+      this.http.get(endpoint, headers).then((res) => {
+        resolve(res.body.checkIns);
+      }, reject);
+    });
+  }
+
+  /* TODO: Rename this to `.create(...)` */
   checkIn(
     latitude,
     longitude,

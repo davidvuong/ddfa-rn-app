@@ -15,6 +15,18 @@ function checkInError(error) {
   return { type: actions.CHECK_IN_ERROR, error };
 }
 
+function listCheckInRequest() {
+  return { type: actions.LIST_CHECK_IN_REQUEST };
+}
+
+function listCheckInSuccess(checkIns) {
+  return { type: actions.LIST_CHECK_IN_SUCCESS, checkIns };
+}
+
+function listCheckInError(error) {
+  return { type: actions.LIST_CHECK_IN_ERROR, error };
+}
+
 /* External */
 
 export function checkIn(latitude, longitude, address, name, comment, rating, isPaying, amountPaid) {
@@ -40,4 +52,16 @@ export function checkIn(latitude, longitude, address, name, comment, rating, isP
 
 export function setSelectedLocation(selectedLocation) {
   return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
+}
+
+export function listCheckIns(startTime, limit) {
+  return (dispatch) => {
+    dispatch(listCheckInRequest());
+    return CheckInService.list(startTime, limit).then((checkIns) => {
+      dispatch(listCheckInSuccess(checkIns));
+    }, (error) => {
+      dispatch(listCheckInError(error));
+      throw error;
+    });
+  };
 }
