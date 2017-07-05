@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
-import { Alert } from 'react-native';
-import { View }from '@shoutem/ui';
+import {
+  Alert,
+  StatusBar,
+} from 'react-native';
+import { View } from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ActionButton from 'react-native-action-button';
@@ -11,6 +14,7 @@ import navigationOptions from '../NavigationOptions';
 
 import AuthenticationService from '../../../services/AuthenticationService';
 import GeoLocationService from '../../../services/GeoLocationService';
+import InfiniteScrollFeed from "./InfiniteScrollFeed";
 
 const propTypes = {
   setSelectedLocation: PropTypes.func.isRequired,
@@ -28,6 +32,42 @@ export default class FeedScreen extends Component {
     /* Render */
     this.onLogout = this.onLogout.bind(this);
     this.onCheckIn = this.onCheckIn.bind(this);
+
+    /* tmp */
+    this.state = {
+      restaurants: [
+        {
+          "name": "Gaspar Brasserie",
+          "address": "185 Sutter St, San Francisco, CA 94109",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
+        },
+        {
+          "name": "Chalk Point Kitchen",
+          "address": "527 Broome St, New York, NY 10013",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
+        },
+        {
+          "name": "Gaspar Brasserie",
+          "address": "185 Sutter St, San Francisco, CA 94109",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
+        },
+        {
+          "name": "Chalk Point Kitchen",
+          "address": "527 Broome St, New York, NY 10013",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
+        },
+        {
+          "name": "Gaspar Brasserie",
+          "address": "185 Sutter St, San Francisco, CA 94109",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" },
+        },
+        {
+          "name": "Chalk Point Kitchen",
+          "address": "527 Broome St, New York, NY 10013",
+          "image": { "url": "https://shoutem.github.io/static/getting-started/restaurant-2.jpg" },
+        },
+      ],
+    };
   }
 
   navigateToLogin() {
@@ -64,17 +104,17 @@ export default class FeedScreen extends Component {
   }
 
   render() {
-    const actionButtonItemSize = 44;
-    const actionButtonItemIconSize = 22;
-
+    const actionButtonItemSize = 34;
     return (
       <View styleName="fill-parent">
+        <StatusBar barStyle="light-content" />
+        <InfiniteScrollFeed places={this.state.restaurants} />
         <ActionButton spacing={12}>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
-            <Icon name="ios-power" size={actionButtonItemIconSize} />
+            <Icon name="ios-power" size={14} />
           </ActionButton.Item>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onCheckIn}>
-            <Icon name="ios-pin" size={actionButtonItemIconSize} />
+            <Icon name="ios-pin" size={16} />
           </ActionButton.Item>
         </ActionButton>
       </View>
