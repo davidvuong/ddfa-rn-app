@@ -40,6 +40,7 @@ export default class InfiniteScrollFeed extends Component {
       images.restaurantImage5,
     ];
     this.sampleImagePool = [];
+    this.backgroundImageCache = {};
 
     /* Helpers */
     this.getBackgroundImage = this.getBackgroundImage.bind(this);
@@ -56,11 +57,18 @@ export default class InfiniteScrollFeed extends Component {
     }
   }
 
-  getBackgroundImage() {
+  /* Memorization and tries to reduce duplicated image series. */
+  getBackgroundImage(checkInId) {
+    const cachedBackgroundImage = this.backgroundImageCache[checkInId];
+    if (cachedBackgroundImage) {
+      return cachedBackgroundImage;
+    }
     if (!this.sampleImagePool.length) {
       this.sampleImagePool = shuffle(cloneDeep(this.SAMPLE_IMAGES));
     }
-    return this.sampleImagePool.shift();
+    const backgroundImage = this.sampleImagePool.shift();
+    this.backgroundImageCache[checkInId] = backgroundImage;
+    return backgroundImage;
   }
 
   onLoadMore() {
@@ -72,7 +80,7 @@ export default class InfiniteScrollFeed extends Component {
   renderRow(checkIn) {
     return (
       <View>
-        <Image styleName="large-banner" source={this.getBackgroundImage()}>
+        <Image styleName="large-banner" source={this.getBackgroundImage(checkIn.id)}>
           <Tile>
             <Title styleName="md-gutter-bottom">{checkIn.name}</Title>
             <Subtitle styleName="sm-gutter-horizontal">{checkIn.address}</Subtitle>
