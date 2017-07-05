@@ -27,4 +27,8 @@ export default {
   actionButtonsButton: {
     marginHorizontal: 4,
   },
+  checkInSpinner: {
+    color: 'white',
+    paddingRight: 6,
+  },
 };

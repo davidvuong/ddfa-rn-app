@@ -34,7 +34,7 @@ export default class ActionButtons extends Component {
           onPress={this.props.onCheckIn}
           disabled={this.props.isCheckingIn}
         >
-          {this.props.isCheckingIn && <Spinner />}
+          {this.props.isCheckingIn && <Spinner style={styles.checkInSpinner} />}
           <Text styleName="bold bright h-center">
             {this.props.isCheckingIn ? 'CHECKING IN' : 'CHECK IN'}
           </Text>
