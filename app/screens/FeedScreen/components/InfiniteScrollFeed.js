@@ -34,11 +34,15 @@ export default class InfiniteScrollFeed extends Component {
 
     this.PAGINATION_SIZE = 10;
     this.SAMPLE_IMAGES = [
-      images.restaurantImage1,
-      images.restaurantImage2,
-      images.restaurantImage3,
-      images.restaurantImage4,
-      images.restaurantImage5,
+      images.foodImage1,
+      images.foodImage2,
+      images.foodImage3,
+      images.foodImage4,
+      images.foodImage5,
+      images.foodImage6,
+      images.foodImage7,
+      images.foodImage8,
+      images.foodImage9,
     ];
     this.sampleImagePool = [];
     this.backgroundImageCache = {};
