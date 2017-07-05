@@ -7,13 +7,11 @@ import {
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state) => {
-  const {
-    checkIns,
-    isListingCheckIns,
-    checkInListErrorStatus,
-  } = state.checkIn;
+  const { checkIn } = state;
   return {
-    checkIns, isListingCheckIns, checkInListErrorStatus,
+    checkIns: checkIn.checkIns,
+    isListingCheckIns: checkIn.isListingCheckIns,
+    checkInListErrorStatus: checkIn.checkInListErrorStatus,
   };
 };
 

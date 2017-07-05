@@ -79,6 +79,7 @@ export default class FeedScreen extends Component {
         <InfiniteScrollFeed
           checkIns={this.props.checkIns}
           loadMore={this.props.listCheckIns}
+          isLoading={this.props.isListingCheckIns}
         />
         <ActionButton spacing={12}>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>

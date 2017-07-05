@@ -1,6 +1,10 @@
 import sample from 'lodash/sample';
+import isNull from 'lodash/isNull';
 
 import React, { Component } from 'react';
+import {
+  StatusBar,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Title,
@@ -10,6 +14,7 @@ import {
   ListView,
   Tile,
   View,
+  Spinner,
 } from '@shoutem/ui';
 
 import images from '../../../Images';
@@ -17,6 +22,7 @@ import images from '../../../Images';
 const propTypes = {
   checkIns: PropTypes.array.isRequired,
   loadMore: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default class InfiniteScrollFeed extends Component {
@@ -58,11 +64,17 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   render() {
+    if (this.props.isLoading || isNull(this.props.isLoading)) {
+      return (
+        <View styleName="fill-parent horizontal h-center vertical v-center">
+          <StatusBar barStyle="dark-content" />
+          <Spinner />
+        </View>
+      );
+    }
+
     return (
-      <ListView
-        data={this.props.checkIns}
-        renderRow={this.renderRow}
-      />
+      <ListView data={this.props.checkIns} renderRow={this.renderRow} />
     );
   }
 }
