@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { Alert } from 'react-native';
-import {
-  View,
-  Text,
-  Button,
-  Divider,
-} from '@shoutem/ui';
+import { View }from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ActionButton from 'react-native-action-button';

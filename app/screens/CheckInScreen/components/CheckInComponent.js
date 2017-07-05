@@ -12,13 +12,13 @@ import {
 } from 'react-native';
 import {
   KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scrollview'
+} from 'react-native-keyboard-aware-scrollview';
 
 import navigationOptions from '../NavigationOptions';
 import styles from '../Style';
 
 import ActionButtons from './ActionButtons';
-import ActionText from './ActionText';
+//import ActionText from './ActionText';
 import CheckInHeader from './CheckInHeader';
 
 const propTypes = {
