@@ -4,6 +4,7 @@ import FeedComponent from './components/FeedComponent';
 import {
   setSelectedLocation,
   listCheckIns,
+  resetCheckIns,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state) => {
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     listCheckIns: (startTime, limit) => {
       return dispatch(listCheckIns(startTime, limit));
+    },
+    resetCheckIns: () => {
+      return dispatch(resetCheckIns());
     },
   };
 };

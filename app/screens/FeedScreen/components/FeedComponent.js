@@ -19,6 +19,7 @@ import InfiniteScrollFeed from "./InfiniteScrollFeed";
 const propTypes = {
   setSelectedLocation: PropTypes.func.isRequired,
   listCheckIns: PropTypes.func.isRequired,
+  resetCheckIns: PropTypes.func.isRequired,
   checkIns: PropTypes.array.isRequired,
   isListingCheckIns: PropTypes.bool,
   checkInListErrorStatus: PropTypes.object,
@@ -79,6 +80,7 @@ export default class FeedScreen extends Component {
         <InfiniteScrollFeed
           checkIns={this.props.checkIns}
           loadMore={this.props.listCheckIns}
+          resetCheckIns={this.props.resetCheckIns}
           isLoading={this.props.isListingCheckIns}
         />
         <ActionButton spacing={12}>

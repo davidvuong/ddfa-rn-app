@@ -24,6 +24,7 @@ import images from '../../../Images';
 const propTypes = {
   checkIns: PropTypes.array.isRequired,
   loadMore: PropTypes.func.isRequired,
+  resetCheckIns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 
@@ -44,17 +45,23 @@ export default class InfiniteScrollFeed extends Component {
 
     /* Helpers */
     this.getBackgroundImage = this.getBackgroundImage.bind(this);
+    this.performInitialLoad = this.performInitialLoad.bind(this);
 
     /* Render */
     this.renderRow = this.renderRow.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   componentDidMount() {
     // Initial load to fetch a couple of check-ins (only if nothing exists).
     if (!this.props.checkIns.length) {
-      this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
+      this.performInitialLoad();
     }
+  }
+
+  performInitialLoad() {
+    this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
   }
 
   /* Memorization and tries to reduce duplicated image series. */
@@ -75,6 +82,11 @@ export default class InfiniteScrollFeed extends Component {
     const checkIn = last(this.props.checkIns);
     if (!checkIn) { return null; }
     return this.props.loadMore(checkIn.createdAt, this.PAGINATION_SIZE);
+  }
+
+  onRefresh() {
+    this.props.resetCheckIns();
+    this.performInitialLoad();
   }
 
   renderRow(checkIn) {
@@ -108,6 +120,7 @@ export default class InfiniteScrollFeed extends Component {
         loading={isLoading}
         renderRow={this.renderRow}
         onLoadMore={this.onLoadMore}
+        onRefresh={this.onRefresh}
       />
     );
   }

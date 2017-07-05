@@ -65,3 +65,7 @@ export function listCheckIns(startTime, limit) {
     });
   };
 }
+
+export function resetCheckIns() {
+  return { type: actions.RESET_CHECK_IN_LIST };
+}
