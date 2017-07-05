@@ -1,5 +1,6 @@
-import sample from 'lodash/sample';
+import shuffle from 'lodash/shuffle';
 import isNull from 'lodash/isNull';
+import cloneDeep from 'lodash/cloneDeep';
 
 import React, { Component } from 'react';
 import {
@@ -29,6 +30,7 @@ export default class InfiniteScrollFeed extends Component {
   constructor(props) {
     super(props);
 
+    this.PAGINATION_SIZE = 10;
     this.SAMPLE_IMAGES = [
       images.restaurantImage1,
       images.restaurantImage2,
@@ -36,7 +38,10 @@ export default class InfiniteScrollFeed extends Component {
       images.restaurantImage4,
       images.restaurantImage5,
     ];
-    this.PAGINATION_SIZE = 10;
+    this.sampleImagePool = [];
+
+    /* Helpers */
+    this.getBackgroundImage = this.getBackgroundImage.bind(this);
 
     /* Render */
     this.renderRow = this.renderRow.bind(this);
@@ -49,10 +54,17 @@ export default class InfiniteScrollFeed extends Component {
     }
   }
 
+  getBackgroundImage() {
+    if (!this.sampleImagePool.length) {
+      this.sampleImagePool = shuffle(cloneDeep(this.SAMPLE_IMAGES));
+    }
+    return this.sampleImagePool.shift();
+  }
+
   renderRow(checkIn) {
     return (
       <View>
-        <Image styleName="large-banner" source={sample(this.SAMPLE_IMAGES)}>
+        <Image styleName="large-banner" source={this.getBackgroundImage()}>
           <Tile>
             <Title styleName="md-gutter-bottom">{checkIn.name}</Title>
             <Subtitle styleName="sm-gutter-horizontal">{checkIn.address}</Subtitle>
