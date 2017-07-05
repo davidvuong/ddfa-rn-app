@@ -9,6 +9,7 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {
   KeyboardAwareScrollView,
@@ -48,6 +49,7 @@ export default class CheckIn extends Component {
 
     /* Render */
     this.onCheckIn = this.onCheckIn.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
 
   getDescriptionTextInputHeight() {
@@ -74,6 +76,14 @@ export default class CheckIn extends Component {
       this.setState(initialState);
       this.props.navigation.goBack();
     }, (error) => { console.error(error); });
+  }
+
+  onCancel() {
+    const buttons = [
+      { text: 'Yes', onPress: this.props.navigation.goBack },
+      { text: 'No', style: 'cancel' },
+    ];
+    Alert.alert('Cancel', 'Are you sure you want to cancel your check-in?', buttons);
   }
 
   render() {
@@ -103,7 +113,7 @@ export default class CheckIn extends Component {
         />
         <ActionButtons
           isCheckingIn={this.props.isCheckingIn}
-          onCancel={() => { this.props.navigation.goBack(); }}
+          onCancel={this.onCancel}
           onCheckIn={this.onCheckIn}
         />
       </ScrollView>
