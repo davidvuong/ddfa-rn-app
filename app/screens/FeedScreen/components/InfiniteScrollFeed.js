@@ -1,6 +1,7 @@
 import shuffle from 'lodash/shuffle';
 import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
+import last from 'lodash/last';
 
 import React, { Component } from 'react';
 import {
@@ -45,6 +46,7 @@ export default class InfiniteScrollFeed extends Component {
 
     /* Render */
     this.renderRow = this.renderRow.bind(this);
+    this.onLoadMore = this.onLoadMore.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +61,12 @@ export default class InfiniteScrollFeed extends Component {
       this.sampleImagePool = shuffle(cloneDeep(this.SAMPLE_IMAGES));
     }
     return this.sampleImagePool.shift();
+  }
+
+  onLoadMore() {
+    const checkIn = last(this.props.checkIns);
+    if (!checkIn) { return null; }
+    return this.props.loadMore(checkIn.createdAt, this.PAGINATION_SIZE);
   }
 
   renderRow(checkIn) {
@@ -76,7 +84,8 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   render() {
-    if (this.props.isLoading || isNull(this.props.isLoading)) {
+    const { isLoading, checkIns } = this.props;
+    if (isNull(isLoading)) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
           <StatusBar barStyle="dark-content" />
@@ -86,7 +95,12 @@ export default class InfiniteScrollFeed extends Component {
     }
 
     return (
-      <ListView data={this.props.checkIns} renderRow={this.renderRow} />
+      <ListView
+        data={checkIns}
+        loading={isLoading}
+        renderRow={this.renderRow}
+        onLoadMore={this.onLoadMore}
+      />
     );
   }
 }
