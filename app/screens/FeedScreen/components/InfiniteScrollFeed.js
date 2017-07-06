@@ -129,6 +129,7 @@ export default class InfiniteScrollFeed extends Component {
         renderRow={this.renderRow}
         onLoadMore={this.onLoadMore}
         onRefresh={this.onRefresh}
+        ref="InfiniteScrollFeed"
       />
     );
   }

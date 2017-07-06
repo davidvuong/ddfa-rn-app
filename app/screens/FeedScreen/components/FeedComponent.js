@@ -37,6 +37,7 @@ export default class FeedScreen extends Component {
     /* Render */
     this.onLogout = this.onLogout.bind(this);
     this.onCheckIn = this.onCheckIn.bind(this);
+    this.onScrollToTop = this.onScrollToTop.bind(this);
   }
 
   navigateToLogin() {
@@ -64,6 +65,26 @@ export default class FeedScreen extends Component {
     }).catch((error) => { console.log(error.message); });
   }
 
+  /* Pull `listView` from shoutem.ui.ListView to `scrollTo` top. */
+  onScrollToTop() {
+    const scrollTo = { x: 0, y: 0, animated: true };
+
+    // `ref` on our custom InfiniteScrollFeedCaller.
+    const callerRefs = this.refs.InfiniteScrollFeedCaller.refs;
+
+    // `InfiniteScrollFeed` is a ref in our custom wrapper.
+    // `wrapperInstance` is something exposed by shoutem.ui to access the underlying
+    // `ReactNative.ListView`. From there we simply call RN's `scrollTo` function.
+    const wrapper = callerRefs.InfiniteScrollFeed.wrappedInstance;
+
+    // Make sure this doesn't blow up, causing our app to potentially crash.
+    if (!wrapper) {
+      console.error('wrappedInstance in InfiniteScrollFeed (ListView) does not exist');
+      return null;
+    }
+    wrapper.listView.scrollTo(scrollTo);
+  }
+
   onLogout() {
     const buttons = [
       { text: 'Yes', onPress: this.navigateToLogin },
@@ -82,6 +103,16 @@ export default class FeedScreen extends Component {
           loadMore={this.props.listCheckIns}
           resetCheckIns={this.props.resetCheckIns}
           isLoading={this.props.isListingCheckIns}
+          ref="InfiniteScrollFeedCaller"
+        />
+        <ActionButton
+          position="left"
+          offsetX={8}
+          offsetY={8}
+          icon={<Icon name="ios-arrow-up-outline" size={18} />}
+          size={28}
+          buttonColor={"rgba(255, 255, 255, 1)"}
+          onPress={this.onScrollToTop}
         />
         <ActionButton spacing={12} offsetX={8} offsetY={8}>
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
