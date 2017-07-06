@@ -110,6 +110,7 @@ export default class CheckIn extends Component {
           multiline={true}
           style={{ height: this.getDescriptionTextInputHeight() }}
           value={this.state.comment}
+          maxLength={2048}
         />
         <ActionButtons
           isCheckingIn={this.props.isCheckingIn}
