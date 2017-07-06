@@ -13,7 +13,7 @@ export default {
     height: 50,
   },
   inputTextBox: {
-    backgroundColor: 'rgba(255,255,255,0.85)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
   },
   footer: {
     position: 'absolute',
