@@ -111,7 +111,7 @@ export default class FeedScreen extends Component {
           offsetY={8}
           icon={<Icon name="ios-arrow-up-outline" size={18} />}
           size={28}
-          buttonColor={"rgba(255, 255, 255, 1)"}
+          buttonColor={'rgba(255, 255, 255, 1)'}
           onPress={this.onScrollToTop}
         />
         <ActionButton spacing={12} offsetX={8} offsetY={8}>
