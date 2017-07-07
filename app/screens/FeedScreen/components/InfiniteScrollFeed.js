@@ -1,8 +1,7 @@
 import shuffle from 'lodash/shuffle';
-import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import last from 'lodash/last';
-import isObject from 'lodash/isObject';
+import isNull from 'lodash/isNull';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -51,6 +50,11 @@ export default class InfiniteScrollFeed extends Component {
     this.sampleImagePool = [];
     this.backgroundImageCache = {};
 
+    this.state = {
+      isLoadingInitial: null,
+      isLoadingMore: null,
+    };
+
     /* Helpers */
     this.getBackgroundImage = this.getBackgroundImage.bind(this);
     this.performInitialLoad = this.performInitialLoad.bind(this);
@@ -71,7 +75,10 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   performInitialLoad() {
-    this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE);
+    this.setState({ isLoadingInitial: true });
+    this.props.loadMore((new Date()).toISOString(), this.PAGINATION_SIZE).finally(() => {
+      this.setState({ isLoadingInitial: false });
+    });
   }
 
   /* Memorization and tries to reduce duplicated image series. */
@@ -91,7 +98,11 @@ export default class InfiniteScrollFeed extends Component {
   onLoadMore() {
     const checkIn = last(this.props.checkIns);
     if (!checkIn) { return null; }
-    return this.props.loadMore(checkIn.createdAt, this.PAGINATION_SIZE);
+
+    this.setState({ isLoadingMore: true });
+    this.props.loadMore(checkIn.createdAt, this.PAGINATION_SIZE).finally(() => {
+      this.setState({ isLoadingMore: false });
+    });
   }
 
   onRefresh() {
@@ -140,8 +151,7 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   render() {
-    const { isLoading, checkIns } = this.props;
-    if (isNull(isLoading)) {
+    if (isNull(this.state.isLoadingInitial) || this.state.isLoadingInitial) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
           <Spinner />
@@ -152,8 +162,8 @@ export default class InfiniteScrollFeed extends Component {
     return (
       <View styleName="fill-parent">
         <ListView
-          data={checkIns}
-          loading={isLoading}
+          data={this.props.checkIns}
+          loading={this.state.isLoadingMore}
           renderRow={this.renderRow}
           onLoadMore={this.onLoadMore}
           onRefresh={this.onRefresh}
