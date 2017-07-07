@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import { Spinner } from '@shoutem/ui';
+import {
+  View,
+  Spinner,
+} from '@shoutem/ui';
 
 import Config from './Config';
 import ConfigureStore from './store/ConfigureStore';
@@ -33,7 +36,11 @@ export default class App extends Component {
     const NavigatorComponent = getNavigator(this.state.isLoggedIn);
     return (
       <Provider store={this.store}>
-        {NavigatorComponent ? <NavigatorComponent /> : <Spinner />}
+        {NavigatorComponent ? <NavigatorComponent /> : (
+          <View styleName="fill-parent horizontal h-center vertical v-center">
+            <Spinner />
+          </View>
+        )}
       </Provider>
     );
   }
