@@ -114,7 +114,7 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   onScrollToBottom() {
-
+    this.refs.InfiniteScrollFeed.wrappedInstance.listView.scrollToEnd();
   }
 
   renderRow(checkIn, _, counter) {
