@@ -2,6 +2,7 @@ import shuffle from 'lodash/shuffle';
 import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import last from 'lodash/last';
+import isObject from 'lodash/isObject';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -28,6 +29,7 @@ const propTypes = {
   loadMore: PropTypes.func.isRequired,
   resetCheckIns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  loadMoreError: PropTypes.object,
 };
 
 export default class InfiniteScrollFeed extends Component {

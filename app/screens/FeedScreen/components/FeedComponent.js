@@ -5,7 +5,9 @@ import {
   Alert,
   StatusBar,
 } from 'react-native';
-import { View } from '@shoutem/ui';
+import {
+  View,
+} from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ActionButton from 'react-native-action-button';
@@ -82,6 +84,7 @@ export default class FeedScreen extends Component {
           loadMore={this.props.listCheckIns}
           resetCheckIns={this.props.resetCheckIns}
           isLoading={this.props.isListingCheckIns}
+          loadingMoreError={this.props.checkInListErrorStatus}
         />
         <ActionButton
           spacing={12}
