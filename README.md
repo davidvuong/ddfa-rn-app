@@ -42,7 +42,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     There were times where I got very bizarre errors when adding a new dependency. If all else fails, nuke it and reinstall from scratch:
 
     ```bash
-    rm -rf ./ios/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i && npmm run build:ios
+    rm -rf ./ios/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i && npm run build:ios
     ```
 
     Less overkill nuke:
