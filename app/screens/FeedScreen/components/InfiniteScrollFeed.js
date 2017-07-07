@@ -17,6 +17,9 @@ import {
   Spinner,
 } from '@shoutem/ui';
 
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import styles from '../Styles';
 import images from '../../../Images';
 
@@ -54,6 +57,8 @@ export default class InfiniteScrollFeed extends Component {
     this.renderRow = this.renderRow.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
+    this.onScrollToTop = this.onScrollToTop.bind(this);
+    this.onScrollToBottom = this.onScrollToBottom.bind(this);
   }
 
   componentDidMount() {
@@ -92,6 +97,26 @@ export default class InfiniteScrollFeed extends Component {
     this.performInitialLoad();
   }
 
+  onScrollToTop() {
+    const scrollTo = { x: 0, y: 0, animated: true };
+
+    // `InfiniteScrollFeed` is a ref in our custom wrapper.
+    // `wrapperInstance` is something exposed by shoutem.ui to access the underlying
+    // `ReactNative.ListView`. From there we simply call RN's `scrollTo` function.
+    const wrapper = this.refs.InfiniteScrollFeed.wrappedInstance;
+
+    // Make sure this doesn't blow up, causing our app to potentially crash.
+    if (!wrapper) {
+      console.error('wrappedInstance in InfiniteScrollFeed (ListView) does not exist');
+      return null;
+    }
+    wrapper.listView.scrollTo(scrollTo);
+  }
+
+  onScrollToBottom() {
+
+  }
+
   renderRow(checkIn, _, counter) {
     return (
       <View>
@@ -123,14 +148,34 @@ export default class InfiniteScrollFeed extends Component {
     }
 
     return (
-      <ListView
-        data={checkIns}
-        loading={isLoading}
-        renderRow={this.renderRow}
-        onLoadMore={this.onLoadMore}
-        onRefresh={this.onRefresh}
-        ref="InfiniteScrollFeed"
-      />
+      <View>
+        <ListView
+          data={checkIns}
+          loading={isLoading}
+          renderRow={this.renderRow}
+          onLoadMore={this.onLoadMore}
+          onRefresh={this.onRefresh}
+          ref="InfiniteScrollFeed"
+        />
+        <ActionButton
+          position="left"
+          offsetX={8}
+          offsetY={44}
+          icon={<Icon name="ios-arrow-up-outline" size={18} />}
+          size={28}
+          buttonColor={'rgba(255, 255, 255, 1)'}
+          onPress={this.onScrollToTop}
+        />
+        <ActionButton
+          position="left"
+          offsetX={8}
+          offsetY={8}
+          icon={<Icon name="ios-arrow-down-outline" size={18} />}
+          size={28}
+          buttonColor={'rgba(255, 255, 255, 1)'}
+          onPress={this.onScrollToBottom}
+        />
+      </View>
     );
   }
 }
