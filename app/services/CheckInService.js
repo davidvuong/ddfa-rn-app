@@ -31,7 +31,14 @@ class CheckInService {
     const endpoint = `${this.host}/check-ins`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
-      latitude, longitude, address, name, comment, rating, isPaying, amountPaid,
+      latitude,
+      longitude,
+      address,
+      name,
+      rating,
+      isPaying,
+      amountPaid,
+      comment: comment ? comment.trim() : comment, // save lives. get rid if trailing/leading whitespaces.
     };
 
     return new Promise((resolve, reject) => {
