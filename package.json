@@ -9,7 +9,7 @@
     "eslint": "./node_modules/.bin/eslint ./app"
   },
   "dependencies": {
-    "@shoutem/ui": "0.15.0",
+    "@shoutem/ui": "0.19.2",
     "bluebird": "3.5.0",
     "lodash": "4.17.4",
     "prop-types": "15.5.10",
