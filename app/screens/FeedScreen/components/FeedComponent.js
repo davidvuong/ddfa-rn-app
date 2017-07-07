@@ -90,7 +90,8 @@ export default class FeedScreen extends Component {
           spacing={12}
           offsetX={8}
           offsetY={8}
-          buttonColor={'rgba(0, 0, 0, 1)'}
+          buttonColor={'rgba(0, 0, 0, 0.9)'}
+          hideShadow
         >
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
             <Icon name="ios-power" size={14} />

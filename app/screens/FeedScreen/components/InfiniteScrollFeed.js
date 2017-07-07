@@ -175,7 +175,8 @@ export default class InfiniteScrollFeed extends Component {
           offsetY={44}
           icon={<Icon name="ios-arrow-up-outline" size={18} />}
           size={28}
-          buttonColor={'rgba(255, 255, 255, 1)'}
+          buttonColor={'rgba(255, 255, 255, 0.9)'}
+          hideShadow
           onPress={this.onScrollToTop}
         />
         <ActionButton
@@ -184,7 +185,8 @@ export default class InfiniteScrollFeed extends Component {
           offsetY={8}
           icon={<Icon name="ios-arrow-down-outline" size={18} />}
           size={28}
-          buttonColor={'rgba(255, 255, 255, 1)'}
+          hideShadow
+          buttonColor={'rgba(255, 255, 255, 0.9)'}
           onPress={this.onScrollToBottom}
         />
       </View>
