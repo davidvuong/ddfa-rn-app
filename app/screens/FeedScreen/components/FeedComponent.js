@@ -37,7 +37,6 @@ export default class FeedScreen extends Component {
     /* Render */
     this.onLogout = this.onLogout.bind(this);
     this.onCheckIn = this.onCheckIn.bind(this);
-    this.onScrollToTop = this.onScrollToTop.bind(this);
   }
 
   navigateToLogin() {
@@ -84,7 +83,12 @@ export default class FeedScreen extends Component {
           resetCheckIns={this.props.resetCheckIns}
           isLoading={this.props.isListingCheckIns}
         />
-        <ActionButton spacing={12} offsetX={8} offsetY={8}>
+        <ActionButton
+          spacing={12}
+          offsetX={8}
+          offsetY={8}
+          buttonColor={'rgba(0, 0, 0, 1)'}
+        >
           <ActionButton.Item buttonColor="white" size={actionButtonItemSize} onPress={this.onLogout}>
             <Icon name="ios-power" size={14} />
           </ActionButton.Item>

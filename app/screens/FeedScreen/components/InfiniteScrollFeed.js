@@ -148,7 +148,7 @@ export default class InfiniteScrollFeed extends Component {
     }
 
     return (
-      <View>
+      <View styleName="fill-parent">
         <ListView
           data={checkIns}
           loading={isLoading}
