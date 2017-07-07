@@ -53,7 +53,7 @@ export default class FeedScreen extends Component {
   }
 
   onCheckIn() {
-    const options = { type: 'establishments' };
+    const options = { type: 'establishments', radius: 0.3 };
     RNGooglePlaces.openPlacePickerModal(options).then((place) => {
       place.address = place.address || place.name;
 
