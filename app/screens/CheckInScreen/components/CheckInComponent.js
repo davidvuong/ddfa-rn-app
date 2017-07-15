@@ -108,7 +108,7 @@ export default class CheckIn extends Component {
           placeholder="Is there something else you would like to add?"
           onChangeText={(comment) => this.setState({ comment })}
           multiline={true}
-          style={{ height: this.getDescriptionTextInputHeight() }}
+          style={{ height: this.getDescriptionTextInputHeight(), fontSize: 18 }}
           value={this.state.comment}
           maxLength={2048}
         />
