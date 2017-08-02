@@ -35,7 +35,7 @@ export default class InfiniteScrollFeed extends Component {
   constructor(props) {
     super(props);
 
-    this.PAGINATION_SIZE = 10;
+    this.PAGINATION_SIZE = 20;
     this.SAMPLE_IMAGES = [
       images.foodImage1,
       images.foodImage2,
