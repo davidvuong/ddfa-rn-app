@@ -37,18 +37,21 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     ```bash
     rm -rf ./ios/build && npm run build:ios
+    rm -rf ./android/build && npm run build:android
     ```
 
     There were times where I got very bizarre errors when adding a new dependency. If all else fails, nuke it and reinstall from scratch:
 
     ```bash
     rm -rf ./ios/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i && npm run build:ios
+    rm -rf ./android/build && rm -rf ./node_modules && npm prune && npm cache clean && npm i && npm run build:android
     ```
 
     Less overkill nuke:
 
     ```bash
     rm -rf ./ios/build && npm run build:ios
+    rm -rf ./android/build && npm run build:android
     ```
 
 1. Obtain the `.env` file and store it in the root of ddfa-app.
@@ -64,10 +67,16 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     **NOTE:** If `npm run build:ios` does not start up the simulator app, open it yourself and click on the DDFA app.
 
+    **NOTE:** run `npm run build:android` for Android development.
+
 ## Bundle JS to Run on Device (without development server)
 
 ```bash
 rm -f ios/main.jsbundle && rm -f ios/main.jsbundle.meta && react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle --reset-cache --verbose
+```
+
+```bash
+rm -f android/main.jsbundle && rm -f android/main.jsbundle.meta && react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/main.jsbundle --reset-cache --verbose
 ```
 
 ... and then follow these steps to disable debug mode: http://facebook.github.io/react-native/releases/0.19/docs/debugging.html#debugging-react-native-apps
@@ -105,7 +114,7 @@ This project uses a few 3rd parties. Below are a few links to help you use the r
 1. [`@shoutem/ui`](https://shoutem.github.io/docs/ui-toolkit/introduction) for common React components:
 
     `@shoutem/ui` provides a few useful components to make cross platform development a bit easier. For example typography (title, subtitle, text), spinners, buttons, text input etc.
-    
+
     `@shoutem/ui` uses `@shoutem/theme` to define the way shoutem components look. For reference, this is the default [theme.js](https://github.com/shoutem/ui/blob/develop/theme.js).
 
 1. [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) for icons:
