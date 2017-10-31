@@ -1,6 +1,6 @@
-# ddfa-app
+# ddfa-rn-app
 
-**Welcome to ddfa-app!**
+**Welcome to ddfa-rn-app!**
 
 This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in JavaScript using [React Native](https://facebook.github.io/react-native/) and supports both iOS and Android. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
 
@@ -18,7 +18,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 1. Clone this repository:
 
     ```bash
-    git clone git@github.com:davidvuong/ddfa-app.git
+    git clone git@github.com:davidvuong/ddfa-rn-app.git
     ```
 
 1. Install project dependencies:
