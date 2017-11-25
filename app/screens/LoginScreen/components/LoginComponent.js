@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  TextInput,
-  Button,
-  Divider,
-  Spinner,
-} from '@shoutem/ui';
+import { NavigationActions } from 'react-navigation';
 import {
   Text,
-  Caption,
-} from '@shoutem/ui';
-import { NavigationActions } from 'react-navigation';
-import { Image } from 'react-native';
+  TextInput,
+  Button,
+  Image,
+} from 'react-native';
 
 import styles from '../Style';
 import navigationOptions from '../NavigationOptions';
@@ -72,20 +67,18 @@ export default class LoginComponent extends Component {
           secureTextEntry
           style={styles.inputTextBox}
         />
-        <Divider />
         <Button
           styleName="secondary"
           onPress={this.onLogin}
           disabled={isLoggingIn}
           style={styles.buttonLogin}
+          title="LOGIN"
         >
-          {isLoggingIn && <Spinner style={styles.loginSpinner} />}
           <Text styleName="bold bright h-center">
             {isLoggingIn ? 'LOGGING IN' : 'LOGIN'}
           </Text>
         </Button>
-        <Divider />
-        <Caption style={styles.footer} styleName="h-center">Double D Food Adventures</Caption>
+        <Text style={styles.footer} styleName="h-center">Double D Food Adventures</Text>
       </Image>
     );
   }

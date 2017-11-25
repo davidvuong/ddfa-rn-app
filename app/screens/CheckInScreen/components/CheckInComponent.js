@@ -2,24 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   TextInput,
-  Spinner,
-} from '@shoutem/ui';
-import {
   View,
-  ScrollView,
   StatusBar,
   Dimensions,
   Alert,
 } from 'react-native';
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scrollview';
 
 import navigationOptions from '../NavigationOptions';
 import styles from '../Style';
 
 import ActionButtons from './ActionButtons';
-//import ActionText from './ActionText';
 import CheckInHeader from './CheckInHeader';
 
 const propTypes = {
@@ -96,8 +88,7 @@ export default class CheckIn extends Component {
       );
     }
     return (
-      <KeyboardAwareScrollView>
-      <ScrollView style={styles.container} scrollEnabled={false}>
+      <View style={styles.container}>
         <StatusBar hidden />
         <CheckInHeader
           location={selectedLocation}
@@ -117,8 +108,7 @@ export default class CheckIn extends Component {
           onCancel={this.onCancel}
           onCheckIn={this.onCheckIn}
         />
-      </ScrollView>
-      </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

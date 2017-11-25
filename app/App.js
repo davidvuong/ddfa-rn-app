@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 
 import {
   View,
-  Spinner,
-} from '@shoutem/ui';
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
 import Config from './Config';
 import ConfigureStore from './store/ConfigureStore';
@@ -38,7 +39,7 @@ export default class App extends Component {
       <Provider store={this.store}>
         {NavigatorComponent ? <NavigatorComponent /> : (
           <View styleName="fill-parent horizontal h-center vertical v-center">
-            <Spinner />
+            <ActivityIndicator />
           </View>
         )}
       </Provider>

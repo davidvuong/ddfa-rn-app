@@ -6,16 +6,11 @@ import isNull from 'lodash/isNull';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Title,
-  Subtitle,
-  Text,
-  Divider,
   Image,
-  ListView,
-  Tile,
   View,
-  Spinner,
-} from '@shoutem/ui';
+  ListView,
+  Text,
+} from 'react-native';
 
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -68,6 +63,7 @@ export default class InfiniteScrollFeed extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     // Initial load to fetch a couple of check-ins (only if nothing exists).
     if (!this.props.checkIns.length) {
       this.performInitialLoad();
@@ -154,7 +150,7 @@ export default class InfiniteScrollFeed extends Component {
     if (isNull(this.state.isLoadingInitial) || this.state.isLoadingInitial) {
       return (
         <View styleName="fill-parent horizontal h-center vertical v-center">
-          <Spinner />
+          <Text>Loading</Text>
         </View>
       );
     }
@@ -162,7 +158,7 @@ export default class InfiniteScrollFeed extends Component {
     return (
       <View styleName="fill-parent">
         <ListView
-          data={this.props.checkIns}
+          dataSource={this.props.checkIns}
           loading={this.state.isLoadingMore}
           renderRow={this.renderRow}
           onLoadMore={this.onLoadMore}

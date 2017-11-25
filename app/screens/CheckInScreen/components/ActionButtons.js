@@ -4,8 +4,7 @@ import {
   View,
   Text,
   Button,
-  Spinner,
-} from '@shoutem/ui';
+} from 'react-native';
 
 import styles from '../Style';
 

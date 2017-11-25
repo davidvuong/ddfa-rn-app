@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Heading,
-  Subtitle,
-  Overlay,
-} from '@shoutem/ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MapView from 'react-native-maps';
 
