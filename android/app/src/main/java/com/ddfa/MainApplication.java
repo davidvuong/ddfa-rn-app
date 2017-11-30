@@ -3,12 +3,6 @@ package com.ddfa;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.reactnative.photoview.PhotoViewPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,13 +22,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new PhotoViewPackage(),
-            new MapsPackage(),
-            new LinearGradientPackage(),
-            new ImagePickerPackage(),
-            new RNGooglePlacesPackage()
+          new MainReactPackage()
       );
     }
 
