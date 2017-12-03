@@ -13,6 +13,7 @@
     "jest": true
   },
   "rules": {
+    "import/no-named-as-default": [0],
     "flowtype/require-parameter-type": 2,
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,
