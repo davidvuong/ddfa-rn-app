@@ -12,6 +12,9 @@
     "node": true,
     "jest": true
   },
+  "globals": {
+    "fetch": true,
+  },
   "rules": {
     "import/no-named-as-default": [0],
     "flowtype/require-parameter-type": 2,
