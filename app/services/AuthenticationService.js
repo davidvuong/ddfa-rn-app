@@ -9,7 +9,7 @@ export default class AuthenticationService {
   }
 
   getAuthenticationHeader() {
-    return { 'Authorization': this.token };
+    return { Authorization: this.token };
   }
 
   getTokenFromStorage() {
@@ -23,7 +23,7 @@ export default class AuthenticationService {
     return AsyncStorage.clear().then(() => {
       this.token = null;
       return Promise.resolve();
-    })
+    });
   }
 
   login(username, password) {
@@ -39,5 +39,5 @@ export default class AuthenticationService {
       this.token = token;
       return Promise.resolve();
     });
-  });
+  }
 }
