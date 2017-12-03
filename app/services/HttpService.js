@@ -1,29 +1,40 @@
-import request from 'request-promise';
+// @flow
+import fetch from 'isomorphic-fetch';
+
+type Payload = {
+
+};
+
+type Headers = {
+
+};
 
 export default class HttpRequestService {
-  DEFAULT_RESPONSE_TIMEOUT = 8000; // 8 seconds.
-
-  request(endpoint, method, payload, headers) {
-    return request({
+  request(endpoint: string, method: string, payload: Payload, headers: Headers) {
+    return fetch(endpoint, {
       method,
-      url: endpoint,
-      json: true,
+      body: JSON.stringify(payload),
       headers: { ...headers, 'Content-Type': 'application/json' },
-      body: payload,
-      encoding: null,
-      timeout: this.DEFAULT_RESPONSE_TIMEOUT,
-    });
+    })
+      .then((response: *) => {
+        if (response.ok) {
+          return Promise.resolve(response);
+        }
+        return Promise.reject(new Error(`${response.statusText}: ${response.status}`));
+      }).then((response: *) => {
+        return response.json();
+      });
   }
 
-  get(endpoint, headers = {}) {
+  get(endpoint: string, headers: Headers = {}) {
     return this.request(endpoint, 'get', {}, headers);
   }
 
-  post(endpoint, payload = {}, headers = {}) {
+  post(endpoint: string, payload: Payload = {}, headers: Headers = {}) {
     return this.request(endpoint, 'post', payload, headers);
   }
 
-  put(endpoint, payload = {}, headers = {}) {
+  put(endpoint: string, payload: Payload = {}, headers: Headers = {}) {
     return this.request(endpoint, 'put', payload, headers);
   }
 }
