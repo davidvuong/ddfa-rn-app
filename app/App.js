@@ -13,7 +13,7 @@ import getReducer from './Reducer';
 import getNavigator from './navigator/AppNavigator';
 
 import HttpService from './services/HttpService';
-import AuthenticationService from './services/AuthenticationService'; // eslint-disable-line import/no-named-as-default
+import AuthenticationService from './services/AuthenticationService';
 import CheckInService from './services/CheckInService';
 
 type Props = {
