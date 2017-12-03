@@ -11,8 +11,12 @@
     "ios": "react-native run-ios"
   },
   "dependencies": {
+    "bluebird": "3.5.1",
+    "lodash": "4.17.4",
     "native-base": "2.3.3",
     "react": "16.0.0",
-    "react-native": "0.50.3"
+    "react-native": "0.50.3",
+    "request": "2.83.0",
+    "request-promise": "4.2.2"
   }
 }
