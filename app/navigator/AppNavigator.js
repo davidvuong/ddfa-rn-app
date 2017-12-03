@@ -9,6 +9,6 @@ export default function getNavigator(isLoggedIn: ?boolean) {
     Login: { screen: LoginScreen },
     Feed: { screen: FeedScreen },
   }, {
-    initialRouteName: isLoggedIn ? 'Login' : 'Feed',
+    initialRouteName: isLoggedIn ? 'Feed' : 'Login',
   });
 }
