@@ -23,7 +23,7 @@ export default class CheckInService {
     comment,
     rating,
     isPaying,
-    amountPaid
+    amountPaid,
   ) {
     const endpoint = `${this.host}/check-ins`;
     const headers = this.authenticationService.getAuthenticationHeader();
