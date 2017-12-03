@@ -1,28 +1,30 @@
 // @flow
+import Promise from 'bluebird';
 
-type Payload = {
-
-};
-
-type Headers = {
-
-};
+type Payload = {};
+type Headers = {};
 
 export default class HttpService {
-  request(endpoint: string, method: string, payload: Payload, headers: Headers) {
-    return fetch(endpoint, {
-      method,
-      body: JSON.stringify(payload),
-      headers: { ...headers, 'Content-Type': 'application/json' },
-    })
-      .then((response: *) => {
-        if (response.ok) {
-          return Promise.resolve(response);
-        }
-        return Promise.reject(new Error(`${response.statusText}: ${response.status}`));
-      }).then((response: *) => {
-        return response.json();
-      });
+  request(endpoint: string, method: string, payload: Payload, headers: Headers): Promise<*> {
+    return new Promise((resolve: *, reject: *) => {
+      fetch(endpoint, {
+        method,
+        body: JSON.stringify(payload),
+        headers: { ...headers, 'Content-Type': 'application/json' },
+      })
+        .then((response: *) => {
+          if (response.ok) {
+            return response;
+          }
+          return reject(new Error(`${response.statusText}: ${response.status}`));
+        })
+        .then((response: *) => {
+          return resolve(response.json());
+        })
+        .catch((error: Error) => {
+          return reject(error);
+        });
+    });
   }
 
   get(endpoint: string, headers: Headers = {}) {
