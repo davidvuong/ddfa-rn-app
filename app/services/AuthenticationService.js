@@ -41,10 +41,10 @@ export class AuthenticationService {
 
     return this.http.post(endpoint, payload)
       .then((res: Object): Promise<[void, string]> => {
-        return Promise.all([
+        return Promise.join(
           AsyncStorage.setItem('@user.token', res.body.token),
           res.body.token,
-        ]);
+        );
       })
       .spread((__: void, token: string): Promise<*> => {
         this.token = token;

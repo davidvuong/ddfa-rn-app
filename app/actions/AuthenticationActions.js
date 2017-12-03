@@ -22,9 +22,8 @@ export function loginUser(username: string, password: string) { // eslint-disabl
   return (dispatch: *) => {
     dispatch(loginRequest());
     return AuthenticationService.login(username, password)
-      .then(() => {
-        dispatch(loginSuccess());
-      }, (error: Error) => {
+      .then(() => { dispatch(loginSuccess()); })
+      .catch((error: Error) => {
         dispatch(loginError(error));
         throw error;
       });
