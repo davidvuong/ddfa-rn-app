@@ -2,6 +2,8 @@
 import * as React from 'react';
 import {
   Container,
+  Header,
+  Body,
   Content,
   Text,
 } from 'native-base';
@@ -26,7 +28,12 @@ export default class FeedScreen extends React.Component<Props, State> {
   render() {
     return (
       <Container>
-        <Content>
+        <Header>
+          <Body>
+            <Text>DDFA Feed</Text>
+          </Body>
+        </Header>
+        <Content padder>
           <Text>Welcome to the feed page!</Text>
         </Content>
       </Container>
