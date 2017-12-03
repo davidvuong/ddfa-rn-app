@@ -9,7 +9,8 @@ import {
 import navigationOptions from '../NavigationOptions';
 
 type Props = {
-
+  isLoggingIn: ?boolean,
+  loginErrorStatus: ?Error,
 };
 
 type State = {
