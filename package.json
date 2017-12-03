@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
+    "flow": "^0.2.3",
     "lodash": "^4.17.4",
     "native-base": "^2.3.3",
     "react": "^16.0.0",
