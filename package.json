@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "native-base": "^2.3.3",
     "react": "^16.0.0",
