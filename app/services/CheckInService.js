@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 
-export default class CheckInService {
+class CheckInService {
   initialize(host, authenticationService, httpService) {
     this.host = host;
     this.authenticationService = authenticationService;
@@ -42,3 +42,5 @@ export default class CheckInService {
     });
   }
 }
+
+export default new CheckInService();

@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 
 import HttpService from './HttpService';
 
-export default class AuthenticationService {
+class AuthenticationService {
   host: string;
   token: ?string;
   http: HttpService;
@@ -51,3 +51,5 @@ export default class AuthenticationService {
       });
   }
 }
+
+export default new AuthenticationService();
