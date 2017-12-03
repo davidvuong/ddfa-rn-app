@@ -34,9 +34,10 @@ export default class App extends React.Component<Props, State> {
     this.state = { isLoggedIn: null };
 
     /* Initialize app services. */
-    AuthenticationService.initialize('localhost', HttpService);
+    const httpService = new HttpService();
+    AuthenticationService.initialize('localhost', httpService);
     AuthenticationService.getTokenFromStorage().then((token: string) => {
-      CheckInService.initialize('localhost', AuthenticationService, HttpService);
+      CheckInService.initialize('localhost', AuthenticationService, httpService);
       this.setState({ isLoggedIn: !!token });
     });
   }

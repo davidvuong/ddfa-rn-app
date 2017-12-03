@@ -9,7 +9,7 @@ type Headers = {
 
 };
 
-export default class HttpRequestService {
+export default class HttpService {
   request(endpoint: string, method: string, payload: Payload, headers: Headers) {
     return fetch(endpoint, {
       method,

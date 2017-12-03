@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 
 import HttpService from './HttpService';
 
-class AuthenticationService {
+export class AuthenticationService {
   host: string;
   token: ?string;
   http: HttpService;
@@ -45,7 +45,8 @@ class AuthenticationService {
           AsyncStorage.setItem('@user.token', res.body.token),
           res.body.token,
         ]);
-      }).spread((__: void, token: string): Promise<*> => {
+      })
+      .spread((__: void, token: string): Promise<*> => {
         this.token = token;
         return Promise.resolve();
       });
