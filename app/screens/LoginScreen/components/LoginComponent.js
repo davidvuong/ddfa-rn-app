@@ -20,7 +20,7 @@ type State = {
 export default class LoginComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
     this.state = { username: null, password: null };
   }
