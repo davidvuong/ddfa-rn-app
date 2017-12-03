@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": false,
   "devDependencies": {
-    "babel-preset-react-native-stage-0": "1.0.1"
+    "babel-preset-react-native-stage-0": "1.0.1",
+    "flow": "^0.2.3"
   },
   "scripts": {
     "start": "react-native start",
@@ -12,7 +13,6 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "flow": "^0.2.3",
     "lodash": "^4.17.4",
     "native-base": "^2.3.3",
     "react": "^16.0.0",
