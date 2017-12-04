@@ -10,6 +10,9 @@ import {
   Text,
   Card,
   CardItem,
+  Left,
+  Right,
+  Button,
 } from 'native-base';
 import {
   Image,
@@ -97,9 +100,15 @@ export default class FeedScreen extends React.Component<Props, State> {
     return (
       <Container>
         <Header>
+          <Left />
           <Body>
             <Text>DDFA Feed</Text>
           </Body>
+          <Right>
+            <Button primary small>
+              <Text>Check In</Text>
+            </Button>
+          </Right>
         </Header>
           <Content padder removeClippedSubviews={true}>
             {
@@ -114,7 +123,7 @@ export default class FeedScreen extends React.Component<Props, State> {
                     </CardItem>
                     <CardItem cardBody>
                       <Image source={this.getBackgroundImage(checkIn.id)} style={{
-                         height: 180, width: null, flex: 1
+                         height: 180, width: null, flex: 1,
                       }} />
                       <Text note numberOfLines={1} style={{
                         position: 'absolute',
