@@ -5,7 +5,6 @@ import * as actions from '../ActionTypes';
 type State = {
   isCheckingIn: ?boolean,
   checkInErrorStatus: ?Error,
-  selectedLocation: ?Object,
   checkIns: Array<*>,
   isListingCheckIns: ?boolean,
   checkInListErrorStatus: ?Error,
@@ -17,9 +16,6 @@ const initialState = {
 
   // Check in error response object.
   checkInErrorStatus: null,
-
-  // The location we've selected to check in.
-  selectedLocation: null,
 
   // Previously checked in resources (possibly including newest).
   checkIns: [],
@@ -40,12 +36,9 @@ export default function CheckInReducer(state: State = initialState, action: *) {
         ...state,
         isCheckingIn: false,
         checkInErrorStatus: null,
-        selectedLocation: null,
       };
     case actions.CHECK_IN_ERROR:
       return { ...state, isCheckingIn: false, checkInErrorStatus: action.error };
-    case actions.SET_SELECTED_LOCATION:
-      return { ...state, selectedLocation: action.selectedLocation };
     case actions.LIST_CHECK_IN_REQUEST:
       return { ...state, isListingCheckIns: true };
     case actions.LIST_CHECK_IN_SUCCESS:
@@ -60,13 +53,6 @@ export default function CheckInReducer(state: State = initialState, action: *) {
         ...state,
         isListingCheckIns: false,
         checkInListErrorStatus: action.error,
-      };
-    case actions.RESET_CHECK_IN_LIST:
-      return {
-        ...state,
-        isListingCheckIns: null,
-        checkIns: [],
-        checkInListErrorStatus: null,
       };
     default:
       return state;
