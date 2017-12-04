@@ -2,6 +2,10 @@
 import { connect } from 'react-redux';
 import FeedComponent from './components/FeedComponent';
 
+import {
+  listCheckIns,
+} from '../../actions/CheckInActions';
+
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
   return {
@@ -12,7 +16,11 @@ const mapStateToProps = (state: *) => {
 };
 
 const mapDispatchToProps = (dispatch: *) => {
-  return {};
+  return {
+    listCheckIns: (startTime: string, limit: number) => {
+      return dispatch(listCheckIns(startTime, limit));
+    },
+  };
 };
 
 export default connect(
