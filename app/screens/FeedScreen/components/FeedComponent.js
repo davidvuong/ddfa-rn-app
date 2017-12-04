@@ -128,16 +128,16 @@ export default class FeedScreen extends React.Component<Props, State> {
       <Container>
         <Header>
           <Left>
-            <Button danger small onPress={this.onPressLogout}>
-              <Text>LOGOUT</Text>
+            <Button dark small onPress={this.onPressLogout}>
+              <Text>Exit</Text>
             </Button>
           </Left>
           <Body>
             <Text>DDFA Feed</Text>
           </Body>
           <Right>
-            <Button primary small>
-              <Text>CHECK IN</Text>
+            <Button info small>
+              <Text>Check In</Text>
             </Button>
           </Right>
         </Header>
