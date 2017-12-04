@@ -48,10 +48,11 @@ export default class App extends React.Component<Props, State> {
     /* Initialize app services. */
     const httpService = new HttpService();
     AuthenticationService.initialize(baseApiEndpoint, httpService);
-    AuthenticationService.getTokenFromStorage().then((token: string) => {
-      CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
-      this.setState({ isLoggedIn: !!token });
-    });
+    AuthenticationService.getTokenFromStorage()
+      .then((token: string) => {
+        CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
+        this.setState({ isLoggedIn: !!token });
+      });
   }
 
   render() {
