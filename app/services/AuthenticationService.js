@@ -23,7 +23,7 @@ export class AuthenticationService {
     return AsyncStorage.getItem('@user.token')
       .then((token: string): Promise<*> => {
         this.token = token;
-        return Promise.resolve();
+        return Promise.resolve(this.token);
       });
   }
 
@@ -41,10 +41,7 @@ export class AuthenticationService {
 
     return this.http.post(endpoint, payload)
       .then((res: Object): Promise<[void, string]> => {
-        return Promise.join(
-          AsyncStorage.setItem('@user.token', res.body.token),
-          res.body.token,
-        );
+        return Promise.join(AsyncStorage.setItem('@user.token', res.token), res.token);
       })
       .spread((__: void, token: string): Promise<*> => {
         this.token = token;
