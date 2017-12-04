@@ -17,12 +17,13 @@ class CheckInService {
     this.http = httpService;
   }
 
-  list(startTime: number, limit: number) {
+  list(startTime: string, limit: number) {
     const endpoint = `${this.host}/check-ins/?startTime=${startTime}&limit=${limit}`;
     const headers = this.authenticationService.getAuthenticationHeader();
-    return this.http.get(endpoint, headers).then((res: *) => {
-      return Promise.resolve(res.body.checkIns);
-    });
+    return this.http.get(endpoint, headers)
+      .then((res: *) => {
+        return Promise.resolve(res.checkIns);
+      });
   }
 
   create(
@@ -47,9 +48,10 @@ class CheckInService {
       amountPaid,
       comment: comment ? comment.trim() : comment, // save lives. get rid if trailing/leading whitespaces.
     };
-    return this.http.post(endpoint, payload, headers).then((res: *) => {
-      return Promise.resolve(res.body);
-    });
+    return this.http.post(endpoint, payload, headers)
+      .then((res: *) => {
+        return Promise.resolve(res);
+      });
   }
 }
 
