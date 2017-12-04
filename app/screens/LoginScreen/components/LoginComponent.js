@@ -97,32 +97,40 @@ export default class LoginComponent extends React.Component<Props, State> {
           }}>
             <Item rounded style={{
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
-              marginLeft: 10,
-              marginRight: 10,
+              marginLeft: 12,
+              marginRight: 12,
               marginBottom: 5,
               paddingLeft: 10,
               paddingRight: 10,
+              height: 45,
             }}>
               <Input
                 placeholder='Username'
                 value={this.state.username}
                 autoCapitalize={'none'}
                 onChangeText={(username: string) => { this.setState({ username }); }}
+                style={{
+                  fontSize: 15,
+                }}
               />
             </Item>
             <Item rounded style={{
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
-              marginLeft: 10,
-              marginRight: 10,
+              marginLeft: 12,
+              marginRight: 12,
               marginBottom: 5,
               paddingLeft: 10,
               paddingRight: 10,
+              height: 45,
             }}>
               <Input
                 placeholder='Password'
                 secureTextEntry
                 value={this.state.password}
                 onChangeText={(password: string) => { this.setState({ password }); }}
+                style={{
+                  fontSize: 15,
+                }}
               />
             </Item>
             <Button
@@ -137,6 +145,13 @@ export default class LoginComponent extends React.Component<Props, State> {
             }}>
               <Text>Sign In</Text>
             </Button>
+            <Text style={{
+              fontWeight: '500',
+              fontSize: 12,
+              marginTop: 5,
+              color: 'rgba(0, 0, 0, 0.5)',
+              fontStyle: 'italic',
+            }}>DDFA - Double D Food Adventures</Text>
           </Container>
         </Content>
       </Container>
