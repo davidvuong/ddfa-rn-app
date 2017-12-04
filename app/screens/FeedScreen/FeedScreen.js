@@ -5,6 +5,9 @@ import FeedComponent from './components/FeedComponent';
 import {
   listCheckIns,
 } from '../../actions/CheckInActions';
+import {
+  logoutUser,
+} from '../../actions/AuthenticationActions';
 
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
@@ -19,6 +22,9 @@ const mapDispatchToProps = (dispatch: *) => {
   return {
     listCheckIns: (startTime: string, limit: number) => {
       return dispatch(listCheckIns(startTime, limit));
+    },
+    logoutUser: () => {
+      return dispatch(logoutUser());
     },
   };
 };

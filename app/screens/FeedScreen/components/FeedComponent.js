@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 import * as React from 'react';
+import { NavigationActions } from 'react-navigation';
 import {
   Container,
   Header,
@@ -16,6 +17,7 @@ import {
 } from 'native-base';
 import {
   Image,
+  Alert,
 } from 'react-native';
 
 import navigationOptions from '../NavigationOptions';
@@ -26,7 +28,9 @@ type Props = {
   checkIns: Array<*>,
   isListingCheckIns: ?boolean,
   checkInListErrorStatus: ?Error,
+  navigation: *,
   listCheckIns: (string, number) => *,
+  logoutUser: () => *,
 };
 
 type State = {
@@ -65,6 +69,8 @@ export default class FeedScreen extends React.Component<Props, State> {
 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);
     (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
+    (this: any).navigateToLogin = this.navigateToLogin.bind(this);
+    (this: any).onPressLogout = this.onPressLogout.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +78,27 @@ export default class FeedScreen extends React.Component<Props, State> {
     if (!this.props.checkIns.length) {
       this.performInitialLoad();
     }
+  }
+
+  navigateToLogin() {
+    this.props.logoutUser()
+      .then(() => {
+        this.props.navigation.dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Login' }),
+          ],
+        }));
+      })
+      .catch((error: Error) => { console.error(error.message); });
+  }
+
+  onPressLogout() {
+    const buttons = [
+      { text: 'Yes', onPress: this.navigateToLogin },
+      { text: 'Cancel', style: 'cancel' },
+    ];
+    Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
   /* Memorization and tries to reduce duplicated image series. */
@@ -100,13 +127,17 @@ export default class FeedScreen extends React.Component<Props, State> {
     return (
       <Container>
         <Header>
-          <Left />
+          <Left>
+            <Button danger small onPress={this.onPressLogout}>
+              <Text>LOGOUT</Text>
+            </Button>
+          </Left>
           <Body>
             <Text>DDFA Feed</Text>
           </Body>
           <Right>
             <Button primary small>
-              <Text>Check In</Text>
+              <Text>CHECK IN</Text>
             </Button>
           </Right>
         </Header>
