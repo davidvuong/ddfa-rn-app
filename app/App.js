@@ -6,6 +6,7 @@ import {
   Container,
   Content,
   Spinner,
+  Root,
 } from 'native-base';
 
 import ConfigureStore from './store/ConfigureStore';
@@ -59,15 +60,17 @@ export default class App extends React.Component<Props, State> {
     // _.isNull(NavigatorComponent) is true if !this.state.isLoggedIn
     const NavigatorComponent = getNavigator(this.state.isLoggedIn);
     return (
-      <Provider store={this.store}>
-        {NavigatorComponent ? <NavigatorComponent /> : (
-          <Container>
-            <Content contentContainerStyle={style.content}>
-              <Spinner color="black" />
-            </Content>
-          </Container>
-        )}
-      </Provider>
+      <Root>
+        <Provider store={this.store}>
+          {NavigatorComponent ? <NavigatorComponent /> : (
+            <Container>
+              <Content contentContainerStyle={style.content}>
+                <Spinner color="black" />
+              </Content>
+            </Container>
+          )}
+        </Provider>
+      </Root>
     );
   }
 }
