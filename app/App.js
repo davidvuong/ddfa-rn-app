@@ -64,7 +64,7 @@ export default class App extends React.Component<Props, State> {
           <Container>
             <Content contentContainerStyle={style.content}>
               <Spinner color="black" />
-            </ Content>
+            </Content>
           </Container>
         )}
       </Provider>
