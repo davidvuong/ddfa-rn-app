@@ -15,6 +15,7 @@ import {
   Item,
   Label,
   Input,
+  Toast,
 } from 'native-base';
 
 import navigationOptions from '../NavigationOptions';
@@ -61,7 +62,16 @@ export default class LoginComponent extends React.Component<Props, State> {
     const { username, password } = this.state;
     this.props.loginUser(username, password)
       .then(() => { this.navigateToMainPage(); })
-      .catch((error: Error) => { console.warn(error); });
+      .catch(() => {
+        Toast.show({
+          text: 'Login failed - please try again...',
+          position: 'top',
+          buttonText: 'OK',
+          type: 'danger',
+          duration: 3000,
+        });
+        this.setState({ ...this.state, password: null });
+      });
   }
 
   render() {
@@ -69,7 +79,7 @@ export default class LoginComponent extends React.Component<Props, State> {
       <Container>
         <Header>
           <Body>
-            <Text>food adventures</Text>
+            <Text>DD Food Adventures</Text>
           </Body>
         </Header>
         <Content padder>
@@ -100,7 +110,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               disabled={this.isLoginButtonDisabled()}
               onPress={this.onPressLogin}
             >
-              <Text style={Styles.loginButtonText}>log into ddfa</Text>
+              <Text style={Styles.loginButtonText}>LOG INTO DDFA</Text>
             </Button>
           </FooterTab>
         </Footer>
