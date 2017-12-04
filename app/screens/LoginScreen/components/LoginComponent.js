@@ -4,20 +4,20 @@ import { NavigationActions } from 'react-navigation';
 
 import {
   Container,
-  Content,
   Header,
+  Content,
   Body,
   Text,
-  Footer,
   Button,
-  FooterTab,
-  Form,
   Item,
-  Label,
   Input,
   Toast,
 } from 'native-base';
+import {
+  Image,
+} from 'react-native';
 
+import Images from '../../../Images';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
@@ -65,9 +65,9 @@ export default class LoginComponent extends React.Component<Props, State> {
       .catch(() => {
         Toast.show({
           text: 'Login failed - please try again...',
-          position: 'top',
+          position: 'bottom',
           buttonText: 'OK',
-          type: 'danger',
+          type: 'warning',
           duration: 3000,
         });
         this.setState({ ...this.state, password: null });
@@ -79,42 +79,66 @@ export default class LoginComponent extends React.Component<Props, State> {
       <Container>
         <Header>
           <Body>
-            <Text>DD Food Adventures</Text>
+            <Text>DDFA Login</Text>
           </Body>
         </Header>
-        <Content padder>
-          <Form>
-            <Item inlineLabel>
-              <Label style={Styles.inputLabel}>username</Label>
+        <Content>
+          <Container style={{ flex: 1 }}>
+            <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
+          </Container>
+          <Container style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0, 
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <Item rounded style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+              marginLeft: 10,
+              marginRight: 10,
+              marginBottom: 5,
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}>
               <Input
+                placeholder='Username'
                 value={this.state.username}
                 autoCapitalize={'none'}
                 onChangeText={(username: string) => { this.setState({ username }); }}
               />
             </Item>
-            <Item inlineLabel>
-              <Text>{this.isLoginButtonDisabled()}</Text>
-              <Label style={Styles.inputLabel}>password</Label>
+            <Item rounded style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+              marginLeft: 10,
+              marginRight: 10,
+              marginBottom: 5,
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}>
               <Input
+                placeholder='Password'
                 secureTextEntry
                 value={this.state.password}
                 onChangeText={(password: string) => { this.setState({ password }); }}
               />
             </Item>
-          </Form>
-        </Content>
-        <Footer>
-          <FooterTab>
             <Button
+              rounded
               full
-              primary
+              info
               disabled={this.isLoginButtonDisabled()}
               onPress={this.onPressLogin}
-            >
-              <Text style={Styles.loginButtonText}>LOG INTO DDFA</Text>
+              style={{
+              marginLeft: 10,
+              marginRight: 10,
+            }}>
+              <Text>Sign In</Text>
             </Button>
-          </FooterTab>
-        </Footer>
+          </Container>
+        </Content>
       </Container>
     );
   }

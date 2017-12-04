@@ -1,15 +1,10 @@
 // @flow
 
 export default {
-  inputLabel: {
-    fontWeight: '500',
-  },
-  inputGroupContainer: {
+  backgroundImage: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginButtonText: {
-    color: 'white',
+    width: null,
+    height: null,
+    resizeMode: 'cover',
   },
 };
