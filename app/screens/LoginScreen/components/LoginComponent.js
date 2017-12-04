@@ -24,7 +24,7 @@ type Props = {
   isLoggingIn: ?boolean,
   loginErrorStatus: ?Error,
   navigation: *,
-  loginUser: (username: string, password: string) => *,
+  loginUser: (string, string) => *,
 };
 
 type State = {
