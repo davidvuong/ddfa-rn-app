@@ -102,7 +102,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               marginBottom: 5,
               paddingLeft: 10,
               paddingRight: 10,
-              height: 45,
+              height: 48,
             }}>
               <Input
                 placeholder='Username'
@@ -110,7 +110,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 autoCapitalize={'none'}
                 onChangeText={(username: string) => { this.setState({ username }); }}
                 style={{
-                  fontSize: 15,
+                  fontSize: 16,
                 }}
               />
             </Item>
@@ -121,7 +121,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               marginBottom: 5,
               paddingLeft: 10,
               paddingRight: 10,
-              height: 45,
+              height: 48,
             }}>
               <Input
                 placeholder='Password'
@@ -129,7 +129,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 value={this.state.password}
                 onChangeText={(password: string) => { this.setState({ password }); }}
                 style={{
-                  fontSize: 15,
+                  fontSize: 16,
                 }}
               />
             </Item>
