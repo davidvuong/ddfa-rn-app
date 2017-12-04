@@ -40,6 +40,11 @@ export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    // @see: https://github.com/facebook/react-native/issues/9599
+    if (typeof global.self === 'undefined') {
+      global.self = global;
+    }
+
     const config = loadConfig();
     const baseApiEndpoint = `${config.api.host}:${config.api.port}`;
 
