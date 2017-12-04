@@ -1,4 +1,5 @@
 // @flow
+import _ from 'lodash';
 import Promise from 'bluebird';
 
 type Payload = {};
@@ -7,11 +8,15 @@ type Headers = {};
 export default class HttpService {
   request(endpoint: string, method: string, payload: Payload, headers: Headers): Promise<*> {
     return new Promise((resolve: *, reject: *) => {
-      fetch(endpoint, {
+      const options: Object = {
         method,
-        body: JSON.stringify(payload),
         headers: { ...headers, 'Content-Type': 'application/json' },
-      })
+      };
+      if (_.includes(['post', 'put'], method)) {
+        options.body = JSON.stringify(payload);
+      }
+
+      fetch(endpoint, options)
         .then((response: *) => {
           if (response.ok) {
             return response;
