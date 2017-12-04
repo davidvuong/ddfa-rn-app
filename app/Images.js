@@ -10,4 +10,5 @@ export default {
   foodImage7: require('./images/food_7.jpg'),
   foodImage8: require('./images/food_8.jpg'),
   foodImage9: require('./images/food_9.jpg'),
+  backgroundImage1: require('./images/background_image_1.jpg'),
 };
