@@ -88,6 +88,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               <Label style={Styles.inputLabel}>username</Label>
               <Input
                 value={this.state.username}
+                autoCapitalize={'none'}
                 onChangeText={(username: string) => { this.setState({ username }); }}
               />
             </Item>
