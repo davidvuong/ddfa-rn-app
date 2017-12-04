@@ -21,7 +21,7 @@ export default class HttpService {
           if (response.ok) {
             return response;
           }
-          return reject(new Error(`${response.statusText}: ${response.status}`));
+          return reject(new Error(`Authentication failed with ${response.status} ${response.url}`));
         })
         .then((response: *) => {
           return resolve(response.json());
