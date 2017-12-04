@@ -1,5 +1,6 @@
 // @flow
 import _ from 'lodash';
+import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
@@ -9,7 +10,6 @@ import {
   Text,
   Card,
   CardItem,
-  Right,
 } from 'native-base';
 import {
   Image,
@@ -34,8 +34,8 @@ type State = {
 export default class FeedScreen extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
-  sampleImages: Array<Buffer>;
-  sampleImagePool: Array<Buffer>;
+  sampleImages: Array<*>;
+  sampleImagePool: Array<*>;
   backgroundImageCache: Object;
 
   constructor(props: Props) {
@@ -113,7 +113,9 @@ export default class FeedScreen extends React.Component<Props, State> {
                       </Body>
                     </CardItem>
                     <CardItem cardBody>
-                      <Image source={this.getBackgroundImage(checkIn.id)} style={{ height: 180, width: null, flex: 1 }} />
+                      <Image source={this.getBackgroundImage(checkIn.id)} style={{
+                         height: 180, width: null, flex: 1
+                      }} />
                       <Text note numberOfLines={1} style={{
                         position: 'absolute',
                         bottom: 3,
@@ -122,8 +124,8 @@ export default class FeedScreen extends React.Component<Props, State> {
                         color: 'white',
                         fontWeight: '500',
                         fontStyle: 'italic',
-                        fontSize: 10,
-                      }}>{checkIn.createdAt}</Text>
+                        fontSize: 12,
+                      }}>Checked in {moment(checkIn.createdAt).fromNow()}</Text>
                     </CardItem>
                   </Card>
                 );
