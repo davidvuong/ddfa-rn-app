@@ -65,7 +65,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     ENVFILE=.env.remote yarn run android
     ```
 
-## Additional Steps
+## Bugs
 
 As of writing this, there are a few bugs in some of the dependencies used in this project:
 
@@ -74,7 +74,20 @@ As of writing this, there are a few bugs in some of the dependencies used in thi
 
 For whatever reason, these PRs have yet to be merged into `master` so for now, please manually change them inside `node_modules` (do not forget to also change them inside `/dist/...`).
 
+Another thing: For whatever reason, due to a combination of `native-base` and `shoutem/theme`, unless "remote debugging" is enabled, things will blow up...
+
 ## Bundle JS to Run on Device (without development server)
+
+Android:
+
+```
+react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest ./android/app/build/intermediates/res/merged/debug
+
+cd android && ./gradlew assembleDebug
+cd app/build/outputs/apk/ && adb install app-debug.apk
+```
+
+iOS:
 
 TODO...
 
