@@ -147,28 +147,28 @@ export default class FeedScreen extends React.Component<Props, State> {
             </Button>
           </Right>
         </Header>
-          <Content padder removeClippedSubviews={true}>
-            {
-              _.map(this.props.checkIns, (checkIn: *) => {
-                return (
-                  <Card key={checkIn.id}>
-                    <CardItem>
-                      <Body>
-                        <Text numberOfLines={1}>{checkIn.name}</Text>
-                        <Text note numberOfLines={1}>{checkIn.address}</Text>
-                      </Body>
-                    </CardItem>
-                    <CardItem cardBody>
-                      <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
-                      <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
-                        Checked in {moment(checkIn.createdAt).fromNow()}
-                      </Text>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            }
-          </Content>
+        <Content padder removeClippedSubviews={true}>
+          {
+            _.map(this.props.checkIns, (checkIn: *) => {
+              return (
+                <Card key={checkIn.id}>
+                  <CardItem>
+                    <Body>
+                      <Text numberOfLines={1}>{checkIn.name}</Text>
+                      <Text note numberOfLines={1}>{checkIn.address}</Text>
+                    </Body>
+                  </CardItem>
+                  <CardItem cardBody>
+                    <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
+                    <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
+                      Checked in {moment(checkIn.createdAt).fromNow()}
+                    </Text>
+                  </CardItem>
+                </Card>
+              );
+            })
+          }
+        </Content>
       </Container>
     );
   }
