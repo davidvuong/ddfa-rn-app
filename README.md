@@ -65,6 +65,15 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     ENVFILE=.env.remote yarn run android
     ```
 
+## Additional Steps
+
+As of writing this, there are a few bugs in some of the dependencies used in this project:
+
+* https://github.com/GeekyAnts/NativeBase/issues/1359
+* https://github.com/GeekyAnts/theme/pull/4
+
+For whatever reason, these PRs have yet to be merged into `master` so for now, please manually change them inside `node_modules` (do not forget to also change them inside `/dist/...`).
+
 ## Bundle JS to Run on Device (without development server)
 
 TODO...
