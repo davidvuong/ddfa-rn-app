@@ -86,51 +86,23 @@ export default class LoginComponent extends React.Component<Props, State> {
           <Container style={{ flex: 1 }}>
             <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
           </Container>
-          <Container style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <Item style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.92)',
-              marginLeft: 12,
-              marginRight: 12,
-              marginBottom: 5,
-              paddingLeft: 10,
-              paddingRight: 10,
-              height: 48,
-            }}>
+          <Container style={Styles.inputGroupContainer}>
+            <Item style={Styles.inputContainer}>
               <Input
                 placeholder='Username'
                 value={this.state.username}
                 autoCapitalize={'none'}
                 onChangeText={(username: string) => { this.setState({ username }); }}
-                style={{
-                  fontSize: 16,
-                }}
+                style={Styles.inputStyle}
               />
             </Item>
-            <Item style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.92)',
-              marginLeft: 12,
-              marginRight: 12,
-              marginBottom: 5,
-              paddingLeft: 10,
-              paddingRight: 10,
-              height: 48,
-            }}>
+            <Item style={Styles.inputContainer}>
               <Input
                 placeholder='Password'
                 secureTextEntry
                 value={this.state.password}
                 onChangeText={(password: string) => { this.setState({ password }); }}
-                style={{
-                  fontSize: 16,
-                }}
+                style={Styles.inputStyle}
               />
             </Item>
             <Button
@@ -139,19 +111,9 @@ export default class LoginComponent extends React.Component<Props, State> {
               info
               disabled={this.isLoginButtonDisabled()}
               onPress={this.onPressLogin}
-              style={{
-              marginLeft: 10,
-              marginRight: 10,
-            }}>
-              <Text>Sign In</Text>
-            </Button>
-            <Text style={{
-              fontWeight: '500',
-              fontSize: 12,
-              marginTop: 5,
-              color: 'rgba(0, 0, 0, 0.5)',
-              fontStyle: 'italic',
-            }}>DDFA - Double D Food Adventures</Text>
+              style={Styles.loginButton}
+            ><Text>Sign In</Text></Button>
+            <Text style={Styles.subtext}>DDFA - Double D Food Adventures</Text>
           </Container>
         </Content>
       </Container>
