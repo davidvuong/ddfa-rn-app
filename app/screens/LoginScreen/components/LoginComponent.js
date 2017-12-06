@@ -82,7 +82,7 @@ export default class LoginComponent extends React.Component<Props, State> {
             <Text>DDFA Login</Text>
           </Body>
         </Header>
-        <Content>
+        <Content scrollEnabled={false} bounces={false}>
           <Container style={{ flex: 1 }}>
             <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
           </Container>
@@ -91,11 +91,11 @@ export default class LoginComponent extends React.Component<Props, State> {
             top: 0,
             bottom: 0,
             left: 0,
-            right: 0, 
+            right: 0,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-            <Item rounded style={{
+            <Item style={{
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
               marginLeft: 12,
               marginRight: 12,
@@ -114,7 +114,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 }}
               />
             </Item>
-            <Item rounded style={{
+            <Item style={{
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
               marginLeft: 12,
               marginRight: 12,
