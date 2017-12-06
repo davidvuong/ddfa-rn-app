@@ -14,10 +14,12 @@ import {
   Left,
   Right,
   Button,
+  Icon,
 } from 'native-base';
 import {
   Image,
   Alert,
+  Platform,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
@@ -120,7 +122,7 @@ export default class FeedScreen extends React.Component<Props, State> {
   performInitialLoad() {
     this.setState({ isInitialLoad: true });
     this.props.listCheckIns((new Date()).toISOString(), this.state.paginationSize)
-      .finally(() => {
+      .then(() => {
         this.setState({ isInitialLoad: false });
       });
   }
@@ -135,11 +137,13 @@ export default class FeedScreen extends React.Component<Props, State> {
         <Header>
           <Left>
             <Button dark small onPress={this.onPressLogout}>
-              <Text>Exit</Text>
+              <Text style={Styles.logoutButtonText}>
+                ✕
+              </Text>
             </Button>
           </Left>
           <Body>
-            <Text>DDFA Feed</Text>
+            <Text style={Styles.headerTitle}>DDFA Feed</Text>
           </Body>
           <Right>
             <Button info small onPress={this.onPressCheckIn}>

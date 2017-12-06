@@ -1,4 +1,5 @@
 // @flow
+import { Platform } from 'react-native';
 
 export default {
   checkInImage: {
@@ -15,5 +16,18 @@ export default {
     fontWeight: '500',
     fontStyle: 'italic',
     fontSize: 12,
+  },
+  headerTitle: {
+    ...Platform.select({
+      ios: {
+        color: 'black',
+      },
+      android: {
+        color: 'white',
+      },
+    }),
+  },
+  logoutButtonText: {
+    color: 'white',
   },
 };
