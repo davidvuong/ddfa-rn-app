@@ -1,5 +1,5 @@
 {
-  "presets": ["react-native", "es2015", "flow"],
+  "presets": ["react-native", "flow"],
   "plugins": [
     "transform-object-rest-spread",
     "transform-class-properties"
