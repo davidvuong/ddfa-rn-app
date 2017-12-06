@@ -153,19 +153,10 @@ export default class FeedScreen extends React.Component<Props, State> {
                       </Body>
                     </CardItem>
                     <CardItem cardBody>
-                      <Image source={this.getBackgroundImage(checkIn.id)} style={{
-                         height: 180, width: null, flex: 1,
-                      }} />
-                      <Text note numberOfLines={1} style={{
-                        position: 'absolute',
-                        bottom: 3,
-                        right: 3,
-                        backgroundColor: 'rgba(0, 0, 0, 0)',
-                        color: 'white',
-                        fontWeight: '500',
-                        fontStyle: 'italic',
-                        fontSize: 12,
-                      }}>Checked in {moment(checkIn.createdAt).fromNow()}</Text>
+                      <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
+                      <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
+                        Checked in {moment(checkIn.createdAt).fromNow()}
+                      </Text>
                     </CardItem>
                   </Card>
                 );
