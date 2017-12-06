@@ -79,14 +79,14 @@ export default class LoginComponent extends React.Component<Props, State> {
       <Container>
         <Header>
           <Body>
-            <Text>DDFA Login</Text>
+            <Text style={Styles.headerTitle}>DDFA Login</Text>
           </Body>
         </Header>
         <Content scrollEnabled={false} bounces={false}>
           <Container style={{ flex: 1 }}>
             <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
           </Container>
-          <Container style={Styles.inputGroupContainer}>
+          <Container enableAutoAutomaticScroll={true} style={Styles.inputGroupContainer}>
             <Item style={Styles.inputContainer}>
               <Input
                 placeholder='Username'

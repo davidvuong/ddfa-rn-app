@@ -152,7 +152,7 @@ export default class FeedScreen extends React.Component<Props, State> {
       <Container>
         <Header>
           <Left>
-            <Button dark small onPress={this.onPressLogout}>
+            <Button transparent onPress={this.onPressLogout}>
               <Text style={Styles.logoutButtonText}>
                 ✕
               </Text>

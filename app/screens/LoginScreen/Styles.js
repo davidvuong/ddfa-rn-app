@@ -1,4 +1,5 @@
 // @flow
+import { Platform } from 'react-native';
 
 export default {
   backgroundImage: {
@@ -38,5 +39,15 @@ export default {
     marginTop: 5,
     color: 'rgba(0, 0, 0, 0.5)',
     fontStyle: 'italic',
+  },
+  headerTitle: {
+    ...Platform.select({
+      ios: {
+        color: 'black',
+      },
+      android: {
+        color: 'white',
+      },
+    }),
   },
 };
