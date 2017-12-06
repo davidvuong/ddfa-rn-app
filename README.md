@@ -47,10 +47,12 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
     rm -rf ./node_modules && rm -rf ./android/build && yarn run android
     ```
 
-1. Obtain the `.env` file and store it in the root of ddfa-rn-app. As of writing this, the contents look like:
+1. Obtain both `.env.local` and `.env.remote` files. The contents look like:
 
     ```
     GOOGLE_MAPS_API_KEY=...
+    API_HOST=...
+    API_PORT=...
     ```
 
 1. Run the React Native application:
@@ -59,8 +61,8 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     ```bash
     yarn start
-    yarn run ios
-    yarn run android
+    ENVFILE=.env.remote yarn run ios
+    ENVFILE=.env.remote yarn run android
     ```
 
 ## Bundle JS to Run on Device (without development server)

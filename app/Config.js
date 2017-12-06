@@ -1,4 +1,5 @@
 // @flow
+import RNConfig from 'react-native-config';
 
 export type ApiConfig = {
   host: string,
@@ -11,8 +12,8 @@ export type Config = {
 
 function loadUnsafe() {
   return {
-    API_HOST: process.env.API_HOST || 'http://localhost',
-    API_PORT: parseInt(process.env.API_PORT, 10) || 8080,
+    API_HOST: RNConfig.API_HOST,
+    API_PORT: parseInt(RNConfig.API_PORT, 10),
   };
 }
 
