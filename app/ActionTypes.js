@@ -12,6 +12,9 @@ export const CHECK_IN_REQUEST = 'checkIn/CHECK_IN_REQUEST';
 export const CHECK_IN_SUCCESS = 'checkIn/CHECK_IN_SUCCESS';
 export const CHECK_IN_ERROR = 'checkIn/CHECK_IN_ERROR';
 
+export const SET_SELECTED_LOCATION = 'checkIn/SET_SELECTED_LOCATION';
+export const RESET_CHECK_IN_LIST = 'checkIn/RESET_CHECK_IN_LIST';
+
 export const LIST_CHECK_IN_REQUEST = 'checkIn/LIST_CHECK_IN_REQUEST';
 export const LIST_CHECK_IN_SUCCESS = 'checkIn/LIST_CHECK_IN_SUCCESS';
 export const LIST_CHECK_IN_ERROR = 'checkIn/LIST_CHECK_IN_ERROR';

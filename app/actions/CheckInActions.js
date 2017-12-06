@@ -18,7 +18,7 @@ function listCheckInError(error: Error) {
 
 /* External */
 
-export function listCheckIns(startTime: string, limit: number) { // eslint-disable-line import/prefer-default-export
+export function listCheckIns(startTime: string, limit: number) {
   return (dispatch: *) => {
     dispatch(listCheckInRequest());
     return CheckInService.list(startTime, limit)
@@ -29,4 +29,12 @@ export function listCheckIns(startTime: string, limit: number) { // eslint-disab
         throw error;
       });
   };
+}
+
+export function setSelectedLocation(selectedLocation: Object) {
+  return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
+}
+
+export function resetCheckIns() {
+  return { type: actions.RESET_CHECK_IN_LIST };
 }

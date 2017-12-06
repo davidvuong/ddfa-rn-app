@@ -4,6 +4,7 @@ import FeedComponent from './components/FeedComponent';
 
 import {
   listCheckIns,
+  setSelectedLocation,
 } from '../../actions/CheckInActions';
 import {
   logoutUser,
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     logoutUser: () => {
       return dispatch(logoutUser());
+    },
+    setSelectedLocation: (location: *) => {
+      return dispatch(setSelectedLocation(location));
     },
   };
 };
