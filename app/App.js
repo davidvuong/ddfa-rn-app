@@ -62,7 +62,6 @@ export default class App extends React.Component<Props, State> {
   }
 
   render() {
-    // _.isNull(NavigatorComponent) is true if !this.state.isLoggedIn
     const NavigatorComponent = getNavigator(this.state.isLoggedIn);
     return (
       <Root>
