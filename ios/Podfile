@@ -1,0 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'ddfa' do
+
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlacePicker'
+
+end

@@ -6,11 +6,14 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  */
+@import GooglePlaces;
+@import GoogleMaps;
 
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "ReactNativeConfig.h"
 
 @implementation AppDelegate
 
@@ -31,6 +34,11 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  NSString *googleApiKey = [ReactNativeConfig envFor:@"GOOGLE_MAPS_API_KEY"];
+  [GMSPlacesClient provideAPIKey:googleApiKey];
+  [GMSServices provideAPIKey:googleApiKey];
+
   return YES;
 }
 

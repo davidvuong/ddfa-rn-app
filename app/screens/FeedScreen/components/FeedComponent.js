@@ -19,6 +19,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
+import RNGooglePlaces from 'react-native-google-places';
 
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -71,6 +72,7 @@ export default class FeedScreen extends React.Component<Props, State> {
     (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
     (this: any).navigateToLogin = this.navigateToLogin.bind(this);
     (this: any).onPressLogout = this.onPressLogout.bind(this);
+    (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +125,10 @@ export default class FeedScreen extends React.Component<Props, State> {
       });
   }
 
+  onPressCheckIn() {
+    RNGooglePlaces.openPlacePickerModal();
+  }
+
   render() {
     return (
       <Container>
@@ -136,7 +142,7 @@ export default class FeedScreen extends React.Component<Props, State> {
             <Text>DDFA Feed</Text>
           </Body>
           <Right>
-            <Button info small>
+            <Button info small onPress={this.onPressCheckIn}>
               <Text>Check In</Text>
             </Button>
           </Right>
