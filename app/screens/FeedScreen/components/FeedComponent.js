@@ -14,12 +14,11 @@ import {
   Left,
   Right,
   Button,
-  Icon,
+  Spinner,
 } from 'native-base';
 import {
   Image,
   Alert,
-  Platform,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
@@ -41,6 +40,8 @@ type Props = {
 type State = {
   isInitialLoad: boolean,
   paginationSize: number,
+  noMoreCheckIns: boolean,
+  isLoadingMore: boolean,
 };
 
 export default class FeedScreen extends React.Component<Props, State> {
@@ -49,6 +50,7 @@ export default class FeedScreen extends React.Component<Props, State> {
   sampleImages: Array<*>;
   sampleImagePool: Array<*>;
   backgroundImageCache: Object;
+  bottomScrollPadding: number;
 
   constructor(props: Props) {
     super(props);
@@ -56,6 +58,8 @@ export default class FeedScreen extends React.Component<Props, State> {
     this.state = {
       isInitialLoad: false,
       paginationSize: 20,
+      noMoreCheckIns: false,
+      isLoadingMore: false,
     };
 
     this.sampleImages = [
@@ -71,12 +75,14 @@ export default class FeedScreen extends React.Component<Props, State> {
     ];
     this.sampleImagePool = [];
     this.backgroundImageCache = {};
+    this.bottomScrollPadding = 20;
 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);
     (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
     (this: any).navigateToLogin = this.navigateToLogin.bind(this);
     (this: any).onPressLogout = this.onPressLogout.bind(this);
     (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
+    (this: any).onScroll = this.onScroll.bind(this);
   }
 
   componentDidMount() {
@@ -147,6 +153,34 @@ export default class FeedScreen extends React.Component<Props, State> {
       .catch((error: Error) => { console.log(error.message); });
   }
 
+  onScroll(event: *) {
+    // Check if we're at the bottom of the page.
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    if (!(layoutMeasurement.height + contentOffset.y > contentSize.height - this.bottomScrollPadding)) {
+      return;
+    }
+    // Check if we're already listing checkins.
+    if (this.props.isListingCheckIns) {
+      return;
+    }
+    // Check if we've loaded the last set upf checkins.
+    if (this.state.noMoreCheckIns) {
+      return;
+    }
+
+    const lastCheckIn = _.last(this.props.checkIns);
+    const previousCheckInsCount = this.props.checkIns.length;
+
+    this.setState({ isLoadingMore: true });
+    this.props.listCheckIns(lastCheckIn.createdAt, this.state.paginationSize)
+      .finally(() => {
+        this.setState({
+          isLoadingMore: false,
+          noMoreCheckIns: previousCheckInsCount == this.props.checkIns.length,
+        });
+      });
+  }
+
   render() {
     return (
       <Container>
@@ -167,7 +201,7 @@ export default class FeedScreen extends React.Component<Props, State> {
             </Button>
           </Right>
         </Header>
-        <Content padder removeClippedSubviews={true}>
+        <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
           {
             _.map(this.props.checkIns, (checkIn: *) => {
               return (
@@ -188,6 +222,7 @@ export default class FeedScreen extends React.Component<Props, State> {
               );
             })
           }
+          {this.props.isLoadingMore ? <Spinner color="black" /> : null}
         </Content>
       </Container>
     );
