@@ -31,10 +31,19 @@ export function listCheckIns(startTime: string, limit: number) {
   };
 }
 
+export function resetCheckIns() {
+  return { type: actions.RESET_CHECK_IN_LIST };
+}
+
+export function setSelectedCheckIn(selectedCheckIn: *) {
+  return { type: actions.SET_SELECTED_CHECK_IN, selectedCheckIn };
+}
+
+export function resetSelectedCheckIn() {
+  return { type: actions.RESET_SELECTED_CHECK_IN };
+}
+
 export function setSelectedLocation(selectedLocation: Object) {
   return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
 }
 
-export function resetCheckIns() {
-  return { type: actions.RESET_CHECK_IN_LIST };
-}
