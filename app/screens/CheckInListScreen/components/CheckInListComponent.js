@@ -29,12 +29,13 @@ import Images from '../../../Images';
 
 type Props = {
   checkIns: Array<*>,
+  setSelectedCheckIn: (*) => *,
   isListingCheckIns: ?boolean,
   checkInListErrorStatus: ?Error,
   navigation: *,
   listCheckIns: (string, number) => *,
   logoutUser: () => *,
-  setSelectedLocation: (*) => *,
+  setSelectedLocation: (Object) => *,
 };
 
 type State = {
@@ -80,6 +81,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);
     (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
     (this: any).navigateToLogin = this.navigateToLogin.bind(this);
+    (this: any).navigateToCheckInDetail = this.navigateToCheckInDetail.bind(this);
     (this: any).onPressLogout = this.onPressLogout.bind(this);
     (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
     (this: any).onScroll = this.onScroll.bind(this);
@@ -103,6 +105,16 @@ export default class CheckInListComponent extends React.Component<Props, State> 
         }));
       })
       .catch((error: Error) => { console.error(error.message); });
+  }
+
+  navigateToCheckInDetail(checkIn: *) {
+    this.props.setSelectedCheckIn(checkIn);
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'CheckInDetail' }),
+      ],
+    }));
   }
 
   onPressLogout() {
@@ -176,7 +188,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       .finally(() => {
         this.setState({
           isLoadingMore: false,
-          noMoreCheckIns: previousCheckInsCount == this.props.checkIns.length,
+          noMoreCheckIns: previousCheckInsCount === this.props.checkIns.length,
         });
       });
   }
@@ -206,13 +218,13 @@ export default class CheckInListComponent extends React.Component<Props, State> 
             _.map(this.props.checkIns, (checkIn: *) => {
               return (
                 <Card key={checkIn.id}>
-                  <CardItem>
+                  <CardItem button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
                     <Body>
                       <Text numberOfLines={1}>{checkIn.name}</Text>
                       <Text note numberOfLines={1}>{checkIn.address}</Text>
                     </Body>
                   </CardItem>
-                  <CardItem cardBody>
+                  <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
                     <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
                     <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
                       Checked in {moment(checkIn.createdAt).fromNow()}
