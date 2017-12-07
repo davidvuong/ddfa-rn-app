@@ -49,7 +49,7 @@ export default class LoginComponent extends React.Component<Props, State> {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'Feed' }),
+        NavigationActions.navigate({ routeName: 'CheckInList' }),
       ],
     }));
   }

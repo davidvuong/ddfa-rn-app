@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import FeedComponent from './components/FeedComponent';
+import CheckInListComponent from './components/CheckInListComponent';
 
 import {
   listCheckIns,
@@ -36,4 +36,4 @@ const mapDispatchToProps = (dispatch: *) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FeedComponent);
+)(CheckInListComponent);

@@ -1,14 +1,14 @@
 // @flow
 import { StackNavigator } from 'react-navigation';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
-import FeedScreen from '../screens/FeedScreen/FeedScreen';
+import CheckInListScreen from '../screens/CheckInListScreen/CheckInListScreen';
 
 export default function getNavigator(isLoggedIn: ?boolean) {
   if (isLoggedIn === null) { return null; }
   return StackNavigator({
     Login: { screen: LoginScreen },
-    Feed: { screen: FeedScreen },
+    CheckInList: { screen: CheckInListScreen },
   }, {
-    initialRouteName: isLoggedIn ? 'Feed' : 'Login',
+    initialRouteName: isLoggedIn ? 'CheckInList' : 'Login',
   });
 }

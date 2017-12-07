@@ -44,7 +44,7 @@ type State = {
   isLoadingMore: boolean,
 };
 
-export default class FeedScreen extends React.Component<Props, State> {
+export default class CheckInListComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
   sampleImages: Array<*>;
