@@ -109,12 +109,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
   navigateToCheckInDetail(checkIn: *) {
     this.props.setSelectedCheckIn(checkIn);
-    this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'CheckInDetail' }),
-      ],
-    }));
+    this.props.navigation.navigate('CheckInDetail');
   }
 
   onPressLogout() {
