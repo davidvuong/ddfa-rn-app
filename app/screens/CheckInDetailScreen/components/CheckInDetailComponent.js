@@ -32,6 +32,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   static navigationOptions = navigationOptions;
 
   render() {
+    const { name, address, comment } = this.props.checkIn;
     return (
       <Container>
         <Header>
@@ -46,7 +47,26 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           <Right />
         </Header>
         <Content padder>
-          <Text>Welcome to the CheckInDetailScreen {this.props.checkIn.name}</Text>
+          <Card>
+            <CardItem header>
+              <Body>
+                <Text>{name}</Text>
+                <Text note>{address}</Text>
+              </Body>
+            </CardItem>
+          </Card>
+          <Card style={{
+            marginBottom: 20,
+          }}>
+            <CardItem header>
+              <Text>Comments</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>{comment}</Text>
+              </Body>
+            </CardItem>
+          </Card>
         </Content>
       </Container>
     );
