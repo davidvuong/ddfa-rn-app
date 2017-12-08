@@ -8,7 +8,7 @@ type State = {
   checkIns: Array<*>,
   isListingCheckIns: ?boolean,
   checkInListErrorStatus: ?Error,
-  selectedLocation: ?Object,
+  selectedLocation: ?*,
   selectedCheckIn: ?*,
 };
 
@@ -37,16 +37,16 @@ const initialState = {
 
 export default function CheckInReducer(state: State = initialState, action: *) {
   switch (action.type) {
-    case actions.CHECK_IN_REQUEST:
+    case actions.CREATE_CHECK_IN_REQUEST:
       return { ...state, isCheckingIn: true, checkInErrorStatus: null };
-    case actions.CHECK_IN_SUCCESS:
+    case actions.CREATE_CHECK_IN_SUCCESS:
       return {
         ...state,
         isCheckingIn: false,
         checkInErrorStatus: null,
         selectedLocation: null,
       };
-    case actions.CHECK_IN_ERROR:
+    case actions.CREATE_CHECK_IN_ERROR:
       return { ...state, isCheckingIn: false, checkInErrorStatus: action.error };
     case actions.LIST_CHECK_IN_REQUEST:
       return { ...state, isListingCheckIns: true };
@@ -76,6 +76,8 @@ export default function CheckInReducer(state: State = initialState, action: *) {
       };
     case actions.SET_SELECTED_LOCATION:
       return { ...state, selectedLocation: action.selectedLocation };
+    case actions.RESET_SELECTED_LOCATION:
+      return { ...state, selectedLocation: null };
     default:
       return state;
   }
