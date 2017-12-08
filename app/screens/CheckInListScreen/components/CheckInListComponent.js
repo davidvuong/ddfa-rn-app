@@ -142,7 +142,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   onPressCheckIn() {
-    const options = { type: 'establishments', radius: 0.3 };
+    const options = { radius: 0.3 };
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
         this.props.setSelectedLocation({
