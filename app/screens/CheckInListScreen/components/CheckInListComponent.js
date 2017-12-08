@@ -145,15 +145,13 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const options = { type: 'establishments', radius: 0.3 };
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
-        const selectedLocation = {
+        this.props.setSelectedLocation({
           address: place.address || place.name,
           latitude: place.latitude,
           longitude: place.longitude,
           place,
-        };
-        this.props.setSelectedLocation(selectedLocation);
-        console.log(selectedLocation);
-        // this.props.navigation.navigate('CheckIn');
+        });
+        this.props.navigation.navigate('CheckInCreate');
       })
       .catch((error: Error) => { console.log(error.message); });
   }
