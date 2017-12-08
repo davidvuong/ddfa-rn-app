@@ -31,10 +31,10 @@ class CheckInService {
     longitude: number,
     address: string,
     name: string,
-    comment: string,
-    rating: number,
+    comment: ?string,
+    rating: ?number,
     isPaying: boolean,
-    amountPaid: number,
+    amountPaid: ?number,
   ) {
     const endpoint = `${this.host}/check-ins`;
     const headers = this.authenticationService.getAuthenticationHeader();
