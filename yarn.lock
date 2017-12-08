@@ -3425,6 +3425,10 @@ react-native-google-places@^2.4.2:
     prop-types "^15.5.10"
     react-timer-mixin "^0.13.3"
 
+react-native-maps@^0.18.3:
+  version "0.18.3"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.18.3.tgz#85dee19596aff434ff65d69b5a218288c3363a3d"
+
 react-native-tab-view@^0.0.70:
   version "0.0.70"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"

@@ -22,7 +22,6 @@ import {
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
-import GeoLocationService from '../../../services/GeoLocationService';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 import Images from '../../../Images';
@@ -146,11 +145,10 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const options = { type: 'establishments', radius: 0.3 };
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
-        const delta = GeoLocationService.calculateRegionDelta(place.latitude, place.longitude);
         const selectedLocation = {
           address: place.address || place.name,
-          latitudeDelta: delta.latitudeDelta,
-          longitudeDelta: delta.longitudeDelta,
+          latitude: place.latitude,
+          longitude: place.longitude,
           place,
         };
         this.props.setSelectedLocation(selectedLocation);

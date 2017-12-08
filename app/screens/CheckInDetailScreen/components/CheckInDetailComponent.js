@@ -10,7 +10,9 @@ import {
   Card,
   CardItem,
 } from 'native-base';
+import MapView from 'react-native-maps';
 
+import GeoLocationService from '../../../services/GeoLocationService';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
@@ -29,7 +31,15 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   render() {
-    const { name, address, comment } = this.props.checkIn;
+    const {
+      name,
+      address,
+      comment,
+      latitude,
+      longitude,
+    } = this.props.checkIn;
+
+    const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
     return (
       <Container>
         <Header>
@@ -38,6 +48,25 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           </Body>
         </Header>
         <Content padder>
+          <MapView
+            zoomEnabled={false}
+            rotateEnabled={false}
+            scrollEnabled={false}
+            pitchEnabled={false}
+            toolbarEnabled={false}
+            moveOnMarkerPress={false}
+            initialRegion={{
+              latitude,
+              longitude,
+              latitudeDelta: delta.latitudeDelta,
+              longitudeDelta: delta.longitudeDelta,
+            }}
+            style={{
+              height: 180,
+            }}
+          >
+            <MapView.Marker coordinate={{ latitude, longitude }} />
+          </MapView>
           <Card>
             <CardItem header>
               <Body>
@@ -50,7 +79,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
             marginBottom: 20,
           }}>
             <CardItem header>
-              <Text>Comments</Text>
+              <Text style={{ fontWeight: '500' }}>Comments</Text>
             </CardItem>
             <CardItem>
               <Body>

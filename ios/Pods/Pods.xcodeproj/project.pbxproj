@@ -25,10 +25,10 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		955D3A22EB34AB333524A949DC729F6B /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
 		99C745A2C9594AE4EF06AB77324FD400 /* Pods-ddfa-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ddfa-dummy.m"; sourceTree = "<group>"; };
-		CA9245AB5B86A5BCD1E0D3BF7079D64B /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		B9B940E1693884E5C7E751D263379D72 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		D1DBCD0071D70866EBEFA8E983E0A2FE /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
-		F769EDE7CC5A77CDBE3B2309AF3BD5FA /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = Frameworks/GooglePlacePicker.framework/Versions/A/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
-		F8567FFA809DD02B36CFB593922A14EA /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
+		D57A28887B9E80E29D36BD414E63A790 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		DE6D813C2480BFCB39E614B9535A00EF /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
 		FDFCE3B65960F1AABDC52C8EA30F42D5 /* Pods-ddfa-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ddfa-resources.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,18 +48,10 @@
 			isa = PBXGroup;
 			children = (
 				8BA44F82F96D164DA342FB09A0BEE150 /* Frameworks */,
-				9595338FF99D6E406412D70BB160C308 /* Resources */,
+				DADFB7FC1731804E229D4AEF6493F2F7 /* Resources */,
 			);
 			name = GooglePlaces;
 			path = GooglePlaces;
-			sourceTree = "<group>";
-		};
-		24E6408847EA4697EC99A3C22F9B2F8E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				CA9245AB5B86A5BCD1E0D3BF7079D64B /* GoogleMaps.bundle */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		45A6375AD18305E8BA7B79AD1BE61E9D /* Frameworks */ = {
@@ -83,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				45A6375AD18305E8BA7B79AD1BE61E9D /* Frameworks */,
-				24E6408847EA4697EC99A3C22F9B2F8E /* Resources */,
+				E8816D4FFB28FB18F0B906E7CC732470 /* Resources */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -113,22 +105,6 @@
 				FD4ED290151C28ABCF7A3EA0217355EB /* Frameworks */,
 			);
 			name = Base;
-			sourceTree = "<group>";
-		};
-		9335B78F64E389AD6BD28E5033911D2C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F769EDE7CC5A77CDBE3B2309AF3BD5FA /* GooglePlacePicker.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		9595338FF99D6E406412D70BB160C308 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F8567FFA809DD02B36CFB593922A14EA /* GooglePlaces.bundle */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		9C0A1FBBD02B7528347BC7FB84DE24F5 /* Frameworks */ = {
@@ -169,10 +145,18 @@
 			isa = PBXGroup;
 			children = (
 				9C0A1FBBD02B7528347BC7FB84DE24F5 /* Frameworks */,
-				9335B78F64E389AD6BD28E5033911D2C /* Resources */,
+				CCDB8ACB50B37F1810F3A87BA87382A7 /* Resources */,
 			);
 			name = GooglePlacePicker;
 			path = GooglePlacePicker;
+			sourceTree = "<group>";
+		};
+		CCDB8ACB50B37F1810F3A87BA87382A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DE6D813C2480BFCB39E614B9535A00EF /* GooglePlacePicker.bundle */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		D1EDE876E30BDBCBB85E1E61FCC4BF95 /* Pods-ddfa */ = {
@@ -198,6 +182,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		DADFB7FC1731804E229D4AEF6493F2F7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B9B940E1693884E5C7E751D263379D72 /* GooglePlaces.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E5C0912CEC7444CFF51EFFE502270519 /* GoogleMaps */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +198,14 @@
 			);
 			name = GoogleMaps;
 			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		E8816D4FFB28FB18F0B906E7CC732470 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D57A28887B9E80E29D36BD414E63A790 /* GoogleMaps.bundle */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		FD4ED290151C28ABCF7A3EA0217355EB /* Frameworks */ = {
