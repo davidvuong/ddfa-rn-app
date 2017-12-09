@@ -28,6 +28,13 @@ export default {
     }),
   },
   logoutButtonText: {
-    color: 'white',
+    ...Platform.select({
+      ios: {
+        color: 'black',
+      },
+      android: {
+        color: 'white',
+      },
+    }),
   },
 };
