@@ -14,11 +14,11 @@ import {
   Left,
   Right,
   Button,
-  Spinner,
 } from 'native-base';
 import {
   Image,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
@@ -41,7 +41,6 @@ type State = {
   isInitialLoad: boolean,
   paginationSize: number,
   noMoreCheckIns: boolean,
-  isLoadingMore: boolean,
 };
 
 export default class CheckInListComponent extends React.Component<Props, State> {
@@ -59,7 +58,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       isInitialLoad: false,
       paginationSize: 20,
       noMoreCheckIns: false,
-      isLoadingMore: false,
     };
 
     this.sampleImages = [
@@ -174,11 +172,9 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const lastCheckIn = _.last(this.props.checkIns);
     const previousCheckInsCount = this.props.checkIns.length;
 
-    this.setState({ isLoadingMore: true });
     this.props.listCheckIns(lastCheckIn.createdAt, this.state.paginationSize)
       .finally(() => {
         this.setState({
-          isLoadingMore: false,
           noMoreCheckIns: previousCheckInsCount === this.props.checkIns.length,
         });
       });
@@ -201,14 +197,18 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           <Right>
             <Button info small onPress={this.onPressCheckIn}>
               <Text>Check In</Text>
+              {this.props.isListingCheckIns ? <ActivityIndicator color="white" /> : null}
             </Button>
           </Right>
         </Header>
         <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
           {
-            _.map(this.props.checkIns, (checkIn: *) => {
+            _.map(this.props.checkIns, (checkIn: *, index: number) => {
+              const isLast = (index + 1) >= this.props.checkIns.length;
               return (
-                <Card key={checkIn.id}>
+                <Card key={checkIn.id} style={{
+                  marginBottom: isLast ? 20 : 10,
+                }}>
                   <CardItem button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
                     <Body>
                       <Text numberOfLines={1}>{checkIn.name}</Text>
@@ -225,7 +225,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
               );
             })
           }
-          {this.props.isLoadingMore ? <Spinner color="black" /> : null}
         </Content>
       </Container>
     );
