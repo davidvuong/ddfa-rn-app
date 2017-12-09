@@ -74,18 +74,21 @@ export default class CheckInDetailComponent extends React.Component<Props, State
               </Body>
             </CardItem>
           </Card>
-          <Card style={{
-            marginBottom: 20,
-          }}>
-            <CardItem header>
-              <Text style={{ fontWeight: '500' }}>Comments</Text>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>{comment}</Text>
-              </Body>
-            </CardItem>
-          </Card>
+          {
+            comment ? (
+              <Card style={{
+                marginBottom: 20,
+              }}>
+                <CardItem>
+                  <Body>
+                    <Text>{comment}</Text>
+                  </Body>
+                </CardItem>
+              </Card>
+            )
+            :
+            null
+          }
         </Content>
       </Container>
     );
