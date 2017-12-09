@@ -61,9 +61,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
               latitudeDelta: delta.latitudeDelta,
               longitudeDelta: delta.longitudeDelta,
             }}
-            style={{
-              height: 180,
-            }}
+            style={Styles.mapView}
           >
             <MapView.Marker coordinate={{ latitude, longitude }} />
           </MapView>
