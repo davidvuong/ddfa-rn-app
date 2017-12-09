@@ -80,8 +80,39 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     this.setState({ comment });
   }
 
+  renderPlaceContent() {
+    const { place } = this.props.selectedLocation;
+    const { rating, pricingLevel } = place;
+
+    if (!rating || pricingLevel < 0) {
+      return (
+        <Body>
+          <Text>{place.name}</Text>
+          <Text note>{place.address}</Text>
+        </Body>
+      );
+    }
+
+    const ratingValue = Math.round(rating * 10) / 10;
+    return (
+      <Body>
+        <Text>{place.name}</Text>
+        <Text style={Styles.placeRatingAndPrice}>
+          {`${ratingValue} stars `}
+          {
+            _.map(_.range(Math.floor(rating)), (i: number) => {
+              return <Icon key={`star-${i}`} name="md-star" style={Styles.placeRatingStarIcon} />;
+            })
+          }
+          {pricingLevel > 0 ? ` (${_.repeat('$', pricingLevel)})` : ' (?)'}
+        </Text>
+        <Text note>{place.address}</Text>
+      </Body>
+    );
+  }
+
   render() {
-    const { latitude, longitude, place } = this.props.selectedLocation;
+    const { latitude, longitude } = this.props.selectedLocation;
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
     return (
       <Container>
@@ -120,40 +151,15 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           </MapView>
           <Content padder>
             <Card>
-              <CardItem header style={{
-                borderBottomColor: 'rgba(0, 0, 0, .05)',
-                borderBottomWidth: 1,
-                paddingBottom: 5,
-              }}>
-                <Body>
-                  <Text>{place.name}</Text>
-                  <Text style={{
-                    fontSize: 12,
-                    marginTop: 3,
-                    marginBottom: 3,
-                    fontWeight: '500',
-                    color: 'orange',
-                  }}>
-                    4.1 stars{' '}
-                    <Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/>
-                    <Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/>
-                    <Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/>
-                    <Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/>
-                    {' '}($$$)
-                  </Text>
-                  <Text note>{place.address}</Text>
-                </Body>
+              <CardItem header style={Styles.placeContentItem}>
+                {this.renderPlaceContent()}
               </CardItem>
-              <CardItem style={{
-                paddingTop: 5,
-                paddingLeft: 10,
-                paddingRight: 10,
-              }}>
+              <CardItem style={Styles.placeCommentItem}>
                 <Input
                   placeholder="Add any additional comments and/or share your experience at this restaurant..."
                   onFocus={this.onFocusComment}
                   multiline={true}
-                  style={{ fontSize: 14, minHeight: 180 }}
+                  style={Styles.commentInput}
                   onChangeText={this.onChangeTextComment}
                   maxLength={2048}
                   autoGrow={true}
