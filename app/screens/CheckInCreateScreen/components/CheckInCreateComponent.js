@@ -7,6 +7,7 @@ import {
   Body,
   Content,
   Text,
+  Icon,
   Card,
   CardItem,
 } from 'native-base';
@@ -21,10 +22,22 @@ type Props = {
   resetSelectedLocation: () => *,
 };
 
-type State = {};
+type State = {
+  comment1: ?string,
+  comment2: ?string,
+};
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      comment1: null,
+      comment2: null,
+    };
+  }
 
   componentWillUnmount() {
     this.props.resetSelectedLocation();
@@ -42,7 +55,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
             <Text style={Styles.headerTitle}>DDFA Create CheckIn</Text>
           </Body>
         </Header>
-        <Content padder>
+        <Content>
           <MapView
             zoomEnabled={false}
             rotateEnabled={false}
@@ -62,7 +75,24 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           >
             <MapView.Marker coordinate={{ latitude, longitude }} />
           </MapView>
-          <Text>Welcome to the check-in page</Text>
+          <Content padder>
+          <Card>
+            <CardItem header>
+              <Body>
+                <Text>{place.name}</Text>
+                <Text style={{
+                  fontSize: 12,
+                  marginTop: 3,
+                  marginBottom: 3,
+                  fontWeight: '500',
+                  color: 'orange',
+                }}>4.1 stars <Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/><Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/><Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/><Icon name="md-star" style={{ fontSize: 12, color: 'orange' }}/> ($$$)</Text>
+                <Text note>{place.address}</Text>
+              </Body>
+            </CardItem>
+          </Card>
+          </Content>
+
         </Content>
       </Container>
     );

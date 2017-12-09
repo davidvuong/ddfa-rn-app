@@ -47,7 +47,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
             <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
           </Body>
         </Header>
-        <Content padder>
+        <Content>
           <MapView
             zoomEnabled={false}
             rotateEnabled={false}
