@@ -44,7 +44,6 @@ export default function CheckInReducer(state: State = initialState, action: *) {
         ...state,
         isCheckingIn: false,
         checkInErrorStatus: null,
-        selectedLocation: null,
       };
     case actions.CREATE_CHECK_IN_ERROR:
       return { ...state, isCheckingIn: false, checkInErrorStatus: action.error };

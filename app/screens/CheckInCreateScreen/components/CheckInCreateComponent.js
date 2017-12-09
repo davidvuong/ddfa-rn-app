@@ -29,8 +29,19 @@ import Styles from '../Styles';
 
 type Props = {
   selectedLocation: *,
+  isCheckingIn: boolean,
   navigation: *,
   resetSelectedLocation: () => *,
+  createCheckIn: (
+    number,
+    number,
+    string,
+    string,
+    ?string,
+    ?number,
+    boolean,
+    ?number,
+  ) => *,
 };
 
 type State = {
@@ -50,6 +61,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     };
 
     (this: any).onPressCancel = this.onPressCancel.bind(this);
+    (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
     (this: any).onPressDone = this.onPressDone.bind(this);
     (this: any).onFocusComment = this.onFocusComment.bind(this);
     (this: any).onChangeTextComment = this.onChangeTextComment.bind(this);
@@ -65,6 +77,28 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       { text: 'No', style: 'cancel' },
     ];
     Alert.alert('Cancel Check-in', 'Are you sure you want to cancel?', buttons);
+  }
+
+  onPressCheckIn() {
+    if (this.props.isCheckingIn) { return null; }
+
+    const { latitude, longitude, place } = this.props.selectedLocation;
+    return this.props.createCheckIn(
+      latitude,
+      longitude,
+      place.address,
+      place.name,
+      this.state.comment,
+      null, // rating
+      false, // isPaying
+      null, // amountPaid
+    )
+      .then(() => {
+        this.props.navigation.goBack();
+      })
+      .catch((error: Error) => {
+        console.error(error);
+      });
   }
 
   onPressDone() {
@@ -171,13 +205,17 @@ export default class CheckInDetailComponent extends React.Component<Props, State
         </Content>
         <Footer>
           <FooterTab>
-            <Button onPress={() => { this.onPressCancel(); }}>
+            <Button onPress={this.onPressCancel}>
               <Text>Cancel</Text>
             </Button>
           </FooterTab>
           <FooterTab>
-            <Button>
-              <Text>Check In</Text>
+            <Button onPress={this.onPressCheckIn}>
+              <Text>
+                {
+                  this.props.isCheckingIn ? 'Checking in...' : 'Check In'
+                }
+              </Text>
             </Button>
           </FooterTab>
         </Footer>

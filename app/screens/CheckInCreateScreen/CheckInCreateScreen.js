@@ -10,6 +10,7 @@ import {
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
   return {
+    isCheckingIn: checkIn.isCheckingIn,
     selectedLocation: checkIn.selectedLocation,
   };
 };

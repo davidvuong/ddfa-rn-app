@@ -31,6 +31,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   render() {
+    if (!this.props.checkIn) { return null; }
     const {
       name,
       address,
