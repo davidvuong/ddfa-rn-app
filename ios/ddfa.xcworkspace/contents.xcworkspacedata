@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:../node_modules/react-native-maps/lib/ios/AirGoogleMaps"
+      name = "AirGoogleMaps">
+      <FileRef
+         location = "group:AIRGMSMarker.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGMSMarker.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGMSPolygon.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGMSPolygon.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGMSPolyline.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGMSPolyline.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMap.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMap.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCallout.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCallout.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCalloutManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCalloutManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCircle.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCircle.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCircleManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapCircleManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapMarker.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapMarker.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapMarkerManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapMarkerManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolygon.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolygon.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolygonManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolygonManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolyline.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolyline.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolylineManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapPolylineManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapUrlTile.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapUrlTile.m">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapUrlTileManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:AIRGoogleMapURLTileManager.m">
+      </FileRef>
+      <FileRef
+         location = "group:DummyView.h">
+      </FileRef>
+      <FileRef
+         location = "group:DummyView.m">
+      </FileRef>
+      <FileRef
+         location = "group:RCTConvert+GMSMapViewType.h">
+      </FileRef>
+      <FileRef
+         location = "group:RCTConvert+GMSMapViewType.m">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:ddfa.xcodeproj">
    </FileRef>
