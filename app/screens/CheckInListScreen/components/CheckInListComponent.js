@@ -200,7 +200,9 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                 </CardItem>
                 <CardItem style={Styles.checkedInAtCardItem}>
                   <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                    Checked in {moment(checkIn.createdAt).fromNow()}...
+                    Checked in{' '}
+                    {moment(checkIn.createdAt).fromNow()}{' '}
+                    ({moment(checkIn.createdAt).format('h:mm a, YYYY-MM-D')})
                   </Text>
                 </CardItem>
               </Card>
