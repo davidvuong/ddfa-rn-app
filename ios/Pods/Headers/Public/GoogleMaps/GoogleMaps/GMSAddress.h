@@ -1,1 +1,1 @@
-../../../../GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Headers/GMSAddress.h
+../../../../GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSAddress.h

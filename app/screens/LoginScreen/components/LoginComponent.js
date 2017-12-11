@@ -1,94 +1,123 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-  TextInput,
-  Button,
-  Divider,
-  Spinner,
-} from '@shoutem/ui';
-import {
-  Text,
-  Caption,
-} from '@shoutem/ui';
+// @flow
+import * as React from 'react';
 import { NavigationActions } from 'react-navigation';
-import { Image } from 'react-native';
 
-import styles from '../Style';
+import {
+  Container,
+  Header,
+  Content,
+  Body,
+  Text,
+  Button,
+  Item,
+  Input,
+  Toast,
+} from 'native-base';
+import {
+  Image,
+} from 'react-native';
+
+import Images from '../../../Images';
 import navigationOptions from '../NavigationOptions';
-import images from '../../../Images';
+import Styles from '../Styles';
 
-const propTypes = {
-  isLoggingIn: PropTypes.bool,
-  loginErrorStatus: PropTypes.object,
+type Props = {
+  isLoggingIn: ?boolean,
+  loginErrorStatus: ?Error,
+  navigation: *,
+  loginUser: (string, string) => *,
 };
 
-export default class LoginComponent extends Component {
+type State = {
+  username: ?string,
+  password: ?string,
+};
+
+export default class LoginComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
-
     this.state = { username: null, password: null };
 
-    /* Helpers */
-    this.navigateToMainPage = this.navigateToMainPage.bind(this);
-
-    /* Render */
-    this.onLogin = this.onLogin.bind(this);
+    (this: any).isLoginButtonDisabled = this.isLoginButtonDisabled.bind(this);
+    (this: any).onPressLogin = this.onPressLogin.bind(this);
+    (this: any).navigateToMainPage = this.navigateToMainPage.bind(this);
   }
 
   navigateToMainPage() {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'Feed' })
-      ]
+        NavigationActions.navigate({ routeName: 'CheckInList' }),
+      ],
     }));
   }
 
-  onLogin() {
-    const { username, password } = this.state;
-    if (!username || !password) { return; }
+  isLoginButtonDisabled() {
+    return !this.state.username || !this.state.password;
+  }
 
-    this.props.loginUser(username, password).then(() => {
-      this.navigateToMainPage();
-    }, console.warn);
+  onPressLogin() {
+    if (this.isLoginButtonDisabled()) { return; }
+
+    this.props.loginUser(this.state.username, this.state.password)
+      .then(() => { this.navigateToMainPage(); })
+      .catch(() => {
+        Toast.show({
+          text: 'Login failed - please try again...',
+          position: 'bottom',
+          buttonText: 'OK',
+          type: 'warning',
+          duration: 3000,
+        });
+        this.setState({ ...this.state, password: null });
+      });
   }
 
   render() {
-    const { isLoggingIn } = this.props;
     return (
-      <Image source={images.loginBackgroundImage} style={styles.backgroundImage}>
-        <TextInput
-          onChangeText={(username) => this.setState({ username })}
-          placeholder="Username"
-          value={this.state.username}
-          style={styles.inputTextBox}
-        />
-        <TextInput
-          onChangeText={(password) => this.setState({ password })}
-          placeholder="Password"
-          value={this.state.password}
-          secureTextEntry
-          style={styles.inputTextBox}
-        />
-        <Divider />
-        <Button
-          styleName="secondary"
-          onPress={this.onLogin}
-          disabled={isLoggingIn}
-          style={styles.buttonLogin}
-        >
-          {isLoggingIn && <Spinner style={styles.loginSpinner} />}
-          <Text styleName="bold bright h-center">
-            {isLoggingIn ? 'LOGGING IN' : 'LOGIN'}
-          </Text>
-        </Button>
-        <Divider />
-        <Caption style={styles.footer} styleName="h-center">Double D Food Adventures</Caption>
-      </Image>
+      <Container>
+        <Header>
+          <Body>
+            <Text style={Styles.headerTitle}>DDFA Login</Text>
+          </Body>
+        </Header>
+        <Content scrollEnabled={false} bounces={false}>
+          <Container style={{ flex: 1 }}>
+            <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
+          </Container>
+          <Container enableAutoAutomaticScroll={true} style={Styles.inputGroupContainer}>
+            <Item style={Styles.inputContainer}>
+              <Input
+                placeholder='Username'
+                value={this.state.username}
+                autoCapitalize={'none'}
+                onChangeText={(username: string) => { this.setState({ username }); }}
+                style={Styles.inputStyle}
+              />
+            </Item>
+            <Item style={Styles.inputContainer}>
+              <Input
+                placeholder='Password'
+                secureTextEntry
+                value={this.state.password}
+                onChangeText={(password: string) => { this.setState({ password }); }}
+                style={Styles.inputStyle}
+              />
+            </Item>
+            <Button
+              rounded
+              full
+              info
+              disabled={this.isLoginButtonDisabled()}
+              onPress={this.onPressLogin}
+              style={Styles.loginButton}
+            ><Text>Sign In</Text></Button>
+            <Text style={Styles.subtext}>DDFA - Double D Food Adventures</Text>
+          </Container>
+        </Content>
+      </Container>
     );
   }
 }
-
-LoginComponent.propTypes = propTypes;

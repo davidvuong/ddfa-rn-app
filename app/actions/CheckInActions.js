@@ -1,38 +1,48 @@
+// @flow
 import * as actions from '../ActionTypes';
 import CheckInService from '../services/CheckInService';
 
 /* Internal */
 
-function checkInRequest() {
-  return { type: actions.CHECK_IN_REQUEST };
+function createCheckInRequest() {
+  return { type: actions.CREATE_CHECK_IN_REQUEST };
 }
 
-function checkInSuccess() {
-  return { type: actions.CHECK_IN_SUCCESS };
+function createCheckInSuccess() {
+  return { type: actions.CREATE_CHECK_IN_SUCCESS };
 }
 
-function checkInError(error) {
-  return { type: actions.CHECK_IN_ERROR, error };
+function createCheckInError(error: Error) {
+  return { type: actions.CREATE_CHECK_IN_ERROR, error };
 }
 
 function listCheckInRequest() {
   return { type: actions.LIST_CHECK_IN_REQUEST };
 }
 
-function listCheckInSuccess(checkIns) {
+function listCheckInSuccess(checkIns: Array<*>) {
   return { type: actions.LIST_CHECK_IN_SUCCESS, checkIns };
 }
 
-function listCheckInError(error) {
+function listCheckInError(error: Error) {
   return { type: actions.LIST_CHECK_IN_ERROR, error };
 }
 
 /* External */
 
-export function checkIn(latitude, longitude, address, name, comment, rating, isPaying, amountPaid) {
-  return (dispatch) => {
-    dispatch(checkInRequest());
-    return CheckInService.checkIn(
+export function createCheckIn(
+  latitude: number,
+  longitude: number,
+  address: string,
+  name: string,
+  comment: ?string,
+  rating: ?number,
+  isPaying: boolean,
+  amountPaid: ?number,
+) {
+  return (dispatch: *) => {
+    dispatch(createCheckInRequest());
+    return CheckInService.create(
       latitude,
       longitude,
       address,
@@ -40,32 +50,45 @@ export function checkIn(latitude, longitude, address, name, comment, rating, isP
       comment,
       rating,
       isPaying,
-      amountPaid
+      amountPaid,
     ).then(() => {
-      dispatch(checkInSuccess());
-    }, (error) => {
-      dispatch(checkInError(error));
+      dispatch(createCheckInSuccess());
+    }, (error: Error) => {
+      dispatch(createCheckInError(error));
       throw error;
     });
   };
 }
 
-export function setSelectedLocation(selectedLocation) {
-  return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
-}
-
-export function listCheckIns(startTime, limit) {
-  return (dispatch) => {
+export function listCheckIns(startTime: string) {
+  return (dispatch: *) => {
     dispatch(listCheckInRequest());
-    return CheckInService.list(startTime, limit).then((checkIns) => {
-      dispatch(listCheckInSuccess(checkIns));
-    }, (error) => {
-      dispatch(listCheckInError(error));
-      throw error;
-    });
+    return CheckInService.list(startTime)
+      .then((checkIns: *) => {
+        dispatch(listCheckInSuccess(checkIns));
+      }, (error: Error) => {
+        dispatch(listCheckInError(error));
+        throw error;
+      });
   };
 }
 
 export function resetCheckIns() {
   return { type: actions.RESET_CHECK_IN_LIST };
+}
+
+export function setSelectedCheckIn(selectedCheckIn: *) {
+  return { type: actions.SET_SELECTED_CHECK_IN, selectedCheckIn };
+}
+
+export function resetSelectedCheckIn() {
+  return { type: actions.RESET_SELECTED_CHECK_IN };
+}
+
+export function setSelectedLocation(selectedLocation: *) {
+  return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
+}
+
+export function resetSelectedLocation() {
+  return { type: actions.RESET_SELECTED_LOCATION };
 }

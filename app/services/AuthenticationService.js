@@ -1,50 +1,52 @@
+// @flow
 import Promise from 'bluebird';
 import { AsyncStorage } from 'react-native';
 
-class AuthenticationService {
-  initialize(host, httpService) {
+import HttpService from './HttpService';
+
+export class AuthenticationService {
+  host: string;
+  token: ?string;
+  http: HttpService;
+
+  initialize(host: string, httpService: HttpService) {
     this.host = host;
     this.token = null;
     this.http = httpService;
   }
 
-  getAuthenticationHeader() {
-    return { 'Authorization': this.token };
+  getAuthenticationHeader(): { Authorization: ?string } {
+    return { Authorization: this.token };
   }
 
-  getTokenFromStorage() {
-    return new Promise((resolve, reject) => {
-      return AsyncStorage.getItem('@user.token').then((token) => {
+  getTokenFromStorage(): Promise<*> {
+    return AsyncStorage.getItem('@user.token')
+      .then((token: string): Promise<*> => {
         this.token = token;
-        resolve(token);
-      }, reject);
-    });
+        return Promise.resolve(this.token);
+      });
   }
 
-  logout() {
-    return new Promise((resolve, reject) => {
-      return AsyncStorage.clear().then(() => {
+  logout(): Promise<*> {
+    return AsyncStorage.clear()
+      .then((): Promise<*> => {
         this.token = null;
-        resolve();
-      }, reject);
-    });
+        return Promise.resolve();
+      });
   }
 
-  login(username, password) {
-    const endpoint = `${this.host}/users/authenticate`;
-    const payload = { username, password };
+  login(username: string, password: string): Promise<*> {
+    const endpoint: string = `${this.host}/users/authenticate`;
+    const payload: { username: string, password: string } = { username, password };
 
-    return new Promise((resolve, reject) => {
-      return this.http.post(endpoint, payload).then((res) => {
-        return Promise.all([
-          AsyncStorage.setItem('@user.token', res.body.token),
-          res.body.token,
-        ]);
-      }).spread((_, token) => {
+    return this.http.post(endpoint, payload)
+      .then((res: Object): Promise<[void, string]> => {
+        return Promise.join(AsyncStorage.setItem('@user.token', res.token), res.token);
+      })
+      .spread((__: void, token: string): Promise<*> => {
         this.token = token;
-        resolve();
-      }).catch(reject);
-    });
+        return Promise.resolve();
+      });
   }
 }
 

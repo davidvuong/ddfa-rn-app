@@ -1,41 +1,39 @@
 {
   "name": "ddfa",
   "version": "0.0.1",
+  "private": false,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react-native": "^4.0.0",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.60.1"
+  },
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "clean": "rm -rf ./ios/build",
-    "build:ios": "node node_modules/react-native/local-cli/cli.js run-ios --no-packager",
-    "build:android": "node node_modules/react-native/local-cli/cli.js run-android --no-packager",
-    "run:ios": "react-native run-ios",
-    "run:android": "react-native run-android",
-    "eslint": "./node_modules/.bin/eslint ./app"
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
-    "@shoutem/ui": "0.19.2",
-    "bluebird": "3.5.0",
-    "lodash": "4.17.4",
-    "prop-types": "15.5.10",
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.43.4",
-    "react-native-action-button": "2.6.10",
-    "react-native-config": "0.5.0",
-    "react-native-google-places": "2.1.0",
-    "react-native-image-picker": "0.26.3",
-    "react-native-keyboard-aware-scrollview": "1.1.6",
-    "react-native-maps": "0.15.2",
-    "react-native-permissions": "0.2.7",
-    "react-native-vector-icons": "4.2.0",
-    "react-navigation": "1.0.0-beta.11",
-    "react-redux": "5.0.5",
-    "redux": "3.6.0",
-    "redux-thunk": "2.2.0",
-    "superagent": "3.5.2"
-  },
-  "devDependencies": {
-    "babel-eslint": "6.1.2",
-    "babel-preset-react-native": "1.9.2",
-    "eslint": "3.19.0",
-    "eslint-plugin-react": "7.0.1",
-    "eslint-plugin-react-native": "2.3.2"
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.3",
+    "native-base": "^2.3.3",
+    "react": "^16.2.0",
+    "react-native": "^0.50.3",
+    "react-native-config": "^0.11.1",
+    "react-native-google-places": "^2.4.2",
+    "react-native-maps": "^0.18.3",
+    "react-navigation": "^1.0.0-beta.21",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }

@@ -1,9 +1,10 @@
+// @flow
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions/AuthenticationActions';
 import LoginComponent from './components/LoginComponent';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: *) => {
   const { authentication } = state;
   return {
     isLoggingIn: authentication.isLoggingIn,
@@ -11,9 +12,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: *) => {
   return {
-    loginUser: (username, password) => {
+    loginUser: (username: string, password: string) => {
       return dispatch(loginUser(username, password));
     },
   };
@@ -21,5 +22,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginComponent);

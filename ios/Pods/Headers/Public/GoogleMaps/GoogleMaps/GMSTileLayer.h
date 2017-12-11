@@ -1,1 +1,1 @@
-../../../../GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Headers/GMSTileLayer.h
+../../../../GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSTileLayer.h

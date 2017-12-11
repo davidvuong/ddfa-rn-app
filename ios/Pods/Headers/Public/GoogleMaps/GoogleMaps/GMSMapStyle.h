@@ -1,1 +1,1 @@
-../../../../GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Headers/GMSMapStyle.h
+../../../../GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSMapStyle.h

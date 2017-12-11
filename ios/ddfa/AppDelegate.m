@@ -6,16 +6,14 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  */
+@import GooglePlaces;
+@import GoogleMaps;
 
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-
 #import "ReactNativeConfig.h"
-
-@import GooglePlaces;
-@import GoogleMaps;
 
 @implementation AppDelegate
 
@@ -23,7 +21,7 @@
 {
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ddfa"
@@ -37,8 +35,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  NSString *googleApiKey = [ReactNativeConfig envFor:@"IOS_GOOGLE_PLACES_API_KEY"];
-
+  NSString *googleApiKey = [ReactNativeConfig envFor:@"GOOGLE_MAPS_API_KEY"];
   [GMSPlacesClient provideAPIKey:googleApiKey];
   [GMSServices provideAPIKey:googleApiKey];
 

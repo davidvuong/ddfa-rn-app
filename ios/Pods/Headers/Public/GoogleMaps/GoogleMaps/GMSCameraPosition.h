@@ -1,1 +1,1 @@
-../../../../GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Headers/GMSCameraPosition.h
+../../../../GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSCameraPosition.h
