@@ -6,7 +6,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 ## Installation
 
-1. Install [React Native](https://facebook.github.io/react-native/docs/getting-started.html):
+1. Install NodeJS and Watchman:
 
     ```bash
     brew install nvm
@@ -78,7 +78,7 @@ Another thing: For whatever reason, due to a combination of `native-base` and `s
 
 ## Bundle JS to Run on Device (without development server)
 
-Android:
+**Android:**
 
 ```
 react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest ./android/app/build/intermediates/res/merged/debug
@@ -87,14 +87,10 @@ cd android && ./gradlew assembleDebug
 cd app/build/outputs/apk/ && adb install app-debug.apk
 ```
 
-iOS:
+**iOS:**
 
 TODO...
 
 ## Debugging with Android Studio
-
-TODO...
-
-## iOS Specific Tasks
 
 TODO...
