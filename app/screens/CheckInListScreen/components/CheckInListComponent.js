@@ -178,6 +178,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   render() {
+    const { isListingCheckIns, checkIns } = this.props;
     return (
       <Container>
         <Header>
@@ -193,15 +194,15 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           </Body>
           <Right>
             <Button info small onPress={this.onPressCheckIn}>
-              <Text>Check In</Text>
-              {this.props.isListingCheckIns ? <ActivityIndicator color="white" /> : null}
+            <Text>{isListingCheckIns ? 'Loading...' : 'Check In'}</Text>
+            {isListingCheckIns ? <ActivityIndicator color="white" /> : null}
             </Button>
           </Right>
         </Header>
         <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
           {
-            _.map(this.props.checkIns, (checkIn: *, index: number) => {
-              const isLast = (index + 1) >= this.props.checkIns.length;
+            _.map(checkIns, (checkIn: *, index: number) => {
+              const isLast = (index + 1) >= checkIns.length;
               return (
                 <Card key={checkIn.id} style={{
                   marginBottom: isLast ? 20 : 10,
