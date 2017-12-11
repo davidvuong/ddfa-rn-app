@@ -22,8 +22,8 @@ const mapStateToProps = (state: *) => {
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    listCheckIns: (startTime: string, limit: number) => {
-      return dispatch(listCheckIns(startTime, limit));
+    listCheckIns: (startTime: string) => {
+      return dispatch(listCheckIns(startTime));
     },
     setSelectedCheckIn: (selectedCheckIn: *) => {
       return dispatch(setSelectedCheckIn(selectedCheckIn));

@@ -32,6 +32,8 @@ type Props = {
   isCheckingIn: boolean,
   navigation: *,
   resetSelectedLocation: () => *,
+  resetCheckIns: () => *,
+  listCheckIns: (string) => *,
   createCheckIn: (
     number,
     number,
@@ -93,6 +95,10 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       false, // isPaying
       null, // amountPaid
     )
+      .then(() => {
+        this.props.resetCheckIns();
+        return this.props.listCheckIns((new Date()).toISOString());
+      })
       .then(() => {
         this.props.navigation.goBack();
       })

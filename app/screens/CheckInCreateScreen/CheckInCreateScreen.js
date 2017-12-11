@@ -4,7 +4,9 @@ import CheckInCreateComponent from './components/CheckInCreateComponent';
 
 import {
   createCheckIn,
+  listCheckIns,
   resetSelectedLocation,
+  resetCheckIns,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state: *) => {
@@ -40,6 +42,12 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     resetSelectedLocation: () => {
       return dispatch(resetSelectedLocation());
+    },
+    resetCheckIns: () => {
+      return dispatch(resetCheckIns());
+    },
+    listCheckIns: (startTime: string, limit: number) => {
+      return dispatch(listCheckIns(startTime, limit));
     },
   };
 };

@@ -32,14 +32,13 @@ type Props = {
   isListingCheckIns: ?boolean,
   checkInListErrorStatus: ?Error,
   navigation: *,
-  listCheckIns: (string, number) => *,
+  listCheckIns: (string) => *,
   logoutUser: () => *,
   setSelectedLocation: (Object) => *,
 };
 
 type State = {
   isInitialLoad: boolean,
-  paginationSize: number,
   noMoreCheckIns: boolean,
 };
 
@@ -56,7 +55,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
     this.state = {
       isInitialLoad: false,
-      paginationSize: 20,
       noMoreCheckIns: false,
     };
 
@@ -85,7 +83,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   componentDidMount() {
-    // Initial load to fetch a couple of check-ins (only if nothing exists).
     if (!this.props.checkIns.length) {
       this.performInitialLoad();
     }
@@ -133,7 +130,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
   performInitialLoad() {
     this.setState({ isInitialLoad: true });
-    this.props.listCheckIns((new Date()).toISOString(), this.state.paginationSize)
+    this.props.listCheckIns((new Date()).toISOString())
       .then(() => {
         this.setState({ isInitialLoad: false });
       });

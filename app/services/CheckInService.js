@@ -7,6 +7,8 @@ import {
 import HttpService from './HttpService';
 
 class CheckInService {
+  static PAGINATION_SIZE = 20;
+
   host: string;
   authenticationService: AuthenticationServiceT;
   http: HttpService
@@ -17,7 +19,7 @@ class CheckInService {
     this.http = httpService;
   }
 
-  list(startTime: string, limit: number) {
+  list(startTime: string, limit: ?number = CheckInService.PAGINATION_SIZE) {
     const endpoint = `${this.host}/check-ins/?startTime=${startTime}&limit=${limit}`;
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)

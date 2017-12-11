@@ -60,10 +60,10 @@ export function createCheckIn(
   };
 }
 
-export function listCheckIns(startTime: string, limit: number) {
+export function listCheckIns(startTime: string) {
   return (dispatch: *) => {
     dispatch(listCheckInRequest());
-    return CheckInService.list(startTime, limit)
+    return CheckInService.list(startTime)
       .then((checkIns: *) => {
         dispatch(listCheckInSuccess(checkIns));
       }, (error: Error) => {
