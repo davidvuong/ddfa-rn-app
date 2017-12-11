@@ -80,6 +80,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     (this: any).onPressLogout = this.onPressLogout.bind(this);
     (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
     (this: any).onScroll = this.onScroll.bind(this);
+    (this: any).renderCheckIns = this.renderCheckIns.bind(this);
   }
 
   componentDidMount() {
@@ -177,8 +178,39 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       });
   }
 
+  renderCheckIns() {
+    const { checkIns } = this.props;
+    return (
+      <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
+        {
+          _.map(checkIns, (checkIn: *, index: number) => {
+            const isLast = (index + 1) >= checkIns.length;
+            return (
+              <Card key={checkIn.id} style={{
+                marginBottom: isLast ? 20 : 10,
+              }}>
+                <CardItem button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
+                  <Body>
+                    <Text numberOfLines={1}>{checkIn.name}</Text>
+                    <Text note numberOfLines={1}>{checkIn.address}</Text>
+                  </Body>
+                </CardItem>
+                <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
+                  <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
+                  <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
+                    Checked in {moment(checkIn.createdAt).fromNow()}
+                  </Text>
+                </CardItem>
+              </Card>
+            );
+          })
+        }
+      </Content>
+    );
+  }
+
   render() {
-    const { isListingCheckIns, checkIns } = this.props;
+    const { isListingCheckIns } = this.props;
     return (
       <Container>
         <Header>
@@ -199,31 +231,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
             </Button>
           </Right>
         </Header>
-        <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
-          {
-            _.map(checkIns, (checkIn: *, index: number) => {
-              const isLast = (index + 1) >= checkIns.length;
-              return (
-                <Card key={checkIn.id} style={{
-                  marginBottom: isLast ? 20 : 10,
-                }}>
-                  <CardItem button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
-                    <Body>
-                      <Text numberOfLines={1}>{checkIn.name}</Text>
-                      <Text note numberOfLines={1}>{checkIn.address}</Text>
-                    </Body>
-                  </CardItem>
-                  <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
-                    <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
-                    <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
-                      Checked in {moment(checkIn.createdAt).fromNow()}
-                    </Text>
-                  </CardItem>
-                </Card>
-              );
-            })
-          }
-        </Content>
+        {this.renderCheckIns()}
       </Container>
     );
   }
