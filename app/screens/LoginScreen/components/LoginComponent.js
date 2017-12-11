@@ -59,8 +59,9 @@ export default class LoginComponent extends React.Component<Props, State> {
   }
 
   onPressLogin() {
-    const { username, password } = this.state;
-    this.props.loginUser(username, password)
+    if (this.isLoginButtonDisabled()) { return; }
+
+    this.props.loginUser(this.state.username, this.state.password)
       .then(() => { this.navigateToMainPage(); })
       .catch(() => {
         Toast.show({
