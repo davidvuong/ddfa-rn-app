@@ -7,15 +7,13 @@ export default {
     width: null,
     flex: 1,
   },
-  lastCheckedInText: {
+  checkedInAtCardItem: {
+    height: 12,
+  },
+  checkedInAtText: {
     position: 'absolute',
-    bottom: 3,
-    right: 3,
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    color: 'white',
-    fontWeight: '500',
+    right: 5,
     fontStyle: 'italic',
-    fontSize: 12,
   },
   headerTitle: {
     ...Platform.select({

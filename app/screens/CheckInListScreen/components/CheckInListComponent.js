@@ -170,7 +170,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const lastCheckIn = _.last(this.props.checkIns);
     const previousCheckInsCount = this.props.checkIns.length;
 
-    this.props.listCheckIns(lastCheckIn.createdAt, this.state.paginationSize)
+    this.props.listCheckIns(lastCheckIn.createdAt)
       .finally(() => {
         this.setState({
           noMoreCheckIns: previousCheckInsCount === this.props.checkIns.length,
@@ -197,8 +197,10 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                 </CardItem>
                 <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
                   <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
-                  <Text note numberOfLines={1} style={Styles.lastCheckedInText}>
-                    Checked in {moment(checkIn.createdAt).fromNow()}
+                </CardItem>
+                <CardItem style={Styles.checkedInAtCardItem}>
+                  <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+                    Checked in {moment(checkIn.createdAt).fromNow()}...
                   </Text>
                 </CardItem>
               </Card>
