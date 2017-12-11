@@ -13,7 +13,7 @@ export default {
     }),
   },
   mapView: {
-    height: 180,
+    height: 220,
   },
   placeContentItem: {
     borderBottomColor: 'rgba(0, 0, 0, .05)',
@@ -38,6 +38,6 @@ export default {
   },
   commentInput: {
     fontSize: 14,
-    minHeight: 180,
+    minHeight: 60,
   },
 };
