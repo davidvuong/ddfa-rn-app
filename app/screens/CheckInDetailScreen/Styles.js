@@ -13,6 +13,6 @@ export default {
     }),
   },
   mapView: {
-    height: 100,
+    height: 220,
   },
 };
