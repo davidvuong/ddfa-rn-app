@@ -12,8 +12,10 @@ export default {
   },
   checkedInAtText: {
     position: 'absolute',
+    top: 2,
     right: 5,
     fontStyle: 'italic',
+    fontSize: 12,
   },
   headerTitle: {
     ...Platform.select({

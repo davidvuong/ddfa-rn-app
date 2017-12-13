@@ -194,16 +194,12 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                     <Text numberOfLines={1}>{checkIn.name}</Text>
                     <Text note numberOfLines={1}>{checkIn.address}</Text>
                   </Body>
+                  <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+                    {moment(checkIn.createdAt).format('h:mmA, Do MMM YYYY')}
+                  </Text>
                 </CardItem>
                 <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
                   <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
-                </CardItem>
-                <CardItem style={Styles.checkedInAtCardItem}>
-                  <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                    Checked in{' '}
-                    {moment(checkIn.createdAt).fromNow()}{' '}
-                    ({moment(checkIn.createdAt).format('h:mm a, YYYY-MM-D')})
-                  </Text>
                 </CardItem>
               </Card>
             );
