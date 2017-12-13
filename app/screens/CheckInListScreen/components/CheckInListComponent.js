@@ -14,6 +14,7 @@ import {
   Left,
   Right,
   Button,
+  Icon,
 } from 'native-base';
 import {
   Image,
@@ -35,6 +36,7 @@ type Props = {
   listCheckIns: (string) => *,
   logoutUser: () => *,
   setSelectedLocation: (Object) => *,
+  resetCheckIns: () => *,
 };
 
 type State = {
@@ -79,6 +81,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     (this: any).navigateToCheckInDetail = this.navigateToCheckInDetail.bind(this);
     (this: any).onPressLogout = this.onPressLogout.bind(this);
     (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
+    (this: any).onPressRefresh = this.onPressRefresh.bind(this);
     (this: any).onScroll = this.onScroll.bind(this);
     (this: any).renderCheckIns = this.renderCheckIns.bind(this);
   }
@@ -135,6 +138,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       .then(() => {
         this.setState({ isInitialLoad: false });
       });
+  }
+
+  onPressRefresh() {
+    this.props.resetCheckIns();
+    this.performInitialLoad();
   }
 
   onPressCheckIn() {
@@ -225,6 +233,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
             <Text style={Styles.headerTitle}>DDFA Feed</Text>
           </Body>
           <Right>
+            {isListingCheckIns ? null : (
+              <Button small transparent onPress={this.onPressRefresh} style={Styles.refreshButton}>
+                <Icon name="refresh" />
+              </Button>
+            )}
             <Button info small onPress={this.onPressCheckIn}>
               <Text>{isListingCheckIns ? 'Loading...' : 'Check In'}</Text>
               {isListingCheckIns ? <ActivityIndicator color="white" /> : null}

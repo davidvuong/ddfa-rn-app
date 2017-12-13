@@ -6,6 +6,7 @@ import {
   listCheckIns,
   setSelectedLocation,
   setSelectedCheckIn,
+  resetCheckIns,
 } from '../../actions/CheckInActions';
 import {
   logoutUser,
@@ -33,6 +34,9 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     setSelectedLocation: (selectedLocation: Object) => {
       return dispatch(setSelectedLocation(selectedLocation));
+    },
+    resetCheckIns: () => {
+      return dispatch(resetCheckIns());
     },
   };
 };

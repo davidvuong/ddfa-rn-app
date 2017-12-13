@@ -17,6 +17,9 @@ export default {
     fontStyle: 'italic',
     fontSize: 12,
   },
+  refreshButton: {
+    marginRight: 5,
+  },
   headerTitle: {
     ...Platform.select({
       ios: {
