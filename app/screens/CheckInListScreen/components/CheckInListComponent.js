@@ -226,8 +226,8 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           </Body>
           <Right>
             <Button info small onPress={this.onPressCheckIn}>
-            <Text>{isListingCheckIns ? 'Loading...' : 'Check In'}</Text>
-            {isListingCheckIns ? <ActivityIndicator color="white" /> : null}
+              <Text>{isListingCheckIns ? 'Loading...' : 'Check In'}</Text>
+              {isListingCheckIns ? <ActivityIndicator color="white" /> : null}
             </Button>
           </Right>
         </Header>
