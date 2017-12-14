@@ -11,10 +11,8 @@ export default {
     height: 12,
   },
   checkedInAtText: {
-    position: 'absolute',
-    top: 2,
-    right: 5,
-    fontStyle: 'italic',
+    color: 'orange',
+    fontWeight: '500',
     fontSize: 12,
   },
   refreshButton: {

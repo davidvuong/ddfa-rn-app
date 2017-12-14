@@ -206,10 +206,10 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                   <Body>
                     <Text numberOfLines={1}>{checkIn.name}</Text>
                     <Text note numberOfLines={1}>{checkIn.address}</Text>
+                    <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+                      Checked in @ {moment(checkIn.createdAt).format('h:mmA, Do MMM YYYY')}
+                    </Text>
                   </Body>
-                  <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                    {moment(checkIn.createdAt).format('h:mmA, Do MMM YYYY')}
-                  </Text>
                 </CardItem>
 
                 {/* see: https://github.com/GeekyAnts/NativeBase/issues/1453 */}
