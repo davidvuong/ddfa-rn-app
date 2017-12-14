@@ -37,7 +37,8 @@ export default {
     paddingRight: 10,
   },
   commentInput: {
+    textAlignVertical: 'top',
     fontSize: 14,
-    minHeight: 60,
+    minHeight: 120,
   },
 };
