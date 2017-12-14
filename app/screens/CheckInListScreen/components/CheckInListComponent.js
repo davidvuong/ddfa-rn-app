@@ -20,6 +20,7 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
@@ -197,7 +198,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
               <Card key={checkIn.id} style={{
                 marginBottom: isLast ? 20 : 10,
               }}>
-                <CardItem button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
+                <CardItem
+                  activeOpacity={1}
+                  button
+                  onPress={() => { this.navigateToCheckInDetail(checkIn); }}
+                >
                   <Body>
                     <Text numberOfLines={1}>{checkIn.name}</Text>
                     <Text note numberOfLines={1}>{checkIn.address}</Text>
@@ -206,9 +211,14 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                     {moment(checkIn.createdAt).format('h:mmA, Do MMM YYYY')}
                   </Text>
                 </CardItem>
-                <CardItem cardBody button onPress={() => { this.navigateToCheckInDetail(checkIn); }}>
+
+                {/* see: https://github.com/GeekyAnts/NativeBase/issues/1453 */}
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => { this.navigateToCheckInDetail(checkIn); }}
+                >
                   <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
-                </CardItem>
+                </TouchableOpacity>
               </Card>
             );
           })
