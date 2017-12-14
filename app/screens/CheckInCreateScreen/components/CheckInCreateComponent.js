@@ -4,7 +4,6 @@ import * as React from 'react';
 import {
   Container,
   Header,
-  Left,
   Right,
   Body,
   Content,
@@ -157,7 +156,6 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     return (
       <Container>
         <Header>
-          <Left />
           <Body>
             <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
           </Body>
