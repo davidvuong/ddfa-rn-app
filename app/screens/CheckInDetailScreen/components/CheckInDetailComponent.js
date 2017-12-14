@@ -1,5 +1,6 @@
 // @flow
 import _ from 'lodash';
+import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
@@ -38,6 +39,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       comment,
       latitude,
       longitude,
+      createdAt,
     } = this.props.checkIn;
 
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
@@ -71,6 +73,9 @@ export default class CheckInDetailComponent extends React.Component<Props, State
               <Body>
                 <Text>{name}</Text>
                 <Text note>{address}</Text>
+                <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+                  Checked in @ {moment(createdAt).format('h:mmA, Do MMM YYYY')}
+                </Text>
               </Body>
             </CardItem>
           </Card>
