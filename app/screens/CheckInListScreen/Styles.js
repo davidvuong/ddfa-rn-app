@@ -31,6 +31,7 @@ export default {
     }),
   },
   logoutButtonText: {
+    fontSize: 16,
     ...Platform.select({
       ios: {
         color: 'black',
