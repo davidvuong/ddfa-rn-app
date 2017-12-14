@@ -34,6 +34,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   render() {
     if (!this.props.checkIn) { return null; }
     const {
+      id,
       name,
       address,
       comment,
@@ -81,9 +82,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           </Card>
           {
             comment ? (
-              <Card style={{
-                marginBottom: 20,
-              }}>
+              <Card>
                 <CardItem>
                   <Body>
                     <Text>{comment}</Text>
@@ -94,6 +93,15 @@ export default class CheckInDetailComponent extends React.Component<Props, State
             :
             null
           }
+          <Card style={{ marginBottom: 20 }}>
+            <CardItem header>
+              <Body>
+                <Text>{id}</Text>
+                <Text note>latLng: ({latitude}, {longitude})</Text>
+                <Text note>createdAt: {createdAt}</Text>
+              </Body>
+            </CardItem>
+          </Card>
         </Content>
       </Container>
     );
