@@ -40,6 +40,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       comment,
       latitude,
       longitude,
+      tz,
       createdAt,
     } = this.props.checkIn;
 
@@ -97,8 +98,8 @@ export default class CheckInDetailComponent extends React.Component<Props, State
             <CardItem header>
               <Body>
                 <Text>{id}</Text>
-                <Text note>latLng: ({latitude}, {longitude})</Text>
-                <Text note>createdAt: {createdAt}</Text>
+                <Text note>{tz}: (lat:{latitude}, lng:{longitude})</Text>
+                <Text note>dt:{createdAt}</Text>
               </Body>
             </CardItem>
           </Card>
