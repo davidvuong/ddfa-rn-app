@@ -55,14 +55,16 @@ export default class LoginComponent extends React.Component<Props, State> {
   }
 
   isLoginButtonDisabled() {
-    return !this.state.username || !this.state.password;
+    return this.props.isLoggingIn || !this.state.username || !this.state.password;
   }
 
   onPressLogin() {
     if (this.isLoginButtonDisabled()) { return; }
 
     this.props.loginUser(this.state.username, this.state.password)
-      .then(() => { this.navigateToMainPage(); })
+      .then(() => {
+        this.navigateToMainPage();
+      })
       .catch(() => {
         Toast.show({
           text: 'Login failed - please try again...',
@@ -113,7 +115,9 @@ export default class LoginComponent extends React.Component<Props, State> {
               disabled={this.isLoginButtonDisabled()}
               onPress={this.onPressLogin}
               style={Styles.loginButton}
-            ><Text>Sign In</Text></Button>
+            >
+              <Text>{this.props.isLoggingIn ? 'Logging in...' : 'Log In'}</Text>
+            </Button>
           </Container>
         </Content>
       </Container>
