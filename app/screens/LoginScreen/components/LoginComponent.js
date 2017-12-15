@@ -109,12 +109,11 @@ export default class LoginComponent extends React.Component<Props, State> {
             <Button
               rounded
               full
-              info
+              primary
               disabled={this.isLoginButtonDisabled()}
               onPress={this.onPressLogin}
               style={Styles.loginButton}
             ><Text>Sign In</Text></Button>
-            <Text style={Styles.subtext}>DDFA - Double D Food Adventures</Text>
           </Container>
         </Content>
       </Container>

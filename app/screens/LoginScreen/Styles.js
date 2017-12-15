@@ -33,13 +33,6 @@ export default {
     marginLeft: 10,
     marginRight: 10,
   },
-  subtext: {
-    fontWeight: '500',
-    fontSize: 12,
-    marginTop: 5,
-    color: 'rgba(0, 0, 0, 0.5)',
-    fontStyle: 'italic',
-  },
   headerTitle: {
     ...Platform.select({
       ios: {
