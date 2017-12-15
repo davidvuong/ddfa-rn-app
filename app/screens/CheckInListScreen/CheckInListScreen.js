@@ -4,13 +4,9 @@ import CheckInListComponent from './components/CheckInListComponent';
 
 import {
   listCheckIns,
-  setSelectedLocation,
   setSelectedCheckIn,
   resetCheckIns,
 } from '../../actions/CheckInActions';
-import {
-  logoutUser,
-} from '../../actions/AuthenticationActions';
 
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
@@ -28,12 +24,6 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     setSelectedCheckIn: (selectedCheckIn: *) => {
       return dispatch(setSelectedCheckIn(selectedCheckIn));
-    },
-    logoutUser: () => {
-      return dispatch(logoutUser());
-    },
-    setSelectedLocation: (selectedLocation: Object) => {
-      return dispatch(setSelectedLocation(selectedLocation));
     },
     resetCheckIns: () => {
       return dispatch(resetCheckIns());

@@ -15,21 +15,7 @@ export default {
     fontWeight: '500',
     fontSize: 12,
   },
-  refreshButton: {
-    marginRight: 5,
-  },
   headerTitle: {
-    ...Platform.select({
-      ios: {
-        color: 'black',
-      },
-      android: {
-        color: 'white',
-      },
-    }),
-  },
-  logoutButtonText: {
-    fontSize: 16,
     ...Platform.select({
       ios: {
         color: 'black',

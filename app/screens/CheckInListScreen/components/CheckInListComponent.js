@@ -11,19 +11,17 @@ import {
   Text,
   Card,
   CardItem,
-  Left,
   Right,
   Button,
   Icon,
 } from 'native-base';
 import {
   Image,
-  Alert,
-  ActivityIndicator,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-import RNGooglePlaces from 'react-native-google-places';
 
+import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 import Images from '../../../Images';
@@ -35,8 +33,6 @@ type Props = {
   checkInListErrorStatus: ?Error,
   navigation: *,
   listCheckIns: (string) => *,
-  logoutUser: () => *,
-  setSelectedLocation: (Object) => *,
   resetCheckIns: () => *,
 };
 
@@ -78,10 +74,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);
     (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
-    (this: any).navigateToLogin = this.navigateToLogin.bind(this);
     (this: any).navigateToCheckInDetail = this.navigateToCheckInDetail.bind(this);
-    (this: any).onPressLogout = this.onPressLogout.bind(this);
-    (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
     (this: any).onPressRefresh = this.onPressRefresh.bind(this);
     (this: any).onScroll = this.onScroll.bind(this);
     (this: any).renderCheckIns = this.renderCheckIns.bind(this);
@@ -93,30 +86,9 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     }
   }
 
-  navigateToLogin() {
-    this.props.logoutUser()
-      .then(() => {
-        this.props.navigation.dispatch(NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'Login' }),
-          ],
-        }));
-      })
-      .catch((error: Error) => { console.error(error.message); });
-  }
-
   navigateToCheckInDetail(checkIn: *) {
     this.props.setSelectedCheckIn(checkIn);
     this.props.navigation.navigate('CheckInDetail');
-  }
-
-  onPressLogout() {
-    const buttons = [
-      { text: 'Yes', onPress: this.navigateToLogin },
-      { text: 'Cancel', style: 'cancel' },
-    ];
-    Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
   /* Memorization and tries to reduce duplicated image series. */
@@ -144,21 +116,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   onPressRefresh() {
     this.props.resetCheckIns();
     this.performInitialLoad();
-  }
-
-  onPressCheckIn() {
-    const options = { radius: 0.3 };
-    RNGooglePlaces.openPlacePickerModal(options)
-      .then((place: *) => {
-        this.props.setSelectedLocation({
-          address: place.address || place.name,
-          latitude: place.latitude,
-          longitude: place.longitude,
-          place,
-        });
-        this.props.navigation.navigate('CheckInCreate');
-      })
-      .catch((error: Error) => { console.log(error.message); });
   }
 
   onScroll(event: *) {
@@ -232,29 +189,19 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     return (
       <Container>
         <Header>
-          <Left>
-            <Button transparent onPress={this.onPressLogout}>
-              <Text style={Styles.logoutButtonText}>
-                ✕
-              </Text>
-            </Button>
-          </Left>
           <Body>
             <Text style={Styles.headerTitle}>DDFA Feed</Text>
           </Body>
           <Right>
-            {isListingCheckIns ? null : (
-              <Button small transparent onPress={this.onPressRefresh} style={Styles.refreshButton}>
+            {isListingCheckIns ? <ActivityIndicator color="white" /> : (
+              <Button small transparent onPress={this.onPressRefresh}>
                 <Icon name="refresh" />
               </Button>
             )}
-            <Button info small onPress={this.onPressCheckIn}>
-              <Text>{isListingCheckIns ? 'Loading...' : 'Check In'}</Text>
-              {isListingCheckIns ? <ActivityIndicator color="white" /> : null}
-            </Button>
           </Right>
         </Header>
         {this.renderCheckIns()}
+        <GlobalFooter navigation={this.props.navigation} />
       </Container>
     );
   }
