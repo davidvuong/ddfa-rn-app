@@ -15,11 +15,6 @@ export default {
   mapView: {
     height: 220,
   },
-  placeContentItem: {
-    borderBottomColor: 'rgba(0, 0, 0, .05)',
-    borderBottomWidth: 1,
-    paddingBottom: 5,
-  },
   placeRatingAndPrice: {
     fontSize: 12,
     marginTop: 3,

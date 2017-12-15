@@ -189,12 +189,14 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           </MapView>
           <Content padder>
             <Card>
-              <CardItem header style={Styles.placeContentItem}>
+              <CardItem header>
                 {this.renderPlaceContent()}
               </CardItem>
+            </Card>
+            <Card>
               <CardItem style={Styles.placeCommentItem}>
                 <Input
-                  placeholder="Add any additional comments and/or share your experience at this restaurant..."
+                  placeholder="Add any additional comments and share your experience at this restaurant..."
                   onFocus={this.onFocusComment}
                   multiline={true}
                   style={Styles.commentInput}
