@@ -190,7 +190,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   renderCheckIns() {
     const { checkIns } = this.props;
     return (
-      <Content padder removeClippedSubviews={true} onScroll={this.onScroll}>
+      <Content padder onScroll={this.onScroll}>
         {
           _.map(checkIns, (checkIn: *, index: number) => {
             const isLast = (index + 1) >= checkIns.length;
