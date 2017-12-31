@@ -95,6 +95,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 placeholder='Username'
                 value={this.state.username}
                 autoCapitalize={'none'}
+                autoCorrect={false}
                 onChangeText={(username: string) => { this.setState({ username }); }}
                 style={Styles.inputStyle}
               />
