@@ -20,7 +20,7 @@ class CheckInService {
   }
 
   list(startTime: string, limit: ?number = CheckInService.PAGINATION_SIZE) {
-    const endpoint = `${this.host}/check-ins/?startTime=${startTime}&limit=${limit}`;
+    const endpoint = `${this.host}/checkins/?startTime=${startTime}&limit=${limit}`;
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)
       .then((res: *) => {
@@ -38,7 +38,7 @@ class CheckInService {
     isPaying: boolean,
     amountPaid: ?number,
   ) {
-    const endpoint = `${this.host}/check-ins`;
+    const endpoint = `${this.host}/checkins`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
       latitude,

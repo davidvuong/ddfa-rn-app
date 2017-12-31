@@ -133,10 +133,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       return;
     }
 
-    const lastCheckIn = _.last(this.props.checkIns);
     const previousCheckInsCount = this.props.checkIns.length;
+    const lastCheckIn = _.last(this.props.checkIns);
+    const lastCheckInAt = (new Date(lastCheckIn.createdAt * 1000)).toISOString();
 
-    this.props.listCheckIns(lastCheckIn.createdAt)
+    this.props.listCheckIns(lastCheckInAt)
       .finally(() => {
         this.setState({
           noMoreCheckIns: previousCheckInsCount === this.props.checkIns.length,
