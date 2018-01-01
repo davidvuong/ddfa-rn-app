@@ -4,6 +4,7 @@ import * as React from 'react';
 import { NavigationActions } from 'react-navigation';
 import {
   Text,
+  Icon,
   Footer,
   FooterTab,
   Button,
@@ -78,16 +79,20 @@ export class GlobalFooterComponent extends React.Component<Props, State> {
       <Footer>
         <FooterTab>
           <Button vertical>
-            <Text>Home</Text>
+            <Icon name="apps" />
+            <Text>home</Text>
           </Button>
           <Button vertical>
-            <Text>Search</Text>
+            <Icon name="search" />
+            <Text>search</Text>
           </Button>
           <Button vertical onPress={this.onPressCheckIn}>
-            <Text>Check In</Text>
+            <Icon name="pin" />
+            <Text>check-in</Text>
           </Button>
           <Button vertical onPress={this.onPressLogout}>
-            <Text>Logout</Text>
+            <Icon name="exit" />
+            <Text>logout</Text>
           </Button>
         </FooterTab>
       </Footer>
