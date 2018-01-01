@@ -1,6 +1,6 @@
 A list of tasks to do before this branch can be merged into `master`.
 
-- [ ] Update GlobalFooter with the new CheckIn.create interface
+- [x] Update GlobalFooter with the new CheckIn.create interface
 - [ ] Add API endpoints to existing/new services (Review, CheckIn, Photo)
 - [ ] Update CheckInCreateScreen with the new review create API
 - [ ] Rename CheckInCreate to ReviewCreate
