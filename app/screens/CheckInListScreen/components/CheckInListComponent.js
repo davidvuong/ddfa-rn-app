@@ -1,6 +1,5 @@
 // @flow
 import _ from 'lodash';
-import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
@@ -8,20 +7,17 @@ import {
   Body,
   Content,
   Text,
-  Card,
-  CardItem,
   Left,
   Right,
   Button,
   Icon,
 } from 'native-base';
 import {
-  Image,
-  TouchableOpacity,
   ActivityIndicator,
   Platform,
 } from 'react-native';
 
+import CheckInCard from './CheckInCard/CheckInCard';
 import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -124,31 +120,13 @@ export default class CheckInListComponent extends React.Component<Props, State> 
         {
           _.map(checkIns, (checkIn: *, index: number) => {
             const isLast = (index + 1) >= checkIns.length;
-            return (
-              <Card key={checkIn.id} style={{ marginBottom: isLast ? 20 : 10 }}>
-                <CardItem
-                  activeOpacity={1}
-                  button
-                  onPress={() => { this.navigateToCheckInDetail(checkIn); }}
-                >
-                  <Body>
-                    <Text numberOfLines={1}>{checkIn.name}</Text>
-                    <Text note numberOfLines={1}>{checkIn.address}</Text>
-                    <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                      Checked in @ {moment(checkIn.createdAt).format('h:mmA, Do MMM YYYY')}
-                    </Text>
-                  </Body>
-                </CardItem>
-
-                {/* see: https://github.com/GeekyAnts/NativeBase/issues/1453 */}
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => { this.navigateToCheckInDetail(checkIn); }}
-                >
-                  <Image source={this.imageGenerator.get(checkIn.id)} style={Styles.checkInImage} />
-                </TouchableOpacity>
-              </Card>
-            );
+            return <CheckInCard
+              key={index}
+              onPress={this.navigateToCheckInDetail}
+              onGetImage={this.imageGenerator.get}
+              isLast={isLast}
+              checkIn={checkIn}
+            />;
           })
         }
       </Content>
