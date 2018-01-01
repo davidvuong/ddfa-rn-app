@@ -1,4 +1,5 @@
 // @flow
+import Promise from 'bluebird';
 import * as React from 'react';
 import { NavigationActions } from 'react-navigation';
 import {
@@ -16,7 +17,8 @@ import RNGooglePlaces from 'react-native-google-places';
 type Props = {
   navigation: *,
   logoutUser: () => *,
-  createCheckIn: (number, number, string, string) => *,
+  createCheckIn: (number, number, string, string) => Promise<string>,
+  setSelectedLocation: (*) => *,
 };
 
 type State = {};
@@ -52,19 +54,23 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
 
   onPressCheckIn() {
+    let googlePlace: *;
+
     const options = { radius: 0.3 };
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
+        googlePlace = place;
+        const { name, address, latitude, longitude } = place; // eslint-disable-line object-curly-newline
+        return this.props.createCheckIn(
+          latitude, longitude, address, name || address || `${latitude} ${longitude}`,
+        );
+      })
+      .then((checkInId: string) => {
         // NOTE:
         //
         // Replace setSelectedLocation to checkIn (but also include the GooglePlace)
         // Perhaps... `setGooglePlace`, `setCheckIn`.
-        this.props.setSelectedLocation({
-          address: place.address || place.name,
-          latitude: place.latitude,
-          longitude: place.longitude,
-          place,
-        });
+        this.props.setSelectedLocation({ id: checkInId, place: googlePlace });
         this.props.navigation.navigate('CheckInCreate');
       })
       .catch((error: Error) => { console.error(error.message); });

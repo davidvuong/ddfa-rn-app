@@ -30,33 +30,16 @@ function listCheckInError(error: Error) {
 
 /* External */
 
-export function createCheckIn(
-  latitude: number,
-  longitude: number,
-  address: string,
-  name: string,
-  comment: ?string,
-  rating: ?number,
-  isPaying: boolean,
-  amountPaid: ?number,
-) {
+export function createCheckIn(latitude: number, longitude: number, address: string, name: string) {
   return (dispatch: *) => {
     dispatch(createCheckInRequest());
-    return CheckInService.create(
-      latitude,
-      longitude,
-      address,
-      name,
-      comment,
-      rating,
-      isPaying,
-      amountPaid,
-    ).then(() => {
-      dispatch(createCheckInSuccess());
-    }, (error: Error) => {
-      dispatch(createCheckInError(error));
-      throw error;
-    });
+    return CheckInService.create(latitude, longitude, address, name)
+      .then(() => {
+        dispatch(createCheckInSuccess());
+      }, (error: Error) => {
+        dispatch(createCheckInError(error));
+        throw error;
+      });
   };
 }
 

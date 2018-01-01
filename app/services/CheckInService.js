@@ -19,7 +19,7 @@ class CheckInService {
     this.http = httpService;
   }
 
-  list(startTime: string, limit: ?number = CheckInService.PAGINATION_SIZE) {
+  list(startTime: string, limit: ?number = CheckInService.PAGINATION_SIZE): Promise<Array<*>> {
     const endpoint = `${this.host}/checkins/?startTime=${startTime}&limit=${limit}`;
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)
@@ -28,7 +28,7 @@ class CheckInService {
       });
   }
 
-  create(latitude: number, longitude: number, address: string, name: string) {
+  create(latitude: number, longitude: number, address: string, name: string): Promise<string> {
     const endpoint = `${this.host}/checkins`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
@@ -36,7 +36,7 @@ class CheckInService {
     };
     return this.http.post(endpoint, payload, headers)
       .then((res: *) => {
-        return Promise.resolve(res);
+        return Promise.resolve(res.id);
       });
   }
 }

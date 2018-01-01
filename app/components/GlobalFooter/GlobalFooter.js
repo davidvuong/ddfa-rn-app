@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch: *) => {
     logoutUser: () => {
       return dispatch(logoutUser());
     },
-    setSelectedLocation: (selectedLocation: Object) => {
+    setSelectedLocation: (selectedLocation: *) => {
       return dispatch(setSelectedLocation(selectedLocation));
     },
   };
