@@ -28,27 +28,11 @@ class CheckInService {
       });
   }
 
-  create(
-    latitude: number,
-    longitude: number,
-    address: string,
-    name: string,
-    comment: ?string,
-    rating: ?number,
-    isPaying: boolean,
-    amountPaid: ?number,
-  ) {
+  create(latitude: number, longitude: number, address: string, name: string) {
     const endpoint = `${this.host}/checkins`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
-      latitude,
-      longitude,
-      address,
-      name,
-      rating,
-      isPaying,
-      amountPaid,
-      comment: comment ? comment.trim() : comment, // save lives. get rid if trailing/leading whitespaces.
+      latitude, longitude, address, name,
     };
     return this.http.post(endpoint, payload, headers)
       .then((res: *) => {
