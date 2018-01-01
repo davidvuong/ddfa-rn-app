@@ -60,7 +60,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
         googlePlace = place;
-        const { name, address, latitude, longitude } = place; // eslint-disable-line object-curly-newline
+        const { name, address, latitude, longitude } = place;
         return this.props.createCheckIn(
           latitude, longitude, address, name || address || `${latitude} ${longitude}`,
         );
