@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import moment from 'moment';
 import * as React from 'react';
-import { NavigationActions } from 'react-navigation';
 import {
   Container,
   Header,
@@ -11,6 +10,7 @@ import {
   Text,
   Card,
   CardItem,
+  Left,
   Right,
   Button,
   Icon,
@@ -19,12 +19,13 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 
 import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
-import Images from '../../../Images';
+import { initImageGenerator } from '../../../Images';
 
 type Props = {
   checkIns: Array<*>,
@@ -34,6 +35,7 @@ type Props = {
   navigation: *,
   listCheckIns: (string) => *,
   resetCheckIns: () => *,
+  createCheckIn: (number, number, string, string) => *,
 };
 
 type State = {
@@ -44,9 +46,7 @@ type State = {
 export default class CheckInListComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
-  sampleImages: Array<*>;
-  sampleImagePool: Array<*>;
-  backgroundImageCache: Object;
+  imageGenerator: Object;
   bottomScrollPadding: number;
 
   constructor(props: Props) {
@@ -56,24 +56,10 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       isInitialLoad: false,
       noMoreCheckIns: false,
     };
-
-    this.sampleImages = [
-      Images.foodImage1,
-      Images.foodImage2,
-      Images.foodImage3,
-      Images.foodImage4,
-      Images.foodImage5,
-      Images.foodImage6,
-      Images.foodImage7,
-      Images.foodImage8,
-      Images.foodImage9,
-    ];
-    this.sampleImagePool = [];
-    this.backgroundImageCache = {};
+    this.imageGenerator = initImageGenerator();
     this.bottomScrollPadding = 20;
 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);
-    (this: any).getBackgroundImage = this.getBackgroundImage.bind(this);
     (this: any).navigateToCheckInDetail = this.navigateToCheckInDetail.bind(this);
     (this: any).onPressRefresh = this.onPressRefresh.bind(this);
     (this: any).onScroll = this.onScroll.bind(this);
@@ -89,20 +75,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   navigateToCheckInDetail(checkIn: *) {
     this.props.setSelectedCheckIn(checkIn);
     this.props.navigation.navigate('CheckInDetail');
-  }
-
-  /* Memorization and tries to reduce duplicated image series. */
-  getBackgroundImage(checkInId: string) {
-    const cachedBackgroundImage = this.backgroundImageCache[checkInId];
-    if (cachedBackgroundImage) {
-      return cachedBackgroundImage;
-    }
-    if (!this.sampleImagePool.length) {
-      this.sampleImagePool = _.shuffle(_.cloneDeep(this.sampleImages));
-    }
-    const backgroundImage = this.sampleImagePool.shift();
-    this.backgroundImageCache[checkInId] = backgroundImage;
-    return backgroundImage;
   }
 
   performInitialLoad() {
@@ -128,14 +100,14 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     if (this.props.isListingCheckIns) {
       return;
     }
-    // Check if we've loaded the last set upf checkins.
+    // Check if we've loaded the last set of checkins.
     if (this.state.noMoreCheckIns) {
       return;
     }
 
     const previousCheckInsCount = this.props.checkIns.length;
     const lastCheckIn = _.last(this.props.checkIns);
-    const lastCheckInAt = (new Date(lastCheckIn.createdAt * 1000)).toISOString();
+    const lastCheckInAt = (new Date(lastCheckIn.createdAt)).toISOString();
 
     this.props.listCheckIns(lastCheckInAt)
       .finally(() => {
@@ -153,9 +125,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           _.map(checkIns, (checkIn: *, index: number) => {
             const isLast = (index + 1) >= checkIns.length;
             return (
-              <Card key={checkIn.id} style={{
-                marginBottom: isLast ? 20 : 10,
-              }}>
+              <Card key={checkIn.id} style={{ marginBottom: isLast ? 20 : 10 }}>
                 <CardItem
                   activeOpacity={1}
                   button
@@ -175,7 +145,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
                   activeOpacity={1}
                   onPress={() => { this.navigateToCheckInDetail(checkIn); }}
                 >
-                  <Image source={this.getBackgroundImage(checkIn.id)} style={Styles.checkInImage} />
+                  <Image source={this.imageGenerator.get(checkIn.id)} style={Styles.checkInImage} />
                 </TouchableOpacity>
               </Card>
             );
@@ -187,14 +157,16 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
   render() {
     const { isListingCheckIns } = this.props;
+    const loadingIconColor = Platform.OS === 'ios' ? 'black' : 'white';
     return (
       <Container>
         <Header>
+          {Platform.OS === 'ios' ? <Left /> : null}
           <Body>
             <Text style={Styles.headerTitle}>DDFA Feed</Text>
           </Body>
           <Right>
-            {isListingCheckIns ? <ActivityIndicator color="white" /> : (
+            {isListingCheckIns ? <ActivityIndicator color={loadingIconColor} /> : (
               <Button small transparent onPress={this.onPressRefresh}>
                 <Icon name="refresh" />
               </Button>
