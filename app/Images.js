@@ -1,6 +1,7 @@
 // @flow
 import _ from 'lodash';
 
+/* eslint-disable global-require */
 export const Images = {
   foodImage1: require('./images/food_1.jpg'),
   foodImage2: require('./images/food_2.jpg'),
@@ -13,35 +14,36 @@ export const Images = {
   foodImage9: require('./images/food_9.jpg'),
   backgroundImage1: require('./images/background_image_1.jpg'),
 };
+/* eslint-enable */
 
 class ImageGenerator {
-  sampleImages: Array<Buffer>;
-  imagePool: Array<Buffer>;
+  sampleImages: Array<string>;
+  imagePool: Array<string>;
   imageCache: Object;
 
-  constructor(sampleImages: Array<Buffer>) {
+  constructor(sampleImages: Array<string>) {
     this.sampleImages = sampleImages;
     this.imagePool = [];
     this.imageCache = {};
 
-    this.get = this.get.bind(this);
+    (this: any).get = this.get.bind(this);
   }
 
-  get(key: string) {
-    const cachedImage = this.imageCache[key];
+  get(key: string): string {
+    const cachedImage: ?string = this.imageCache[key];
     if (cachedImage) {
       return cachedImage;
     }
     if (!this.imagePool.length) {
       this.imagePool = _.shuffle(_.cloneDeep(this.sampleImages));
     }
-    const newImage = this.imagePool.shift();
+    const newImage: string = this.imagePool.shift();
     this.imageCache[key] = newImage;
     return newImage;
   }
 }
 
-export function initImageGenerator() {
+export function initImageGenerator(): ImageGenerator {
   return new ImageGenerator([
     Images.foodImage1,
     Images.foodImage2,
