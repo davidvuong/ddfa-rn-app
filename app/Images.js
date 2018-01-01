@@ -23,6 +23,8 @@ class ImageGenerator {
     this.sampleImages = sampleImages;
     this.imagePool = [];
     this.imageCache = {};
+
+    this.get = this.get.bind(this);
   }
 
   get(key: string) {
