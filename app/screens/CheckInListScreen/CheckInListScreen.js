@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import CheckInListComponent from './components/CheckInListComponent';
 
 import {
-  createCheckIn,
   listCheckIns,
   setSelectedCheckIn,
   resetCheckIns,
@@ -12,7 +11,6 @@ import {
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
   return {
-    isCheckingIn: checkIn.isCheckingIn,
     checkIns: checkIn.checkIns,
     isListingCheckIns: checkIn.isListingCheckIns,
     checkInListErrorStatus: checkIn.checkInListErrorStatus,
@@ -21,9 +19,6 @@ const mapStateToProps = (state: *) => {
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    createCheckIn: (latitude: number, longitude: number, address: string, name: string) => {
-      return dispatch(createCheckIn(latitude, longitude, address, name));
-    },
     listCheckIns: (startTime: string) => {
       return dispatch(listCheckIns(startTime));
     },

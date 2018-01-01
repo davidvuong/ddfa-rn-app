@@ -31,7 +31,6 @@ type Props = {
   navigation: *,
   listCheckIns: (string) => *,
   resetCheckIns: () => *,
-  createCheckIn: (number, number, string, string) => *,
 };
 
 type State = {
