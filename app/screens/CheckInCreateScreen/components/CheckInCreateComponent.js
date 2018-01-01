@@ -110,14 +110,12 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   renderPlaceContent() {
-    const { place } = this.props.selectedLocation;
-    const { rating, pricingLevel } = place;
-
+    const { rating, pricingLevel, name, address } = this.props.selectedLocation.place;
     if (!rating || pricingLevel < 0) {
       return (
         <Body>
-          <Text>{place.name}</Text>
-          <Text note>{place.address}</Text>
+          <Text>{name}</Text>
+          <Text note>{address}</Text>
         </Body>
       );
     }
@@ -125,7 +123,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     const ratingValue = Math.round(rating * 10) / 10;
     return (
       <Body>
-        <Text>{place.name}</Text>
+        <Text>{name}</Text>
         <Text style={Styles.placeRatingAndPrice}>
           {`${ratingValue} stars `}
           {
@@ -135,13 +133,13 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           }
           {pricingLevel > 0 ? ` (${_.repeat('$', pricingLevel)})` : ' (?)'}
         </Text>
-        <Text note>{place.address}</Text>
+        <Text note>{address}</Text>
       </Body>
     );
   }
 
   render() {
-    const { latitude, longitude } = this.props.selectedLocation;
+    const { latitude, longitude } = this.props.selectedLocation.place;
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
     return (
       <Container>
