@@ -33,16 +33,6 @@ type Props = {
   resetSelectedLocation: () => *,
   resetCheckIns: () => *,
   listCheckIns: (string) => *,
-  createCheckIn: (
-    number,
-    number,
-    string,
-    string,
-    ?string,
-    ?number,
-    boolean,
-    ?number,
-  ) => *,
 };
 
 type State = {
