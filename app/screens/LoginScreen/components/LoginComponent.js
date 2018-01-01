@@ -17,7 +17,7 @@ import {
   Image,
 } from 'react-native';
 
-import Images from '../../../Images';
+import { Images } from '../../../Images';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
