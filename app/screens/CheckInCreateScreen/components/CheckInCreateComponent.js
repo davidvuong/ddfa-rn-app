@@ -71,29 +71,29 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   onPressCheckIn() {
-    if (this.props.isCheckingIn) { return null; }
+    // if (this.props.isCheckingIn) { return null; }
 
-    const { latitude, longitude, place } = this.props.selectedLocation;
-    return this.props.createCheckIn(
-      latitude,
-      longitude,
-      place.address,
-      place.name,
-      this.state.comment,
-      null, // rating
-      false, // isPaying
-      null, // amountPaid
-    )
-      .then(() => {
-        this.props.resetCheckIns();
-        return this.props.listCheckIns((new Date()).toISOString());
-      })
-      .then(() => {
-        this.props.navigation.goBack();
-      })
-      .catch((error: Error) => {
-        console.error(error);
-      });
+    // const { latitude, longitude, place } = this.props.selectedLocation;
+    // return this.props.createCheckIn(
+    //   latitude,
+    //   longitude,
+    //   place.address,
+    //   place.name,
+    //   this.state.comment,
+    //   null, // rating
+    //   false, // isPaying
+    //   null, // amountPaid
+    // )
+    //   .then(() => {
+    //     this.props.resetCheckIns();
+    //     return this.props.listCheckIns((new Date()).toISOString());
+    //   })
+    //   .then(() => {
+    //     this.props.navigation.goBack();
+    //   })
+    //   .catch((error: Error) => {
+    //     console.error(error);
+    //   });
   }
 
   onPressDone() {
