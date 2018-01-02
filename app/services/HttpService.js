@@ -13,7 +13,7 @@ export default class HttpService {
           if (response.ok) {
             return response;
           }
-          return reject(new Error(`Authentication failed with ${response.status} ${response.url}`));
+          return reject(new Error(`HttpRequest failed with ${response.status} ${response.url}`));
         })
         .then((response: *) => {
           return resolve(response.json());
@@ -30,7 +30,7 @@ export default class HttpService {
       reqHeaders = { ...reqHeaders, 'Content-Type': 'application/json' };
     }
 
-    const options: Object = { method, headers };
+    const options: Object = { method, headers: reqHeaders };
 
     // Not all `payload` need to be `JSON.stringify` e.g. multipart/form-data.
     if (!_.isEmpty(payload)) {
