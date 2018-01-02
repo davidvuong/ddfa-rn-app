@@ -59,7 +59,7 @@ export default class LoginComponent extends React.Component<Props, State> {
   }
 
   onPressLogin() {
-    if (this.isLoginButtonDisabled()) { return; }
+    if (!this.state.username || !this.state.password) { return; }
 
     this.props.loginUser(this.state.username, this.state.password)
       .then(() => {
