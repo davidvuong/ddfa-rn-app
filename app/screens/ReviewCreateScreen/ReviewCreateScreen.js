@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import CheckInCreateComponent from './components/CheckInCreateComponent';
+import ReviewCreateComponent from './components/ReviewCreateComponent';
 
 import {
   listCheckIns,
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch: *) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CheckInCreateComponent);
+)(ReviewCreateComponent);

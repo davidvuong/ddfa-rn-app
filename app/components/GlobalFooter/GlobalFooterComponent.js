@@ -71,7 +71,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
         // Replace setSelectedLocation to checkIn (but also include the GooglePlace)
         // Perhaps... `setGooglePlace`, `setCheckIn`.
         this.props.setSelectedLocation({ id: checkInId, place: googlePlace });
-        this.props.navigation.navigate('CheckInCreate');
+        this.props.navigation.navigate('ReviewCreate');
       })
       .catch((error: Error) => { console.error(error.message); });
   }

@@ -40,7 +40,7 @@ type State = {
   comment: ?string,
 };
 
-export default class CheckInDetailComponent extends React.Component<Props, State> {
+export default class ReviewCreateComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
 
   constructor(props: Props) {
