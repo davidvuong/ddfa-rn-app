@@ -6,12 +6,12 @@ type State = {
   loginErrorStatus: ?Error,
 };
 
-const initialState = {
+const initialState: State = {
   isLoggingIn: null,
   loginErrorStatus: null,
 };
 
-export default function AuthenticationReducer(state: State = initialState, action: *) {
+export default function AuthenticationReducer(state: State = initialState, action: *): State {
   switch (action.type) {
     case actions.LOGIN_USER_REQUEST:
       return { ...state, isLoggingIn: true, loginErrorStatus: null };

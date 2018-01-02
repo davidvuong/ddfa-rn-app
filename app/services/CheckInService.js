@@ -19,7 +19,11 @@ class CheckInService {
     this.http = httpService;
   }
 
-  list(startTime: string, limit: ?number = CheckInService.PAGINATION_SIZE): Promise<Array<*>> {
+  list(startTime: string, limit: ?number): Promise<Array<*>> {
+    if (!limit || limit < 0) {
+      limit = CheckInService.PAGINATION_SIZE; // eslint-disable-line no-param-reassign
+    }
+
     const endpoint = `${this.host}/checkins/?startTime=${startTime}&limit=${limit}`;
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)
@@ -31,9 +35,7 @@ class CheckInService {
   create(latitude: number, longitude: number, address: string, name: string): Promise<string> {
     const endpoint = `${this.host}/checkins`;
     const headers = this.authenticationService.getAuthenticationHeader();
-    const payload = {
-      latitude, longitude, address, name,
-    };
+    const payload = { latitude, longitude, address, name };
     return this.http.post(endpoint, payload, headers)
       .then((res: *) => {
         return Promise.resolve(res.id);

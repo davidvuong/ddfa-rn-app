@@ -12,7 +12,7 @@ type State = {
   selectedCheckIn: ?*,
 };
 
-const initialState = {
+const initialState: State = {
   // Check in progress status.
   isCheckingIn: null,
 
@@ -35,7 +35,7 @@ const initialState = {
   checkInListErrorStatus: null,
 };
 
-export default function CheckInReducer(state: State = initialState, action: *) {
+export default function CheckInReducer(state: State = initialState, action: *): State {
   switch (action.type) {
     case actions.CREATE_CHECK_IN_REQUEST:
       return { ...state, isCheckingIn: true, checkInErrorStatus: null };
