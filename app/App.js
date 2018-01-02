@@ -18,9 +18,9 @@ import HttpService from './services/HttpService';
 import AuthenticationService from './services/AuthenticationService';
 import CheckInService from './services/CheckInService';
 
-type Props = {
+import type { Config } from './Config';
 
-};
+type Props = {};
 
 type State = {
   isLoggedIn: ?boolean,
@@ -45,8 +45,8 @@ export default class App extends React.Component<Props, State> {
       global.self = global;
     }
 
-    const config = loadConfig();
-    const baseApiEndpoint = `${config.api.host}:${config.api.port}`;
+    const config: Config = loadConfig();
+    const baseApiEndpoint: string = `${config.api.host}:${config.api.port}`;
 
     this.store = ConfigureStore(getReducer());
     this.state = { isLoggedIn: null };

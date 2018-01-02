@@ -19,23 +19,23 @@ export class AuthenticationService {
     return { Authorization: this.token };
   }
 
-  getTokenFromStorage(): Promise<*> {
+  getTokenFromStorage(): Promise<string> {
     return AsyncStorage.getItem('@user.token')
-      .then((token: string): Promise<*> => {
+      .then((token: string): Promise<string> => {
         this.token = token;
         return Promise.resolve(this.token);
       });
   }
 
-  logout(): Promise<*> {
+  logout(): Promise<void> {
     return AsyncStorage.clear()
-      .then((): Promise<*> => {
+      .then((): Promise<void> => {
         this.token = null;
         return Promise.resolve();
       });
   }
 
-  login(username: string, password: string): Promise<*> {
+  login(username: string, password: string): Promise<void> {
     const endpoint: string = `${this.host}/users/authenticate`;
     const payload: { username: string, password: string } = { username, password };
 
