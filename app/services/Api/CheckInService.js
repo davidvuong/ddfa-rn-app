@@ -30,7 +30,7 @@ class CheckInService {
       endpoint += `&limit=${limit}`;
     }
     if (_.isBoolean(draftOnly)) {
-      endpoint += `&draftOnly=${draftOnly}`;
+      endpoint += `&draftOnly=${draftOnly ? 'true' : 'false'}`;
     }
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)
