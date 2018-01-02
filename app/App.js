@@ -15,8 +15,10 @@ import getNavigator from './navigator/AppNavigator';
 import loadConfig from './Config';
 
 import HttpService from './services/HttpService';
-import AuthenticationService from './services/AuthenticationService';
-import CheckInService from './services/CheckInService';
+import AuthenticationService from './services/Api/AuthenticationService';
+import CheckInService from './services/Api/CheckInService';
+import PhotoService from './services/Api/PhotoService';
+import ReviewService from './services/Api/ReviewService';
 
 import type { Config } from './Config';
 
@@ -57,6 +59,8 @@ export default class App extends React.Component<Props, State> {
     AuthenticationService.getTokenFromStorage()
       .then((token: string) => {
         CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
+        PhotoService.initialize(baseApiEndpoint, AuthenticationService, httpService);
+        ReviewService.initialize(baseApiEndpoint, AuthenticationService, httpService);
         this.setState({ isLoggedIn: !!token });
       });
   }

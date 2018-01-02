@@ -2,7 +2,7 @@
 import Promise from 'bluebird';
 import { AsyncStorage } from 'react-native';
 
-import HttpService from './HttpService';
+import HttpService from '../HttpService';
 
 export class AuthenticationService {
   host: string;

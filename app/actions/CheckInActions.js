@@ -1,6 +1,6 @@
 // @flow
 import * as actions from '../ActionTypes';
-import CheckInService from '../services/CheckInService';
+import CheckInService from '../services/Api/CheckInService';
 
 /* Internal */
 
