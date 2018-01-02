@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch: *) => {
     resetCheckIns: () => {
       return dispatch(resetCheckIns());
     },
-    listCheckIns: (startTime: string, limit: number) => {
-      return dispatch(listCheckIns(startTime, limit));
+    listCheckIns: (startTime: string) => {
+      return dispatch(listCheckIns(startTime));
     },
   };
 };
