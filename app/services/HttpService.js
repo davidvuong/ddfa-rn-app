@@ -3,10 +3,7 @@ import _ from 'lodash';
 import Promise from 'bluebird';
 
 type Payload = {};
-type Headers = {
-  Authorization: ?string,
-  'Content-Type': ?string,
-};
+type Headers = {};
 
 export default class HttpService {
   fetchWithPromise(endpoint: string, options: *): Promise<*> {
@@ -28,10 +25,7 @@ export default class HttpService {
   }
 
   request(endpoint: string, method: string, payload: Payload, headers: ?Headers): Promise<*> {
-    let reqHeaders = headers || {
-      Authorization: null,
-      'Content-Type': null,
-    };
+    let reqHeaders: Object = headers || {};
     if (!reqHeaders['Content-Type']) {
       reqHeaders = { ...reqHeaders, 'Content-Type': 'application/json' };
     }
