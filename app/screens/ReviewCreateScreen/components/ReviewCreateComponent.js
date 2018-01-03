@@ -22,6 +22,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
+import PlaceContentCard from './PlaceContentCard/PlaceContentCard';
 import GeoLocationService from '../../../services/GeoLocationService';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -138,7 +139,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   render() {
-    const { latitude, longitude } = this.props.selectedLocation.place;
+    const { latitude, longitude, rating, pricingLevel, name, address } = this.props.selectedLocation.place;
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
     return (
       <Container>
@@ -175,11 +176,12 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
             <MapView.Marker coordinate={{ latitude, longitude }} />
           </MapView>
           <Content padder>
-            <Card>
-              <CardItem header>
-                {this.renderPlaceContent()}
-              </CardItem>
-            </Card>
+            <PlaceContentCard
+              rating={rating}
+              pricingLevel={pricingLevel}
+              name={name}
+              address={address}
+            />
             <Card>
               <CardItem style={Styles.placeCommentItem}>
                 <Input
