@@ -34,8 +34,9 @@ export function createCheckIn(latitude: number, longitude: number, address: stri
   return (dispatch: *) => {
     dispatch(createCheckInRequest());
     return CheckInService.create(latitude, longitude, address, name)
-      .then(() => {
+      .then((id: string) => {
         dispatch(createCheckInSuccess());
+        return id;
       }, (error: Error) => {
         dispatch(createCheckInError(error));
         throw error;
@@ -49,6 +50,7 @@ export function listCheckIns(startTime: string) {
     return CheckInService.list(startTime)
       .then((checkIns: *) => {
         dispatch(listCheckInSuccess(checkIns));
+        return checkIns;
       }, (error: Error) => {
         dispatch(listCheckInError(error));
         throw error;

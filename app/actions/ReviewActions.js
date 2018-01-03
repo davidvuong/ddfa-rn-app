@@ -32,7 +32,10 @@ export function createReview( // eslint-disable-line import/prefer-default-expor
     return ReviewService.create(
       checkInId, amountPaid, currency, comment, foodRating, environmentRating, serviceRating,
     )
-      .then(() => { dispatch(createReviewSuccess()); })
+      .then((id: string) => {
+        dispatch(createReviewSuccess());
+        return id;
+      })
       .catch((error: Error) => {
         dispatch(createReviewError(error));
         throw error;
