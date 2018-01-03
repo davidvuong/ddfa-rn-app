@@ -82,7 +82,27 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   onPressSubmit() {
+    if (this.props.isCreatingReview) { return null; }
 
+    return this.props.createReview(
+      this.props.selectedLocation.id, // checkInId
+      0, // amountPaid
+      'AUD', // currency
+      this.state.comment,
+      null, // foodRating
+      null, // environmentRating
+      null, // serviceRating
+    )
+      .then(() => {
+        this.props.resetCheckIns();
+        return this.props.listCheckIns((new Date()).toISOString());
+      })
+      .then(() => {
+        this.props.navigation.goBack();
+      })
+      .catch((error: Error) => {
+        console.error(error);
+      });
   }
 
   onPressDone() {
@@ -128,9 +148,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         </FooterTab>
         <FooterTab>
           <Button onPress={this.onPressSubmit}>
-            <Text>
-              {this.props.isCheckingIn ? 'Submitting...' : 'Submit'}
-            </Text>
+            <Text>{this.props.isCreatingReview ? 'Submitting...' : 'Submit'}</Text>
           </Button>
         </FooterTab>
       </Footer>
