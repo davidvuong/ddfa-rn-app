@@ -1,5 +1,4 @@
 // @flow
-import _ from 'lodash';
 import * as React from 'react';
 import {
   Container,
@@ -30,10 +29,21 @@ import Styles from '../Styles';
 
 type Props = {
   selectedLocation: *,
+  isCreatingReview: boolean,
+  createReviewErrorStatus: review.createReviewErrorStatus,
   navigation: *,
   resetSelectedLocation: () => *,
   resetCheckIns: () => *,
   listCheckIns: (string) => *,
+  createReview: (
+    string,
+    number,
+    string,
+    ?string,
+    ?number,
+    ?number,
+    ?number,
+  ) => *,
 };
 
 type State = {
