@@ -4,8 +4,9 @@ A list of tasks to do before this branch can be merged into `master`.
 - [x] Add API endpoints to existing/new services (Review, CheckIn, Photo)
 - [x] Update CheckInCreateScreen with the new review create API (tmp: all_ratings=0, price=0, currency=AUD)
 - [x] Rename CheckInCreate to ReviewCreate
-- [ ] Update backend `Photo.check_in_id` to `Photo.review_id`...
 - [ ] Store googlePlaceId in the checkIn object
+- [ ] Manually parse through check-in photos and store them somewhere DDFA API can reference
+- [ ] Update backend `Photo.check_in_id` to `Photo.review_id`...
 - [ ] Add ability cancel check-in (delete - only present if you are the owner)
 - [ ] Add ability to go back from check-in
 - [ ] Add ability set a price
