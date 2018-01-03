@@ -28,7 +28,6 @@ import Styles from '../Styles';
 
 type Props = {
   selectedLocation: *,
-  isCheckingIn: boolean,
   navigation: *,
   resetSelectedLocation: () => *,
   resetCheckIns: () => *,
@@ -52,7 +51,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     };
 
     (this: any).onPressCancel = this.onPressCancel.bind(this);
-    (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
+    (this: any).onPressSubmit = this.onPressSubmit.bind(this);
     (this: any).onPressDone = this.onPressDone.bind(this);
     (this: any).onFocusComment = this.onFocusComment.bind(this);
     (this: any).onChangeTextComment = this.onChangeTextComment.bind(this);
@@ -67,10 +66,10 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       { text: 'Yes', onPress: this.props.navigation.goBack },
       { text: 'No', style: 'cancel' },
     ];
-    Alert.alert('Cancel Check-in', 'Are you sure you want to cancel?', buttons);
+    Alert.alert('Cancel Review', 'Are you sure you want to cancel?', buttons);
   }
 
-  onPressCheckIn() {
+  onPressSubmit() {
     // if (this.props.isCheckingIn) { return null; }
 
     // const { latitude, longitude, place } = this.props.selectedLocation;
@@ -145,7 +144,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       <Container>
         <Header>
           <Body>
-            <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
+            <Text style={Styles.headerTitle}>DDFA Review</Text>
           </Body>
           <Right>
             {
@@ -204,10 +203,10 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
             </Button>
           </FooterTab>
           <FooterTab>
-            <Button onPress={this.onPressCheckIn}>
+            <Button onPress={this.onPressSubmit}>
               <Text>
                 {
-                  this.props.isCheckingIn ? 'Checking in...' : 'Check In'
+                  this.props.isCheckingIn ? 'Submitting...' : 'Submit'
                 }
               </Text>
             </Button>
