@@ -2,12 +2,12 @@
 import * as actions from '../ActionTypes';
 
 type State = {
-  isLoggingIn: ?boolean,
+  isLoggingIn: boolean,
   loginErrorStatus: ?Error,
 };
 
 const initialState: State = {
-  isLoggingIn: null,
+  isLoggingIn: false,
   loginErrorStatus: null,
 };
 

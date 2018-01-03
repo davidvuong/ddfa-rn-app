@@ -26,7 +26,7 @@ import { initImageGenerator } from '../../../Images';
 type Props = {
   checkIns: Array<*>,
   setSelectedCheckIn: (*) => *,
-  isListingCheckIns: ?boolean,
+  isListingCheckIns: boolean,
   checkInListErrorStatus: ?Error,
   navigation: *,
   listCheckIns: (string) => *,

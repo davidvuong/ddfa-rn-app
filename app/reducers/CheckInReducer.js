@@ -3,18 +3,18 @@ import _ from 'lodash';
 import * as actions from '../ActionTypes';
 
 type State = {
-  isCheckingIn: ?boolean,
+  isCheckingIn: boolean,
   checkInErrorStatus: ?Error,
   checkIns: Array<*>,
-  isListingCheckIns: ?boolean,
+  isListingCheckIns: boolean,
   checkInListErrorStatus: ?Error,
-  selectedLocation: ?*,
-  selectedCheckIn: ?*,
+  selectedLocation: *,
+  selectedCheckIn: *,
 };
 
 const initialState: State = {
   // Check in progress status.
-  isCheckingIn: null,
+  isCheckingIn: false,
 
   // Check in error response object.
   checkInErrorStatus: null,
@@ -29,7 +29,7 @@ const initialState: State = {
   checkIns: [],
 
   // Status of retrieving checkIn resources.
-  isListingCheckIns: null,
+  isListingCheckIns: false,
 
   // Check in list error response object.
   checkInListErrorStatus: null,

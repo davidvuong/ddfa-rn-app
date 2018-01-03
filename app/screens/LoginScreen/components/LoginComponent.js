@@ -22,7 +22,7 @@ import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
 type Props = {
-  isLoggingIn: ?boolean,
+  isLoggingIn: boolean,
   loginErrorStatus: ?Error,
   navigation: *,
   loginUser: (string, string) => *,
