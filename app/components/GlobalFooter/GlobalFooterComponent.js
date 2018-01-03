@@ -11,8 +11,11 @@ import {
 } from 'native-base';
 import {
   Alert,
+  Platform,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
+
+import Styles from './Styles';
 
 type Props = {
   navigation: *,
@@ -81,20 +84,20 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       <Footer>
         <FooterTab>
           <Button vertical>
-            <Icon name="apps" />
-            <Text>home</Text>
+            <Icon name="ios-apps" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>home</Text>}
           </Button>
           <Button vertical>
-            <Icon name="search" />
-            <Text>search</Text>
+            <Icon name="ios-search" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>nearby</Text>}
           </Button>
           <Button vertical onPress={this.onPressCheckIn}>
-            <Icon name="pin" />
-            <Text>check-in</Text>
+            <Icon name="ios-navigate" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>check-in</Text>}
           </Button>
           <Button vertical onPress={this.onPressLogout}>
-            <Icon name="exit" />
-            <Text>logout</Text>
+            <Icon name="ios-exit" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>logout</Text>}
           </Button>
         </FooterTab>
       </Footer>
