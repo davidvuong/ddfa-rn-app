@@ -4,6 +4,7 @@ import * as React from 'react';
 import {
   Container,
   Header,
+  Left,
   Right,
   Body,
   Content,
@@ -19,6 +20,7 @@ import {
 import {
   Alert,
   Keyboard,
+  Platform,
 } from 'react-native';
 import MapView from 'react-native-maps';
 
@@ -144,6 +146,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     return (
       <Container>
         <Header>
+          {Platform.OS === 'ios' ? <Left /> : null}
           <Body>
             <Text style={Styles.headerTitle}>DDFA Review</Text>
           </Body>
