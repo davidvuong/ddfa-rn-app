@@ -26,7 +26,7 @@ class ReviewService {
     environmentRating: ?number,
     serviceRating: ?number,
   ): Promise<string> {
-    const endpoint = `${this.host}/reviews`;
+    const endpoint = `${this.host}/checkins/${checkInId}/reviews`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
       checkInId,

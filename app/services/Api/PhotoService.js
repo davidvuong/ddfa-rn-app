@@ -20,13 +20,12 @@ class ReviewService {
 
   // FIXME: checkInId should be the reviewId!!!
   create(checkInId: string, photos: Array<Blob>): Promise<string> {
-    const endpoint = `${this.host}/photos`;
+    const endpoint = `${this.host}/checkins/${checkInId}/photos`;
     const headers = {
       ...this.authenticationService.getAuthenticationHeader(),
       'Content-Type': 'multipart/form-data',
     };
     const payload = new FormData(); // eslint-disable-line no-undef
-    payload.append('checkInId', checkInId);
     _.each(photos, (i: number, photo: Blob) => {
       payload.append('photos', photo, `photo_${i}.jpg`);
     });
