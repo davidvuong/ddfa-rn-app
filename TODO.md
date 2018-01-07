@@ -6,14 +6,23 @@ A list of tasks to do before this branch can be merged into `master`.
 - [x] Rename CheckInCreate to ReviewCreate
 - [x] Store googlePlaceId in the checkIn object
 - [ ] Manually parse through check-in photos and store them somewhere DDFA API can reference
+- [ ] Run data migration on production
+- [ ] Update CheckInDetail to show additional information
+
+Once the above is complete, the database schema migration branch can be merged into master and deployed.
+
+- [ ] Add ability to search for check-ins nearby
+- [ ] Polish up UI (Android & iOS)
+- [ ] Last bit of refactor (ddfa-api, ddfa-rn-app)
+
+Once the above is complete, I can give a working APK to Aaron.
+
 - [ ] Update backend `Photo.check_in_id` to `Photo.review_id`...
 - [ ] Add ability cancel check-in (delete - only present if you are the owner)
 - [ ] Add ability to go back from check-in
 - [ ] Add ability set a price
 - [ ] Add ability to set ratings
 - [ ] Add ability to upload photos
-- [ ] Update CheckInDetail to show additional information
-- [ ] Add ability to search for check-ins nearby
 
 Flow:
 
