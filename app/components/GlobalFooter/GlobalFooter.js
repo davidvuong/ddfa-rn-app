@@ -18,8 +18,8 @@ const mapStateToProps = (state: *) => {
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    createCheckIn: (latitude: number, longitude: number, address: string, name: string) => {
-      return dispatch(createCheckIn(latitude, longitude, address, name));
+    createCheckIn: (latitude: number, longitude: number, address: string, name: string, googlePlaceId: ?string) => {
+      return dispatch(createCheckIn(latitude, longitude, address, name, googlePlaceId));
     },
     logoutUser: () => {
       return dispatch(logoutUser());

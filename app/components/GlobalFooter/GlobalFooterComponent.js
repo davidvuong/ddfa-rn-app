@@ -20,7 +20,7 @@ import Styles from './Styles';
 type Props = {
   navigation: *,
   logoutUser: () => *,
-  createCheckIn: (number, number, string, string) => Promise<string>,
+  createCheckIn: (number, number, string, string, ?string) => Promise<string>,
   setSelectedLocation: (*) => *,
 };
 
@@ -63,9 +63,10 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     RNGooglePlaces.openPlacePickerModal(options)
       .then((place: *) => {
         googlePlace = place;
-        const { name, address, latitude, longitude } = place;
+
+        const { name, address, latitude, longitude, placeID } = place;
         return this.props.createCheckIn(
-          latitude, longitude, address, name || address || `${latitude} ${longitude}`,
+          latitude, longitude, address, name || address || `${latitude} ${longitude}`, placeID,
         );
       })
       .then((checkInId: string) => {

@@ -48,10 +48,10 @@ class CheckInService {
       });
   }
 
-  create(latitude: number, longitude: number, address: string, name: string): Promise<string> {
+  create(latitude: number, longitude: number, address: string, name: string, googlePlaceId: ?string): Promise<string> {
     const endpoint = `${this.host}/checkins`;
     const headers = this.authenticationService.getAuthenticationHeader();
-    const payload = { latitude, longitude, address, name };
+    const payload = { latitude, longitude, address, name, googlePlaceId };
     return this.http.post(endpoint, payload, headers)
       .then((res: *) => {
         return Promise.resolve(res.id);

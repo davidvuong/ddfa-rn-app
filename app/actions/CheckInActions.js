@@ -30,10 +30,16 @@ function listCheckInError(error: Error) {
 
 /* External */
 
-export function createCheckIn(latitude: number, longitude: number, address: string, name: string) {
+export function createCheckIn(
+  latitude: number,
+  longitude: number,
+  address: string,
+  name: string,
+  googlePlaceId: ?string,
+) {
   return (dispatch: *) => {
     dispatch(createCheckInRequest());
-    return CheckInService.create(latitude, longitude, address, name)
+    return CheckInService.create(latitude, longitude, address, name, googlePlaceId)
       .then((id: string) => {
         dispatch(createCheckInSuccess());
         return id;
