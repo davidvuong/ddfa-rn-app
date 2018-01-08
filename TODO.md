@@ -6,7 +6,7 @@ A list of tasks to do before this branch can be merged into `master`.
 - [x] Rename CheckInCreate to ReviewCreate
 - [x] Store googlePlaceId in the checkIn object
 - [x] Manually parse through check-in photos and store them somewhere DDFA API can reference
-- [ ] Run data migration on production
+- [x] Run data migration on production
 - [ ] Update CheckInDetail to show additional information
 
 Once the above is complete, the database schema migration branch can be merged into master and deployed.
