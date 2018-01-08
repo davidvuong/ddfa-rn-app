@@ -5,7 +5,7 @@ A list of tasks to do before this branch can be merged into `master`.
 - [x] Update CheckInCreateScreen with the new review create API (tmp: all_ratings=0, price=0, currency=AUD)
 - [x] Rename CheckInCreate to ReviewCreate
 - [x] Store googlePlaceId in the checkIn object
-- [ ] Manually parse through check-in photos and store them somewhere DDFA API can reference
+- [x] Manually parse through check-in photos and store them somewhere DDFA API can reference
 - [ ] Run data migration on production
 - [ ] Update CheckInDetail to show additional information
 
