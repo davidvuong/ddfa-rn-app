@@ -27,6 +27,14 @@ export class AuthenticationService {
       });
   }
 
+  isTokenValid(token: string): Promise<boolean> {
+    const endpoint: string = `${this.host}/users/authenticate-token`;
+    const headers = { Authorization: token };
+    return this.http.post(endpoint, {}, headers)
+      .then(() => { return true; })
+      .catch(() => { return false; });
+  }
+
   logout(): Promise<void> {
     return AsyncStorage.clear()
       .then((): Promise<void> => {

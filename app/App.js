@@ -61,7 +61,14 @@ export default class App extends React.Component<Props, State> {
         CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
         PhotoService.initialize(baseApiEndpoint, AuthenticationService, httpService);
         ReviewService.initialize(baseApiEndpoint, AuthenticationService, httpService);
-        this.setState({ isLoggedIn: !!token });
+
+        return AuthenticationService.isTokenValid(token);
+      })
+      .then((isLoggedIn: boolean) => {
+        this.setState({ isLoggedIn });
+        if (!isLoggedIn) {
+          AuthenticationService.logout();
+        }
       });
   }
 
