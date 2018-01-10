@@ -6,4 +6,7 @@ export default {
     fontWeight: '500',
     fontSize: 12,
   },
+  detailedCheckInSpinner: {
+    marginTop: 5,
+  },
 };

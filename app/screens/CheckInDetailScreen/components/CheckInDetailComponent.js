@@ -9,8 +9,12 @@ import {
   Card,
   CardItem,
 } from 'native-base';
+import {
+  ActivityIndicator,
+} from 'react-native';
 
 import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
+import CheckInDetailContent from './CheckInDetailContent/CheckInDetailContent';
 import CheckInDetailMap from './CheckInDetailMap/CheckInDetailMap';
 
 import navigationOptions from '../NavigationOptions';
@@ -24,11 +28,16 @@ type Props = {
 };
 
 type State = {
-  detailedCheckIn: *,
+  detailedCheckIn: ?*,
 };
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { detailedCheckIn: null };
+  }
 
   componentDidMount() {
     this.props.getCheckIn(this.props.checkIn.id)
@@ -64,13 +73,21 @@ export default class CheckInDetailComponent extends React.Component<Props, State
 
   render() {
     if (!this.props.checkIn) { return null; }
-
     return (
       <Container>
         <CheckInDetailHeader navigation={this.props.navigation} />
         <Content>
-          <CheckInDetailMap latitude={this.props.checkIn.latitude} longitude={this.props.checkIn.longitude} />
+          <CheckInDetailMap
+            latitude={this.props.checkIn.latitude}
+            longitude={this.props.checkIn.longitude}
+          />
           {this.renderTitleCard()}
+          {
+            this.state.detailedCheckIn ?
+              <CheckInDetailContent checkIn={this.state.detailedCheckIn} />
+              :
+              <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
+          }
         </Content>
       </Container>
     );
