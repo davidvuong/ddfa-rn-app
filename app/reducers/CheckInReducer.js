@@ -69,7 +69,7 @@ export default function CheckInReducer(state: State = initialState, action: *): 
     case actions.RESET_CHECK_IN_LIST:
       return {
         ...state,
-        isListingCheckIns: null,
+        isListingCheckIns: false,
         checkIns: [],
         checkInListErrorStatus: null,
       };
