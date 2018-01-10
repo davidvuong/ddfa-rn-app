@@ -7,7 +7,7 @@ import {
 } from './AuthenticationService';
 import HttpService from '../HttpService';
 
-class ReviewService {
+class PhotoService {
   host: string;
   authenticationService: AuthenticationServiceT;
   http: HttpService
@@ -16,6 +16,10 @@ class ReviewService {
     this.host = host;
     this.authenticationService = authenticationService;
     this.http = httpService;
+  }
+
+  getUrl(id: string): string {
+    return `${this.host}/photos/${id}`;
   }
 
   // FIXME: checkInId should be the reviewId!!!
@@ -37,4 +41,4 @@ class ReviewService {
   }
 }
 
-export default new ReviewService();
+export default new PhotoService();
