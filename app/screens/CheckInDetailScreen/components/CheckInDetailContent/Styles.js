@@ -1,11 +1,11 @@
 // @flow
+import {
+  Dimensions,
+} from 'react-native';
 
 export default {
   photo: {
-    width: 200,
-    height: 240,
-  },
-  photosContainer: {
-    height: 240,
+    width: Dimensions.get('window').width,
+    height: 420,
   },
 };

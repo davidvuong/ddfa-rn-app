@@ -25,6 +25,7 @@ type Props = {
   navigation: *,
   resetSelectedCheckIn: () => *,
   getCheckIn: (string) => *,
+  getPhotoUrl: (string) => string,
 };
 
 type State = {
@@ -83,7 +84,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           {this.renderTitleCard()}
           {
             this.state.detailedCheckIn ?
-              <CheckInDetailContent checkIn={this.state.detailedCheckIn} />
+              <CheckInDetailContent checkIn={this.state.detailedCheckIn} getPhotoUrl={this.props.getPhotoUrl} />
               :
               <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
           }

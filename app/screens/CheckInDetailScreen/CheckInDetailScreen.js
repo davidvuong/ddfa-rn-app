@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import CheckInDetailComponent from './components/CheckInDetailComponent';
 import CheckInService from '../../services/Api/CheckInService';
+import PhotoService from '../../services/Api/PhotoService';
 
 import {
   resetSelectedCheckIn,
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     getCheckIn: (id: string) => {
       return CheckInService.get(id);
+    },
+    getPhotoUrl: (id: string) => {
+      return PhotoService.getUrl(id);
     },
   };
 };

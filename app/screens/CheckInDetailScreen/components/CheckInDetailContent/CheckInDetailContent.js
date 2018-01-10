@@ -4,7 +4,6 @@ import * as React from 'react';
 import {
   Container,
   Left,
-  Right,
   Body,
   Thumbnail,
   Text,
@@ -13,14 +12,15 @@ import {
 } from 'native-base';
 import {
   Image,
-  ScrollView,
 } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 import { initAvatarImageGenerator } from '../../../../Images';
 import Styles from './Styles';
 
 type Props = {
   checkIn: *,
+  getPhotoUrl: (string) => string,
 };
 
 type State = {};
@@ -35,28 +35,22 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   }
 
   renderPhotos() {
-    if (!this.props.checkIn.photos) { return null; }
     return (
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={true}
-        showsVerticalScrollIndicator={false}
-        style={Styles.photosContainer}
-      >
+      <Swiper loop height={420} activeDotColor="rgba(255, 255, 255, 0.65)">
         {
-          _.map(this.props.checkIn.photos, (photo: *, i: number) => {
-            const source = { uri: `http://localhost:5000/photos/${photo.id}` };
-            return <Image key={i} source={source} style={Styles.photo} />;
+          _.map(this.props.checkIn.photos, (photo: *) => {
+            const source = { uri: this.props.getPhotoUrl(photo.id) };
+            return <Image key={photo.id} source={source} style={Styles.photo} />;
           })
         }
-      </ScrollView>
+      </Swiper>
     );
   }
 
   renderReviews() {
-    return _.map(this.props.checkIn.reviews, (review: *, i: number) => {
+    return _.map(this.props.checkIn.reviews, (review: *) => {
       return (
-        <Card key={i} style={{ flex: 0, marginTop: 0 }}>
+        <Card key={review.id} style={{ flex: 0, marginTop: 0 }}>
           <CardItem>
             <Left>
               <Thumbnail source={this.imageGenerator.get(review.id)} />
@@ -85,7 +79,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
     return (
       <Container>
         {this.renderReviews()}
-        {/* {this.renderPhotos()} */}
+        {this.renderPhotos()}
       </Container>
     );
   }
