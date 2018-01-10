@@ -21,7 +21,7 @@ import CheckInCard from './CheckInCard/CheckInCard';
 import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
-import { initImageGenerator } from '../../../Images';
+import { initFoodImageGenerator } from '../../../Images';
 
 type Props = {
   checkIns: Array<*>,
@@ -51,7 +51,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       isInitialLoad: false,
       noMoreCheckIns: false,
     };
-    this.imageGenerator = initImageGenerator();
+    this.imageGenerator = initFoodImageGenerator();
     this.bottomScrollPadding = 20;
 
     (this: any).performInitialLoad = this.performInitialLoad.bind(this);

@@ -12,6 +12,15 @@ export const Images = {
   foodImage7: require('./images/food_7.jpg'),
   foodImage8: require('./images/food_8.jpg'),
   foodImage9: require('./images/food_9.jpg'),
+  avatarImage1: require('./images/avatar_1.png'),
+  avatarImage2: require('./images/avatar_2.png'),
+  avatarImage3: require('./images/avatar_3.png'),
+  avatarImage4: require('./images/avatar_4.png'),
+  avatarImage5: require('./images/avatar_5.png'),
+  avatarImage6: require('./images/avatar_6.png'),
+  avatarImage7: require('./images/avatar_7.png'),
+  avatarImage8: require('./images/avatar_8.png'),
+  avatarImage9: require('./images/avatar_9.png'),
   backgroundImage1: require('./images/background_image_1.jpg'),
 };
 /* eslint-enable */
@@ -43,7 +52,7 @@ class ImageGenerator {
   }
 }
 
-export function initImageGenerator(): ImageGenerator {
+export function initFoodImageGenerator(): ImageGenerator {
   return new ImageGenerator([
     Images.foodImage1,
     Images.foodImage2,
@@ -54,5 +63,19 @@ export function initImageGenerator(): ImageGenerator {
     Images.foodImage7,
     Images.foodImage8,
     Images.foodImage9,
+  ]);
+}
+
+export function initAvatarImageGenerator(): ImageGenerator {
+  return new ImageGenerator([
+    Images.avatarImage1,
+    Images.avatarImage2,
+    Images.avatarImage3,
+    Images.avatarImage4,
+    Images.avatarImage5,
+    Images.avatarImage6,
+    Images.avatarImage7,
+    Images.avatarImage8,
+    Images.avatarImage9,
   ]);
 }

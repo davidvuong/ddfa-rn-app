@@ -94,3 +94,7 @@ TODO...
 ## Debugging with Android Studio
 
 TODO...
+
+## Attributions
+
+Avatar Icons - https://www.flaticon.com/packs/avatar-set
