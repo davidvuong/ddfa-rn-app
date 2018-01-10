@@ -62,21 +62,6 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     );
   }
 
-  renderDebugCard() {
-    const { id, latitude, longitude, tz, createdAt } = this.props.checkIn;
-    return (
-      <Card style={{ marginBottom: 20 }}>
-        <CardItem header>
-          <Body>
-            <Text>{id}</Text>
-            <Text note>{tz}: (lat:{latitude}, lng:{longitude})</Text>
-            <Text note>dt:{createdAt}</Text>
-          </Body>
-        </CardItem>
-      </Card>
-    );
-  }
-
   render() {
     if (!this.props.checkIn) { return null; }
 
@@ -86,7 +71,6 @@ export default class CheckInDetailComponent extends React.Component<Props, State
         <Content>
           <CheckInDetailMap latitude={this.props.checkIn.latitude} longitude={this.props.checkIn.longitude} />
           {this.renderTitleCard()}
-          {this.renderDebugCard()}
         </Content>
       </Container>
     );
