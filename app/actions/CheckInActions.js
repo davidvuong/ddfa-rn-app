@@ -28,18 +28,6 @@ function listCheckInError(error: Error) {
   return { type: actions.LIST_CHECK_IN_ERROR, error };
 }
 
-function getCheckInRequest() {
-  return { type: actions.GET_CHECK_IN_REQUEST };
-}
-
-function getCheckInSuccess() {
-  return { type: actions.GET_CHECK_IN_SUCCESS };
-}
-
-function getCheckInError(error: Error) {
-  return { type: actions.GET_CHECK_IN_ERROR, error };
-}
-
 /* External */
 
 export function createCheckIn(
@@ -71,20 +59,6 @@ export function listCheckIns(startTime: string) {
         return checkIns;
       }, (error: Error) => {
         dispatch(listCheckInError(error));
-        throw error;
-      });
-  };
-}
-
-export function getCheckIn(id: string) {
-  return (dispatch: *) => {
-    dispatch(getCheckInRequest());
-    return CheckInService.get(id)
-      .then((checkIn: *) => {
-        dispatch(getCheckInSuccess());
-        return checkIn;
-      }, (error: Error) => {
-        dispatch(getCheckInError(error));
         throw error;
       });
   };

@@ -13,10 +13,10 @@ type State = {
 };
 
 const initialState: State = {
-  // Check in progress status.
+  // Check-in progress status.
   isCheckingIn: false,
 
-  // Check in error response object.
+  // Check-in error response object.
   checkInErrorStatus: null,
 
   // The location we've selected to check in.
@@ -31,7 +31,7 @@ const initialState: State = {
   // Status of retrieving checkIn resources.
   isListingCheckIns: false,
 
-  // Check in list error response object.
+  // Check-in list error response object.
   checkInListErrorStatus: null,
 };
 
