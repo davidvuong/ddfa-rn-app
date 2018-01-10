@@ -45,57 +45,48 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     this.props.resetSelectedCheckIn();
   }
 
+  renderTitleCard() {
+    const { name, address, createdAt } = this.props.checkIn;
+    return (
+      <Card>
+        <CardItem header>
+          <Body>
+            <Text>{name}</Text>
+            <Text note>{address}</Text>
+            <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+              Checked in @ {moment(createdAt).format('h:mmA, Do MMM YYYY')}
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  }
+
+  renderDebugCard() {
+    const { id, latitude, longitude, tz, createdAt } = this.props.checkIn;
+    return (
+      <Card style={{ marginBottom: 20 }}>
+        <CardItem header>
+          <Body>
+            <Text>{id}</Text>
+            <Text note>{tz}: (lat:{latitude}, lng:{longitude})</Text>
+            <Text note>dt:{createdAt}</Text>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  }
+
   render() {
     if (!this.props.checkIn) { return null; }
-    const {
-      id,
-      name,
-      address,
-      comment,
-      latitude,
-      longitude,
-      tz,
-      createdAt,
-    } = this.props.checkIn;
 
     return (
       <Container>
         <CheckInDetailHeader navigation={this.props.navigation} />
         <Content>
-          <CheckInDetailMap latitude={latitude} longitude={longitude} />
-          <Card>
-            <CardItem header>
-              <Body>
-                <Text>{name}</Text>
-                <Text note>{address}</Text>
-                <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                  Checked in @ {moment(createdAt).format('h:mmA, Do MMM YYYY')}
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
-          {
-            comment ? (
-              <Card>
-                <CardItem>
-                  <Body>
-                    <Text>{comment}</Text>
-                  </Body>
-                </CardItem>
-              </Card>
-            )
-            :
-            null
-          }
-          <Card style={{ marginBottom: 20 }}>
-            <CardItem header>
-              <Body>
-                <Text>{id}</Text>
-                <Text note>{tz}: (lat:{latitude}, lng:{longitude})</Text>
-                <Text note>dt:{createdAt}</Text>
-              </Body>
-            </CardItem>
-          </Card>
+          <CheckInDetailMap latitude={this.props.checkIn.latitude} longitude={this.props.checkIn.longitude} />
+          {this.renderTitleCard()}
+          {this.renderDebugCard()}
         </Content>
       </Container>
     );
