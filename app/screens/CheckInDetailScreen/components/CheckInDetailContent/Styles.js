@@ -5,4 +5,7 @@ export default {
     width: 200,
     height: 240,
   },
+  photosContainer: {
+    height: 240,
+  },
 };

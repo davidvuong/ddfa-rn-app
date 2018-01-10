@@ -43,7 +43,6 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     this.props.getCheckIn(this.props.checkIn.id)
       .then((detailedCheckIn: *) => {
         this.setState({ detailedCheckIn });
-        console.log(detailedCheckIn);
       })
       .catch((error: Error) => {
         console.error(error); // TODO: Handle failure.
