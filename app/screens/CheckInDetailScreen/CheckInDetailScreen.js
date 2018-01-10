@@ -4,6 +4,7 @@ import CheckInDetailComponent from './components/CheckInDetailComponent';
 
 import {
   resetSelectedCheckIn,
+  getCheckIn,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state: *) => {
@@ -17,6 +18,9 @@ const mapDispatchToProps = (dispatch: *) => {
   return {
     resetSelectedCheckIn: () => {
       return dispatch(resetSelectedCheckIn());
+    },
+    getCheckIn: (id: string) => {
+      return dispatch(getCheckIn(id));
     },
   };
 };

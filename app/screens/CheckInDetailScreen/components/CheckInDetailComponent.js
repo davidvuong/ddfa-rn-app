@@ -27,12 +27,26 @@ type Props = {
   checkIn: *,
   navigation: *,
   resetSelectedCheckIn: () => *,
+  getCheckIn: (string) => *,
 };
 
-type State = {};
+type State = {
+  detailedCheckIn: *,
+};
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
+
+  componentDidMount() {
+    this.props.getCheckIn(this.props.checkIn.id)
+      .then((detailedCheckIn: *) => {
+        this.setState({ detailedCheckIn });
+        console.log(detailedCheckIn);
+      })
+      .catch((error: Error) => {
+        console.error(error); // TODO: Handle failure.
+      });
+  }
 
   componentWillUnmount() {
     this.props.resetSelectedCheckIn();
