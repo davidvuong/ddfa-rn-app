@@ -3,22 +3,15 @@ import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
-  Header,
   Body,
-  Left,
-  Right,
   Content,
   Text,
   Card,
   CardItem,
-  Icon,
-  Button,
 } from 'native-base';
-import {
-  Platform,
-} from 'react-native';
 import MapView from 'react-native-maps';
 
+import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
 import GeoLocationService from '../../../services/GeoLocationService';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -52,26 +45,6 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     this.props.resetSelectedCheckIn();
   }
 
-  renderHeader() {
-    return (
-      <Header>
-        {
-          Platform.OS !== 'ios' ? null : (
-            <Left>
-              <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
-                <Icon name="arrow-back" />
-              </Button>
-            </Left>
-          )
-        }
-        <Body>
-          <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
-        </Body>
-        {Platform.OS === 'ios' ? <Right /> : null}
-      </Header>
-    );
-  }
-
   render() {
     if (!this.props.checkIn) { return null; }
     const {
@@ -88,7 +61,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
     return (
       <Container>
-        {this.renderHeader()}
+        <CheckInDetailHeader navigation={this.props.navigation} />
         <Content>
           <MapView
             zoomEnabled={false}
