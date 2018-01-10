@@ -23,7 +23,7 @@ type State = {};
 export default class PlaceContentCard extends React.Component<Props, State> {
   renderBody() {
     const { rating, pricingLevel, name, address } = this.props;
-    if (!rating || pricingLevel < 0) {
+    if (!rating || !pricingLevel || pricingLevel < 0) {
       return (
         <Body>
           <Text>{name}</Text>
