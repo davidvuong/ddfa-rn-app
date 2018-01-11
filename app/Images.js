@@ -36,7 +36,7 @@ class ImageGenerator {
     this.imageCache = {};
   }
 
-  get = (key: string): string => {
+  get = (key: string): * => {
     const cachedImage: ?string = this.imageCache[key];
     if (cachedImage) {
       return cachedImage;
