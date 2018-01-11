@@ -8,7 +8,6 @@ import {
   Text,
   Card,
   CardItem,
-  Content,
 } from 'native-base';
 
 import { initAvatarImageGenerator } from '../../../../Images';
@@ -25,7 +24,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   render() {
     return _.map(this.props.reviews, (review: *) => {
       return (
-        <Card style={{ marginTop: 0 }} key={review.id}>
+        <Card style={Styles.card} key={review.id}>
           <CardItem>
             <Left>
               <Thumbnail source={this.imageGenerator.get(review.id)} />
