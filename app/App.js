@@ -15,12 +15,12 @@ import getNavigator from './navigator/AppNavigator';
 import loadConfig from './Config';
 
 import HttpService from './services/HttpService';
-import AuthenticationService from './services/AuthenticationService';
-import CheckInService from './services/CheckInService';
+import AuthenticationService from './services/Api/AuthenticationService';
+import CheckInService from './services/Api/CheckInService';
+import PhotoService from './services/Api/PhotoService';
+import ReviewService from './services/Api/ReviewService';
 
-type Props = {
-
-};
+type Props = {};
 
 type State = {
   isLoggedIn: ?boolean,
@@ -35,7 +35,9 @@ const style = {
 };
 
 export default class App extends React.Component<Props, State> {
-  store: *;
+  store = ConfigureStore(getReducer());
+  state = { isLoggedIn: null };
+  config = loadConfig();
 
   constructor(props: Props) {
     super(props);
@@ -45,19 +47,24 @@ export default class App extends React.Component<Props, State> {
       global.self = global;
     }
 
-    const config = loadConfig();
-    const baseApiEndpoint = `${config.api.host}:${config.api.port}`;
-
-    this.store = ConfigureStore(getReducer());
-    this.state = { isLoggedIn: null };
-
     /* Initialize app services. */
+    const baseApiEndpoint: string = `${this.config.api.host}:${this.config.api.port}`;
     const httpService = new HttpService();
+
     AuthenticationService.initialize(baseApiEndpoint, httpService);
     AuthenticationService.getTokenFromStorage()
       .then((token: string) => {
         CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
-        this.setState({ isLoggedIn: !!token });
+        PhotoService.initialize(baseApiEndpoint, AuthenticationService, httpService);
+        ReviewService.initialize(baseApiEndpoint, AuthenticationService, httpService);
+
+        return AuthenticationService.isTokenValid(token);
+      })
+      .then((isLoggedIn: boolean) => {
+        this.setState({ isLoggedIn });
+        if (!isLoggedIn) {
+          AuthenticationService.logout();
+        }
       });
   }
 

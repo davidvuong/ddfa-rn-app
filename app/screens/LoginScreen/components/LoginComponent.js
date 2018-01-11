@@ -17,12 +17,12 @@ import {
   Image,
 } from 'react-native';
 
-import Images from '../../../Images';
+import { Images } from '../../../Images';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
 type Props = {
-  isLoggingIn: ?boolean,
+  isLoggingIn: boolean,
   loginErrorStatus: ?Error,
   navigation: *,
   loginUser: (string, string) => *,
@@ -35,17 +35,9 @@ type State = {
 
 export default class LoginComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
+  state = { username: null, password: null };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = { username: null, password: null };
-
-    (this: any).isLoginButtonDisabled = this.isLoginButtonDisabled.bind(this);
-    (this: any).onPressLogin = this.onPressLogin.bind(this);
-    (this: any).navigateToMainPage = this.navigateToMainPage.bind(this);
-  }
-
-  navigateToMainPage() {
+  navigateToMainPage = () => {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
@@ -54,12 +46,12 @@ export default class LoginComponent extends React.Component<Props, State> {
     }));
   }
 
-  isLoginButtonDisabled() {
+  isLoginButtonDisabled = () => {
     return this.props.isLoggingIn || !this.state.username || !this.state.password;
   }
 
-  onPressLogin() {
-    if (this.isLoginButtonDisabled()) { return; }
+  onPressLogin = () => {
+    if (!this.state.username || !this.state.password) { return; }
 
     this.props.loginUser(this.state.username, this.state.password)
       .then(() => {
@@ -95,6 +87,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 placeholder='Username'
                 value={this.state.username}
                 autoCapitalize={'none'}
+                autoCorrect={false}
                 onChangeText={(username: string) => { this.setState({ username }); }}
                 style={Styles.inputStyle}
               />

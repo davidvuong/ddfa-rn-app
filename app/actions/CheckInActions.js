@@ -1,6 +1,6 @@
 // @flow
 import * as actions from '../ActionTypes';
-import CheckInService from '../services/CheckInService';
+import CheckInService from '../services/Api/CheckInService';
 
 /* Internal */
 
@@ -35,28 +35,18 @@ export function createCheckIn(
   longitude: number,
   address: string,
   name: string,
-  comment: ?string,
-  rating: ?number,
-  isPaying: boolean,
-  amountPaid: ?number,
+  googlePlaceId: ?string,
 ) {
   return (dispatch: *) => {
     dispatch(createCheckInRequest());
-    return CheckInService.create(
-      latitude,
-      longitude,
-      address,
-      name,
-      comment,
-      rating,
-      isPaying,
-      amountPaid,
-    ).then(() => {
-      dispatch(createCheckInSuccess());
-    }, (error: Error) => {
-      dispatch(createCheckInError(error));
-      throw error;
-    });
+    return CheckInService.create(latitude, longitude, address, name, googlePlaceId)
+      .then((id: string) => {
+        dispatch(createCheckInSuccess());
+        return id;
+      }, (error: Error) => {
+        dispatch(createCheckInError(error));
+        throw error;
+      });
   };
 }
 
@@ -64,8 +54,9 @@ export function listCheckIns(startTime: string) {
   return (dispatch: *) => {
     dispatch(listCheckInRequest());
     return CheckInService.list(startTime)
-      .then((checkIns: *) => {
+      .then((checkIns: Array<*>) => {
         dispatch(listCheckInSuccess(checkIns));
+        return checkIns;
       }, (error: Error) => {
         dispatch(listCheckInError(error));
         throw error;

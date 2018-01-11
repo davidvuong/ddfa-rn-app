@@ -15,17 +15,6 @@ export default {
   mapView: {
     height: 220,
   },
-  placeRatingAndPrice: {
-    fontSize: 12,
-    marginTop: 3,
-    marginBottom: 3,
-    fontWeight: '500',
-    color: 'orange',
-  },
-  placeRatingStarIcon: {
-    fontSize: 12,
-    color: 'orange',
-  },
   placeCommentItem: {
     paddingTop: 5,
     paddingLeft: 10,

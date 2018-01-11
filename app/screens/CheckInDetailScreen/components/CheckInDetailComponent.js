@@ -1,108 +1,96 @@
 // @flow
-import _ from 'lodash';
 import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
-  Header,
-  Body,
   Content,
+  Body,
   Text,
   Card,
   CardItem,
+  View,
 } from 'native-base';
-import MapView from 'react-native-maps';
+import {
+  ActivityIndicator,
+} from 'react-native';
 
-import GeoLocationService from '../../../services/GeoLocationService';
+import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
+import CheckInDetailPhotoGallery from './CheckInDetailPhotoGallery/CheckInDetailPhotoGallery';
+import CheckInDetailReviews from './CheckInDetailReviews/CheckInDetailReviews';
+import CheckInDetailMap from './CheckInDetailMap/CheckInDetailMap';
+
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
 type Props = {
   checkIn: *,
+  navigation: *,
   resetSelectedCheckIn: () => *,
+  getCheckIn: (string) => *,
+  getPhotoUrl: (string) => string,
+  getCurrencySymbol: (string) => string,
 };
 
-type State = {};
+type State = {
+  detailedCheckIn: ?*,
+};
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
+  state = { detailedCheckIn: null };
+
+  componentDidMount() {
+    this.props.getCheckIn(this.props.checkIn.id)
+      .then((detailedCheckIn: *) => {
+        this.setState({ detailedCheckIn });
+      })
+      .catch((error: Error) => {
+        console.error(error); // TODO: Handle failure.
+      });
+  }
 
   componentWillUnmount() {
     this.props.resetSelectedCheckIn();
   }
 
-  render() {
-    if (!this.props.checkIn) { return null; }
-    const {
-      id,
-      name,
-      address,
-      comment,
-      latitude,
-      longitude,
-      tz,
-      createdAt,
-    } = this.props.checkIn;
+  renderTitleCard() {
+    const { name, address, createdAt } = this.props.checkIn;
+    return (
+      <Card>
+        <CardItem header>
+          <Body>
+            <Text>{name}</Text>
+            <Text note>{address}</Text>
+            <Text note numberOfLines={1} style={Styles.checkedInAtText}>
+              Checked in @ {moment(createdAt).format('h:mmA, Do MMM YYYY')}
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  }
 
-    const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
+  render() {
+    const { getPhotoUrl, getCurrencySymbol, checkIn, navigation } = this.props;
+    const { detailedCheckIn } = this.state;
+    if (!checkIn) { return null; }
+
     return (
       <Container>
-        <Header>
-          <Body>
-            <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
-          </Body>
-        </Header>
+        <CheckInDetailHeader navigation={navigation} />
         <Content>
-          <MapView
-            zoomEnabled={false}
-            rotateEnabled={false}
-            scrollEnabled={false}
-            pitchEnabled={false}
-            toolbarEnabled={false}
-            moveOnMarkerPress={false}
-            initialRegion={{
-              latitude,
-              longitude,
-              latitudeDelta: delta.latitudeDelta,
-              longitudeDelta: delta.longitudeDelta,
-            }}
-            style={Styles.mapView}
-          >
-            <MapView.Marker coordinate={{ latitude, longitude }} />
-          </MapView>
-          <Card>
-            <CardItem header>
-              <Body>
-                <Text>{name}</Text>
-                <Text note>{address}</Text>
-                <Text note numberOfLines={1} style={Styles.checkedInAtText}>
-                  Checked in @ {moment(createdAt).format('h:mmA, Do MMM YYYY')}
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
+          <CheckInDetailMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
+          {this.renderTitleCard()}
           {
-            comment ? (
-              <Card>
-                <CardItem>
-                  <Body>
-                    <Text>{comment}</Text>
-                  </Body>
-                </CardItem>
-              </Card>
+            detailedCheckIn ? (
+              <View>
+                <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
+                <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
+              </View>
+            ) : (
+              <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
             )
-            :
-            null
           }
-          <Card style={{ marginBottom: 20 }}>
-            <CardItem header>
-              <Body>
-                <Text>{id}</Text>
-                <Text note>{tz}: (lat:{latitude}, lng:{longitude})</Text>
-                <Text note>dt:{createdAt}</Text>
-              </Body>
-            </CardItem>
-          </Card>
         </Content>
       </Container>
     );

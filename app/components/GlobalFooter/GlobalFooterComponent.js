@@ -1,0 +1,101 @@
+// @flow
+import Promise from 'bluebird';
+import * as React from 'react';
+import { NavigationActions } from 'react-navigation';
+import {
+  Text,
+  Icon,
+  Footer,
+  FooterTab,
+  Button,
+} from 'native-base';
+import {
+  Alert,
+  Platform,
+} from 'react-native';
+import RNGooglePlaces from 'react-native-google-places';
+
+import Styles from './Styles';
+
+type Props = {
+  navigation: *,
+  logoutUser: () => *,
+  createCheckIn: (number, number, string, string, ?string) => Promise<string>,
+  setSelectedLocation: (*) => *,
+};
+
+type State = {};
+
+export default class GlobalFooterComponent extends React.Component<Props, State> {
+  navigateToLogin = () => {
+    this.props.logoutUser()
+      .then(() => {
+        this.props.navigation.dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Login' }),
+          ],
+        }));
+      })
+      .catch((error: Error) => { console.error(error.message); });
+  }
+
+  onPressLogout = () => {
+    const buttons = [
+      { text: 'Yes', onPress: this.navigateToLogin },
+      { text: 'Cancel', style: 'cancel' },
+    ];
+    Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
+  }
+
+  onPressCheckIn = () => {
+    let googlePlace: *;
+
+    const options = { radius: 0.3 };
+    RNGooglePlaces.openPlacePickerModal(options)
+      .then((place: *) => {
+        googlePlace = place;
+
+        const { name, address, latitude, longitude, placeID } = place;
+        return this.props.createCheckIn(
+          latitude, longitude, address, name || address || `${latitude} ${longitude}`, placeID,
+        );
+      })
+      .then((checkInId: string) => {
+        // NOTE:
+        //
+        // Replace setSelectedLocation to checkIn (but also include the GooglePlace)
+        // Perhaps... `setGooglePlace`, `setCheckIn`.
+        this.props.setSelectedLocation({ id: checkInId, place: googlePlace });
+        this.props.navigation.navigate('ReviewCreate');
+      })
+      .catch(() => {
+        // pass
+      });
+  }
+
+  render() {
+    return (
+      <Footer>
+        <FooterTab>
+          <Button vertical>
+            <Icon name="ios-apps" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>home</Text>}
+          </Button>
+          <Button vertical>
+            <Icon name="ios-search" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>nearby</Text>}
+          </Button>
+          <Button vertical onPress={this.onPressCheckIn}>
+            <Icon name="ios-navigate" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>check-in</Text>}
+          </Button>
+          <Button vertical onPress={this.onPressLogout}>
+            <Icon name="ios-exit" style={Styles.icon} />
+            {Platform.OS === 'ios' ? null : <Text>logout</Text>}
+          </Button>
+        </FooterTab>
+      </Footer>
+    );
+  }
+}

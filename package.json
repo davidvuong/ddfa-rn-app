@@ -14,12 +14,13 @@
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.1",
-    "flow-bin": "^0.60.1"
+    "flow-bin": "^0.62.0"
   },
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "react-native run-ios"
+    "ios": "react-native run-ios",
+    "eslint": "eslint ./app"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -31,7 +32,8 @@
     "react-native-config": "^0.11.1",
     "react-native-google-places": "^2.4.2",
     "react-native-maps": "^0.18.3",
-    "react-navigation": "^1.0.0-beta.21",
+    "react-native-swiper": "^1.5.13",
+    "react-navigation": "^1.0.0-beta.22",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

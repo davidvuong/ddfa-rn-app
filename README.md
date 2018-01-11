@@ -57,12 +57,16 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
 1. Run the React Native application:
 
-    I prefer to run the packager myself (more control over my terminal):
-
     ```bash
     yarn start
+    yarn run ios
+    yarn run android
+    ```
+
+    If you would like to use a different `env` file:
+
+    ```bash
     ENVFILE=.env.remote yarn run ios
-    ENVFILE=.env.remote yarn run android
     ```
 
 ## Bugs
@@ -80,7 +84,7 @@ Another thing: For whatever reason, due to a combination of `native-base` and `s
 
 **Android:**
 
-```
+```bash
 react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest ./android/app/build/intermediates/res/merged/debug
 
 cd android && ./gradlew assembleDebug
@@ -91,6 +95,6 @@ cd app/build/outputs/apk/ && adb install app-debug.apk
 
 TODO...
 
-## Debugging with Android Studio
+## Attributions
 
-TODO...
+Avatar Icons - https://www.flaticon.com/packs/avatar-set

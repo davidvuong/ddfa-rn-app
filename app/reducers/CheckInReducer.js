@@ -3,20 +3,20 @@ import _ from 'lodash';
 import * as actions from '../ActionTypes';
 
 type State = {
-  isCheckingIn: ?boolean,
+  isCheckingIn: boolean,
   checkInErrorStatus: ?Error,
   checkIns: Array<*>,
-  isListingCheckIns: ?boolean,
+  isListingCheckIns: boolean,
   checkInListErrorStatus: ?Error,
-  selectedLocation: ?*,
-  selectedCheckIn: ?*,
+  selectedLocation: *,
+  selectedCheckIn: *,
 };
 
-const initialState = {
-  // Check in progress status.
-  isCheckingIn: null,
+const initialState: State = {
+  // Check-in progress status.
+  isCheckingIn: false,
 
-  // Check in error response object.
+  // Check-in error response object.
   checkInErrorStatus: null,
 
   // The location we've selected to check in.
@@ -29,13 +29,13 @@ const initialState = {
   checkIns: [],
 
   // Status of retrieving checkIn resources.
-  isListingCheckIns: null,
+  isListingCheckIns: false,
 
-  // Check in list error response object.
+  // Check-in list error response object.
   checkInListErrorStatus: null,
 };
 
-export default function CheckInReducer(state: State = initialState, action: *) {
+export default function CheckInReducer(state: State = initialState, action: *): State {
   switch (action.type) {
     case actions.CREATE_CHECK_IN_REQUEST:
       return { ...state, isCheckingIn: true, checkInErrorStatus: null };
@@ -69,7 +69,7 @@ export default function CheckInReducer(state: State = initialState, action: *) {
     case actions.RESET_CHECK_IN_LIST:
       return {
         ...state,
-        isListingCheckIns: null,
+        isListingCheckIns: false,
         checkIns: [],
         checkInListErrorStatus: null,
       };
