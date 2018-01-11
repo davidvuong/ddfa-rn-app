@@ -55,7 +55,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
             <Left>
               <Thumbnail source={this.imageGenerator.get(review.id)} />
               <Body>
-                <Text>{review.user.username}</Text>
+                <Text>{review.user.name || review.user.username}</Text>
                 <Text note>
                   <Text style={{ fontWeight: '300', color: 'orange' }}>F</Text> {review.foodRating}{', '}
                   <Text style={{ fontWeight: '300', color: 'orange' }}>S</Text> {review.serviceRating}{', '}
@@ -76,6 +76,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   }
 
   render() {
+    console.log(this.props.checkIn);
     return (
       <Container>
         {this.renderReviews()}
