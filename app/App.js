@@ -20,8 +20,6 @@ import CheckInService from './services/Api/CheckInService';
 import PhotoService from './services/Api/PhotoService';
 import ReviewService from './services/Api/ReviewService';
 
-import type { Config } from './Config';
-
 type Props = {};
 
 type State = {
@@ -37,8 +35,6 @@ const style = {
 };
 
 export default class App extends React.Component<Props, State> {
-  store: *;
-
   store = ConfigureStore(getReducer());
   state = { isLoggedIn: null };
   config = loadConfig();
