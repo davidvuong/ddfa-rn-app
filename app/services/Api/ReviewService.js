@@ -11,13 +11,13 @@ class ReviewService {
   authenticationService: AuthenticationServiceT;
   http: HttpService
 
-  initialize(host: string, authenticationService: AuthenticationServiceT, httpService: HttpService) {
+  initialize = (host: string, authenticationService: AuthenticationServiceT, httpService: HttpService) => {
     this.host = host;
     this.authenticationService = authenticationService;
     this.http = httpService;
   }
 
-  create(
+  create = (
     checkInId: string,
     amountPaid: number,
     currency: string,
@@ -25,7 +25,7 @@ class ReviewService {
     foodRating: ?number,
     environmentRating: ?number,
     serviceRating: ?number,
-  ): Promise<string> {
+  ): Promise<string> => {
     const endpoint = `${this.host}/checkins/${checkInId}/reviews`;
     const headers = this.authenticationService.getAuthenticationHeader();
     const payload = {
@@ -41,6 +41,17 @@ class ReviewService {
       .then((res: *) => {
         return Promise.resolve(res.id);
       });
+  }
+
+  getCurrencySymbol = (currency: string): string => {
+    return {
+      USD: '$',
+      AUD: '$',
+      CNY: '&',
+      JPY: '¥',
+      GBP: '£',
+      PKW: '₩',
+    }[currency] || '';
   }
 }
 

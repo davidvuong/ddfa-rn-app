@@ -12,18 +12,18 @@ class PhotoService {
   authenticationService: AuthenticationServiceT;
   http: HttpService
 
-  initialize(host: string, authenticationService: AuthenticationServiceT, httpService: HttpService) {
+  initialize = (host: string, authenticationService: AuthenticationServiceT, httpService: HttpService) => {
     this.host = host;
     this.authenticationService = authenticationService;
     this.http = httpService;
   }
 
-  getUrl(id: string): string {
+  getUrl = (id: string): string => {
     return `${this.host}/photos/${id}`;
   }
 
   // FIXME: checkInId should be the reviewId!!!
-  create(checkInId: string, photos: Array<Blob>): Promise<string> {
+  create = (checkInId: string, photos: Array<Blob>): Promise<string> => {
     const endpoint = `${this.host}/checkins/${checkInId}/photos`;
     const headers = {
       ...this.authenticationService.getAuthenticationHeader(),

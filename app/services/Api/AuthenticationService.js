@@ -9,17 +9,17 @@ export class AuthenticationService {
   token: ?string;
   http: HttpService;
 
-  initialize(host: string, httpService: HttpService) {
+  initialize = (host: string, httpService: HttpService) => {
     this.host = host;
     this.token = null;
     this.http = httpService;
   }
 
-  getAuthenticationHeader(): { Authorization: ?string } {
+  getAuthenticationHeader = (): { Authorization: ?string } => {
     return { Authorization: this.token };
   }
 
-  getTokenFromStorage(): Promise<string> {
+  getTokenFromStorage = (): Promise<string> => {
     return AsyncStorage.getItem('@user.token')
       .then((token: string): Promise<string> => {
         this.token = token;
@@ -27,7 +27,7 @@ export class AuthenticationService {
       });
   }
 
-  isTokenValid(token: string): Promise<boolean> {
+  isTokenValid = (token: string): Promise<boolean> => {
     const endpoint: string = `${this.host}/users/authenticate-token`;
     const headers = { Authorization: token };
     return this.http.post(endpoint, {}, headers)
@@ -35,7 +35,7 @@ export class AuthenticationService {
       .catch(() => { return false; });
   }
 
-  logout(): Promise<void> {
+  logout = (): Promise<void> => {
     return AsyncStorage.clear()
       .then((): Promise<void> => {
         this.token = null;
@@ -43,7 +43,7 @@ export class AuthenticationService {
       });
   }
 
-  login(username: string, password: string): Promise<void> {
+  login = (username: string, password: string): Promise<void> => {
     const endpoint: string = `${this.host}/users/authenticate`;
     const payload: { username: string, password: string } = { username, password };
 
