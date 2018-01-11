@@ -34,11 +34,9 @@ class ImageGenerator {
     this.sampleImages = sampleImages;
     this.imagePool = [];
     this.imageCache = {};
-
-    (this: any).get = this.get.bind(this);
   }
 
-  get(key: string): string {
+  get = (key: string): string => {
     const cachedImage: ?string = this.imageCache[key];
     if (cachedImage) {
       return cachedImage;

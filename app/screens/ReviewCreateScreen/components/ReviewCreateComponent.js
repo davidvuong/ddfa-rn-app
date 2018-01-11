@@ -30,7 +30,7 @@ import Styles from '../Styles';
 type Props = {
   selectedLocation: *,
   isCreatingReview: boolean,
-  createReviewErrorStatus: review.createReviewErrorStatus,
+  createReviewErrorStatus: ?Error,
   navigation: *,
   resetSelectedLocation: () => *,
   resetCheckIns: () => *,
@@ -61,19 +61,13 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       isWritingComment: false,
       comment: null,
     };
-
-    (this: any).onPressCancel = this.onPressCancel.bind(this);
-    (this: any).onPressSubmit = this.onPressSubmit.bind(this);
-    (this: any).onPressDone = this.onPressDone.bind(this);
-    (this: any).onFocusComment = this.onFocusComment.bind(this);
-    (this: any).onChangeTextComment = this.onChangeTextComment.bind(this);
   }
 
   componentWillUnmount() {
     this.props.resetSelectedLocation();
   }
 
-  onPressCancel() {
+  onPressCancel = () => {
     const buttons = [
       { text: 'Yes', onPress: this.props.navigation.goBack },
       { text: 'No', style: 'cancel' },
@@ -81,7 +75,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     Alert.alert('Cancel Review', 'Are you sure you want to cancel?', buttons);
   }
 
-  onPressSubmit() {
+  onPressSubmit = () => {
     if (this.props.isCreatingReview) { return null; }
 
     return this.props.createReview(
@@ -105,20 +99,20 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       });
   }
 
-  onPressDone() {
+  onPressDone = () => {
     this.setState({ isWritingComment: false });
     Keyboard.dismiss();
   }
 
-  onFocusComment() {
+  onFocusComment = () => {
     this.setState({ isWritingComment: true });
   }
 
-  onChangeTextComment(comment: string) {
+  onChangeTextComment = (comment: string) => {
     this.setState({ comment });
   }
 
-  renderHeader() {
+  renderHeader = () => {
     return (
       <Header>
         {Platform.OS === 'ios' ? <Left /> : null}
@@ -138,7 +132,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     );
   }
 
-  renderFooter() {
+  renderFooter = () => {
     return (
       <Footer>
         <FooterTab>

@@ -53,12 +53,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     };
     this.imageGenerator = initFoodImageGenerator();
     this.bottomScrollPadding = 20;
-
-    (this: any).performInitialLoad = this.performInitialLoad.bind(this);
-    (this: any).navigateToCheckInDetail = this.navigateToCheckInDetail.bind(this);
-    (this: any).onPressRefresh = this.onPressRefresh.bind(this);
-    (this: any).onScroll = this.onScroll.bind(this);
-    (this: any).renderCheckIns = this.renderCheckIns.bind(this);
   }
 
   componentDidMount() {
@@ -67,12 +61,12 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     }
   }
 
-  navigateToCheckInDetail(checkIn: *) {
+  navigateToCheckInDetail = (checkIn: *) => {
     this.props.setSelectedCheckIn(checkIn);
     this.props.navigation.navigate('CheckInDetail');
   }
 
-  performInitialLoad() {
+  performInitialLoad = () => {
     this.setState({ isInitialLoad: true });
     this.props.listCheckIns((new Date()).toISOString())
       .then(() => {
@@ -80,12 +74,12 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       });
   }
 
-  onPressRefresh() {
+  onPressRefresh = () => {
     this.props.resetCheckIns();
     this.performInitialLoad();
   }
 
-  onScroll(event: *) {
+  onScroll = (event: *) => {
     // Check if we're at the bottom of the page.
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     if (!(layoutMeasurement.height + contentOffset.y > contentSize.height - this.bottomScrollPadding)) {
@@ -112,7 +106,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       });
   }
 
-  renderCheckIns() {
+  renderCheckIns = () => {
     const { checkIns } = this.props;
     return (
       <Content padder onScroll={this.onScroll}>

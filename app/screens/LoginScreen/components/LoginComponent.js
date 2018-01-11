@@ -39,13 +39,9 @@ export default class LoginComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { username: null, password: null };
-
-    (this: any).isLoginButtonDisabled = this.isLoginButtonDisabled.bind(this);
-    (this: any).onPressLogin = this.onPressLogin.bind(this);
-    (this: any).navigateToMainPage = this.navigateToMainPage.bind(this);
   }
 
-  navigateToMainPage() {
+  navigateToMainPage = () => {
     this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
@@ -54,11 +50,11 @@ export default class LoginComponent extends React.Component<Props, State> {
     }));
   }
 
-  isLoginButtonDisabled() {
+  isLoginButtonDisabled = () => {
     return this.props.isLoggingIn || !this.state.username || !this.state.password;
   }
 
-  onPressLogin() {
+  onPressLogin = () => {
     if (!this.state.username || !this.state.password) { return; }
 
     this.props.loginUser(this.state.username, this.state.password)

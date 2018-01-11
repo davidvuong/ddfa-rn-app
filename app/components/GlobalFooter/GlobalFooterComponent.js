@@ -27,15 +27,7 @@ type Props = {
 type State = {};
 
 export default class GlobalFooterComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    (this: any).navigateToLogin = this.navigateToLogin.bind(this);
-    (this: any).onPressLogout = this.onPressLogout.bind(this);
-    (this: any).onPressCheckIn = this.onPressCheckIn.bind(this);
-  }
-
-  navigateToLogin() {
+  navigateToLogin = () => {
     this.props.logoutUser()
       .then(() => {
         this.props.navigation.dispatch(NavigationActions.reset({
@@ -48,7 +40,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .catch((error: Error) => { console.error(error.message); });
   }
 
-  onPressLogout() {
+  onPressLogout = () => {
     const buttons = [
       { text: 'Yes', onPress: this.navigateToLogin },
       { text: 'Cancel', style: 'cancel' },
@@ -56,7 +48,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
-  onPressCheckIn() {
+  onPressCheckIn = () => {
     let googlePlace: *;
 
     const options = { radius: 0.3 };
@@ -77,7 +69,9 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
         this.props.setSelectedLocation({ id: checkInId, place: googlePlace });
         this.props.navigation.navigate('ReviewCreate');
       })
-      .catch((error: Error) => { console.error(error.message); });
+      .catch(() => {
+        // pass
+      });
   }
 
   render() {
