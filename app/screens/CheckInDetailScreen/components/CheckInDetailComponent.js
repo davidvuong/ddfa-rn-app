@@ -14,7 +14,8 @@ import {
 } from 'react-native';
 
 import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
-import CheckInDetailContent from './CheckInDetailContent/CheckInDetailContent';
+import CheckInDetailPhotoGallery from './CheckInDetailPhotoGallery/CheckInDetailPhotoGallery';
+import CheckInDetailReviews from './CheckInDetailReviews/CheckInDetailReviews';
 import CheckInDetailMap from './CheckInDetailMap/CheckInDetailMap';
 
 import navigationOptions from '../NavigationOptions';
@@ -68,21 +69,25 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   render() {
-    if (!this.props.checkIn) { return null; }
+    const { getPhotoUrl, checkIn, navigation } = this.props;
+    const { detailedCheckIn } = this.state;
+    if (!checkIn) { return null; }
+
     return (
       <Container>
-        <CheckInDetailHeader navigation={this.props.navigation} />
+        <CheckInDetailHeader navigation={navigation} />
         <Content>
-          <CheckInDetailMap
-            latitude={this.props.checkIn.latitude}
-            longitude={this.props.checkIn.longitude}
-          />
+          <CheckInDetailMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
           {this.renderTitleCard()}
           {
-            this.state.detailedCheckIn ?
-              <CheckInDetailContent checkIn={this.state.detailedCheckIn} getPhotoUrl={this.props.getPhotoUrl} />
-              :
+            detailedCheckIn ? (
+              <Container>
+                <CheckInDetailReviews reviews={detailedCheckIn.reviews} />
+                <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
+              </Container>
+            ) : (
               <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
+            )
           }
         </Content>
       </Container>
