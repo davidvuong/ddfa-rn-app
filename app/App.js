@@ -39,6 +39,10 @@ const style = {
 export default class App extends React.Component<Props, State> {
   store: *;
 
+  store = ConfigureStore(getReducer());
+  state = { isLoggedIn: null };
+  config = loadConfig();
+
   constructor(props: Props) {
     super(props);
 
@@ -47,14 +51,10 @@ export default class App extends React.Component<Props, State> {
       global.self = global;
     }
 
-    const config: Config = loadConfig();
-    const baseApiEndpoint: string = `${config.api.host}:${config.api.port}`;
-
-    this.store = ConfigureStore(getReducer());
-    this.state = { isLoggedIn: null };
-
     /* Initialize app services. */
+    const baseApiEndpoint: string = `${this.config.api.host}:${this.config.api.port}`;
     const httpService = new HttpService();
+
     AuthenticationService.initialize(baseApiEndpoint, httpService);
     AuthenticationService.getTokenFromStorage()
       .then((token: string) => {
