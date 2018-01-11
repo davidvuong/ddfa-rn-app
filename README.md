@@ -78,6 +78,8 @@ Another thing: For whatever reason, due to a combination of `native-base` and `s
 
 **Android:**
 
+Change the values of `DDFA_RELEASE_STORE_PASSWORD` and `DDFA_RELEASE_KEY_PASSWORD` in `android/app/gradle.properties`.
+
 ```bash
 # Keystore: https://developer.android.com/training/articles/keystore.html
 keytool -genkey -v -keystore ddfa.keystore -alias ddfa -keyalg RSA -keysize 2048 -validity 10000
