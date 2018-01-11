@@ -76,7 +76,6 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   }
 
   render() {
-    console.log(this.props.checkIn);
     return (
       <Container>
         {this.renderReviews()}
