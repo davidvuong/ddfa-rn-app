@@ -18,7 +18,7 @@ type Props = {
   checkIn: *,
   isLast: boolean,
   onPress: (*) => *,
-  onGetImage: (string) => Buffer,
+  onGetImage: (string) => *,
 };
 
 type State = {};
