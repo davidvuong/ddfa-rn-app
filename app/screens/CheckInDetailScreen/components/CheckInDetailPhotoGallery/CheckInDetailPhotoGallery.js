@@ -17,8 +17,9 @@ type State = {};
 
 export default class CheckInDetailContent extends React.Component<Props, State> {
   render() {
+    if (!this.props.photos.length) { return null; }
     return (
-      <Swiper loop height={420} activeDotColor="rgba(255, 255, 255, 0.65)">
+      <Swiper loop height={380} activeDotColor="rgba(255, 255, 255, 0.65)">
         {
           _.map(this.props.photos, (photo: *) => {
             const source = { uri: this.props.getPhotoUrl(photo.id) };

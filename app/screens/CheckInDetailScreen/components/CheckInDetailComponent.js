@@ -3,11 +3,12 @@ import moment from 'moment';
 import * as React from 'react';
 import {
   Container,
-  Body,
   Content,
+  Body,
   Text,
   Card,
   CardItem,
+  View,
 } from 'native-base';
 import {
   ActivityIndicator,
@@ -81,10 +82,10 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           {this.renderTitleCard()}
           {
             detailedCheckIn ? (
-              <Container>
+              <View>
                 <CheckInDetailReviews reviews={detailedCheckIn.reviews} />
                 <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
-              </Container>
+              </View>
             ) : (
               <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
             )

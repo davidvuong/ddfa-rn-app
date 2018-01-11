@@ -1,5 +1,4 @@
 // @flow
-import moment from 'moment';
 import * as React from 'react';
 import MapView from 'react-native-maps';
 

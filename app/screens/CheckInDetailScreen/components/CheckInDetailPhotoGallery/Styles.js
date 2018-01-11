@@ -6,6 +6,6 @@ import {
 export default {
   photo: {
     width: Dimensions.get('window').width,
-    height: 420,
+    height: 380,
   },
 };
