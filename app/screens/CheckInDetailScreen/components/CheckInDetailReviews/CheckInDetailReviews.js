@@ -28,9 +28,9 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
     const price = amountPaid === 0 ? 'FREE' : `${this.props.getCurrencySymbol(currency)}${amountPaid} (${currency})`;
     return (
       <Text note>
-        <Text note style={Styles.ratingsText}>F</Text>: {foodRating}{' '}
-        <Text note style={Styles.ratingsText}>S</Text>: {serviceRating}{' '}
-        <Text note style={Styles.ratingsText}>E</Text>: {environmentRating}{' '}
+        <Text note style={Styles.ratingsText}>F</Text>: {foodRating || 'n/a'}{' '}
+        <Text note style={Styles.ratingsText}>S</Text>: {serviceRating || 'n/a'}{' '}
+        <Text note style={Styles.ratingsText}>E</Text>: {environmentRating || 'n/a'}{' '}
         <Text note style={Styles.ratingsText}>P</Text>: {price}
       </Text>
     );
