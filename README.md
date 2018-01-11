@@ -59,14 +59,8 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     ```bash
     yarn start
-    yarn run ios
-    yarn run android
-    ```
-
-    If you would like to use a different `env` file:
-
-    ```bash
-    ENVFILE=.env.remote yarn run ios
+    ENVFILE=.env.local yarn run ios
+    ENVFILE=.env.local yarn run android
     ```
 
 ## Bugs
@@ -85,10 +79,11 @@ Another thing: For whatever reason, due to a combination of `native-base` and `s
 **Android:**
 
 ```bash
-react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest ./android/app/build/intermediates/res/merged/debug
+# Keystore: https://developer.android.com/training/articles/keystore.html
+keytool -genkey -v -keystore ddfa.keystore -alias ddfa -keyalg RSA -keysize 2048 -validity 10000
 
-cd android && ./gradlew assembleDebug
-cd app/build/outputs/apk/ && adb install app-debug.apk
+cd android && ./gradlew clean && ./gradlew assembleRelease
+adb install -r ./app/build/outputs/apk/app-release.apk
 ```
 
 **iOS:**
