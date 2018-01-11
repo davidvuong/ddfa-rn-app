@@ -40,20 +40,12 @@ type State = {
 
 export default class CheckInListComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-
-  imageGenerator: Object;
-  bottomScrollPadding: number;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isInitialLoad: false,
-      noMoreCheckIns: false,
-    };
-    this.imageGenerator = initFoodImageGenerator();
-    this.bottomScrollPadding = 20;
-  }
+  state = {
+    isInitialLoad: false,
+    noMoreCheckIns: false,
+  };
+  imageGenerator = initFoodImageGenerator();
+  bottomScrollPadding = 20;
 
   componentDidMount() {
     if (!this.props.checkIns.length) {

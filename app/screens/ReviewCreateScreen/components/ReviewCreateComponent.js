@@ -53,15 +53,10 @@ type State = {
 
 export default class ReviewCreateComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isWritingComment: false,
-      comment: null,
-    };
-  }
+  state = {
+    isWritingComment: false,
+    comment: null,
+  };
 
   componentWillUnmount() {
     this.props.resetSelectedLocation();

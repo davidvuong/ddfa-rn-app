@@ -35,11 +35,7 @@ type State = {
 
 export default class LoginComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = { username: null, password: null };
-  }
+  state = { username: null, password: null };
 
   navigateToMainPage = () => {
     this.props.navigation.dispatch(NavigationActions.reset({

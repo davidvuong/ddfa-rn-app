@@ -26,13 +26,7 @@ type Props = {
 type State = {};
 
 export default class CheckInDetailContent extends React.Component<Props, State> {
-  imageGenerator: Object;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.imageGenerator = initAvatarImageGenerator();
-  }
+  imageGenerator = initAvatarImageGenerator();
 
   renderPhotos() {
     return (

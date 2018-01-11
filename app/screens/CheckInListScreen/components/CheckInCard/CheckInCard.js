@@ -24,12 +24,6 @@ type Props = {
 type State = {};
 
 export default class CheckInCard extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render() {
     const { checkIn, isLast, onPress, onGetImage } = this.props;
     return (

@@ -34,11 +34,7 @@ type State = {
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = { detailedCheckIn: null };
-  }
+  state = { detailedCheckIn: null };
 
   componentDidMount() {
     this.props.getCheckIn(this.props.checkIn.id)
