@@ -32,6 +32,7 @@ ios/main.jsbundle.meta
 
 android/main.jsbundle
 android/main.jsbundle.meta
+android/app/ddfa.keystore
 
 # Android/IntelliJ
 .idea
