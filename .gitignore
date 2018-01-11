@@ -2,6 +2,7 @@
 .env
 .env.remote
 .env.device
+.env.local
 
 build/
 node_modules/
