@@ -31,10 +31,10 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
               <Body>
                 <Text>{review.user.name || review.user.username}</Text>
                 <Text note>
-                  <Text style={{ fontWeight: '300', color: 'orange' }}>F</Text> {review.foodRating}{', '}
-                  <Text style={{ fontWeight: '300', color: 'orange' }}>S</Text> {review.serviceRating}{', '}
-                  <Text style={{ fontWeight: '300', color: 'orange' }}>E</Text> {review.environmentRating}{', '}
-                  <Text style={{ fontWeight: '300', color: 'orange' }}>P</Text> {review.amountPaid} ({review.currency})
+                  <Text style={Styles.ratingsText}>F</Text> {review.foodRating}{', '}
+                  <Text style={Styles.ratingsText}>S</Text> {review.serviceRating}{', '}
+                  <Text style={Styles.ratingsText}>E</Text> {review.environmentRating}{', '}
+                  <Text style={Styles.ratingsText}>P</Text> {review.amountPaid} ({review.currency})
                 </Text>
               </Body>
             </Left>
