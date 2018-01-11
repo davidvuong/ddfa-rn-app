@@ -28,6 +28,7 @@ type Props = {
   resetSelectedCheckIn: () => *,
   getCheckIn: (string) => *,
   getPhotoUrl: (string) => string,
+  getCurrencySymbol: (string) => string,
 };
 
 type State = {
@@ -70,7 +71,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   render() {
-    const { getPhotoUrl, checkIn, navigation } = this.props;
+    const { getPhotoUrl, getCurrencySymbol, checkIn, navigation } = this.props;
     const { detailedCheckIn } = this.state;
     if (!checkIn) { return null; }
 
@@ -83,7 +84,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
           {
             detailedCheckIn ? (
               <View>
-                <CheckInDetailReviews reviews={detailedCheckIn.reviews} />
+                <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
                 <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
               </View>
             ) : (
