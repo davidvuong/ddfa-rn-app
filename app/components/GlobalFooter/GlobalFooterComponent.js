@@ -40,6 +40,30 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .catch((error: Error) => { console.error(error.message); });
   }
 
+  onPressHome = () => {
+    if (this.props.navigation.state.routeName === 'CheckInList') {
+      return;
+    }
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'CheckInList' }),
+      ],
+    }));
+  }
+
+  onPressSearch = () => {
+    if (this.props.navigation.state.routeName === 'CheckInNearby') {
+      return;
+    }
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'CheckInNearby' }),
+      ],
+    }));
+  }
+
   onPressLogout = () => {
     const buttons = [
       { text: 'Yes', onPress: this.navigateToLogin },
@@ -75,23 +99,24 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
 
   render() {
+    const { routeName } = this.props.navigation.state;
     return (
       <Footer>
         <FooterTab>
-          <Button vertical>
-            <Icon name="ios-apps" style={Styles.icon} />
+          <Button vertical onPress={this.onPressHome} active={routeName === 'CheckInList'}>
+            {Platform.OS === 'ios' ? <Icon name="ios-apps" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text>home</Text>}
           </Button>
-          <Button vertical>
-            <Icon name="ios-search" style={Styles.icon} />
+          <Button vertical onPress={this.onPressSearch} active={routeName === 'CheckInNearby'}>
+            {Platform.OS === 'ios' ? <Icon name="ios-search" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text>nearby</Text>}
           </Button>
           <Button vertical onPress={this.onPressCheckIn}>
-            <Icon name="ios-navigate" style={Styles.icon} />
+            {Platform.OS === 'ios' ? <Icon name="ios-navigate" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text>check-in</Text>}
           </Button>
           <Button vertical onPress={this.onPressLogout}>
-            <Icon name="ios-exit" style={Styles.icon} />
+            {Platform.OS === 'ios' ? <Icon name="ios-exit" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text>logout</Text>}
           </Button>
         </FooterTab>
