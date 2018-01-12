@@ -26,6 +26,7 @@ Once the above is complete, I can give a working APK to Aaron.
 - [ ] Add ability to set ratings
 - [ ] Add ability to upload photos
 - [ ] Replace npm with yarn for ddfa-api
+- [ ] Pull out domain types in ddfa-api so they can be shared with ddfa-rn-app
 
 Flow:
 
