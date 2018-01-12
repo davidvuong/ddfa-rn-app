@@ -11,6 +11,8 @@ A list of tasks to do before this branch can be merged into `master`.
 
 Once the above is complete, the database schema migration branch can be merged into master and deployed.
 
+- [ ] Populate `check_in.published_at=check_in.created_at` (also change GET `/checkins` and GET `/checkins/nearby` to ignore drafts)
+- [ ] Create a new user for Aaron
 - [ ] Add ability to search for check-ins nearby
 - [ ] Polish up UI (Android & iOS)
 - [ ] Last bit of refactor (ddfa-api, ddfa-rn-app)
@@ -23,6 +25,7 @@ Once the above is complete, I can give a working APK to Aaron.
 - [ ] Add ability set a price
 - [ ] Add ability to set ratings
 - [ ] Add ability to upload photos
+- [ ] Replace npm with yarn for ddfa-api
 
 Flow:
 
