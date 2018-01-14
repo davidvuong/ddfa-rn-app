@@ -16,6 +16,7 @@ import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import CheckInNearbyMap from './CheckInNearbyMap/CheckInNearbyMap';
 import CheckInNearbyList from './CheckInNearbyList/CheckInNearbyList';
 import navigationOptions from '../NavigationOptions';
+import Styles from '../Styles';
 
 type Props = {
   navigation: *,
@@ -75,7 +76,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
     return (
       <Container>
         <Header>
-          <Body><Text>DDFA Check-ins Nearby</Text></Body>
+          <Body><Text style={Styles.headerTitle}>DDFA Check-ins Nearby</Text></Body>
         </Header>
         {this.renderContent()}
         <GlobalFooter navigation={this.props.navigation} />
