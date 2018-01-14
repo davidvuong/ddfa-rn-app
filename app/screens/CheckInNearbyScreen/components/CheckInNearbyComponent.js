@@ -65,7 +65,11 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
     const { navigation, setSelectedCheckIn, nearbyCheckIns } = this.props;
     return (
       <Content>
-        <CheckInNearbyMap latitude={latitude} longitude={longitude} />
+        <CheckInNearbyMap
+          nearbyCheckIns={nearbyCheckIns}
+          latitude={latitude}
+          longitude={longitude}
+        />
         <CheckInNearbyList
           navigation={navigation}
           setSelectedCheckIn={setSelectedCheckIn}

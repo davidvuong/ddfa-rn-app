@@ -1,4 +1,5 @@
 // @flow
+import _ from 'lodash';
 import * as React from 'react';
 import MapView from 'react-native-maps';
 
@@ -6,6 +7,7 @@ import GeoLocationService from '../../../../services/GeoLocationService';
 import Styles from './Styles';
 
 type Props = {
+  nearbyCheckIns: Array<*>,
   latitude: number,
   longitude: number,
 };
@@ -30,7 +32,14 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
         }}
         style={Styles.mapView}
       >
-        <MapView.Marker coordinate={{ latitude, longitude }} />
+        <MapView.Marker pinColor="red" coordinate={{ latitude, longitude }} />
+        {
+          _.map(this.props.nearbyCheckIns, (checkIn: *) => {
+            return <MapView.Marker key={checkIn.id} pinColor="orange" coordinate={{
+              latitude: checkIn.latitude, longitude: checkIn.longitude,
+            }} />;
+          })
+        }
       </MapView>
     );
   }
