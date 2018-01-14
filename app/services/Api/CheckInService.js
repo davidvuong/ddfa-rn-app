@@ -40,7 +40,7 @@ class CheckInService {
   }
 
   getNearby = (latitude: number, longitude: number): Promise<Array<*>> => {
-    const endpoint = `${this.host}/checkins/?latitude=${latitude}&longitude=${longitude}`;
+    const endpoint = `${this.host}/checkins/nearby?latitude=${latitude}&longitude=${longitude}`;
     const headers = this.authenticationService.getAuthenticationHeader();
     return this.http.get(endpoint, headers)
       .then((res: *) => {
