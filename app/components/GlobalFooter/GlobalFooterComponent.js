@@ -116,7 +116,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
             {Platform.OS === 'ios' ? null : <Text>check-in</Text>}
           </Button>
           <Button vertical onPress={this.onPressLogout}>
-            {Platform.OS === 'ios' ? <Icon name="ios-exit" style={Styles.icon} /> : null}
+            {Platform.OS === 'ios' ? <Icon name="ios-log-out" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text>logout</Text>}
           </Button>
         </FooterTab>
