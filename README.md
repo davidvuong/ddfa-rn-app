@@ -10,7 +10,7 @@ This is the frontend component of the DDFA (Double D Food Adventures) app. It's 
 
     ```bash
     brew install nvm
-    nvm install 6.10
+    nvm install 6.12
 
     brew install watchman
     ```
@@ -74,7 +74,7 @@ For whatever reason, these PRs have yet to be merged into `master` so for now, p
 
 Another thing: For whatever reason, due to a combination of `native-base` and `shoutem/theme`, unless "remote debugging" is enabled, things will blow up...
 
-## Bundle JS to Run on Device (without development server)
+## Bundle JS to run on device (without development server)
 
 **Android:**
 
