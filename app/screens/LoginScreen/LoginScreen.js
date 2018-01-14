@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import LoginComponent from './components/LoginComponent';
 import AuthenticationService from '../../services/Api/AuthenticationService';
 
-const mapStateToProps = (state: *) => {
+const mapStateToProps = () => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: *) => {
+const mapDispatchToProps = () => {
   return {
     loginUser: AuthenticationService.login,
   };

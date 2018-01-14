@@ -6,7 +6,7 @@ import GlobalFooterComponent from './GlobalFooterComponent';
 import AuthenticationService from '../../services/Api/AuthenticationService';
 import CheckInService from '../../services/Api/CheckInService';
 
-const mapStateToProps = (state: *) => {
+const mapStateToProps = () => {
   return {};
 };
 
