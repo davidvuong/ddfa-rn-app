@@ -9,9 +9,6 @@ import {
   Icon,
   Button,
 } from 'native-base';
-import {
-  Platform,
-} from 'react-native';
 
 import Styles from './Styles';
 
@@ -25,19 +22,15 @@ export default class CheckInDetailHeader extends React.Component<Props, State> {
   render() {
     return (
       <Header>
-        {
-          Platform.OS !== 'ios' ? null : (
-            <Left>
-              <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
-                <Icon name="arrow-back" />
-              </Button>
-            </Left>
-          )
-        }
+        <Left>
+          <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
         <Body>
           <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
         </Body>
-        {Platform.OS === 'ios' ? <Right /> : null}
+        <Right />
       </Header>
     );
   }
