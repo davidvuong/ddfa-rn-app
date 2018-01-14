@@ -10,7 +10,7 @@ import {
 } from 'native-base';
 
 import ConfigureStore from './store/ConfigureStore';
-import getReducer from './Reducer';
+import getReducer from './reducers/AppReducer';
 import getNavigator from './navigator/AppNavigator';
 import loadConfig from './Config';
 

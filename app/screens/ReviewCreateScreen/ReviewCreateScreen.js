@@ -2,21 +2,17 @@
 import { connect } from 'react-redux';
 import ReviewCreateComponent from './components/ReviewCreateComponent';
 
+import ReviewService from '../../services/Api/ReviewService';
 import {
   listCheckIns,
   resetSelectedLocation,
   resetCheckIns,
 } from '../../actions/CheckInActions';
-import {
-  createReview,
-} from '../../actions/ReviewActions';
 
 const mapStateToProps = (state: *) => {
-  const { checkIn, review } = state;
+  const { checkIn } = state;
   return {
     selectedLocation: checkIn.selectedLocation,
-    isCreatingReview: review.isCreatingReview,
-    createReviewErrorStatus: review.createReviewErrorStatus,
   };
 };
 
@@ -31,25 +27,7 @@ const mapDispatchToProps = (dispatch: *) => {
     listCheckIns: (startTime: string) => {
       return dispatch(listCheckIns(startTime));
     },
-    createReview: (
-      checkInId: string,
-      amountPaid: number,
-      currency: string,
-      comment: ?string,
-      foodRating: ?number,
-      environmentRating: ?number,
-      serviceRating: ?number,
-    ) => {
-      return dispatch(createReview(
-        checkInId,
-        amountPaid,
-        currency,
-        comment,
-        foodRating,
-        environmentRating,
-        serviceRating,
-      ));
-    },
+    createReview: ReviewService.create,
   };
 };
 

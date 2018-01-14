@@ -22,20 +22,23 @@ import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
 type Props = {
-  isLoggingIn: boolean,
-  loginErrorStatus: ?Error,
   navigation: *,
-  loginUser: (string, string) => *,
+  loginUser: (string, string) => Promise<*>,
 };
 
 type State = {
+  isLoggingIn: boolean,
   username: ?string,
   password: ?string,
 };
 
 export default class LoginComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-  state = { username: null, password: null };
+  state = {
+    isLoggingIn: false,
+    username: null,
+    password: null,
+  };
 
   navigateToMainPage = () => {
     this.props.navigation.dispatch(NavigationActions.reset({
@@ -47,13 +50,15 @@ export default class LoginComponent extends React.Component<Props, State> {
   }
 
   isLoginButtonDisabled = () => {
-    return this.props.isLoggingIn || !this.state.username || !this.state.password;
+    return this.state.isLoggingIn || !this.state.username || !this.state.password;
   }
 
   onPressLogin = () => {
-    if (!this.state.username || !this.state.password) { return; }
+    const { username, password } = this.state;
+    if (!username || !password) { return; }
 
-    this.props.loginUser(this.state.username, this.state.password)
+    this.setState({ isLoggingIn: true });
+    this.props.loginUser(username, password)
       .then(() => {
         this.navigateToMainPage();
       })
@@ -65,7 +70,7 @@ export default class LoginComponent extends React.Component<Props, State> {
           type: 'warning',
           duration: 3000,
         });
-        this.setState({ ...this.state, password: null });
+        this.setState({ ...this.state, password: null, isLoggingIn: false });
       });
   }
 
@@ -109,7 +114,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               onPress={this.onPressLogin}
               style={Styles.loginButton}
             >
-              <Text>{this.props.isLoggingIn ? 'Logging in...' : 'Log In'}</Text>
+              <Text>{this.state.isLoggingIn ? 'Logging in...' : 'Log In'}</Text>
             </Button>
           </Container>
         </Content>

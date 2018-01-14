@@ -1,22 +1,16 @@
 // @flow
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/AuthenticationActions';
 import LoginComponent from './components/LoginComponent';
+import AuthenticationService from '../../services/Api/AuthenticationService';
 
 const mapStateToProps = (state: *) => {
-  const { authentication } = state;
-  return {
-    isLoggingIn: authentication.isLoggingIn,
-    loginErrorStatus: authentication.loginErrorStatus,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    loginUser: (username: string, password: string) => {
-      return dispatch(loginUser(username, password));
-    },
+    loginUser: AuthenticationService.login,
   };
 };
 

@@ -1,29 +1,19 @@
 // @flow
 import { connect } from 'react-redux';
-import {
-  setSelectedLocation,
-  createCheckIn,
-} from '../../actions/CheckInActions';
-import {
-  logoutUser,
-} from '../../actions/AuthenticationActions';
+
+import { setSelectedLocation } from '../../actions/CheckInActions';
 import GlobalFooterComponent from './GlobalFooterComponent';
+import AuthenticationService from '../../services/Api/AuthenticationService';
+import CheckInService from '../../services/Api/CheckInService';
 
 const mapStateToProps = (state: *) => {
-  const { checkIn } = state;
-  return {
-    isCheckingIn: checkIn.isCheckingIn,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    createCheckIn: (latitude: number, longitude: number, address: string, name: string, googlePlaceId: ?string) => {
-      return dispatch(createCheckIn(latitude, longitude, address, name, googlePlaceId));
-    },
-    logoutUser: () => {
-      return dispatch(logoutUser());
-    },
+    createCheckIn: CheckInService.create,
+    logoutUser: AuthenticationService.logout,
     setSelectedLocation: (selectedLocation: *) => {
       return dispatch(setSelectedLocation(selectedLocation));
     },

@@ -12,8 +12,6 @@ const mapStateToProps = (state: *) => {
   const { checkIn } = state;
   return {
     checkIns: checkIn.checkIns,
-    isListingCheckIns: checkIn.isListingCheckIns,
-    checkInListErrorStatus: checkIn.checkInListErrorStatus,
   };
 };
 

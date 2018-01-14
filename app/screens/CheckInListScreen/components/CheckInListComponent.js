@@ -26,14 +26,13 @@ import { initFoodImageGenerator } from '../../../Images';
 type Props = {
   checkIns: Array<*>,
   setSelectedCheckIn: (*) => *,
-  isListingCheckIns: boolean,
-  checkInListErrorStatus: ?Error,
   navigation: *,
   listCheckIns: (string) => *,
   resetCheckIns: () => *,
 };
 
 type State = {
+  isListingCheckIns: boolean,
   isInitialLoad: boolean,
   noMoreCheckIns: boolean,
 };
@@ -41,6 +40,7 @@ type State = {
 export default class CheckInListComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
   state = {
+    isListingCheckIns: false,
     isInitialLoad: false,
     noMoreCheckIns: false,
   };
@@ -78,7 +78,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       return;
     }
     // Check if we're already listing checkins.
-    if (this.props.isListingCheckIns) {
+    if (this.state.isListingCheckIns) {
       return;
     }
     // Check if we've loaded the last set of checkins.
@@ -90,11 +90,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const lastCheckIn = _.last(this.props.checkIns);
     const lastCheckInAt = (new Date(lastCheckIn.createdAt)).toISOString();
 
+    this.setState({ isListingCheckIns: true });
     this.props.listCheckIns(lastCheckInAt)
       .finally(() => {
-        this.setState({
-          noMoreCheckIns: previousCheckInsCount === this.props.checkIns.length,
-        });
+        const noMoreCheckIns = previousCheckInsCount === this.props.checkIns.length;
+        this.setState({ noMoreCheckIns, isListingCheckIns: false });
       });
   }
 
@@ -120,7 +120,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   render() {
-    const { isListingCheckIns } = this.props;
+    const { isListingCheckIns } = this.state;
     const loadingIconColor = Platform.OS === 'ios' ? 'black' : 'white';
     return (
       <Container>
@@ -132,7 +132,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           <Right>
             {isListingCheckIns ? <ActivityIndicator color={loadingIconColor} /> : (
               <Button small transparent onPress={this.onPressRefresh}>
-                <Icon name="refresh" />
+                <Icon name="refresh" color="white" />
               </Button>
             )}
           </Right>

@@ -29,7 +29,6 @@ import Styles from '../Styles';
 
 type Props = {
   selectedLocation: *,
-  isCreatingReview: boolean,
   createReviewErrorStatus: ?Error,
   navigation: *,
   resetSelectedLocation: () => *,
@@ -47,6 +46,7 @@ type Props = {
 };
 
 type State = {
+  isCreatingReview: boolean,
   isWritingComment: boolean,
   comment: ?string,
 };
@@ -54,6 +54,7 @@ type State = {
 export default class ReviewCreateComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
   state = {
+    isCreatingReview: false,
     isWritingComment: false,
     comment: null,
   };
@@ -71,8 +72,9 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   onPressSubmit = () => {
-    if (this.props.isCreatingReview) { return null; }
+    if (this.state.isCreatingReview) { return null; }
 
+    this.setState({ isCreatingReview: true });
     return this.props.createReview(
       this.props.selectedLocation.id, // checkInId
       0, // amountPaid
@@ -90,6 +92,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         this.props.navigation.goBack();
       })
       .catch((error: Error) => {
+        this.setState({ isCreatingReview: false });
         console.error(error);
       });
   }
@@ -108,19 +111,24 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   renderHeader = () => {
+    const { isWritingComment } = this.state;
     return (
       <Header>
-        {Platform.OS === 'ios' ? <Left /> : null}
-        <Body>
-          <Text style={Styles.headerTitle}>DDFA Review</Text>
-        </Body>
+        {Platform.OS === 'ios' && !isWritingComment ? <Left /> : null}
+        {
+          isWritingComment ? null : (
+            <Body>
+              <Text style={Styles.headerTitle}>DDFA Review</Text>
+            </Body>
+          )
+        }
         <Right>
           {
-            this.state.isWritingComment ? (
+            !isWritingComment ? null : (
               <Button transparent onPress={this.onPressDone}>
                 <Text>Done</Text>
               </Button>
-            ) : null
+            )
           }
         </Right>
       </Header>
@@ -137,7 +145,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         </FooterTab>
         <FooterTab>
           <Button onPress={this.onPressSubmit}>
-            <Text>{this.props.isCreatingReview ? 'Submitting...' : 'Submit'}</Text>
+            <Text>{this.state.isCreatingReview ? 'Submitting...' : 'Submit'}</Text>
           </Button>
         </FooterTab>
       </Footer>
@@ -151,6 +159,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       <Container>
         {this.renderHeader()}
         <Content>
+          {/* Move this MapView into ReviewCreateMap */}
           <MapView
             zoomEnabled={false}
             rotateEnabled={false}
@@ -168,6 +177,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
           >
             <MapView.Marker coordinate={{ latitude, longitude }} />
           </MapView>
+          {/* Move this into `renderContent()` function */}
           <Content padder>
             <PlaceContentCard
               rating={rating}
