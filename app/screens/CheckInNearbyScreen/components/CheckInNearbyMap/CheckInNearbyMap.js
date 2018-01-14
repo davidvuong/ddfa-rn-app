@@ -33,13 +33,14 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
         style={Styles.mapView}
       >
         <MapView.Marker pinColor="red" coordinate={{ latitude, longitude }} />
-        {
-          _.map(this.props.nearbyCheckIns, (checkIn: *) => {
-            return <MapView.Marker key={checkIn.id} pinColor="orange" coordinate={{
-              latitude: checkIn.latitude, longitude: checkIn.longitude,
-            }} />;
-          })
-        }
+        {_.map(this.props.nearbyCheckIns, (checkIn: *) => {
+            return <MapView.Marker
+              key={checkIn.id}
+              pinColor="orange"
+              title={checkIn.name}
+              description={`${checkIn.distance / 1000}km away`}
+              coordinate={{ latitude: checkIn.latitude, longitude: checkIn.longitude }} />;
+        })}
       </MapView>
     );
   }
