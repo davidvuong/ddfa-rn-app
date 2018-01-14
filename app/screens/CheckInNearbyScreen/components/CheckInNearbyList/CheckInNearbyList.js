@@ -75,12 +75,12 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
   render() {
     const { nearbyCheckIns, isLoading } = this.props;
     if (isLoading) {
-      return <View><ActivityIndicator color="black" /></View>;
+      return <View padder><ActivityIndicator color="black" /></View>;
     }
     if (!nearbyCheckIns || !nearbyCheckIns.length) {
       return (
-        <View>
-          <Text>There are not check-ins around your location...</Text>
+        <View padder style={Styles.emptyCheckInsContainer}>
+          <Text style={Styles.emptyCheckInsText} note>There are no check-ins around your location...</Text>
         </View>
       );
     }

@@ -1,6 +1,13 @@
 // @flow
 
 export default {
+  emptyCheckInsContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  emptyCheckInsText: {
+    fontStyle: 'italic',
+  },
   listContainer: {
     marginLeft: -14,
   },
