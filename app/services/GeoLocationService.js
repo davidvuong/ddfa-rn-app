@@ -1,4 +1,5 @@
 // @flow
+import Promise from 'bluebird';
 
 export type RegionDelta = {
   latitude: number,
@@ -8,7 +9,7 @@ export type RegionDelta = {
 };
 
 export class GeoLocationService {
-  calculateRegionDelta(latitude: number, longitude: number, distance: number = 500): RegionDelta {
+  calculateRegionDelta = (latitude: number, longitude: number, distance: number = 500): RegionDelta => {
     const d = distance / 2;
     const circumference = 40075;
     const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
@@ -20,6 +21,12 @@ export class GeoLocationService {
       Math.cos(angularDistance) - Math.sin(latitude) * Math.sin(latitude), // eslint-disable-line no-mixed-operators
     ));
     return { latitude, longitude, latitudeDelta, longitudeDelta };
+  }
+
+  getCurrentPosition = () => {
+    return new Promise((resolve: *, reject: *) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
   }
 }
 
