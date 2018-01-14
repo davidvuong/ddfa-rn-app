@@ -27,7 +27,7 @@ export default class CheckInCard extends React.Component<Props, State> {
   render() {
     const { checkIn, isLast, onPress, image } = this.props;
     return (
-      <Card key={checkIn.id} style={{ marginBottom: isLast ? 20 : 10 }}>
+      <Card key={checkIn.id} style={{ marginTop: 0, marginBottom: isLast ? 20 : 10 }}>
         <CardItem activeOpacity={1} button onPress={() => { onPress(checkIn); }}>
           <Body>
             <Text numberOfLines={1}>{checkIn.name}</Text>

@@ -6,6 +6,7 @@ import {
   Header,
   Body,
   Content,
+  View,
   Text,
   Left,
   Right,
@@ -53,7 +54,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     }
   }
 
-  navigateToCheckInDetail = (checkIn: *) => {
+  navigateToCheckIn = (checkIn: *) => {
     this.props.setSelectedCheckIn(checkIn);
     this.props.navigation.navigate('CheckInDetail');
   }
@@ -101,27 +102,25 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   renderCheckIns = () => {
     const { checkIns } = this.props;
     return (
-      <Content padder onScroll={this.onScroll}>
-        {
-          _.map(checkIns, (checkIn: *, i: number) => {
+      <View>
+        {_.map(checkIns, (checkIn: *, i: number) => {
             return (
               <CheckInCard
                 key={checkIn.id}
                 checkIn={checkIn}
                 isLast={(i + 1) >= checkIns.length}
-                onPress={this.navigateToCheckInDetail}
+                onPress={this.navigateToCheckIn}
                 image={this.imageGenerator.get(checkIn.id)}
               />
             );
-          })
-        }
-      </Content>
+          })}
+      </View>
     );
   }
 
   render() {
     const { isListingCheckIns } = this.state;
-    const loadingIconColor = Platform.OS === 'ios' ? 'black' : 'white';
+    const iconColor = Platform.OS === 'ios' ? 'black' : 'white';
     return (
       <Container>
         <Header>
@@ -130,14 +129,16 @@ export default class CheckInListComponent extends React.Component<Props, State> 
             <Text style={Styles.headerTitle}>DDFA Feed</Text>
           </Body>
           <Right>
-            {isListingCheckIns ? <ActivityIndicator color={loadingIconColor} /> : (
+            {isListingCheckIns ? <ActivityIndicator color={iconColor} /> : (
               <Button small transparent onPress={this.onPressRefresh}>
-                <Icon name="refresh" color="white" />
+                <Icon name="refresh" style={{ color: iconColor }} />
               </Button>
             )}
           </Right>
         </Header>
-        {this.renderCheckIns()}
+        <Content padder onScroll={this.onScroll}>
+          {this.renderCheckIns()}
+        </Content>
         <GlobalFooter navigation={this.props.navigation} />
       </Container>
     );

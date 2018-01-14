@@ -2,13 +2,13 @@
 
 export default {
   checkInImage: {
-    height: 180,
+    height: 160,
     width: null,
     flex: 1,
   },
   checkedInAtText: {
     color: 'orange',
-    fontWeight: '500',
+    fontWeight: '600',
     fontSize: 12,
   },
 };
