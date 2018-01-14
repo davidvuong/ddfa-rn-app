@@ -15,6 +15,7 @@ import {
   View,
 } from 'native-base';
 import {
+  Platform,
   ActivityIndicator,
 } from 'react-native';
 
@@ -47,6 +48,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
 
   renderItem = (checkIn: *) => {
     const checkedInAt = moment(checkIn.createdAt).format('Do MMM YYYY');
+    const iconName = Platform.OS === 'ios' ? 'arrow-forward' : 'md-link';
     return (
       <ListItem avatar key={checkIn.id} style={Styles.listItemContainer}>
         <Left>
@@ -61,8 +63,12 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
         </Body>
         <Right>
           <Body>
-            <Button transparent style={Styles.navigateButton} onPress={() => { this.navigateToCheckIn(checkIn); }}>
-              <Icon name="arrow-forward" style={Styles.navigateIcon} />
+            <Button
+              transparent
+              style={Styles.navigateButton}
+              onPress={() => { this.navigateToCheckIn(checkIn); }}
+            >
+              <Icon name={iconName} style={Styles.navigateIcon} />
             </Button>
           </Body>
         </Right>

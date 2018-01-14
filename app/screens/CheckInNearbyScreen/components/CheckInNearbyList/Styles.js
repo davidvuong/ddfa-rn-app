@@ -1,4 +1,5 @@
 // @flow
+import { Platform } from 'react-native';
 
 export default {
   emptyCheckInsContainer: {
@@ -28,7 +29,11 @@ export default {
     color: 'rgba(0, 0, 0, 0.75)',
   },
   navigateButton: {
-    width: 25,
+    ...Platform.select({
+      ios: {
+        width: 25,
+      },
+    }),
   },
   thumbnail: {
     width: 46,
