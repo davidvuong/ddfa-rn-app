@@ -5,6 +5,7 @@ import CheckInNearbyComponent from './components/CheckInNearbyComponent';
 import {
   getNearbyCheckIns,
   setSelectedCheckIn,
+  setSelectedLocation,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state: *) => {
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch: *) => {
     },
     setSelectedCheckIn: (checkIn: *) => {
       return dispatch(setSelectedCheckIn(checkIn));
+    },
+    setSelectedLocation: (location: *) => {
+      return dispatch(setSelectedLocation(location));
     },
   };
 };

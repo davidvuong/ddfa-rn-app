@@ -19,8 +19,12 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
     const { latitude, longitude } = this.props;
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
 
+    // When `latitude` and `longitude` changes, force React to re-render MapView.
+    //
+    // @see: https://github.com/react-community/react-native-maps/issues/283
     return (
       <MapView
+        key={`${latitude}${longitude}`}
         pitchEnabled={false}
         toolbarEnabled={true}
         moveOnMarkerPress={false}
