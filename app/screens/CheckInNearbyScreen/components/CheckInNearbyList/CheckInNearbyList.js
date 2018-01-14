@@ -21,8 +21,6 @@ import {
 import { initFoodImageGenerator } from '../../../../Images';
 import Styles from './Styles';
 
-import type { Position } from '../../../../services/GeoLocationService';
-
 type Props = {
   navigation: *,
   nearbyCheckIns: Array<*>,
