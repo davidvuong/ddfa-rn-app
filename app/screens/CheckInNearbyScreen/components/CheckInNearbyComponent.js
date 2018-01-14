@@ -17,19 +17,17 @@ import CheckInNearbyMap from './CheckInNearbyMap/CheckInNearbyMap';
 import CheckInNearbyList from './CheckInNearbyList/CheckInNearbyList';
 import navigationOptions from '../NavigationOptions';
 
-import type { Position } from '../../../services/GeoLocationService';
-
 type Props = {
   navigation: *,
   nearbyCheckIns: Array<*>,
   setSelectedCheckIn: (*) => *,
   getNearbyCheckIns: (number, number) => Promise<*>,
   getCurrentPosition: () => Promise<Position>,
+  position: { latitude: number, longitude: number },
 };
 
 type State = {
   isLoadingNearbyCheckIns: boolean,
-  currentPosition: ?Position,
 };
 
 // TODO: All direct service calls in components (unless in Global) should be passed in (i.e. Screens).
@@ -41,11 +39,9 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
   };
 
   componentDidMount() {
-    this.props.getCurrentPosition()
-      .then((position: Position) => {
-        this.setState({ currentPosition: position, isLoadingNearbyCheckIns: true });
-        return this.props.getNearbyCheckIns(position.coords.latitude, position.coords.longitude);
-      })
+    const { position } = this.props;
+    this.setState({ isLoadingNearbyCheckIns: true });
+    this.props.getNearbyCheckIns(position.latitude, position.longitude)
       .then(() => {
         this.setState({ isLoadingNearbyCheckIns: false });
       })
@@ -56,19 +52,14 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
   }
 
   renderContent = () => {
-    const { currentPosition, isLoadingNearbyCheckIns } = this.state;
-    if (!currentPosition) {
-      return <Content padder><ActivityIndicator color="black" /></Content>;
-    }
-
-    const { latitude, longitude } = currentPosition.coords;
-    const { navigation, setSelectedCheckIn, nearbyCheckIns } = this.props;
+    const { isLoadingNearbyCheckIns } = this.state;
+    const { navigation, setSelectedCheckIn, nearbyCheckIns, position } = this.props;
     return (
       <Content>
         <CheckInNearbyMap
           nearbyCheckIns={nearbyCheckIns}
-          latitude={latitude}
-          longitude={longitude}
+          latitude={position.latitude}
+          longitude={position.longitude}
         />
         <CheckInNearbyList
           navigation={navigation}

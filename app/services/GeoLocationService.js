@@ -1,24 +1,10 @@
 // @flow
-import Promise from 'bluebird';
 
 export type RegionDelta = {
   latitude: number,
   latitudeDelta: number,
   longitude: number,
   longitudeDelta: number,
-};
-
-export type Position = {
-  coords: {
-    accuracy: number,
-    altitude: number,
-    altitudeAccuracy: number,
-    heading: number,
-    latitude: number,
-    longitude: number,
-    speed: number,
-  },
-  timestamp: number,
 };
 
 export class GeoLocationService {
@@ -34,12 +20,6 @@ export class GeoLocationService {
       Math.cos(angularDistance) - Math.sin(latitude) * Math.sin(latitude), // eslint-disable-line no-mixed-operators
     ));
     return { latitude, longitude, latitudeDelta, longitudeDelta };
-  }
-
-  getCurrentPosition = (): Promise<Position> => {
-    return new Promise((resolve: *, reject: *) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
   }
 }
 

@@ -2,15 +2,16 @@
 import { connect } from 'react-redux';
 
 import CheckInNearbyComponent from './components/CheckInNearbyComponent';
-import GeoLocationService from '../../services/GeoLocationService';
 import {
   getNearbyCheckIns,
   setSelectedCheckIn,
 } from '../../actions/CheckInActions';
 
 const mapStateToProps = (state: *) => {
+  const { checkIn } = state;
   return {
-    nearbyCheckIns: state.checkIn.nearbyCheckIns,
+    position: checkIn.selectedLocation, // TODO: Don't share this action with CreateReview.
+    nearbyCheckIns: checkIn.nearbyCheckIns,
   };
 };
 
@@ -22,7 +23,6 @@ const mapDispatchToProps = (dispatch: *) => {
     setSelectedCheckIn: (checkIn: *) => {
       return dispatch(setSelectedCheckIn(checkIn));
     },
-    getCurrentPosition: GeoLocationService.getCurrentPosition,
   };
 };
 

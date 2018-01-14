@@ -27,6 +27,8 @@ type Props = {
 type State = {};
 
 export default class GlobalFooterComponent extends React.Component<Props, State> {
+  RNGooglePlacesOptions = { radius: 0.5 };
+
   navigateToLogin = () => {
     this.props.logoutUser()
       .then(() => {
@@ -56,12 +58,20 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     if (this.props.navigation.state.routeName === 'CheckInNearby') {
       return;
     }
-    this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'CheckInNearby' }),
-      ],
-    }));
+    RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
+      .then((place: *) => {
+        const { latitude, longitude } = place;
+        this.props.setSelectedLocation({ latitude, longitude });
+        this.props.navigation.dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'CheckInNearby' }),
+          ],
+        }));
+      })
+      .catch(() => {
+        // pass
+      });
   }
 
   onPressLogout = () => {
@@ -75,8 +85,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   onPressCheckIn = () => {
     let googlePlace: *;
 
-    const options = { radius: 0.3 };
-    RNGooglePlaces.openPlacePickerModal(options)
+    RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
       .then((place: *) => {
         googlePlace = place;
 
