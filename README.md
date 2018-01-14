@@ -2,7 +2,11 @@
 
 **Welcome to ddfa-rn-app!**
 
-This is the frontend component of the DDFA (Double D Food Adventures) app. It's written in JavaScript using [React Native](https://facebook.github.io/react-native/) and supports both iOS and Android. You can checkout the backend [here](https://github.com/davidvuong/ddfa-api).
+**DDFA (Double D Food Adventures)** is a mobile app I use to track of restaurants I visit with my partner. It helps us decide where to (or not to) eat, it tracks our rating (food, service, environment), our photos, etc.
+
+The app also provides insights such as how much we pay on average, which of us pays more often, what we usually order, what times we usually eat, how long do we typically eat for etc.
+
+DDFA has 2 components, this component is the frontend mobile app. It's written in JavaScript using [React Native](https://facebook.github.io/react-native/) and supports both iOS and Android. You can checkout the backend API [here](https://github.com/davidvuong/ddfa-api).
 
 ## Installation
 
