@@ -8,6 +8,10 @@ function listCheckInsSuccess(checkIns: Array<*>) {
   return { type: actions.LIST_CHECK_INS_SUCCESS, checkIns };
 }
 
+function getNearbyCheckInsSuccess(checkIns: Array<*>) {
+  return { type: actions.GET_NEARBY_CHECK_INS_SUCCESS, checkIns };
+}
+
 /* External */
 
 export function listCheckIns(startTime: string) {
@@ -15,6 +19,16 @@ export function listCheckIns(startTime: string) {
     return CheckInService.list(startTime)
       .then((checkIns: Array<*>) => {
         dispatch(listCheckInsSuccess(checkIns));
+        return checkIns;
+      });
+  };
+}
+
+export function getNearbyCheckIns(latitude: number, longitude: number) {
+  return (dispatch: *) => {
+    return CheckInService.getNearby(latitude, longitude)
+      .then((checkIns: Array<*>) => {
+        dispatch(getNearbyCheckInsSuccess(checkIns));
         return checkIns;
       });
   };

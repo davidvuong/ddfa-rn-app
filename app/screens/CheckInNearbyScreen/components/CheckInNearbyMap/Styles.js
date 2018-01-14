@@ -2,6 +2,6 @@
 
 export default {
   mapView: {
-    height: 380,
+    height: 300,
   },
 };
