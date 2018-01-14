@@ -17,7 +17,7 @@ import {
 import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
 import CheckInDetailPhotoGallery from './CheckInDetailPhotoGallery/CheckInDetailPhotoGallery';
 import CheckInDetailReviews from './CheckInDetailReviews/CheckInDetailReviews';
-import CheckInDetailMap from './CheckInDetailMap/CheckInDetailMap';
+import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
 
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -79,7 +79,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       <Container>
         <CheckInDetailHeader navigation={navigation} />
         <Content>
-          <CheckInDetailMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
+          <GenericStaticMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
           {this.renderTitleCard()}
           {
             detailedCheckIn ? (

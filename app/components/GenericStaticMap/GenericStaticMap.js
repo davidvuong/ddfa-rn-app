@@ -2,7 +2,7 @@
 import * as React from 'react';
 import MapView from 'react-native-maps';
 
-import GeoLocationService from '../../../../services/GeoLocationService';
+import GeoLocationService from '../../services/GeoLocationService';
 import Styles from './Styles';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 type State = {};
 
-export default class CheckInDetailMap extends React.Component<Props, State> {
+export default class GenericStaticMap extends React.Component<Props, State> {
   render() {
     const { latitude, longitude } = this.props;
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);

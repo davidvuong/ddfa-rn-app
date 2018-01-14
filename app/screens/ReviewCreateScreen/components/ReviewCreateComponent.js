@@ -20,10 +20,10 @@ import {
   Keyboard,
   Platform,
 } from 'react-native';
-import MapView from 'react-native-maps';
 
 import PlaceContentCard from './PlaceContentCard/PlaceContentCard';
-import GeoLocationService from '../../../services/GeoLocationService';
+import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
+
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
@@ -135,6 +135,34 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     );
   }
 
+  renderContent = () => {
+    const { rating, pricingLevel, name, address } = this.props.selectedLocation.place;
+    return (
+      <Content padder>
+        <PlaceContentCard
+          rating={rating}
+          pricingLevel={pricingLevel}
+          name={name}
+          address={address}
+        />
+        <Card>
+          <CardItem style={Styles.placeCommentItem}>
+            <Input
+              placeholder="Add any additional comments and share your experience at this restaurant..."
+              onFocus={this.onFocusComment}
+              multiline={true}
+              style={Styles.commentInput}
+              onChangeText={this.onChangeTextComment}
+              maxLength={2048}
+              autoGrow={true}
+              onBlur={() => { this.setState({ isWritingComment: false }); }}
+            />
+          </CardItem>
+        </Card>
+      </Content>
+    );
+  }
+
   renderFooter = () => {
     return (
       <Footer>
@@ -153,53 +181,13 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   render() {
-    const { latitude, longitude, rating, pricingLevel, name, address } = this.props.selectedLocation.place;
-    const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
+    const { latitude, longitude } = this.props.selectedLocation.place;
     return (
       <Container>
         {this.renderHeader()}
         <Content>
-          {/* Move this MapView into ReviewCreateMap */}
-          <MapView
-            zoomEnabled={false}
-            rotateEnabled={false}
-            scrollEnabled={false}
-            pitchEnabled={false}
-            toolbarEnabled={false}
-            moveOnMarkerPress={false}
-            initialRegion={{
-              latitude,
-              longitude,
-              latitudeDelta: delta.latitudeDelta,
-              longitudeDelta: delta.longitudeDelta,
-            }}
-            style={Styles.mapView}
-          >
-            <MapView.Marker coordinate={{ latitude, longitude }} />
-          </MapView>
-          {/* Move this into `renderContent()` function */}
-          <Content padder>
-            <PlaceContentCard
-              rating={rating}
-              pricingLevel={pricingLevel}
-              name={name}
-              address={address}
-            />
-            <Card>
-              <CardItem style={Styles.placeCommentItem}>
-                <Input
-                  placeholder="Add any additional comments and share your experience at this restaurant..."
-                  onFocus={this.onFocusComment}
-                  multiline={true}
-                  style={Styles.commentInput}
-                  onChangeText={this.onChangeTextComment}
-                  maxLength={2048}
-                  autoGrow={true}
-                  onBlur={() => { this.setState({ isWritingComment: false }); }}
-                />
-              </CardItem>
-            </Card>
-          </Content>
+          <GenericStaticMap latitude={latitude} longitude={longitude} />
+          {this.renderContent()}
         </Content>
         {this.renderFooter()}
       </Container>
