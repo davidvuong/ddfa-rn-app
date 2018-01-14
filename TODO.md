@@ -16,6 +16,8 @@ Once the above is complete, the database schema migration branch can be merged i
 - [ ] Add ability to search for check-ins nearby
 - [ ] Polish up UI (Android & iOS)
 - [ ] Last bit of refactor (ddfa-api, ddfa-rn-app)
+- [ ] Add script to remove old columns from `check_ins` relation
+- [ ] Add script to migration 1 combined review to 2 separate reviews
 
 Once the above is complete, I can give a working APK to Aaron.
 
