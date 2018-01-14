@@ -8,6 +8,19 @@ export type RegionDelta = {
   longitudeDelta: number,
 };
 
+export type Position = {
+  coords: {
+    accuracy: number,
+    altitude: number,
+    altitudeAccuracy: number,
+    heading: number,
+    latitude: number,
+    longitude: number,
+    speed: number,
+  },
+  timestamp: number,
+};
+
 export class GeoLocationService {
   calculateRegionDelta = (latitude: number, longitude: number, distance: number = 500): RegionDelta => {
     const d = distance / 2;
@@ -23,7 +36,7 @@ export class GeoLocationService {
     return { latitude, longitude, latitudeDelta, longitudeDelta };
   }
 
-  getCurrentPosition = () => {
+  getCurrentPosition = (): Promise<Position> => {
     return new Promise((resolve: *, reject: *) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
