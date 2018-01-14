@@ -43,7 +43,7 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
               key={checkIn.id}
               pinColor="orange"
               title={checkIn.name}
-              description={`${checkIn.distance / 1000}km away`}
+              description={`${(checkIn.distance / 1000).toFixed(2)}km away`}
               coordinate={{ latitude: checkIn.latitude, longitude: checkIn.longitude }} />;
         })}
       </MapView>
