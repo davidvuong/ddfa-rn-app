@@ -106,11 +106,11 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           _.map(checkIns, (checkIn: *, i: number) => {
             return (
               <CheckInCard
-                key={i}
+                key={checkIn.id}
                 checkIn={checkIn}
                 isLast={(i + 1) >= checkIns.length}
                 onPress={this.navigateToCheckInDetail}
-                onGetImage={this.imageGenerator.get}
+                image={this.imageGenerator.get(checkIn.id)}
               />
             );
           })
