@@ -25,6 +25,8 @@ export default class GenericStaticMap extends React.Component<Props, State> {
         pitchEnabled={false}
         toolbarEnabled={false}
         moveOnMarkerPress={false}
+        cacheEnabled={true}
+        loadingEnabled={true}
         initialRegion={{
           latitude,
           longitude,

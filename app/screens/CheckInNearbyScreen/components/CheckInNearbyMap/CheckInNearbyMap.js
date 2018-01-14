@@ -28,6 +28,7 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
         pitchEnabled={false}
         toolbarEnabled={true}
         moveOnMarkerPress={false}
+        loadingEnabled={true}
         initialRegion={{
           latitude,
           longitude,
