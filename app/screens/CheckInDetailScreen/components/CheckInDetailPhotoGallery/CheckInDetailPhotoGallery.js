@@ -22,7 +22,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
       <Swiper loop height={380} activeDotColor="rgba(255, 255, 255, 0.65)">
         {
           _.map(this.props.photos, (photo: *) => {
-            const source = { uri: this.props.getPhotoUrl(photo.id) };
+            const source = { uri: `${this.props.getPhotoUrl(photo.id)}?width=420` };
             return <Image key={photo.id} source={source} style={Styles.photo} />;
           })
         }
