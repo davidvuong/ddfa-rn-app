@@ -11,15 +11,14 @@ A list of tasks to do before this branch can be merged into `master`.
 
 Once the above is complete, the database schema migration branch can be merged into master and deployed.
 
-- [ ] Create a new user for Aaron
 - [x] Add ability to search for check-ins nearby
 - [x] Polish up UI (Android & iOS)
 - [x] Last bit of refactor (ddfa-api, ddfa-rn-app)
-- [ ] Add script to remove old columns from `check_ins` relation
-- [ ] Add script to migration 1 combined review to 2 separate reviews
+- [x] Add script to remove old columns from `check_ins` relation
 
 Once the above is complete, I can give a working APK to Aaron.
 
+- [ ] Add script to migration 1 combined review to 2 separate reviews
 - [ ] Update backend `Photo.check_in_id` to `Photo.review_id`...
 - [ ] Add ability cancel check-in (delete - only present if you are the owner)
 - [ ] Add ability to go back from check-in
