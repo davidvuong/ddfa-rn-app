@@ -11,6 +11,7 @@ import {
 } from 'native-base';
 
 import { initAvatarImageGenerator } from '../../../../Images';
+import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
 type Props = {
@@ -24,41 +25,49 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   imageGenerator = initAvatarImageGenerator();
 
   renderSubText(review: *) {
-    const { foodRating, serviceRating, environmentRating, currency, amountPaid } = review;
-    const price = amountPaid === 0 ? 'FREE' : `${this.props.getCurrencySymbol(currency)}${amountPaid} (${currency})`;
+    const { currency, amountPaid } = review;
+    if (amountPaid === 0) {
+      return <Text note>FREE</Text>;
+    }
     return (
       <Text note>
-        <Text note style={Styles.ratingsText}>F</Text>: {foodRating || 'n/a'}{' '}
-        <Text note style={Styles.ratingsText}>S</Text>: {serviceRating || 'n/a'}{' '}
-        <Text note style={Styles.ratingsText}>E</Text>: {environmentRating || 'n/a'}{' '}
-        <Text note style={Styles.ratingsText}>P</Text>: {price}
+        {`${this.props.getCurrencySymbol(currency)}${amountPaid} (${currency})`}
       </Text>
     );
   }
 
   render() {
     if (!this.props.reviews.length) { return null; }
+
     return _.map(this.props.reviews, (review: *) => {
+      const { id, comment, foodRating, serviceRating, environmentRating, user } = review;
       return (
-        <Card style={Styles.card} key={review.id}>
+        <Card style={Styles.card} key={id}>
           <CardItem>
             <Left>
-              <Thumbnail source={this.imageGenerator.get(review.id)} />
+              <Thumbnail source={this.imageGenerator.get(id)} />
               <Body>
-                <Text>{review.user.name || review.user.username}</Text>
+                <Text>{user.name || user.username}</Text>
                 {this.renderSubText(review)}
               </Body>
             </Left>
           </CardItem>
           {
-            !review.comment ? null : (
+            !comment ? null : (
               <CardItem>
                 <Body>
-                  <Text>{review.comment}</Text>
+                  <Text>{comment}</Text>
                 </Body>
               </CardItem>
             )
           }
+          <CardItem>
+            <ReviewRatings
+              foodRating={foodRating}
+              serviceRating={serviceRating}
+              environmentRating={environmentRating}
+            />
+          </CardItem>
         </Card>
       );
     });
