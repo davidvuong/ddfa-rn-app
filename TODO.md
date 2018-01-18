@@ -18,6 +18,7 @@ Once the above is complete, the database schema migration branch can be merged i
 
 Once the above is complete, I can give a working APK to Aaron.
 
+- [ ] A few ratings with decimal values were floored... need to fix
 - [ ] Add avatars for Denise and myself
 - [ ] Add script to migration 1 combined review to 2 separate reviews
 - [ ] Update backend `Photo.check_in_id` to `Photo.review_id`...
