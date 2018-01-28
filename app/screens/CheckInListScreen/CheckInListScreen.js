@@ -12,6 +12,7 @@ const mapStateToProps = (state: *) => {
   const { checkIn } = state;
   return {
     checkIns: checkIn.checkIns,
+    totalCheckIns: checkIn.totalCheckIns,
   };
 };
 

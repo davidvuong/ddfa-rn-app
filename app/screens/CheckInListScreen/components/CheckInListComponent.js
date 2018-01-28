@@ -26,6 +26,7 @@ import { initFoodImageGenerator } from '../../../Images';
 
 type Props = {
   checkIns: Array<*>,
+  totalCheckIns: number,
   setSelectedCheckIn: (*) => *,
   navigation: *,
   listCheckIns: (string) => *,
@@ -100,12 +101,13 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   renderCheckIns = () => {
-    const { checkIns } = this.props;
+    const { checkIns, totalCheckIns } = this.props;
     return (
       <View>
         {_.map(checkIns, (checkIn: *, i: number) => {
             return (
               <CheckInCard
+                counter={totalCheckIns - (i + 1)}
                 key={checkIn.id}
                 checkIn={checkIn}
                 isLast={(i + 1) >= checkIns.length}

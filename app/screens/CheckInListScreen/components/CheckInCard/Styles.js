@@ -11,4 +11,9 @@ export default {
     fontWeight: '600',
     fontSize: 12,
   },
+  counter: {
+    fontSize: 8,
+    position: 'absolute',
+    right: -5,
+  },
 };

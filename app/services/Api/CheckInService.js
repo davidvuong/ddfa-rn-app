@@ -33,10 +33,7 @@ class CheckInService {
       endpoint += `&draftOnly=${draftOnly ? 'true' : 'false'}`;
     }
     const headers = this.authenticationService.getAuthenticationHeader();
-    return this.http.get(endpoint, headers)
-      .then((res: *) => {
-        return Promise.resolve(res.checkIns);
-      });
+    return this.http.get(endpoint, headers).then(Promise.resolve);
   }
 
   getNearby = (latitude: number, longitude: number): Promise<Array<*>> => {
@@ -51,10 +48,7 @@ class CheckInService {
   get = (id: string): Promise<*> => {
     const endpoint = `${this.host}/checkins/${id}`;
     const headers = this.authenticationService.getAuthenticationHeader();
-    return this.http.get(endpoint, headers)
-      .then((res: *) => {
-        return Promise.resolve(res);
-      });
+    return this.http.get(endpoint, headers).then(Promise.resolve);
   }
 
   create = (

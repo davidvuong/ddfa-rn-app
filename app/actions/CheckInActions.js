@@ -4,8 +4,8 @@ import CheckInService from '../services/Api/CheckInService';
 
 /* Internal */
 
-function listCheckInsSuccess(checkIns: Array<*>) {
-  return { type: actions.LIST_CHECK_INS_SUCCESS, checkIns };
+function listCheckInsSuccess(checkIns: Array<*>, count: number) {
+  return { type: actions.LIST_CHECK_INS_SUCCESS, checkIns, count };
 }
 
 function getNearbyCheckInsSuccess(checkIns: Array<*>) {
@@ -17,9 +17,10 @@ function getNearbyCheckInsSuccess(checkIns: Array<*>) {
 export function listCheckIns(startTime: string) {
   return (dispatch: *) => {
     return CheckInService.list(startTime)
-      .then((checkIns: Array<*>) => {
-        dispatch(listCheckInsSuccess(checkIns));
-        return checkIns;
+      .then((res: *) => {
+        const { checkIns, count } = res;
+        dispatch(listCheckInsSuccess(checkIns, count));
+        return res;
       });
   };
 }
