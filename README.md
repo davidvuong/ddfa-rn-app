@@ -74,9 +74,9 @@ As of writing this, there are a few bugs in some of the dependencies used in thi
 * https://github.com/GeekyAnts/NativeBase/issues/1359
 * https://github.com/GeekyAnts/theme/pull/4
 
-For whatever reason, these PRs have yet to be merged into `master` so for now, please manually change them inside `node_modules` (do not forget to also change them inside `/dist/...`).
+These PRs have yet to be merged into `master` so for now, please manually change them inside `node_modules` (do not forget to also change them inside `/dist/...`).
 
-Another thing: For whatever reason, due to a combination of `native-base` and `shoutem/theme`, unless "remote debugging" is enabled, things will blow up...
+**Another thing:** Due to a combination of `native-base` and `shoutem/theme`, unless "remote debugging" is enabled, things will blow up...
 
 ## Bundle JS to run on device (without development server)
 
