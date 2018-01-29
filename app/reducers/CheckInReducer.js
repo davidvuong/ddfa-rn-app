@@ -38,7 +38,7 @@ export default function CheckInReducer(state: State = initialState, action: *): 
     case actions.RESET_SELECTED_CHECK_IN:
       return { ...state, selectedCheckIn: null };
     case actions.RESET_CHECK_IN_LIST:
-      return { ...state, checkIns: [], count: 0 };
+      return { ...state, checkIns: [], totalCheckIns: 0 };
     case actions.SET_SELECTED_LOCATION:
       return { ...state, selectedLocation: action.selectedLocation };
     case actions.RESET_SELECTED_LOCATION:
