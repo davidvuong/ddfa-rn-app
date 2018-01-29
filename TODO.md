@@ -27,7 +27,7 @@ Once the above is complete, I can give a working APK to Aaron.
 - [ ] Add ability set a price
 - [ ] Add ability to set ratings
 - [ ] Add ability to upload photos
-- [ ] Replace npm with yarn for ddfa-api
+- [x] Replace npm with yarn for ddfa-api
 - [ ] Pull out domain types in ddfa-api so they can be shared with ddfa-rn-app
 - [ ] Populate `check_in.published_at=check_in.created_at` (also change GET `/checkins` and GET `/checkins/nearby` to ignore drafts)
 
