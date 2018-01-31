@@ -189,7 +189,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
           <GenericStaticMap latitude={latitude} longitude={longitude} />
           {this.renderContent()}
         </Content>
-        {this.renderFooter()}
+        {this.state.isWritingComment ? null : this.renderFooter()}
       </Container>
     );
   }
