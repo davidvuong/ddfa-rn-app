@@ -8,6 +8,7 @@ import {
   Text,
   Card,
   CardItem,
+  View,
 } from 'native-base';
 
 import { initAvatarImageGenerator } from '../../../../Images';
@@ -24,7 +25,7 @@ type State = {};
 export default class CheckInDetailContent extends React.Component<Props, State> {
   imageGenerator = initAvatarImageGenerator();
 
-  renderSubText(review: *) {
+  renderSubText = (review: *) => {
     const { currency, amountPaid } = review;
     if (amountPaid === 0) {
       return <Text note>FREE</Text>;
@@ -37,7 +38,13 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   }
 
   render() {
-    if (!this.props.reviews.length) { return null; }
+    if (!this.props.reviews.length) {
+      return (
+        <View padder style={Styles.emptyReviewsContainer}>
+          <Text style={Styles.emptyReviewsText} note>There are no reivews for this check-in...</Text>
+        </View>
+      );
+    }
 
     return _.map(this.props.reviews, (review: *) => {
       const { id, comment, foodRating, serviceRating, environmentRating, user } = review;
