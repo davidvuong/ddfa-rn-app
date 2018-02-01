@@ -77,3 +77,17 @@ export function initAvatarImageGenerator(): ImageGenerator {
     Images.avatarImage9,
   ]);
 }
+
+export function getAvatar(user: *): string {
+  return user.avatar || _.sample([
+    Images.avatarImage1,
+    Images.avatarImage2,
+    Images.avatarImage3,
+    Images.avatarImage4,
+    Images.avatarImage5,
+    Images.avatarImage6,
+    Images.avatarImage7,
+    Images.avatarImage8,
+    Images.avatarImage9,
+  ]);
+}
