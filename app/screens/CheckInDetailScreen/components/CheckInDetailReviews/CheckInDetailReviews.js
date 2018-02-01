@@ -11,7 +11,7 @@ import {
   View,
 } from 'native-base';
 
-import { initAvatarImageGenerator } from '../../../../Images';
+import { getAvatar } from '../../../../Images';
 import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
@@ -23,8 +23,6 @@ type Props = {
 type State = {};
 
 export default class CheckInDetailContent extends React.Component<Props, State> {
-  imageGenerator = initAvatarImageGenerator();
-
   renderSubText = (review: *) => {
     const { currency, amountPaid } = review;
     if (amountPaid === 0) {
@@ -32,7 +30,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
     }
     return (
       <Text note>
-        {`${this.props.getCurrencySymbol(currency)}${amountPaid} (${currency})`}
+        {`PRICE ${this.props.getCurrencySymbol(currency)}${amountPaid} (${currency})`}
       </Text>
     );
   }
@@ -52,7 +50,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
         <Card style={Styles.card} key={id}>
           <CardItem>
             <Left>
-              <Thumbnail source={this.imageGenerator.get(id)} />
+              <Thumbnail source={getAvatar(review.user)} />
               <Body>
                 <Text>{user.name || user.username}</Text>
                 {this.renderSubText(review)}
