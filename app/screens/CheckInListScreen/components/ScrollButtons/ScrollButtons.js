@@ -13,6 +13,7 @@ type Props = {
   container?: ?{
     scrollToPosition: (number) => void,
     scrollToEnd: () => void,
+    position: { x: number, y: number },
   },
 };
 
@@ -32,6 +33,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   }
 
   render() {
+    if (!this.props.container) { return null; }
     return (
       <View>
         <Fab
