@@ -78,8 +78,8 @@ export function initAvatarImageGenerator(): ImageGenerator {
   ]);
 }
 
-export function getAvatar(user: *): string {
-  return user.avatar || _.sample([
+export function getRandomAvatar(): string {
+  return _.sample([
     Images.avatarImage1,
     Images.avatarImage2,
     Images.avatarImage3,

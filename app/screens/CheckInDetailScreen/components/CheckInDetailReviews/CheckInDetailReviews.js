@@ -11,7 +11,7 @@ import {
   View,
 } from 'native-base';
 
-import { getAvatar } from '../../../../Images';
+import { getRandomAvatar } from '../../../../Images';
 import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
@@ -50,7 +50,12 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
         <Card style={Styles.card} key={id}>
           <CardItem>
             <Left>
-              <Thumbnail source={getAvatar(review.user)} />
+              {
+                user.avatar ?
+                  <Thumbnail source={{ uri: user.avatar }} />
+                :
+                  <Thumbnail source={getRandomAvatar()} />
+              }
               <Body>
                 <Text>{user.name || user.username}</Text>
                 {this.renderSubText(review)}
