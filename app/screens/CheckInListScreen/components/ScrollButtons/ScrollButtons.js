@@ -36,14 +36,14 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       <View>
         <Fab
           onPress={this.onPressScrollUpFab}
-          position="bottomLeft"
+          position="bottomRight"
           style={Styles.upArrow}
         >
             <Icon name="ios-arrow-up" style={Styles.arrowIcons} />
         </Fab>
         <Fab
           onPress={this.onPressScrollDownFab}
-          position="bottomLeft"
+          position="bottomRight"
           style={Styles.downArrow}
         >
             <Icon name="ios-arrow-down" style={Styles.arrowIcons} />

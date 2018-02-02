@@ -3,7 +3,7 @@
 const commonArrowStyles = {
   width: 36,
   height: 36,
-  left: -7,
+  right: 0,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
 };
 
