@@ -44,7 +44,8 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
       );
     }
 
-    return _.map(this.props.reviews, (review: *) => {
+    const reviews = _.orderBy(this.props.reviews, ['createdAt'], ['asc']);
+    return _.map(reviews, (review: *) => {
       const { id, comment, foodRating, serviceRating, environmentRating, user } = review;
       return (
         <Card style={Styles.card} key={id}>
