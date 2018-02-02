@@ -18,6 +18,5 @@ export default {
   arrowIcons: {
     fontSize: 16,
     color: 'black',
-    marginTop: 5,
   },
 };
