@@ -12,7 +12,6 @@ import {
   Right,
   Button,
   Icon,
-  Fab,
 } from 'native-base';
 import {
   ActivityIndicator,
@@ -20,6 +19,7 @@ import {
 } from 'react-native';
 
 import CheckInCard from './CheckInCard/CheckInCard';
+import ScrollButtons from './ScrollButtons/ScrollButtons';
 import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -101,14 +101,6 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       });
   }
 
-  onPressScrollUpFab = () => {
-    this.refs.checkInsContainer.wrappedInstance.scrollToPosition(0);
-  }
-
-  onPressScrollDownFab = () => {
-    this.refs.checkInsContainer.wrappedInstance.scrollToEnd();
-  }
-
   renderCheckIns = () => {
     const { checkIns, totalCheckIns } = this.props;
     return (
@@ -150,34 +142,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
         <Content ref="checkInsContainer" padder onScroll={this.onScroll}>
           {this.renderCheckIns()}
         </Content>
-        <Fab
-          onPress={this.onPressScrollUpFab}
-          position="bottomLeft"
-          style={{
-            position: 'absolute',
-            width: 36,
-            height: 36,
-            left: -7,
-            bottom: 78,
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          }}
-        >
-            <Icon name="ios-arrow-up" style={{ fontSize: 16, color: 'black', marginTop: 5 }} />
-        </Fab>
-        <Fab
-          onPress={this.onPressScrollDownFab}
-          position="bottomLeft"
-          style={{
-            width: 36,
-            height: 36,
-            position: 'absolute',
-            left: -7,
-            bottom: 38,
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          }}
-        >
-            <Icon name="ios-arrow-down" style={{ fontSize: 16, color: 'black', marginTop: 5 }} />
-        </Fab>
+        <ScrollButtons container={(this.refs.checkInsContainer || {}).wrappedInstance} />
         <GlobalFooter navigation={this.props.navigation} />
       </Container>
     );
