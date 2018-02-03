@@ -168,21 +168,21 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
   renderFooter = () => {
     return (
-      <Footer>
-        <FooterTab>
+      <Footer style={Styles.footerContainer}>
+        <FooterTab style={Styles.footerTab}>
           <Button onPress={this.onPressSubmit}>
-            <Text>
+            <Text style={Styles.footerText}>
               {
                 (() => {
                   switch (this.state.createReviewState) {
                     case 'IDLE':
                       return 'Submit';
                     case 'CREATING':
-                      return 'Submitting';
+                      return 'Submitting...';
                     case 'CREATED':
-                      return 'Success :)';
+                      return 'Success 🎉';
                     case 'ERROR':
-                      return 'Failed...';
+                      return 'Failed :(';
                     default:
                       return 'Submit';
                   }
