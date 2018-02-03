@@ -15,6 +15,7 @@ type State = {};
 export default class GenericStaticMap extends React.Component<Props, State> {
   render() {
     const { latitude, longitude } = this.props;
+    if (!latitude || !longitude) { return null; }
     const delta = GeoLocationService.calculateRegionDelta(latitude, longitude);
 
     return (
