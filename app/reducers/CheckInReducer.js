@@ -6,7 +6,15 @@ type State = {
   checkIns: Array<*>,
   totalCheckIns: number,
   nearbyCheckIns: Array<*>,
-  selectedLocation: *,
+  selectedLocation: ?{
+    checkInId: string,
+    latitude: number,
+    longitude: number,
+    rating: ?number,
+    pricingLevel: ?number,
+    name: string,
+    address: string,
+  },
   selectedCheckIn: *,
 };
 

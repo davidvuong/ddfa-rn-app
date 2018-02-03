@@ -28,7 +28,16 @@ import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
 type Props = {
-  selectedLocation: *,
+  // TODO: Pull this into a shared type.
+  selectedLocation: {
+    checkInId: string,
+    latitude: number,
+    longitude: number,
+    rating: ?number,
+    pricingLevel: ?number,
+    name: string,
+    address: string,
+  },
   createReviewErrorStatus: ?Error,
   navigation: *,
   resetSelectedLocation: () => *,
@@ -68,7 +77,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
     this.setState({ createReviewState: 'CREATING' });
     return this.props.createReview(
-      this.props.selectedLocation.id, // checkInId
+      this.props.selectedLocation.checkInId,
       0, // amountPaid
       'AUD', // currency
       this.state.comment,
@@ -139,7 +148,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   renderContent = () => {
-    const { rating, pricingLevel, name, address } = this.props.selectedLocation.place;
+    const { rating, pricingLevel, name, address } = this.props.selectedLocation;
     return (
       <Content padder>
         <PlaceContentCard
@@ -180,7 +189,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
                     case 'CREATING':
                       return 'Submitting...';
                     case 'CREATED':
-                      return 'Success 🎉';
+                      return 'Success 🎉!';
                     case 'ERROR':
                       return 'Failed :(';
                     default:
@@ -196,7 +205,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   render() {
-    const { latitude, longitude } = this.props.selectedLocation.place;
+    const { latitude, longitude } = this.props.selectedLocation;
     return (
       <Container>
         {this.renderHeader()}

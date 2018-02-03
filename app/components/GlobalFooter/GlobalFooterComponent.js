@@ -82,6 +82,12 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
+  /* Given a GooglePlace object, determine the location name. */
+  getLocationName = (place: *) => {
+    const { name, address, latitude, longitude } = place;
+    return name || address || `${latitude} ${longitude}`;
+  }
+
   onPressCheckIn = () => {
     let googlePlace: *;
 
@@ -89,17 +95,23 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .then((place: *) => {
         googlePlace = place;
 
-        const { name, address, latitude, longitude, placeID } = place;
-        return this.props.createCheckIn(
-          latitude, longitude, address, name || address || `${latitude} ${longitude}`, placeID,
-        );
+        const { address, latitude, longitude, placeID } = place;
+        const name = this.getLocationName(place);
+        return this.props.createCheckIn(latitude, longitude, address, name, placeID);
       })
       .then((checkInId: string) => {
-        // NOTE:
-        //
-        // Replace setSelectedLocation to checkIn (but also include the GooglePlace)
-        // Perhaps... `setGooglePlace`, `setCheckIn`.
-        this.props.setSelectedLocation({ id: checkInId, place: googlePlace });
+        const { address, latitude, longitude, rating, pricingLevel } = googlePlace;
+        const name = this.getLocationName(googlePlace);
+        this.props.setSelectedLocation({
+          checkInId,
+          name,
+          address,
+          latitude,
+          longitude,
+          rating:
+          rating || null,
+          pricingLevel: pricingLevel || null,
+        });
         this.props.navigation.navigate('ReviewCreate');
       })
       .catch(() => {
