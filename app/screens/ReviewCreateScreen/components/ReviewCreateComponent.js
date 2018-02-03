@@ -68,10 +68,6 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     comment: null,
   };
 
-  componentWillUnmount() {
-    this.props.resetSelectedLocation();
-  }
-
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
