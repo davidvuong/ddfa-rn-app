@@ -50,11 +50,10 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   fetchDetailedCheckIn = () => {
-    this.setState({ isLoadingDetailedCheckIn: true });
+    this.setState({ detailedCheckIn: null, isLoadingDetailedCheckIn: true });
     this.props.getCheckIn(this.props.checkIn.id)
       .then((detailedCheckIn: *) => {
-        this.setState({ detailedCheckIn });
-        this.setState({ isLoadingDetailedCheckIn: false });
+        this.setState({ detailedCheckIn, isLoadingDetailedCheckIn: false });
       })
       .catch((error: Error) => {
         console.error(error); // TODO: Handle failure.
@@ -72,7 +71,9 @@ export default class CheckInDetailComponent extends React.Component<Props, State
       latitude,
       longitude,
     });
-    this.props.navigation.navigate('ReviewCreate');
+    this.props.navigation.navigate('ReviewCreate', {
+      goBackCallback: this.fetchDetailedCheckIn,
+    });
   }
 
   renderTitleCard = () => {
