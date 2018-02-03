@@ -3,6 +3,7 @@ import * as React from 'react';
 import { NavigationActions } from 'react-navigation';
 
 import {
+  View,
   Container,
   Header,
   Content,
@@ -86,14 +87,13 @@ export default class LoginComponent extends React.Component<Props, State> {
           <Container style={{ flex: 1 }}>
             <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
           </Container>
-          <Container enableAutoAutomaticScroll={true} style={Styles.inputGroupContainer}>
+          <View enableAutoAutomaticScroll={true} style={Styles.inputGroupContainer}>
             <Item style={Styles.inputContainer}>
               <Input
                 placeholder='Username'
-                value={this.state.username}
                 autoCapitalize={'none'}
                 autoCorrect={false}
-                onChangeText={(username: string) => { this.setState({ username }); }}
+                // onChangeText={(username: string) => { this.setState({ username }); }}
                 style={Styles.inputStyle}
               />
             </Item>
@@ -101,8 +101,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               <Input
                 placeholder='Password'
                 secureTextEntry
-                value={this.state.password}
-                onChangeText={(password: string) => { this.setState({ password }); }}
+                // onChangeText={(password: string) => { this.setState({ password }); }}
                 style={Styles.inputStyle}
               />
             </Item>
@@ -116,7 +115,7 @@ export default class LoginComponent extends React.Component<Props, State> {
             >
               <Text>{this.state.isLoggingIn ? 'Logging in...' : 'Log In'}</Text>
             </Button>
-          </Container>
+          </View>
         </Content>
       </Container>
     );
