@@ -46,7 +46,7 @@ type Props = {
 };
 
 type State = {
-  isCreatingReview: boolean,
+  createReviewState: 'IDLE' | 'CREATING' | 'CREATED' | 'ERROR',
   isWritingComment: boolean,
   comment: ?string,
 };
@@ -54,7 +54,7 @@ type State = {
 export default class ReviewCreateComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
   state = {
-    isCreatingReview: false,
+    createReviewState: 'IDLE',
     isWritingComment: false,
     comment: null,
   };
@@ -74,7 +74,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
-    this.setState({ isCreatingReview: true });
+    this.setState({ createReviewState: 'CREATING' });
     return this.props.createReview(
       this.props.selectedLocation.id, // checkInId
       0, // amountPaid
@@ -89,11 +89,17 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         return this.props.listCheckIns((new Date()).toISOString());
       })
       .then(() => {
-        this.props.navigation.goBack();
+        this.setState({ createReviewState: 'CREATED' });
+        setTimeout(() => {
+          this.props.navigation.goBack();
+        }, 1500);
       })
       .catch((error: Error) => {
-        this.setState({ isCreatingReview: false });
         console.error(error);
+        this.setState({ createReviewState: 'ERROR' });
+        setTimeout(() => {
+          this.setState({ createReviewState: 'IDLE' });
+        }, 1000);
       });
   }
 
@@ -173,7 +179,24 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         </FooterTab>
         <FooterTab>
           <Button onPress={this.onPressSubmit}>
-            <Text>{this.state.isCreatingReview ? 'Submitting...' : 'Submit'}</Text>
+            <Text>
+              {
+                (() => {
+                  switch (this.state.createReviewState) {
+                    case 'IDLE':
+                      return 'Submit';
+                    case 'CREATING':
+                      return 'Submitting';
+                    case 'CREATED':
+                      return 'Success :)';
+                    case 'ERROR':
+                      return 'Failed...';
+                    default:
+                      return 'Submit';
+                  }
+                })()
+              }
+            </Text>
           </Button>
         </FooterTab>
       </Footer>
