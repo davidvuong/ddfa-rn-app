@@ -24,17 +24,6 @@ export default {
     fontSize: 11,
     fontWeight: '600',
   },
-  navigateIcon: {
-    fontSize: 16,
-    color: 'rgba(0, 0, 0, 0.75)',
-  },
-  navigateButton: {
-    ...Platform.select({
-      ios: {
-        width: 25,
-      },
-    }),
-  },
   thumbnail: {
     width: 46,
     height: 46,

@@ -4,14 +4,11 @@ import moment from 'moment';
 import * as React from 'react';
 import {
   Left,
-  Right,
   Body,
   Text,
   List,
   ListItem,
   Thumbnail,
-  Button,
-  Icon,
   View,
 } from 'native-base';
 import {
@@ -48,9 +45,13 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
 
   renderItem = (checkIn: *) => {
     const checkedInAt = moment(checkIn.createdAt).format('Do MMM YYYY');
-    const iconName = Platform.OS === 'ios' ? 'arrow-forward' : 'md-link';
     return (
-      <ListItem avatar key={checkIn.id} style={Styles.listItemContainer}>
+      <ListItem
+        avatar
+        key={checkIn.id}
+        style={Styles.listItemContainer}
+        onPress={() => { this.navigateToCheckIn(checkIn); }}
+      >
         <Left>
           <Thumbnail square style={Styles.thumbnail} source={this.imageGenerator.get(checkIn.id)} />
         </Left>
@@ -61,17 +62,6 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
             Checked in @ {checkedInAt} ({Math.round(checkIn.distance) / 1000}km away)
           </Text>
         </Body>
-        <Right>
-          <Body>
-            <Button
-              transparent
-              style={Styles.navigateButton}
-              onPress={() => { this.navigateToCheckIn(checkIn); }}
-            >
-              <Icon name={iconName} style={Styles.navigateIcon} />
-            </Button>
-          </Body>
-        </Right>
       </ListItem>
     );
   }
