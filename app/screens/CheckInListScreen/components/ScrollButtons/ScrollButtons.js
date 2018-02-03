@@ -1,5 +1,4 @@
 // @flow
-import _ from 'lodash';
 import * as React from 'react';
 import {
   View,
