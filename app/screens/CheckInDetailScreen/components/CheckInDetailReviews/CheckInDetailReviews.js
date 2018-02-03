@@ -8,7 +8,6 @@ import {
   Text,
   Card,
   CardItem,
-  View,
 } from 'native-base';
 
 import { getRandomAvatar } from '../../../../Images';
@@ -55,14 +54,6 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
   }
 
   render() {
-    if (!this.props.reviews.length) {
-      return (
-        <View padder style={Styles.emptyReviewsContainer}>
-          <Text style={Styles.emptyReviewsText} note>There are no reivews for this check-in...</Text>
-        </View>
-      );
-    }
-
     const reviews = _.orderBy(this.props.reviews, ['createdAt'], ['asc']);
     return _.map(reviews, (review: *) => {
       const { id, comment, foodRating, serviceRating, environmentRating } = review;

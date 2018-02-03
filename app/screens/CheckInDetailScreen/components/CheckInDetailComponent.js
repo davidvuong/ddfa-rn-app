@@ -9,6 +9,7 @@ import {
   Card,
   CardItem,
   View,
+  Button,
 } from 'native-base';
 import {
   ActivityIndicator,
@@ -26,34 +27,55 @@ type Props = {
   checkIn: *,
   navigation: *,
   resetSelectedCheckIn: () => *,
+  setSelectedLocation: (*) => *,
   getCheckIn: (string) => *,
   getPhotoUrl: (string) => string,
   getCurrencySymbol: (string) => string,
 };
 
 type State = {
+  isLoadingDetailedCheckIn: boolean,
   detailedCheckIn: ?*,
 };
 
 export default class CheckInDetailComponent extends React.Component<Props, State> {
   static navigationOptions = navigationOptions;
-  state = { detailedCheckIn: null };
+  state = {
+    isLoadingDetailedCheckIn: false,
+    detailedCheckIn: null,
+  };
 
   componentDidMount() {
+    this.fetchDetailedCheckIn();
+  }
+
+  fetchDetailedCheckIn = () => {
+    this.setState({ isLoadingDetailedCheckIn: true });
     this.props.getCheckIn(this.props.checkIn.id)
       .then((detailedCheckIn: *) => {
         this.setState({ detailedCheckIn });
+        this.setState({ isLoadingDetailedCheckIn: false });
       })
       .catch((error: Error) => {
         console.error(error); // TODO: Handle failure.
+        this.setState({ isLoadingDetailedCheckIn: false });
       });
   }
 
-  componentWillUnmount() {
-    this.props.resetSelectedCheckIn();
+  onPressWriteReviewButton = () => {
+    if (!this.state.detailedCheckIn) { return; }
+    const { id, name, address, latitude, longitude } = this.state.detailedCheckIn;
+    this.props.setSelectedLocation({
+      checkInId: id,
+      name,
+      address,
+      latitude,
+      longitude,
+    });
+    this.props.navigation.navigate('ReviewCreate');
   }
 
-  renderTitleCard() {
+  renderTitleCard = () => {
     const { name, address, createdAt } = this.props.checkIn;
     return (
       <Card>
@@ -70,27 +92,55 @@ export default class CheckInDetailComponent extends React.Component<Props, State
     );
   }
 
-  render() {
-    const { getPhotoUrl, getCurrencySymbol, checkIn, navigation } = this.props;
-    const { detailedCheckIn } = this.state;
-    if (!checkIn) { return null; }
+  renderEmptyReviews = () => {
+    return (
+      <View padder style={Styles.emptyReviewsContainer}>
+        <Text style={Styles.emptyReviewsText} note>There are no reivews for this check-in...</Text>
+        <Button
+          primary
+          small
+          rounded
+          onPress={this.onPressWriteReviewButton}
+          style={Styles.writeReviewButton}
+        >
+          <Text uppercase={false}>Write a review</Text>
+        </Button>
+      </View>
+    );
+  }
 
+  renderContent = () => {
+    const { isLoadingDetailedCheckIn, detailedCheckIn } = this.state;
+    if (!detailedCheckIn && isLoadingDetailedCheckIn) {
+      return <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />;
+    }
+    if (!detailedCheckIn && !isLoadingDetailedCheckIn) {
+      return null; // oops server error.
+    }
+
+    // We have reviews and possible photos!
+    if (detailedCheckIn && detailedCheckIn.reviews.length) {
+      const { getPhotoUrl, getCurrencySymbol } = this.props;
+      return (
+        <View>
+          <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
+          <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
+        </View>
+      );
+    }
+    return this.renderEmptyReviews(); // We have nothing!
+  }
+
+  render() {
+    const { checkIn, navigation } = this.props;
+    if (!checkIn) { return null; }
     return (
       <Container>
         <CheckInDetailHeader navigation={navigation} />
         <Content>
           <GenericStaticMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
           {this.renderTitleCard()}
-          {
-            detailedCheckIn ? (
-              <View>
-                <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
-                <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
-              </View>
-            ) : (
-              <ActivityIndicator color="black" style={Styles.detailedCheckInSpinner} />
-            )
-          }
+          {this.renderContent()}
         </Content>
       </Container>
     );
