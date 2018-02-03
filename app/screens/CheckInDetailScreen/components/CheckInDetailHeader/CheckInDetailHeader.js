@@ -9,6 +9,9 @@ import {
   Icon,
   Button,
 } from 'native-base';
+import {
+  Platform,
+} from 'react-native';
 
 import Styles from './Styles';
 
@@ -24,7 +27,7 @@ export default class CheckInDetailHeader extends React.Component<Props, State> {
       <Header>
         <Left>
           <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
-            <Icon name="arrow-back" />
+            <Icon name="arrow-back" style={Styles.headerBackIcon} />
           </Button>
         </Left>
         <Body>

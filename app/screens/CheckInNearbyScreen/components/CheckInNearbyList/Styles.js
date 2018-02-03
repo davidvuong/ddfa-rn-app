@@ -14,6 +14,7 @@ export default {
   },
   listItemContainer: {
     paddingLeft: 6,
+    backgroundColor: 'white',
   },
   listItemBody: {
     marginLeft: 5,

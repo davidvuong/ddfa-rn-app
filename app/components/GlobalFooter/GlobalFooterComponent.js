@@ -111,22 +111,22 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     const { routeName } = this.props.navigation.state;
     return (
       <Footer style={Styles.footerContainer}>
-        <FooterTab>
+        <FooterTab style={Styles.footerTab}>
           <Button vertical onPress={this.onPressHome} active={routeName === 'CheckInList'}>
             {Platform.OS === 'ios' ? <Icon name="ios-apps" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text>home</Text>}
+            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>home</Text>}
           </Button>
           <Button vertical onPress={this.onPressSearch} active={routeName === 'CheckInNearby'}>
             {Platform.OS === 'ios' ? <Icon name="ios-search" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text>nearby</Text>}
+            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>nearby</Text>}
           </Button>
           <Button vertical onPress={this.onPressCheckIn}>
             {Platform.OS === 'ios' ? <Icon name="ios-navigate" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text>check-in</Text>}
+            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>check-in</Text>}
           </Button>
           <Button vertical onPress={this.onPressLogout}>
             {Platform.OS === 'ios' ? <Icon name="ios-log-out" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text>logout</Text>}
+            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>logout</Text>}
           </Button>
         </FooterTab>
       </Footer>

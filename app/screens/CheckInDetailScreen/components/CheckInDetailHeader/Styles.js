@@ -12,4 +12,14 @@ export default {
       },
     }),
   },
+  headerBackIcon: {
+    ...Platform.select({
+      ios: {
+        color: 'black',
+      },
+      android: {
+        color: 'white',
+      },
+    }),
+  },
 };
