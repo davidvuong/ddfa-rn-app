@@ -108,15 +108,14 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
 
   render() {
-    const { routeName } = this.props.navigation.state;
     return (
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
-          <Button vertical onPress={this.onPressHome} active={routeName === 'CheckInList'}>
+          <Button vertical onPress={this.onPressHome}>
             {Platform.OS === 'ios' ? <Icon name="ios-apps" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>home</Text>}
           </Button>
-          <Button vertical onPress={this.onPressSearch} active={routeName === 'CheckInNearby'}>
+          <Button vertical onPress={this.onPressSearch}>
             {Platform.OS === 'ios' ? <Icon name="ios-search" style={Styles.icon} /> : null}
             {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>nearby</Text>}
           </Button>
