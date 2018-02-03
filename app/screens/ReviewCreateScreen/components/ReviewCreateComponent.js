@@ -63,14 +63,6 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     this.props.resetSelectedLocation();
   }
 
-  onPressCancel = () => {
-    const buttons = [
-      { text: 'Yes', onPress: this.props.navigation.goBack },
-      { text: 'No', style: 'cancel' },
-    ];
-    Alert.alert('Cancel Review', 'Are you sure you want to cancel?', buttons);
-  }
-
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
@@ -172,11 +164,6 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   renderFooter = () => {
     return (
       <Footer>
-        <FooterTab>
-          <Button onPress={this.onPressCancel}>
-            <Text>Cancel</Text>
-          </Button>
-        </FooterTab>
         <FooterTab>
           <Button onPress={this.onPressSubmit}>
             <Text>
