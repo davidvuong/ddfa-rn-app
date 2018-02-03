@@ -13,8 +13,8 @@ const commonArrowStyles = {
 };
 
 export default {
-  upArrow: { ...commonArrowStyles, bottom: 40 },
-  downArrow: { ...commonArrowStyles, bottom: 0 },
+  upArrow: { ...commonArrowStyles, bottom: 30 },
+  downArrow: { ...commonArrowStyles, bottom: -10 },
   arrowIcons: {
     fontSize: 16,
     color: 'black',
