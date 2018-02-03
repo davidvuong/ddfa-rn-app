@@ -89,7 +89,12 @@ export default class CheckInListComponent extends React.Component<Props, State> 
       return;
     }
 
+    // There are no previous checkIns, nothing to do.
     const previousCheckInsCount = this.props.checkIns.length;
+    if (!previousCheckInsCount) {
+      return;
+    }
+
     const lastCheckIn = _.last(this.props.checkIns);
     const lastCheckInAt = (new Date(lastCheckIn.createdAt)).toISOString();
 
