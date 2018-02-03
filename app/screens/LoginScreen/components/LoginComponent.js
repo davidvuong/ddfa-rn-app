@@ -93,7 +93,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 placeholder='Username'
                 autoCapitalize={'none'}
                 autoCorrect={false}
-                // onChangeText={(username: string) => { this.setState({ username }); }}
+                onChangeText={(username: string) => { this.setState({ username }); }}
                 style={Styles.inputStyle}
               />
             </Item>
@@ -101,7 +101,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               <Input
                 placeholder='Password'
                 secureTextEntry
-                // onChangeText={(password: string) => { this.setState({ password }); }}
+                onChangeText={(password: string) => { this.setState({ password }); }}
                 style={Styles.inputStyle}
               />
             </Item>
