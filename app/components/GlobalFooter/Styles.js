@@ -15,7 +15,7 @@ export default {
     fontSize: 28,
   },
   iconText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'black',
   },
 };
