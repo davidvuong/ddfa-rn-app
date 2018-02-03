@@ -35,6 +35,25 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
     );
   }
 
+  renderUserDetails = (review: *) => {
+    return (
+      <CardItem>
+        <Left>
+          {
+            review.user.avatar ?
+              <Thumbnail source={{ uri: review.user.avatar }} />
+            :
+              <Thumbnail source={getRandomAvatar()} />
+          }
+          <Body>
+            <Text>{review.user.name || review.user.username}</Text>
+            {this.renderSubText(review)}
+          </Body>
+        </Left>
+      </CardItem>
+    );
+  }
+
   render() {
     if (!this.props.reviews.length) {
       return (
@@ -46,23 +65,10 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
 
     const reviews = _.orderBy(this.props.reviews, ['createdAt'], ['asc']);
     return _.map(reviews, (review: *) => {
-      const { id, comment, foodRating, serviceRating, environmentRating, user } = review;
+      const { id, comment, foodRating, serviceRating, environmentRating } = review;
       return (
         <Card style={Styles.card} key={id}>
-          <CardItem>
-            <Left>
-              {
-                user.avatar ?
-                  <Thumbnail source={{ uri: user.avatar }} />
-                :
-                  <Thumbnail source={getRandomAvatar()} />
-              }
-              <Body>
-                <Text>{user.name || user.username}</Text>
-                {this.renderSubText(review)}
-              </Body>
-            </Left>
-          </CardItem>
+          {this.renderUserDetails(review)}
           {
             !comment ? null : (
               <CardItem>
