@@ -12,7 +12,7 @@ export default {
     fontSize: 12,
   },
   counter: {
-    fontSize: 8,
+    fontSize: 12,
     position: 'absolute',
     right: -5,
   },
