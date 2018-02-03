@@ -108,8 +108,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
           address,
           latitude,
           longitude,
-          rating:
-          rating || null,
+          rating: rating || null,
           pricingLevel: pricingLevel || null,
         });
         this.props.navigation.navigate('ReviewCreate');
