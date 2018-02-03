@@ -2,7 +2,17 @@
 import { Platform } from 'react-native';
 
 export default {
-  headerTitle: {
+  headerText: {
+    ...Platform.select({
+      ios: {
+        color: 'black',
+      },
+      android: {
+        color: 'white',
+      },
+    }),
+  },
+  headerBackIcon: {
     ...Platform.select({
       ios: {
         color: 'black',

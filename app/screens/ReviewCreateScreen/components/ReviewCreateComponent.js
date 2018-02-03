@@ -14,11 +14,11 @@ import {
   FooterTab,
   Button,
   Input,
+  Icon,
 } from 'native-base';
 import {
   Alert,
   Keyboard,
-  Platform,
 } from 'react-native';
 
 import PlaceContentCard from './PlaceContentCard/PlaceContentCard';
@@ -110,25 +110,30 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
   renderHeader = () => {
     const { isWritingComment } = this.state;
+    if (isWritingComment) {
+      return (
+        <Header>
+          <Left />
+          <Body />
+          <Right>
+            <Button transparent onPress={this.onPressDone}>
+              <Text style={Styles.headerText}>Done</Text>
+            </Button>
+          </Right>
+        </Header>
+      );
+    }
     return (
       <Header>
-        {Platform.OS === 'ios' && !isWritingComment ? <Left /> : null}
-        {
-          isWritingComment ? null : (
-            <Body>
-              <Text style={Styles.headerTitle}>DDFA Review</Text>
-            </Body>
-          )
-        }
-        <Right>
-          {
-            !isWritingComment ? null : (
-              <Button transparent onPress={this.onPressDone}>
-                <Text>Done</Text>
-              </Button>
-            )
-          }
-        </Right>
+        <Left>
+          <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
+            <Icon name="arrow-back" style={Styles.headerBackIcon} />
+          </Button>
+        </Left>
+        <Body>
+          <Text style={Styles.headerText}>DDFA Review</Text>
+        </Body>
+        <Right />
       </Header>
     );
   }
