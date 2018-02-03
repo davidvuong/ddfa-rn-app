@@ -153,11 +153,11 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
             <Input
               placeholder="Add any additional comments and share your experience at this restaurant..."
               onFocus={this.onFocusComment}
-              multiline={true}
               style={Styles.commentInput}
               onChangeText={this.onChangeTextComment}
               maxLength={2048}
-              autoGrow={true}
+              autoGrow
+              multiline
               onBlur={() => { this.setState({ isWritingComment: false }); }}
             />
           </CardItem>
