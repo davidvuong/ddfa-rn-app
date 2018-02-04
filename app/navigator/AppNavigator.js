@@ -1,5 +1,8 @@
 // @flow
-import { StackNavigator } from 'react-navigation';
+import {
+  StackNavigator,
+  NavigationActions,
+} from 'react-navigation';
 
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import CheckInListScreen from '../screens/CheckInListScreen/CheckInListScreen';
@@ -18,4 +21,13 @@ export default function getNavigator(isLoggedIn: ?boolean): * {
   }, {
     initialRouteName: isLoggedIn ? 'CheckInList' : 'Login',
   });
+}
+
+export function navigateAndReset(routeName: string) {
+  return this.props.navigation.dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName }),
+    ],
+  }));
 }

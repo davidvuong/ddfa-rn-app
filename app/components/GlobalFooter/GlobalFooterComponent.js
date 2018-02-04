@@ -2,10 +2,8 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
 import * as React from 'react';
-import { NavigationActions } from 'react-navigation';
 import {
   Text,
-  Icon,
   Footer,
   FooterTab,
   Button,
@@ -18,6 +16,7 @@ import {
 import RNGooglePlaces from 'react-native-google-places';
 
 import Styles from './Styles';
+import { navigateAndReset } from '../../navigator/AppNavigator';
 
 type Props = {
   navigation: *,
@@ -48,21 +47,12 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     return !!this.state.spinners[spinnerType];
   }
 
-  navigateAndReset = (routeName: string) => {
-    return this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName }),
-      ],
-    }));
-  }
-
   onPressHome = () => {
     if (this.props.navigation.state.routeName === 'CheckInList' || this.isSpinning('home')) {
       return;
     }
     this.setSpinner('home', true);
-    this.navigateAndReset('CheckInList');
+    navigateAndReset('CheckInList');
   }
 
   onPressNearby = () => {
@@ -74,7 +64,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .then((place: *) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude });
-        this.navigateAndReset('CheckInNearby');
+        navigateAndReset('CheckInNearby');
       })
       .catch(() => { this.setSpinner('nearby', false); });
   }
@@ -84,7 +74,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     const onPressLogoutCancel = () => { this.setSpinner('logout', false); };
     const onPressLogoutYes = () => {
       this.props.logoutUser()
-        .then(() => { this.navigateAndReset('Login'); })
+        .then(() => { navigateAndReset('Login'); })
         .catch(() => { this.setSpinner('login', false); });
     };
 

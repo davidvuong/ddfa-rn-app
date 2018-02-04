@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { NavigationActions } from 'react-navigation';
 
 import {
   View,
@@ -18,6 +17,7 @@ import {
   Image,
 } from 'react-native';
 
+import { navigateAndReset } from '../../../navigator/AppNavigator';
 import { Images } from '../../../Images';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -41,15 +41,6 @@ export default class LoginComponent extends React.Component<Props, State> {
     password: null,
   };
 
-  navigateToMainPage = () => {
-    this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'CheckInList' }),
-      ],
-    }));
-  }
-
   isLoginButtonDisabled = () => {
     return this.state.isLoggingIn || !this.state.username || !this.state.password;
   }
@@ -60,9 +51,7 @@ export default class LoginComponent extends React.Component<Props, State> {
 
     this.setState({ isLoggingIn: true });
     this.props.loginUser(username, password)
-      .then(() => {
-        this.navigateToMainPage();
-      })
+      .then(() => { navigateAndReset('CheckInList'); })
       .catch(() => {
         Toast.show({
           text: 'Login failed - please try again...',
