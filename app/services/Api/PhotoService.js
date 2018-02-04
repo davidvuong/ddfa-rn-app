@@ -22,7 +22,6 @@ class PhotoService {
     return `${this.host}/photos/${id}`;
   }
 
-  // FIXME: checkInId should be the reviewId!!!
   create = (checkInId: string, photos: Array<Blob>): Promise<string> => {
     const endpoint = `${this.host}/checkins/${checkInId}/photos`;
     const headers = {
