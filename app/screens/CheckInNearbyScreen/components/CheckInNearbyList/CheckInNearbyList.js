@@ -12,7 +12,6 @@ import {
   View,
 } from 'native-base';
 import {
-  Platform,
   ActivityIndicator,
 } from 'react-native';
 

@@ -9,9 +9,6 @@ import {
   Icon,
   Button,
 } from 'native-base';
-import {
-  Platform,
-} from 'react-native';
 
 import Styles from './Styles';
 

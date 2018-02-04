@@ -1,5 +1,4 @@
 // @flow
-import { Platform } from 'react-native';
 
 export default {
   emptyCheckInsContainer: {

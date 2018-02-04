@@ -18,7 +18,6 @@ import {
   Icon,
 } from 'native-base';
 import {
-  Alert,
   Keyboard,
 } from 'react-native';
 
