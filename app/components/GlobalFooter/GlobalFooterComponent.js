@@ -47,6 +47,13 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     return !!this.state.spinners[spinnerType];
   }
 
+  /* Given a GooglePlace object, determine the location name. */
+  getLocationName = (place: *) => {
+    const { name, address, latitude, longitude } = place;
+    return name || address || `${latitude} ${longitude}`;
+  }
+
+  /* Below are all `onPress` callbacks (home, nearby, checkIn, logout). */
   onPressHome = () => {
     if (this.props.navigation.state.routeName === 'CheckInList' || this.isSpinning('home')) {
       return;
@@ -67,28 +74,6 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
         navigateAndReset('CheckInNearby');
       })
       .catch(() => { this.setSpinner('nearby', false); });
-  }
-
-  onPressLogout = () => {
-    this.setSpinner('logout', true);
-    const onPressLogoutCancel = () => { this.setSpinner('logout', false); };
-    const onPressLogoutYes = () => {
-      this.props.logoutUser()
-        .then(() => { navigateAndReset('Login'); })
-        .catch(() => { this.setSpinner('login', false); });
-    };
-
-    const buttons = [
-      { text: 'Yes', onPress: onPressLogoutYes },
-      { text: 'Cancel', style: 'cancel', onPress: onPressLogoutCancel },
-    ];
-    Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
-  }
-
-  /* Given a GooglePlace object, determine the location name. */
-  getLocationName = (place: *) => {
-    const { name, address, latitude, longitude } = place;
-    return name || address || `${latitude} ${longitude}`;
   }
 
   onPressCheckIn = () => {
@@ -125,11 +110,25 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .catch(() => { this.setSpinner('checkIn', false); });
   }
 
+  onPressLogout = () => {
+    this.setSpinner('logout', true);
+    const onPressLogoutCancel = () => { this.setSpinner('logout', false); };
+    const onPressLogoutYes = () => {
+      this.props.logoutUser()
+        .then(() => { navigateAndReset('Login'); })
+        .catch(() => { this.setSpinner('login', false); });
+    };
+
+    const buttons = [
+      { text: 'Yes', onPress: onPressLogoutYes },
+      { text: 'Cancel', style: 'cancel', onPress: onPressLogoutCancel },
+    ];
+    Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
+  }
+
   renderButton = (btnType: string, btnName: string, onPress: *) => {
     if (this.state.spinners[btnType]) {
-      return (
-        <Button vertical><ActivityIndicator color="black" /></Button>
-      );
+      return <Button vertical><ActivityIndicator color="black" /></Button>;
     }
     return (
       <Button vertical onPress={onPress}>
