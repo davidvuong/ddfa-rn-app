@@ -1,4 +1,5 @@
 // @flow
+import _ from 'lodash';
 import Promise from 'bluebird';
 import * as React from 'react';
 import { NavigationActions } from 'react-navigation';
@@ -12,6 +13,7 @@ import {
 import {
   Alert,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 
@@ -26,60 +28,69 @@ type Props = {
   listCheckIns: (string) => *,
 };
 
-type State = {};
+type State = {
+  spinners: Object,
+};
 
 export default class GlobalFooterComponent extends React.Component<Props, State> {
   RNGooglePlacesOptions = { radius: 0.5 };
+  state = {
+    spinners: {},
+  };
 
-  navigateToLogin = () => {
-    this.props.logoutUser()
-      .then(() => {
-        this.props.navigation.dispatch(NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'Login' }),
-          ],
-        }));
-      })
-      .catch((error: Error) => { console.error(error.message); });
+  /* Wrappers over `this.state.spinners`. */
+  setSpinner = (spinnerType: string, isSpinning: boolean) => {
+    const spinners = _.clone(this.state.spinners);
+    spinners[spinnerType] = isSpinning;
+    this.setState({ spinners });
+  }
+  isSpinning = (spinnerType: string): boolean => {
+    return !!this.state.spinners[spinnerType];
   }
 
-  onPressHome = () => {
-    if (this.props.navigation.state.routeName === 'CheckInList') {
-      return;
-    }
-    this.props.navigation.dispatch(NavigationActions.reset({
+  navigateAndReset = (routeName: string) => {
+    return this.props.navigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'CheckInList' }),
+        NavigationActions.navigate({ routeName }),
       ],
     }));
   }
 
-  onPressSearch = () => {
-    if (this.props.navigation.state.routeName === 'CheckInNearby') {
+  onPressHome = () => {
+    if (this.props.navigation.state.routeName === 'CheckInList' || this.isSpinning('home')) {
       return;
     }
+    this.setSpinner('home', true);
+    this.navigateAndReset('CheckInList');
+  }
+
+  onPressNearby = () => {
+    if (this.props.navigation.state.routeName === 'CheckInNearby' || this.isSpinning('nearby')) {
+      return;
+    }
+    this.setSpinner('nearby', true);
     RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
       .then((place: *) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude });
-        this.props.navigation.dispatch(NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'CheckInNearby' }),
-          ],
-        }));
+        this.navigateAndReset('CheckInNearby');
       })
-      .catch(() => {
-        // pass
-      });
+      .catch(() => { this.setSpinner('nearby', false); });
   }
 
   onPressLogout = () => {
+    this.setSpinner('logout', true);
+    const onPressLogoutCancel = () => { this.setSpinner('logout', false); };
+    const onPressLogoutYes = () => {
+      this.props.logoutUser()
+        .then(() => { this.navigateAndReset('Login'); })
+        .catch(() => { this.setSpinner('login', false); });
+    };
+
     const buttons = [
-      { text: 'Yes', onPress: this.navigateToLogin },
-      { text: 'Cancel', style: 'cancel' },
+      { text: 'Yes', onPress: onPressLogoutYes },
+      { text: 'Cancel', style: 'cancel', onPress: onPressLogoutCancel },
     ];
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
@@ -93,6 +104,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   onPressCheckIn = () => {
     let googlePlace: *;
 
+    this.setSpinner('checkIn', true);
     RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
       .then((place: *) => {
         googlePlace = place;
@@ -120,31 +132,30 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
           },
         });
       })
-      .catch(() => {
-        // pass
-      });
+      .catch(() => { this.setSpinner('checkIn', false); });
+  }
+
+  renderButton = (btnType: string, btnName: string, onPress: *) => {
+    if (this.state.spinners[btnType]) {
+      return (
+        <Button vertical><ActivityIndicator color="black" /></Button>
+      );
+    }
+    return (
+      <Button vertical onPress={onPress}>
+        <Text style={Styles.iconText} uppercase>{btnName}</Text>
+      </Button>
+    );
   }
 
   render() {
     return (
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
-          <Button vertical onPress={this.onPressHome}>
-            {Platform.OS === 'ios' ? <Icon name="ios-apps" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>home</Text>}
-          </Button>
-          <Button vertical onPress={this.onPressSearch}>
-            {Platform.OS === 'ios' ? <Icon name="ios-search" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>nearby</Text>}
-          </Button>
-          <Button vertical onPress={this.onPressCheckIn}>
-            {Platform.OS === 'ios' ? <Icon name="ios-navigate" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>check-in</Text>}
-          </Button>
-          <Button vertical onPress={this.onPressLogout}>
-            {Platform.OS === 'ios' ? <Icon name="ios-log-out" style={Styles.icon} /> : null}
-            {Platform.OS === 'ios' ? null : <Text style={Styles.iconText}>logout</Text>}
-          </Button>
+          {this.renderButton('home', 'home', this.onPressHome)}
+          {this.renderButton('nearby', 'nearby', this.onPressNearby)}
+          {this.renderButton('check-in', 'check-in', this.onPressCheckIn)}
+          {this.renderButton('logout', 'logout', this.onPressLogout)}
         </FooterTab>
       </Footer>
     );
