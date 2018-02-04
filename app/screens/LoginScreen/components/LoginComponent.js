@@ -76,7 +76,7 @@ export default class LoginComponent extends React.Component<Props, State> {
           <Container style={{ flex: 1 }}>
             <Image source={Images.backgroundImage1} style={Styles.backgroundImage} />
           </Container>
-          <View enableAutoAutomaticScroll={true} style={Styles.inputGroupContainer}>
+          <View enableAutoAutomaticScroll style={Styles.inputGroupContainer}>
             <Item style={Styles.inputContainer}>
               <Input
                 placeholder='Username'

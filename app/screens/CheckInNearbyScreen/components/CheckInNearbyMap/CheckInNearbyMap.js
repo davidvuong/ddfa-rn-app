@@ -26,9 +26,9 @@ export default class CheckInDetailMap extends React.Component<Props, State> {
       <MapView
         key={`${latitude}${longitude}`}
         pitchEnabled={false}
-        toolbarEnabled={true}
+        toolbarEnabled
         moveOnMarkerPress={false}
-        loadingEnabled={true}
+        loadingEnabled
         initialRegion={{
           latitude,
           longitude,
