@@ -38,11 +38,7 @@ type Props = {
     name: string,
     address: string,
   },
-  createReviewErrorStatus: ?Error,
   navigation: *,
-  resetSelectedLocation: () => *,
-  resetCheckIns: () => *,
-  listCheckIns: (string) => *,
   createReview: (
     string,
     number,
@@ -68,17 +64,6 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     comment: null,
   };
 
-  handleSubmitSuccess = () => {
-    this.setState({ createReviewState: 'CREATED' });
-    _.delay(() => { this.props.navigation.goBack(); }, 1500);
-  }
-
-  handleSubmitError = (error: Error) => {
-    console.error(error);
-    this.setState({ createReviewState: 'ERROR' });
-    _.delay(() => { this.setState({ createReviewState: 'IDLE' }); }, 1000);
-  }
-
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
@@ -95,14 +80,20 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       .then(() => {
         // @see: https://github.com/react-navigation/react-navigation/issues/1416
         const { state } = this.props.navigation;
-        if (state.params && state.params.goBackCallback) { state.params.goBackCallback(); }
-
-        // TODO: Pull resetCheckIns, listCheckIns into a `goBackCallback`.
-        this.props.resetCheckIns();
-        return this.props.listCheckIns((new Date()).toISOString());
+        if (state.params && state.params.goBackCallback) {
+          return state.params.goBackCallback();
+        }
+        return null;
       })
-      .then(this.handleSubmitSuccess)
-      .catch(this.handleSubmitError);
+      .then(() => {
+        this.setState({ createReviewState: 'CREATED' });
+        _.delay(() => { this.props.navigation.goBack(); }, 1500);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+        this.setState({ createReviewState: 'ERROR' });
+        _.delay(() => { this.setState({ createReviewState: 'IDLE' }); }, 1000);
+      });
   }
 
   onPressDone = () => {

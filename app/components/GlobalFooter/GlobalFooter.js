@@ -1,7 +1,11 @@
 // @flow
 import { connect } from 'react-redux';
 
-import { setSelectedLocation } from '../../actions/CheckInActions';
+import {
+  setSelectedLocation,
+  resetCheckIns,
+  listCheckIns,
+} from '../../actions/CheckInActions';
 import GlobalFooterComponent from './GlobalFooterComponent';
 import AuthenticationService from '../../services/Api/AuthenticationService';
 import CheckInService from '../../services/Api/CheckInService';
@@ -16,6 +20,12 @@ const mapDispatchToProps = (dispatch: *) => {
     logoutUser: AuthenticationService.logout,
     setSelectedLocation: (selectedLocation: *) => {
       return dispatch(setSelectedLocation(selectedLocation));
+    },
+    resetCheckIns: () => {
+      return dispatch(resetCheckIns());
+    },
+    listCheckIns: (startTime: string) => {
+      return dispatch(listCheckIns(startTime));
     },
   };
 };

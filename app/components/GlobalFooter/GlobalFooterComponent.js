@@ -22,6 +22,8 @@ type Props = {
   logoutUser: () => *,
   createCheckIn: (number, number, string, string, ?string) => Promise<string>,
   setSelectedLocation: (*) => *,
+  resetCheckIns: () => *,
+  listCheckIns: (string) => *,
 };
 
 type State = {};
@@ -111,7 +113,12 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
           rating: rating || null,
           pricingLevel: pricingLevel || null,
         });
-        this.props.navigation.navigate('ReviewCreate');
+        this.props.navigation.navigate('ReviewCreate', {
+          goBackCallback: () => {
+            this.props.resetCheckIns();
+            return this.props.listCheckIns((new Date()).toISOString());
+          },
+        });
       })
       .catch(() => {
         // pass

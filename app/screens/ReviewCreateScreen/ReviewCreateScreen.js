@@ -1,13 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import ReviewCreateComponent from './components/ReviewCreateComponent';
 
+import ReviewCreateComponent from './components/ReviewCreateComponent';
 import ReviewService from '../../services/Api/ReviewService';
-import {
-  listCheckIns,
-  resetSelectedLocation,
-  resetCheckIns,
-} from '../../actions/CheckInActions';
 
 const mapStateToProps = (state: *) => {
   const { checkIn } = state;
@@ -18,15 +13,6 @@ const mapStateToProps = (state: *) => {
 
 const mapDispatchToProps = (dispatch: *) => {
   return {
-    resetSelectedLocation: () => {
-      return dispatch(resetSelectedLocation());
-    },
-    resetCheckIns: () => {
-      return dispatch(resetCheckIns());
-    },
-    listCheckIns: (startTime: string) => {
-      return dispatch(listCheckIns(startTime));
-    },
     createReview: ReviewService.create,
   };
 };
