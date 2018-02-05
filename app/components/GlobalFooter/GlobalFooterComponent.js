@@ -70,11 +70,13 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
       .then((place: *) => {
         const { latitude, longitude } = place;
-        this.props.setSelectedLocation({ latitude, longitude });
+        this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
         navigateAndReset('CheckInNearby');
-        this.setSpinner('nearby', false);
       })
-      .catch(() => { this.setSpinner('nearby', false); });
+      .catch((error: Error) => {
+        console.debug(error);
+        this.setSpinner('nearby', false);
+      });
   }
 
   onPressCheckIn = () => {
@@ -109,7 +111,10 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
         });
         this.setSpinner('checkIn', false);
       })
-      .catch(() => { this.setSpinner('checkIn', false); });
+      .catch((error: Error) => {
+        console.debug(error);
+        this.setSpinner('checkIn', false);
+      });
   }
 
   onPressLogout = () => {
