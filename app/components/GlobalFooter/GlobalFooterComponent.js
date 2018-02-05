@@ -72,6 +72,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude });
         navigateAndReset('CheckInNearby');
+        this.setSpinner('nearby', false);
       })
       .catch(() => { this.setSpinner('nearby', false); });
   }
@@ -106,6 +107,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
             return this.props.listCheckIns((new Date()).toISOString());
           },
         });
+        this.setSpinner('checkIn', false);
       })
       .catch(() => { this.setSpinner('checkIn', false); });
   }
@@ -115,7 +117,10 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     const onPressLogoutCancel = () => { this.setSpinner('logout', false); };
     const onPressLogoutYes = () => {
       this.props.logoutUser()
-        .then(() => { navigateAndReset('Login'); })
+        .then(() => {
+          navigateAndReset('Login');
+          this.setSpinner('logout', false);
+        })
         .catch(() => { this.setSpinner('login', false); });
     };
 
