@@ -59,7 +59,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       return;
     }
     this.setSpinner('home', true);
-    navigateAndReset('CheckInList');
+    navigateAndReset('CheckInList', this.props.navigation);
   }
 
   onPressNearby = () => {
@@ -71,7 +71,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
       .then((place: *) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
-        navigateAndReset('CheckInNearby');
+        navigateAndReset('CheckInNearby', this.props.navigation);
       })
       .catch((error: Error) => {
         console.debug(error);
@@ -123,7 +123,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     const onPressLogoutYes = () => {
       this.props.logoutUser()
         .then(() => {
-          navigateAndReset('Login');
+          navigateAndReset('Login', this.props.navigations);
           this.setSpinner('logout', false);
         })
         .catch(() => { this.setSpinner('login', false); });

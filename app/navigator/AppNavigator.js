@@ -23,8 +23,8 @@ export default function getNavigator(isLoggedIn: ?boolean): * {
   });
 }
 
-export function navigateAndReset(routeName: string) {
-  return this.props.navigation.dispatch(NavigationActions.reset({
+export function navigateAndReset(routeName: string, navigation: *) {
+  return navigation.dispatch(NavigationActions.reset({
     index: 0,
     actions: [
       NavigationActions.navigate({ routeName }),

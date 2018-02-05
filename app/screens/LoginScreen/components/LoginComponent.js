@@ -51,7 +51,7 @@ export default class LoginComponent extends React.Component<Props, State> {
 
     this.setState({ isLoggingIn: true });
     this.props.loginUser(username, password)
-      .then(() => { navigateAndReset('CheckInList'); })
+      .then(() => { navigateAndReset('CheckInList', this.props.navigation); })
       .catch(() => {
         Toast.show({
           text: 'Login failed - please try again...',
