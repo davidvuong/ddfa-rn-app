@@ -67,7 +67,7 @@ export default class CheckInDetailHeader extends React.Component<Props, State> {
       return <Right><ActivityIndicator color="black" /></Right>;
     }
     if (isDeletingCheckIn === 'DELETED') {
-      return <Right><Text>💀!</Text></Right>; // bleh... dead!
+      return <Right><Text style={Styles.headerIcon}>💀</Text></Right>; // bleh... dead!
     }
     return null;
   }
