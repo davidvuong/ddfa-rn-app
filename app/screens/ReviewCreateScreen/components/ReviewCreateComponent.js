@@ -65,8 +65,8 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     isWritingComment: false,
     comment: null,
   };
-  flushReviewToCacheInterval = 3500;
-  flushReviewIntervalTimer: *;
+  // flushReviewToCacheInterval = 3500;
+  // flushReviewIntervalTimer: *;
 
   componentWillMount() {
     this.props.getCachedReview(this.props.selectedLocation.checkInId)
@@ -75,17 +75,18 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
         this.setState({ comment: cachedReview.comment });
       })
       .then(() => {
-        this.flushReviewIntervalTimer = setInterval(() => {
-          this.props.setCachedReview(this.props.selectedLocation.checkInId, {
-            comment: this.state.comment,
-          });
-        }, this.flushReviewToCacheInterval);
+        // this.flushReviewIntervalTimer = setInterval(() => {
+        //   this.props.setCachedReview(this.props.selectedLocation.checkInId, {
+        //     comment: this.state.comment,
+        //   });
+        // }, this.flushReviewToCacheInterval);
+        return null;
       });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.flushReviewIntervalTimer);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.flushReviewIntervalTimer);
+  // }
 
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
