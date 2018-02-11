@@ -48,6 +48,8 @@ type Props = {
     ?number,
     ?number,
   ) => *,
+  getCachedReview: (string) => Promise<?Object>,
+  setCachedReview: (string, Object) => Promise<void>,
 };
 
 type State = {
@@ -63,6 +65,30 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     isWritingComment: false,
     comment: null,
   };
+
+  /* --- BEGIN AUTO_SAVE FEATURE... --- */
+  autoCacheSaveTimer: * = null;
+  autoSaveInterval = 2000;
+  componentWillMount() {
+    const { selectedLocation } = this.props;
+    this.props.getCachedReview(this.props.selectedLocation.checkInId)
+      .then((cachedReview: ?Object) => {
+        if (!cachedReview || _.isEmpty(cachedReview)) { return; }
+        this.setState({ comment: cachedReview.comment });
+      })
+      .then(() => {
+        this.autoCacheSaveTimer = setInterval(() => {
+          const { comment } = this.state;
+          this.props.setCachedReview(selectedLocation.checkInId, { comment });
+        }, this.autoSaveInterval);
+      });
+  }
+  componentWillUnmount() {
+    if (this.autoCacheSaveTimer) {
+      clearInterval(this.autoCacheSaveTimer);
+    }
+  }
+  /* --- END AUTO_SAVE FEATURE...--- */
 
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
@@ -84,6 +110,9 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
           return state.params.goBackCallback();
         }
         return null;
+      })
+      .then(() => {
+        return this.props.setCachedReview(this.props.selectedLocation.checkInId, {}); // rm upon complete.
       })
       .then(() => {
         this.setState({ createReviewState: 'CREATED' });
@@ -159,6 +188,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
               maxLength={2048}
               autoGrow
               multiline
+              value={this.state.comment}
               onBlur={() => { this.setState({ isWritingComment: false }); }}
             />
           </CardItem>
