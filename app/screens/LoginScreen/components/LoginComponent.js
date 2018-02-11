@@ -47,11 +47,19 @@ export default class LoginComponent extends React.Component<Props, State> {
 
   onPressLogin = () => {
     const { username, password } = this.state;
-    if (!username || !password) { return; }
+    if (!username || !password) { return null; }
 
     this.setState({ isLoggingIn: true });
-    this.props.loginUser(username, password)
-      .then(() => { navigateAndReset('CheckInList', this.props.navigation); })
+    return this.props.loginUser(username, password)
+      .then(() => { return navigateAndReset('CheckInList', this.props.navigation); })
+      .then(() => {
+        // Stops warnings about React Navigation promise not being handled.
+        //
+        // `navigateAndReset` calls `navigation.dispatch` which returns a promise. I don't need
+        // to deal with the promise so this callback is just to tell React Native's yellow text
+        // to shut up and be quiet :)
+        return null;
+      })
       .catch(() => {
         Toast.show({
           text: 'Login failed - please try again...',
