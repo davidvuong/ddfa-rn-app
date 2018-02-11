@@ -1,4 +1,5 @@
 // @flow
+import _ from 'lodash';
 import * as React from 'react';
 import {
   Header,
@@ -23,32 +24,52 @@ type Props = {
 };
 
 type State = {
-  isDeletingCheckIn: boolean,
+  isDeletingCheckIn: 'IDLE' | 'DELETING' | 'DELETED',
 };
 
 export default class CheckInDetailHeader extends React.Component<Props, State> {
   state = {
-    isDeletingCheckIn: false,
+    isDeletingCheckIn: 'IDLE',
   };
 
   onPressDeleteButton = () => {
     const onPressYes = () => {
-      this.setState({ isDeletingCheckIn: true });
+      this.setState({ isDeletingCheckIn: 'DELETING' });
       this.props.deleteCheckIn(this.props.checkIn.id)
         .then(() => {
-          // It's expected that a `goBackCallback` exists...
+          this.setState({ isDeletingCheckIn: 'DELETED' });
           return this.props.navigation.state.params.goBackCallback();
         })
         .then(() => {
-          this.props.navigation.goBack();
+          _.delay(() => { this.props.navigation.goBack(); }, 1000);
         })
-        .catch(() => { this.setState({ isDeletingCheckIn: false }); });
+        .catch(() => { this.setState({ isDeletingCheckIn: 'IDLE' }); });
     };
     const buttons = [
       { text: 'Yes', onPress: onPressYes },
       { text: 'Cancel', style: 'cancel' },
     ];
     Alert.alert('Delete Check-in', 'Are you sure you want to delete?', buttons);
+  }
+
+  renderRightIcon = () => {
+    const { isDeletingCheckIn } = this.state;
+    if (isDeletingCheckIn === 'IDLE') {
+      return (
+        <Right>
+          <Button transparent onPress={this.onPressDeleteButton}>
+            <Icon name="md-trash" style={Styles.headerIcon} />
+          </Button>
+        </Right>
+      );
+    }
+    if (isDeletingCheckIn === 'DELETING') {
+      return <Right><ActivityIndicator color="black" /></Right>;
+    }
+    if (isDeletingCheckIn === 'DELETED') {
+      return <Right><Text>💀!</Text></Right>; // bleh... dead!
+    }
+    return null;
   }
 
   render() {
@@ -62,17 +83,7 @@ export default class CheckInDetailHeader extends React.Component<Props, State> {
         <Body>
           <Text style={Styles.headerTitle}>DDFA CheckIn</Text>
         </Body>
-        <Right>
-          {
-            this.state.isDeletingCheckIn ? (
-              <ActivityIndicator color="black" />
-            ) : (
-              <Button transparent onPress={this.onPressDeleteButton}>
-                <Icon name="md-trash" style={Styles.headerIcon} />
-              </Button>
-            )
-          }
-        </Right>
+        {this.renderRightIcon()}
       </Header>
     );
   }
