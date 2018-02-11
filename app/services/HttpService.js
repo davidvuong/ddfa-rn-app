@@ -16,11 +16,13 @@ export default class HttpService {
           return reject(new Error(`HttpRequest failed with ${response.status} ${response.url}`));
         })
         .then((response: *) => {
-          return resolve(response.json());
+          if (response.headers.get('content-type').startsWith('application/json')) {
+            return response.json();
+          }
+          return response.text();
         })
-        .catch((error: Error) => {
-          return reject(error);
-        });
+        .then(resolve)
+        .catch(reject);
     });
   }
 
@@ -53,5 +55,9 @@ export default class HttpService {
 
   put(endpoint: string, payload: Payload = {}, headers: ?Headers): Promise<*> {
     return this.request(endpoint, 'put', payload, headers);
+  }
+
+  delete(endpoint: string, headers: ?Headers): Promise<*> {
+    return this.request(endpoint, 'delete', {}, headers);
   }
 }
