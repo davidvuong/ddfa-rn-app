@@ -12,7 +12,7 @@ export default {
       },
     }),
   },
-  headerBackIcon: {
+  headerIcon: {
     ...Platform.select({
       ios: {
         color: 'black',
@@ -21,5 +21,6 @@ export default {
         color: 'white',
       },
     }),
+    fontSize: 24,
   },
 };

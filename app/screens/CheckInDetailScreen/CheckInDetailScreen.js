@@ -29,6 +29,7 @@ const mapDispatchToProps = (dispatch: *) => {
     getCheckIn: CheckInService.get,
     getPhotoUrl: PhotoService.getUrl,
     getCurrencySymbol: ReviewService.getCurrencySymbol,
+    deleteCheckIn: CheckInService.delete,
   };
 };
 

@@ -31,6 +31,7 @@ type Props = {
   getCheckIn: (string) => *,
   getPhotoUrl: (string) => string,
   getCurrencySymbol: (string) => string,
+  deleteCheckIn: (string) => Promise<void>,
 };
 
 type State = {
@@ -133,11 +134,15 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   }
 
   render() {
-    const { checkIn, navigation } = this.props;
+    const { checkIn, navigation, deleteCheckIn } = this.props;
     if (!checkIn) { return null; }
     return (
       <Container>
-        <CheckInDetailHeader navigation={navigation} />
+        <CheckInDetailHeader
+          navigation={navigation}
+          checkIn={checkIn}
+          deleteCheckIn={deleteCheckIn}
+        />
         <Content>
           <GenericStaticMap latitude={checkIn.latitude} longitude={checkIn.longitude} />
           {this.renderTitleCard()}
