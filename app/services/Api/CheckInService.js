@@ -51,6 +51,12 @@ class CheckInService {
     return this.http.get(endpoint, headers).then(Promise.resolve);
   }
 
+  delete = (id: string): Promise<void> => {
+    const endpoint = `${this.host}/checkins/${id}`;
+    const headers = this.authenticationService.getAuthenticationHeader();
+    return this.http.delete(endpoint, headers).then(Promise.resolve);
+  }
+
   create = (
     latitude: number,
     longitude: number,
