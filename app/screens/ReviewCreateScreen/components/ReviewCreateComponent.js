@@ -65,30 +65,27 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     isWritingComment: false,
     comment: null,
   };
+  flushReviewToCacheInterval = 3500;
+  flushReviewIntervalTimer: *;
 
-  /* --- BEGIN AUTO_SAVE FEATURE... --- */
-  autoCacheSaveTimer: * = null;
-  autoSaveInterval = 2000;
   componentWillMount() {
-    const { selectedLocation } = this.props;
     this.props.getCachedReview(this.props.selectedLocation.checkInId)
       .then((cachedReview: ?Object) => {
         if (!cachedReview || _.isEmpty(cachedReview)) { return; }
         this.setState({ comment: cachedReview.comment });
       })
       .then(() => {
-        this.autoCacheSaveTimer = setInterval(() => {
-          const { comment } = this.state;
-          this.props.setCachedReview(selectedLocation.checkInId, { comment });
-        }, this.autoSaveInterval);
+        this.flushReviewIntervalTimer = setInterval(() => {
+          this.props.setCachedReview(this.props.selectedLocation.checkInId, {
+            comment: this.state.comment,
+          });
+        }, this.flushReviewToCacheInterval);
       });
   }
+
   componentWillUnmount() {
-    if (this.autoCacheSaveTimer) {
-      clearInterval(this.autoCacheSaveTimer);
-    }
+    clearInterval(this.flushReviewIntervalTimer);
   }
-  /* --- END AUTO_SAVE FEATURE...--- */
 
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
@@ -127,6 +124,9 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
   onPressDone = () => {
     this.setState({ isWritingComment: false });
+    this.props.setCachedReview(this.props.selectedLocation.checkInId, {
+      comment: this.state.comment,
+    });
     Keyboard.dismiss();
   }
 
@@ -189,7 +189,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
               autoGrow
               multiline
               value={this.state.comment}
-              onBlur={() => { this.setState({ isWritingComment: false }); }}
+              onBlur={this.onPressDone}
             />
           </CardItem>
         </Card>
