@@ -17,7 +17,7 @@ import Styles from './Styles';
 type Props = {
   checkIn: *,
   isLast: boolean,
-  onPress: (*) => *,
+  onPress: (*) => void,
   image: *,
   counter: number,
 };

@@ -35,7 +35,13 @@ export default class CheckInDetailHeader extends React.Component<Props, State> {
     const onPressYes = () => {
       this.setState({ isDeletingCheckIn: true });
       this.props.deleteCheckIn(this.props.checkIn.id)
-        .then(() => { this.props.navigation.goBack(); })
+        .then(() => {
+          // It's expected that a `goBackCallback` exists...
+          return this.props.navigation.state.params.goBackCallback();
+        })
+        .then(() => {
+          this.props.navigation.goBack();
+        })
         .catch(() => { this.setState({ isDeletingCheckIn: false }); });
     };
     const buttons = [

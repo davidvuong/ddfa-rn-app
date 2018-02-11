@@ -58,12 +58,16 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
   navigateToCheckIn = (checkIn: *) => {
     this.props.setSelectedCheckIn(checkIn);
-    this.props.navigation.navigate('CheckInDetail');
+
+    // Give CheckInDetail the option to invoke this callback when navigating back.
+    this.props.navigation.navigate('CheckInDetail', {
+      goBackCallback: this.onPressRefresh,
+    });
   }
 
   performInitialLoad = () => {
     this.setState({ isInitialLoad: true });
-    this.props.listCheckIns((new Date()).toISOString())
+    return this.props.listCheckIns((new Date()).toISOString())
       .then(() => {
         this.setState({ isInitialLoad: false });
       });
@@ -71,7 +75,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
 
   onPressRefresh = () => {
     this.props.resetCheckIns();
-    this.performInitialLoad();
+    return this.performInitialLoad();
   }
 
   onScroll = (event: *) => {
