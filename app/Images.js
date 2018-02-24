@@ -12,6 +12,11 @@ export const Images = {
   foodImage7: require('./images/food_7.jpg'),
   foodImage8: require('./images/food_8.jpg'),
   foodImage9: require('./images/food_9.jpg'),
+  foodImage10: require('./images/food_10.jpg'),
+  foodImage11: require('./images/food_11.jpg'),
+  foodImage12: require('./images/food_12.jpg'),
+  foodImage13: require('./images/food_13.jpg'),
+  foodImage14: require('./images/food_14.jpg'),
   avatarImage1: require('./images/avatar_1.png'),
   avatarImage2: require('./images/avatar_2.png'),
   avatarImage3: require('./images/avatar_3.png'),
@@ -61,6 +66,11 @@ export function initFoodImageGenerator(): ImageGenerator {
     Images.foodImage7,
     Images.foodImage8,
     Images.foodImage9,
+    Images.foodImage10,
+    Images.foodImage11,
+    Images.foodImage12,
+    Images.foodImage13,
+    Images.foodImage14,
   ]);
 }
 
