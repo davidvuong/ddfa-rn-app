@@ -86,7 +86,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
         <Body><Text style={Styles.headerTitle}>DDFA Nearby</Text></Body>
         <Right>
           {this.state.isSelectingNewPosition ? <ActivityIndicator color={iconColor} /> : (
-            <Button small transparent onPress={this.selectNewPosition}>
+            <Button transparent onPress={this.selectNewPosition}>
               <Icon name="search" style={{ color: iconColor }} />
             </Button>
           )}

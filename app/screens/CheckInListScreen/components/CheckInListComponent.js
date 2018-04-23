@@ -142,7 +142,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
           </Body>
           <Right>
             {isListingCheckIns ? <ActivityIndicator color={iconColor} /> : (
-              <Button small transparent onPress={this.onPressRefresh}>
+              <Button transparent onPress={this.onPressRefresh}>
                 <Icon name="refresh" style={{ color: iconColor }} />
               </Button>
             )}
