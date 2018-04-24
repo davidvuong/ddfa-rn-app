@@ -42,8 +42,6 @@ export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    console.log(this.config);
-
     // @see: https://github.com/facebook/react-native/issues/9599
     if (typeof global.self === 'undefined') {
       global.self = global;
