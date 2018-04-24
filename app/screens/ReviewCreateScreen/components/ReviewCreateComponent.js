@@ -1,4 +1,5 @@
 // @flow
+import Promise from 'bluebird';
 import _ from 'lodash';
 import * as React from 'react';
 import {
@@ -114,7 +115,10 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       })
       .then(() => {
         this.setState({ createReviewState: 'CREATED' });
-        _.delay(() => { this.props.navigation.goBack(); }, 1500);
+        return Promise.delay(1500);
+      })
+      .then(() => {
+        return this.props.navigation.goBack();
       })
       .catch((error: Error) => {
         console.error(error);
