@@ -52,7 +52,7 @@ export default class CheckInDetailComponent extends React.Component<Props, State
 
   fetchDetailedCheckIn = () => {
     this.setState({ detailedCheckIn: null, isLoadingDetailedCheckIn: true });
-    this.props.getCheckIn(this.props.checkIn.id)
+    return this.props.getCheckIn(this.props.checkIn.id)
       .then((detailedCheckIn: *) => {
         this.setState({ detailedCheckIn, isLoadingDetailedCheckIn: false });
       })
