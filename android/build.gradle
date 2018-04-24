@@ -22,3 +22,15 @@ allprojects {
         }
     }
 }
+
+/**
+ + Project-wide Gradle configuration properties (replace versions as appropriate)
+ */
+ext {
+  compileSdkVersion   = 25
+  targetSdkVersion    = 25
+  buildToolsVersion   = "25.0.2"
+  supportLibVersion   = "25.0.2"
+  googlePlayServicesVersion = "11.0.4"
+  androidMapsUtilsVersion = "0.5+"
+}

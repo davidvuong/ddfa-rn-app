@@ -59,6 +59,8 @@ DDFA has 2 components, this component is the frontend mobile app. It's written i
     API_PORT=...
     ```
 
+    **NOTE:** Don't use `localhost` when testing in an Android emulator as it references the emulator and not the host (see [here](https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator) for more information).
+
 1. Run the React Native application:
 
     ```bash
