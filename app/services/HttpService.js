@@ -16,7 +16,8 @@ export default class HttpService {
           return reject(new Error(`HttpRequest failed with ${response.status} ${response.url}`));
         })
         .then((response: *) => {
-          if (response.headers.get('content-type').startsWith('application/json')) {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.startsWith('application/json')) {
             return response.json();
           }
           return response.text();
