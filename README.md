@@ -69,6 +69,20 @@ DDFA has 2 components, this component is the frontend mobile app. It's written i
     ENVFILE=.env.local yarn run android
     ```
 
+    **NOTE:** I've tested this against Java v1.8 so if you have another version of Java installed, you should consider using `jenv` to manage your versions::
+
+    ```bash
+    brew tap caskroom/versions
+    brew install jenv
+    brew cask install java8
+    jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+    jenv versions
+    jenv local 1.8
+    java -version
+    ```
+
+    Run `jenv doctor` if you're having problems (don't forget to update your profile then run `source`).
+
 ## Bundle JS to run on device (without development server)
 
 **Android:**
