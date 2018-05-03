@@ -19,7 +19,6 @@ import {
 } from 'react-native';
 
 import CheckInCard from './CheckInCard/CheckInCard';
-import ScrollButtons from './ScrollButtons/ScrollButtons';
 import GlobalFooter from '../../../components/GlobalFooter/GlobalFooter';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -148,10 +147,9 @@ export default class CheckInListComponent extends React.Component<Props, State> 
             )}
           </Right>
         </Header>
-        <Content ref="checkInsContainer" padder onScroll={this.onScroll}>
+        <Content padder onScroll={this.onScroll}>
           {this.renderCheckIns()}
         </Content>
-        <ScrollButtons container={(this.refs.checkInsContainer || {}).wrappedInstance} />
         <GlobalFooter navigation={this.props.navigation} />
       </Container>
     );
