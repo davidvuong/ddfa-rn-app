@@ -31,7 +31,6 @@ type State = {
 };
 
 export default class GlobalFooterComponent extends React.Component<Props, State> {
-  RNGooglePlacesOptions = { radius: 0.5 };
   state = {
     spinners: {},
   };
@@ -47,9 +46,10 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
   setThenResetSpinner = (spinnerType: string, delay: number = 1500) => {
     this.setSpinner(spinnerType, true);
-    _.delay(() => {
-      this.setSpinner(spinnerType, false);
-    }, delay);
+    return Promise.delay(delay)
+      .then(() => {
+        this.setSpinner(spinnerType, false);
+      });
   }
 
   /* Given a GooglePlace object, determine the location name. */
@@ -58,9 +58,17 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     return name || address || `${latitude} ${longitude}`;
   }
 
+  selectLocation = () => {
+    return RNGooglePlaces.openPlacePickerModal({ radius: 0.5 });
+  }
+
+  isRouteActive = (routeName: string): boolean => {
+    return this.props.navigation.state.routeName === routeName;
+  }
+
   /* Below are all `onPress` callbacks (home, nearby, checkIn, logout). */
   onPressHome = () => {
-    if (this.props.navigation.state.routeName === 'CheckInList' || this.isSpinning('home')) {
+    if (this.isRouteActive('CheckInList') || this.isSpinning('home')) {
       return;
     }
     this.setThenResetSpinner('home');
@@ -68,12 +76,12 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
 
   onPressNearby = () => {
-    if (this.props.navigation.state.routeName === 'CheckInNearby' || this.isSpinning('nearby')) {
+    if (this.isRouteActive('CheckInNearby') || this.isSpinning('nearby')) {
       return;
     }
 
     this.setThenResetSpinner('nearby');
-    RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
+    this.selectLocation()
       .then((place: *) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
@@ -86,7 +94,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     let googlePlace: *;
 
     this.setThenResetSpinner('checkIn');
-    RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
+    this.selectLocation()
       .then((place: *) => {
         googlePlace = place;
 
@@ -134,12 +142,14 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
-  renderButton = (btnType: string, btnName: string, onPress: *) => {
+  renderButton = (btnType: string, btnName: string, routeName: string, onPress: *) => {
     if (this.state.spinners[btnType]) {
       return <Button vertical><ActivityIndicator color="black" /></Button>;
     }
+
+    const style = this.isRouteActive(routeName) ? Styles.footerButtonActive : Styles.footerButton;
     return (
-      <Button vertical onPress={onPress}>
+      <Button vertical onPress={onPress} style={style}>
         <Text style={Styles.iconText} uppercase>{btnName}</Text>
       </Button>
     );
@@ -149,10 +159,10 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     return (
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
-          {this.renderButton('home', 'home', this.onPressHome)}
-          {this.renderButton('nearby', 'nearby', this.onPressNearby)}
-          {this.renderButton('checkIn', 'check-in', this.onPressCheckIn)}
-          {this.renderButton('logout', 'logout', this.onPressLogout)}
+          {this.renderButton('home', 'home', 'CheckInList', this.onPressHome)}
+          {this.renderButton('nearby', 'nearby', 'CheckInNearby', this.onPressNearby)}
+          {this.renderButton('checkIn', 'check-in', null, this.onPressCheckIn)}
+          {this.renderButton('logout', 'logout', null, this.onPressLogout)}
         </FooterTab>
       </Footer>
     );

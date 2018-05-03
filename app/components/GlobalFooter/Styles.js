@@ -7,9 +7,19 @@ export default {
     backgroundColor: 'white',
   },
   footerTab: {
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(0, 0, 0, 0.15)',
     backgroundColor: 'white',
+  },
+  footerButton: {
+    backgroundColor: 'white',
+    height: 48,
+    borderRadius: 0,
+  },
+  footerButtonActive: {
+    backgroundColor: 'white',
+    height: 48,
+    borderRadius: 0,
+    borderTopWidth: 5,
+    borderTopColor: 'rgba(63, 81, 181, 0.7)',
   },
   icon: {
     fontSize: 28,
