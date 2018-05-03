@@ -66,28 +66,14 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     isWritingComment: false,
     comment: null,
   };
-  // flushReviewToCacheInterval = 3500;
-  // flushReviewIntervalTimer: *;
 
   componentWillMount() {
     this.props.getCachedReview(this.props.selectedLocation.checkInId)
       .then((cachedReview: ?Object) => {
         if (!cachedReview || _.isEmpty(cachedReview)) { return; }
         this.setState({ comment: cachedReview.comment });
-      })
-      .then(() => {
-        // this.flushReviewIntervalTimer = setInterval(() => {
-        //   this.props.setCachedReview(this.props.selectedLocation.checkInId, {
-        //     comment: this.state.comment,
-        //   });
-        // }, this.flushReviewToCacheInterval);
-        return null;
       });
   }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.flushReviewIntervalTimer);
-  // }
 
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
@@ -129,9 +115,6 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
   onPressDone = () => {
     this.setState({ isWritingComment: false });
-    this.props.setCachedReview(this.props.selectedLocation.checkInId, {
-      comment: this.state.comment,
-    });
     Keyboard.dismiss();
   }
 
@@ -140,7 +123,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   onChangeTextComment = (comment: string) => {
-    this.setState({ comment });
+    return this.props.setCachedReview(this.props.selectedLocation.checkInId, { comment });
   }
 
   renderHeader = () => {
