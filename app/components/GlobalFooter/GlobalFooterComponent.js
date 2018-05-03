@@ -10,7 +10,6 @@ import {
 } from 'native-base';
 import {
   Alert,
-  Platform,
   ActivityIndicator,
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
