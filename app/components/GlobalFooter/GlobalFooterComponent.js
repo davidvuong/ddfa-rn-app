@@ -30,7 +30,7 @@ export default class GlobalFooterComponent extends React.Component {
   isSpinning = (spinnerType) => {
     return !!this.state.spinners[spinnerType];
   }
-  setThenResetSpinner = (spinnerType, delay = 1500) => {
+  setThenResetSpinner = (spinnerType, delay = 3000) => {
     this.setSpinner(spinnerType, true);
     return Promise.delay(delay)
       .then(() => { this.setSpinner(spinnerType, false); });
@@ -63,15 +63,14 @@ export default class GlobalFooterComponent extends React.Component {
     if (this.isRouteActive('CheckInNearby') || this.isSpinning('nearby')) {
       return;
     }
-
     this.setThenResetSpinner('nearby');
-    this.selectLocation()
-      .then((place) => {
-        const { latitude, longitude } = place;
-        this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
-        navigateAndReset('CheckInNearby', this.props.navigation);
-      })
-      .catch(console.debug);
+
+    const geoLocationOptions = { enableHighAccuracy: true, timeout: 5000 };
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
+      navigateAndReset('CheckInNearby', this.props.navigation);
+    }, (error) => { console.log(error); }, geoLocationOptions);
   }
 
   onPressGallery = () => {
