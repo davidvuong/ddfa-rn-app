@@ -20,7 +20,7 @@ export default {
     borderTopColor: 'rgba(63, 81, 181, 0.7)',
   },
   iconText: {
-    fontSize: 10.5,
+    fontSize: 9,
     color: 'black',
   },
 };
