@@ -11,7 +11,8 @@
     "jest": true
   },
   "globals": {
-    "fetch": true
+    "fetch": true,
+    "navigator": true
   },
   "rules": {
     "import/no-named-as-default": [0],
