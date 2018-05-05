@@ -1,4 +1,3 @@
-// @flow
 import _ from 'lodash';
 import Promise from 'bluebird';
 import * as React from 'react';
@@ -17,43 +16,28 @@ import RNGooglePlaces from 'react-native-google-places';
 import Styles from './Styles';
 import { navigateAndReset } from '../../navigator/AppNavigator';
 
-type Props = {
-  navigation: *,
-  logoutUser: () => *,
-  createCheckIn: (number, number, string, string, ?string) => Promise<string>,
-  setSelectedLocation: (*) => *,
-  resetCheckIns: () => *,
-  listCheckIns: (string) => *,
-};
-
-type State = {
-  spinners: Object,
-};
-
-export default class GlobalFooterComponent extends React.Component<Props, State> {
+export default class GlobalFooterComponent extends React.Component {
   state = {
     spinners: {},
   };
 
   /* Wrappers over `this.state.spinners`. */
-  setSpinner = (spinnerType: string, isSpinning: boolean) => {
+  setSpinner = (spinnerType, isSpinning) => {
     const spinners = _.clone(this.state.spinners);
     spinners[spinnerType] = isSpinning;
     this.setState({ spinners });
   }
-  isSpinning = (spinnerType: string): boolean => {
+  isSpinning = (spinnerType) => {
     return !!this.state.spinners[spinnerType];
   }
-  setThenResetSpinner = (spinnerType: string, delay: number = 1500) => {
+  setThenResetSpinner = (spinnerType, delay = 1500) => {
     this.setSpinner(spinnerType, true);
     return Promise.delay(delay)
-      .then(() => {
-        this.setSpinner(spinnerType, false);
-      });
+      .then(() => { this.setSpinner(spinnerType, false); });
   }
 
   /* Given a GooglePlace object, determine the location name. */
-  getLocationName = (place: *) => {
+  getLocationName = (place) => {
     const { name, address, latitude, longitude } = place;
     return name || address || `${latitude} ${longitude}`;
   }
@@ -62,7 +46,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     return RNGooglePlaces.openPlacePickerModal({ radius: 0.5 });
   }
 
-  isRouteActive = (routeName: string): boolean => {
+  isRouteActive = (routeName) => {
     return this.props.navigation.state.routeName === routeName;
   }
 
@@ -82,7 +66,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
 
     this.setThenResetSpinner('nearby');
     this.selectLocation()
-      .then((place: *) => {
+      .then((place) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
         navigateAndReset('CheckInNearby', this.props.navigation);
@@ -91,18 +75,18 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
   }
 
   onPressCheckIn = () => {
-    let googlePlace: *;
+    let googlePlace;
 
     this.setThenResetSpinner('checkIn');
     this.selectLocation()
-      .then((place: *) => {
+      .then((place) => {
         googlePlace = place;
 
         const { address, latitude, longitude, placeID } = place;
         const name = this.getLocationName(place);
         return this.props.createCheckIn(latitude, longitude, address, name, placeID);
       })
-      .then((checkInId: string) => {
+      .then((checkInId) => {
         const { address, latitude, longitude, rating, pricingLevel } = googlePlace;
         const name = this.getLocationName(googlePlace);
         this.props.setSelectedLocation({
@@ -142,7 +126,7 @@ export default class GlobalFooterComponent extends React.Component<Props, State>
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
-  renderButton = (btnType: string, btnName: string, routeName: string, onPress: *) => {
+  renderButton = (btnType, btnName, routeName, onPress) => {
     if (this.state.spinners[btnType]) {
       return <Button vertical><ActivityIndicator color="black" /></Button>;
     }

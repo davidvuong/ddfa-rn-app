@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import {
   View,
@@ -7,16 +6,8 @@ import {
 
 import Styles from './Styles';
 
-type Props = {
-  serviceRating?: number,
-  foodRating?: number,
-  environmentRating?: number,
-};
-
-type State = {};
-
-export default class ReviewRatings extends React.Component<Props, State> {
-  renderRating = (value: ?number, label: string) => {
+export default class ReviewRatings extends React.Component {
+  renderRating = (value, label) => {
     if (!value) {
       return (
         <View style={Styles.ratingContainer}>

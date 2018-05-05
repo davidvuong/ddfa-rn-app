@@ -1,5 +1,3 @@
-// @flow
-import Promise from 'bluebird';
 import * as React from 'react';
 import {
   Body,
@@ -24,22 +22,8 @@ import CheckInNearbyList from './CheckInNearbyList/CheckInNearbyList';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
-type Props = {
-  navigation: *,
-  nearbyCheckIns: Array<*>,
-  setSelectedCheckIn: (*) => *,
-  setSelectedLocation: (*) => *,
-  getNearbyCheckIns: (number, number) => Promise<*>,
-  position: { latitude: number, longitude: number },
-};
-
-type State = {
-  isLoadingNearbyCheckIns: boolean,
-  isSelectingNewPosition: boolean,
-};
-
 // TODO: All direct service calls in components (unless in Global) should be passed in (i.e. Screens).
-export default class CheckInNearbyComponent extends React.Component<Props, State> {
+export default class CheckInNearbyComponent extends React.Component {
   static navigationOptions = navigationOptions;
   state = {
     isLoadingNearbyCheckIns: false,
@@ -54,7 +38,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
       .then(() => {
         this.setState({ isLoadingNearbyCheckIns: false });
       })
-      .catch((error: Error) => {
+      .catch((error) => {
         this.setState({ isLoadingNearbyCheckIns: false });
         console.error(error);
       });
@@ -65,7 +49,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
 
     this.setState({ isSelectingNewPosition: true });
     RNGooglePlaces.openPlacePickerModal(this.RNGooglePlacesOptions)
-      .then((place: *) => {
+      .then((place) => {
         const { latitude, longitude } = place;
         this.props.setSelectedLocation({ latitude, longitude });
         return this.props.getNearbyCheckIns(latitude, longitude);

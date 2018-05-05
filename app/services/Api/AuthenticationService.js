@@ -1,57 +1,50 @@
-// @flow
 import Promise from 'bluebird';
 import { AsyncStorage } from 'react-native';
 
-import HttpService from '../HttpService';
-
 export class AuthenticationService {
-  host: string;
-  token: ?string;
-  http: HttpService;
-
-  initialize = (host: string, httpService: HttpService) => {
+  initialize = (host, httpService) => {
     this.host = host;
     this.token = null;
     this.http = httpService;
   }
 
-  getAuthenticationHeader = (): { Authorization: ?string } => {
+  getAuthenticationHeader = () => {
     return { Authorization: this.token };
   }
 
-  getTokenFromStorage = (): Promise<string> => {
+  getTokenFromStorage = () => {
     return AsyncStorage.getItem('@user.token')
-      .then((token: string): Promise<string> => {
+      .then((token) => {
         this.token = token;
         return Promise.resolve(this.token);
       });
   }
 
-  isTokenValid = (token: string): Promise<boolean> => {
-    const endpoint: string = `${this.host}/users/authenticate-token`;
+  isTokenValid = (token) => {
+    const endpoint = `${this.host}/users/authenticate-token`;
     const headers = { Authorization: token };
     return this.http.post(endpoint, {}, headers)
       .then(() => { return true; })
       .catch(() => { return false; });
   }
 
-  logout = (): Promise<void> => {
+  logout = () => {
     return AsyncStorage.clear()
-      .then((): Promise<void> => {
+      .then(() => {
         this.token = null;
         return Promise.resolve();
       });
   }
 
-  login = (username: string, password: string): Promise<void> => {
-    const endpoint: string = `${this.host}/users/authenticate`;
-    const payload: { username: string, password: string } = { username, password };
+  login = (username, password) => {
+    const endpoint = `${this.host}/users/authenticate`;
+    const payload = { username, password };
 
     return this.http.post(endpoint, payload)
-      .then((res: Object): Promise<[void, string]> => {
+      .then((res) => {
         return Promise.join(AsyncStorage.setItem('@user.token', res.token), res.token);
       })
-      .spread((__: void, token: string): Promise<*> => {
+      .spread((__, token) => {
         this.token = token;
         return Promise.resolve();
       });

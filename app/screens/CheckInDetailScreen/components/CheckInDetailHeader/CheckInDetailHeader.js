@@ -17,17 +17,7 @@ import {
 
 import Styles from './Styles';
 
-type Props = {
-  navigation: *,
-  checkIn: *,
-  deleteCheckIn: (string) => Promise<void>,
-};
-
-type State = {
-  isDeletingCheckIn: 'IDLE' | 'DELETING' | 'DELETED',
-};
-
-export default class CheckInDetailHeader extends React.Component<Props, State> {
+export default class CheckInDetailHeader extends React.Component {
   state = {
     isDeletingCheckIn: 'IDLE',
   };

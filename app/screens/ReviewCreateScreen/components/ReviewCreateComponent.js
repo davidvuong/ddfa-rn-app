@@ -1,4 +1,3 @@
-// @flow
 import Promise from 'bluebird';
 import _ from 'lodash';
 import * as React from 'react';
@@ -28,37 +27,7 @@ import GenericStaticMap from '../../../components/GenericStaticMap/GenericStatic
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
-type Props = {
-  // TODO: Pull this into a shared type.
-  selectedLocation: {
-    checkInId: string,
-    latitude: number,
-    longitude: number,
-    rating: ?number,
-    pricingLevel: ?number,
-    name: string,
-    address: string,
-  },
-  navigation: *,
-  createReview: (
-    string,
-    number,
-    string,
-    ?string,
-    ?number,
-    ?number,
-    ?number,
-  ) => *,
-  getCachedReview: (string) => Promise<?Object>,
-  setCachedReview: (string, Object) => Promise<void>,
-};
-
-type State = {
-  createReviewState: 'IDLE' | 'CREATING' | 'CREATED' | 'ERROR',
-  isWritingComment: boolean,
-};
-
-export default class ReviewCreateComponent extends React.Component<Props, State> {
+export default class ReviewCreateComponent extends React.Component {
   static navigationOptions = navigationOptions;
   state = {
     createReviewState: 'IDLE',
@@ -75,7 +44,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
 
   componentWillMount() {
     this.props.getCachedReview(this.props.selectedLocation.checkInId)
-      .then((cachedReview: ?Object) => {
+      .then((cachedReview) => {
         this.review = { ...this.review, ...cachedReview };
       });
   }
@@ -108,7 +77,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
       .then(() => {
         return this.props.navigation.goBack();
       })
-      .catch((error: Error) => {
+      .catch((error) => {
         console.error(error);
         this.setState({ createReviewState: 'ERROR' });
         _.delay(() => { this.setState({ createReviewState: 'IDLE' }); }, 1000);
@@ -124,7 +93,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     this.setState({ isWritingComment: true });
   }
 
-  onChangeTextComment = (comment: string) => {
+  onChangeTextComment = (comment) => {
     this.review.comment = comment;
     return this.props.setCachedReview(this.props.selectedLocation.checkInId, { comment });
   }

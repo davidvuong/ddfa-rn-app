@@ -1,21 +1,17 @@
-// @flow
 import _ from 'lodash';
 import Promise from 'bluebird';
 
-type Payload = {};
-type Headers = {};
-
 export default class HttpService {
-  fetchWithPromise(endpoint: string, options: *): Promise<*> {
-    return new Promise((resolve: *, reject: *) => {
+  fetchWithPromise(endpoint, options) {
+    return new Promise((resolve, reject) => {
       fetch(endpoint, options)
-        .then((response: *) => {
+        .then((response) => {
           if (response.ok) {
             return response;
           }
           return reject(new Error(`HttpRequest failed with ${response.status} ${response.url}`));
         })
-        .then((response: *) => {
+        .then((response) => {
           const contentType = response.headers.get('content-type');
           if (contentType && contentType.startsWith('application/json')) {
             return response.json();
@@ -27,13 +23,13 @@ export default class HttpService {
     });
   }
 
-  request(endpoint: string, method: string, payload: Payload, headers: ?Headers): Promise<*> {
-    let reqHeaders: Object = headers || {};
+  request(endpoint, method, payload, headers) {
+    let reqHeaders = headers || {};
     if (!reqHeaders['Content-Type']) {
       reqHeaders = { ...reqHeaders, 'Content-Type': 'application/json' };
     }
 
-    const options: Object = { method, headers: reqHeaders };
+    const options = { method, headers: reqHeaders };
 
     // Not all `payload` need to be `JSON.stringify` e.g. multipart/form-data.
     if (!_.isEmpty(payload)) {
@@ -46,19 +42,19 @@ export default class HttpService {
     return this.fetchWithPromise(endpoint, options);
   }
 
-  get(endpoint: string, headers: ?Headers): Promise<*> {
+  get(endpoint, headers = {}) {
     return this.request(endpoint, 'get', {}, headers);
   }
 
-  post(endpoint: string, payload: Payload = {}, headers: ?Headers): Promise<*> {
+  post(endpoint, payload = {}, headers = {}) {
     return this.request(endpoint, 'post', payload, headers);
   }
 
-  put(endpoint: string, payload: Payload = {}, headers: ?Headers): Promise<*> {
+  put(endpoint, payload = {}, headers = {}) {
     return this.request(endpoint, 'put', payload, headers);
   }
 
-  delete(endpoint: string, headers: ?Headers): Promise<*> {
+  delete(endpoint, headers = {}) {
     return this.request(endpoint, 'delete', {}, headers);
   }
 }

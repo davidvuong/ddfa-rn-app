@@ -1,14 +1,5 @@
-// @flow
-
-export type RegionDelta = {
-  latitude: number,
-  latitudeDelta: number,
-  longitude: number,
-  longitudeDelta: number,
-};
-
 export class GeoLocationService {
-  calculateRegionDelta = (latitude: number, longitude: number, distance: number = 500): RegionDelta => {
+  calculateRegionDelta = (latitude, longitude, distance = 500) => {
     const d = distance / 2;
     const circumference = 40075;
     const oneDegreeOfLatitudeInMeters = 111.32 * 1000;

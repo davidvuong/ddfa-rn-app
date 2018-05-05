@@ -1,6 +1,4 @@
-// @flow
 import { connect } from 'react-redux';
-
 import LoginComponent from './components/LoginComponent';
 import AuthenticationService from '../../services/Api/AuthenticationService';
 

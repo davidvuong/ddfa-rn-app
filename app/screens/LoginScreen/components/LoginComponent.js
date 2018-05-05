@@ -1,6 +1,4 @@
-// @flow
 import * as React from 'react';
-
 import {
   View,
   Container,
@@ -22,18 +20,7 @@ import { Images } from '../../../Images';
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
-type Props = {
-  navigation: *,
-  loginUser: (string, string) => Promise<*>,
-};
-
-type State = {
-  isLoggingIn: boolean,
-  username: ?string,
-  password: ?string,
-};
-
-export default class LoginComponent extends React.Component<Props, State> {
+export default class LoginComponent extends React.Component {
   static navigationOptions = navigationOptions;
   state = {
     isLoggingIn: false,
@@ -90,7 +77,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                 placeholder='Username'
                 autoCapitalize={'none'}
                 autoCorrect={false}
-                onChangeText={(username: string) => { this.setState({ username }); }}
+                onChangeText={(username) => { this.setState({ username }); }}
                 style={Styles.inputStyle}
               />
             </Item>
@@ -98,7 +85,7 @@ export default class LoginComponent extends React.Component<Props, State> {
               <Input
                 placeholder='Password'
                 secureTextEntry
-                onChangeText={(password: string) => { this.setState({ password }); }}
+                onChangeText={(password) => { this.setState({ password }); }}
                 style={Styles.inputStyle}
               />
             </Item>
