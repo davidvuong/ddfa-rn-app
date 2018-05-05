@@ -19,11 +19,8 @@ export default {
     borderTopWidth: 5,
     borderTopColor: 'rgba(63, 81, 181, 0.7)',
   },
-  icon: {
-    fontSize: 28,
-  },
   iconText: {
-    fontSize: 12,
+    fontSize: 11,
     color: 'black',
   },
 };

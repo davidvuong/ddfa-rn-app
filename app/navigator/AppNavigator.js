@@ -8,6 +8,7 @@ import CheckInListScreen from '../screens/CheckInListScreen/CheckInListScreen';
 import CheckInDetailScreen from '../screens/CheckInDetailScreen/CheckInDetailScreen';
 import CheckInNearbyScreen from '../screens/CheckInNearbyScreen/CheckInNearbyScreen';
 import ReviewCreateScreen from '../screens/ReviewCreateScreen/ReviewCreateScreen';
+import PhotoGalleryScreen from '../screens/PhotoGalleryScreen/PhotoGalleryScreen';
 
 export default function getNavigator(isLoggedIn) {
   if (isLoggedIn === null) { return null; }
@@ -17,6 +18,7 @@ export default function getNavigator(isLoggedIn) {
     CheckInDetail: { screen: CheckInDetailScreen },
     CheckInNearby: { screen: CheckInNearbyScreen },
     ReviewCreate: { screen: ReviewCreateScreen },
+    PhotoGallery: { screen: PhotoGalleryScreen },
   }, {
     initialRouteName: isLoggedIn ? 'CheckInList' : 'Login',
   });

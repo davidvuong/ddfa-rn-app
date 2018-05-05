@@ -74,6 +74,14 @@ export default class GlobalFooterComponent extends React.Component {
       .catch(console.debug);
   }
 
+  onPressGallery = () => {
+    if (this.isRouteActive('PhotoGallery') || this.isSpinning('photo-gallery')) {
+      return;
+    }
+    this.setThenResetSpinner('photo-gallery');
+    navigateAndReset('PhotoGallery', this.props.navigation);
+  }
+
   onPressCheckIn = () => {
     let googlePlace;
 
@@ -144,6 +152,7 @@ export default class GlobalFooterComponent extends React.Component {
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
           {this.renderButton('home', 'home', 'CheckInList', this.onPressHome)}
+          {this.renderButton('photo-gallery', 'gallery', 'PhotoGallery', this.onPressGallery)}
           {this.renderButton('nearby', 'nearby', 'CheckInNearby', this.onPressNearby)}
           {this.renderButton('checkIn', 'check-in', null, this.onPressCheckIn)}
           {this.renderButton('logout', 'logout', null, this.onPressLogout)}
