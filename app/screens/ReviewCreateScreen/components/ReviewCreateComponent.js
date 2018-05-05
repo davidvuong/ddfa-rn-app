@@ -56,7 +56,6 @@ type Props = {
 type State = {
   createReviewState: 'IDLE' | 'CREATING' | 'CREATED' | 'ERROR',
   isWritingComment: boolean,
-  comment: ?string,
 };
 
 export default class ReviewCreateComponent extends React.Component<Props, State> {
@@ -64,14 +63,20 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   state = {
     createReviewState: 'IDLE',
     isWritingComment: false,
+  };
+  review = {
     comment: null,
+    amountPaid: 0,
+    currency: 'AUD',
+    foodRating: null,
+    environmentRating: null,
+    serviceRating: null,
   };
 
   componentWillMount() {
     this.props.getCachedReview(this.props.selectedLocation.checkInId)
       .then((cachedReview: ?Object) => {
-        if (!cachedReview || _.isEmpty(cachedReview)) { return; }
-        this.setState({ comment: cachedReview.comment });
+        this.review = { ...this.review, ...cachedReview };
       });
   }
 
@@ -79,14 +84,11 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
     if (this.state.isCreatingReview) { return null; }
 
     this.setState({ createReviewState: 'CREATING' });
+    const { comment, amountPaid, currency, foodRating, environmentRating, serviceRating } = this.review;
+    const checkInId = this.props.selectedLocation.checkInId; // eslint-disable-line prefer-destructuring
+
     return this.props.createReview(
-      this.props.selectedLocation.checkInId,
-      0, // amountPaid
-      'AUD', // currency
-      this.state.comment,
-      null, // foodRating
-      null, // environmentRating
-      null, // serviceRating
+      checkInId, amountPaid, currency, comment, foodRating, environmentRating, serviceRating,
     )
       .then(() => {
         // @see: https://github.com/react-navigation/react-navigation/issues/1416
@@ -123,6 +125,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
   }
 
   onChangeTextComment = (comment: string) => {
+    this.review.comment = comment;
     return this.props.setCachedReview(this.props.selectedLocation.checkInId, { comment });
   }
 
@@ -176,7 +179,7 @@ export default class ReviewCreateComponent extends React.Component<Props, State>
               maxLength={2048}
               autoGrow
               multiline
-              value={this.state.comment}
+              defaultValue={this.review.comment}
               onBlur={this.onPressDone}
             />
           </CardItem>
