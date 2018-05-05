@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import * as React from 'react';
 import {
@@ -23,23 +22,7 @@ import GenericStaticMap from '../../../components/GenericStaticMap/GenericStatic
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 
-type Props = {
-  checkIn: *,
-  navigation: *,
-  resetSelectedCheckIn: () => *,
-  setSelectedLocation: (*) => *,
-  getCheckIn: (string) => *,
-  getPhotoUrl: (string) => string,
-  getCurrencySymbol: (string) => string,
-  deleteCheckIn: (string) => Promise<void>,
-};
-
-type State = {
-  isLoadingDetailedCheckIn: boolean,
-  detailedCheckIn: ?*,
-};
-
-export default class CheckInDetailComponent extends React.Component<Props, State> {
+export default class CheckInDetailComponent extends React.Component {
   static navigationOptions = navigationOptions;
   state = {
     isLoadingDetailedCheckIn: false,
@@ -53,10 +36,10 @@ export default class CheckInDetailComponent extends React.Component<Props, State
   fetchDetailedCheckIn = () => {
     this.setState({ detailedCheckIn: null, isLoadingDetailedCheckIn: true });
     return this.props.getCheckIn(this.props.checkIn.id)
-      .then((detailedCheckIn: *) => {
+      .then((detailedCheckIn) => {
         this.setState({ detailedCheckIn, isLoadingDetailedCheckIn: false });
       })
-      .catch((error: Error) => {
+      .catch((error) => {
         console.error(error); // TODO: Handle failure.
         this.setState({ isLoadingDetailedCheckIn: false });
       });

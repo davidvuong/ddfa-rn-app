@@ -1,4 +1,3 @@
-// @flow
 import _ from 'lodash';
 import moment from 'moment';
 import * as React from 'react';
@@ -18,31 +17,19 @@ import {
 import { initFoodImageGenerator } from '../../../../Images';
 import Styles from './Styles';
 
-type Props = {
-  navigation: *,
-  nearbyCheckIns: Array<*>,
-  setSelectedCheckIn: (*) => *,
-  isLoading: boolean,
-};
-
-type State = {
-  isLoadingNearbyCheckIns: boolean,
-  currentPosition: ?Position,
-};
-
-export default class CheckInNearbyComponent extends React.Component<Props, State> {
+export default class CheckInNearbyComponent extends React.Component {
   state = {
     isLoadingNearbyCheckIns: false,
     currentPosition: null,
   };
   imageGenerator = initFoodImageGenerator();
 
-  navigateToCheckIn = (checkIn: *) => {
+  navigateToCheckIn = (checkIn) => {
     this.props.setSelectedCheckIn(checkIn);
     this.props.navigation.navigate('CheckInDetail');
   }
 
-  renderItem = (checkIn: *) => {
+  renderItem = (checkIn) => {
     const checkedInAt = moment(checkIn.createdAt).format('Do MMM YYYY');
     return (
       <ListItem
@@ -79,7 +66,7 @@ export default class CheckInNearbyComponent extends React.Component<Props, State
     }
     return (
       <List style={Styles.listContainer}>
-        {_.map(this.props.nearbyCheckIns, (checkIn: *) => { return this.renderItem(checkIn); })}
+        {_.map(this.props.nearbyCheckIns, (checkIn) => { return this.renderItem(checkIn); })}
       </List>
     );
   }

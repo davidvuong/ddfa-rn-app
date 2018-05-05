@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 
 import CheckInNearbyComponent from './components/CheckInNearbyComponent';
@@ -8,7 +7,7 @@ import {
   setSelectedLocation,
 } from '../../actions/CheckInActions';
 
-const mapStateToProps = (state: *) => {
+const mapStateToProps = (state) => {
   const { checkIn } = state;
   return {
     position: checkIn.selectedLocation, // TODO: Don't share this action with CreateReview.
@@ -16,15 +15,15 @@ const mapStateToProps = (state: *) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: *) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getNearbyCheckIns: (latitude: number, longitude: number) => {
+    getNearbyCheckIns: (latitude, longitude) => {
       return dispatch(getNearbyCheckIns(latitude, longitude));
     },
-    setSelectedCheckIn: (checkIn: *) => {
+    setSelectedCheckIn: (checkIn) => {
       return dispatch(setSelectedCheckIn(checkIn));
     },
-    setSelectedLocation: (location: *) => {
+    setSelectedLocation: (location) => {
       return dispatch(setSelectedLocation(location));
     },
   };

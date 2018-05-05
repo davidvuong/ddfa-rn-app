@@ -1,23 +1,22 @@
-// @flow
 import * as actions from './ActionTypes';
 import CheckInService from '../services/Api/CheckInService';
 
 /* Internal */
 
-function listCheckInsSuccess(checkIns: Array<*>, count: number) {
+function listCheckInsSuccess(checkIns, count) {
   return { type: actions.LIST_CHECK_INS_SUCCESS, checkIns, count };
 }
 
-function getNearbyCheckInsSuccess(checkIns: Array<*>) {
+function getNearbyCheckInsSuccess(checkIns) {
   return { type: actions.GET_NEARBY_CHECK_INS_SUCCESS, checkIns };
 }
 
 /* External */
 
-export function listCheckIns(startTime: string) {
-  return (dispatch: *) => {
+export function listCheckIns(startTime) {
+  return (dispatch) => {
     return CheckInService.list(startTime)
-      .then((res: *) => {
+      .then((res) => {
         const { checkIns, count } = res;
         dispatch(listCheckInsSuccess(checkIns, count));
         return res;
@@ -25,10 +24,10 @@ export function listCheckIns(startTime: string) {
   };
 }
 
-export function getNearbyCheckIns(latitude: number, longitude: number) {
-  return (dispatch: *) => {
+export function getNearbyCheckIns(latitude, longitude) {
+  return (dispatch) => {
     return CheckInService.getNearby(latitude, longitude)
-      .then((checkIns: Array<*>) => {
+      .then((checkIns) => {
         dispatch(getNearbyCheckInsSuccess(checkIns));
         return checkIns;
       });
@@ -39,7 +38,7 @@ export function resetCheckIns() {
   return { type: actions.RESET_CHECK_IN_LIST };
 }
 
-export function setSelectedCheckIn(selectedCheckIn: *) {
+export function setSelectedCheckIn(selectedCheckIn) {
   return { type: actions.SET_SELECTED_CHECK_IN, selectedCheckIn };
 }
 
@@ -47,7 +46,7 @@ export function resetSelectedCheckIn() {
   return { type: actions.RESET_SELECTED_CHECK_IN };
 }
 
-export function setSelectedLocation(selectedLocation: *) {
+export function setSelectedLocation(selectedLocation) {
   return { type: actions.SET_SELECTED_LOCATION, selectedLocation };
 }
 

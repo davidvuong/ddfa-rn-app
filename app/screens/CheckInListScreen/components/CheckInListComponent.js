@@ -24,22 +24,7 @@ import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
 import { initFoodImageGenerator } from '../../../Images';
 
-type Props = {
-  checkIns: Array<*>,
-  totalCheckIns: number,
-  setSelectedCheckIn: (*) => *,
-  navigation: *,
-  listCheckIns: (string) => *,
-  resetCheckIns: () => *,
-};
-
-type State = {
-  isListingCheckIns: boolean,
-  isInitialLoad: boolean,
-  noMoreCheckIns: boolean,
-};
-
-export default class CheckInListComponent extends React.Component<Props, State> {
+export default class CheckInListComponent extends React.Component {
   static navigationOptions = navigationOptions;
   state = {
     isListingCheckIns: false,
@@ -55,7 +40,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     }
   }
 
-  navigateToCheckIn = (checkIn: *) => {
+  navigateToCheckIn = (checkIn) => {
     this.props.setSelectedCheckIn(checkIn);
 
     // Give CheckInDetail the option to invoke this callback when navigating back.
@@ -67,9 +52,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
   performInitialLoad = () => {
     this.setState({ isInitialLoad: true });
     return this.props.listCheckIns((new Date()).toISOString())
-      .then(() => {
-        this.setState({ isInitialLoad: false });
-      });
+      .then(() => { this.setState({ isInitialLoad: false }); });
   }
 
   onPressRefresh = () => {
@@ -77,7 +60,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     return this.performInitialLoad();
   }
 
-  onScroll = (event: *) => {
+  onScroll = (event) => {
     // Check if we're at the bottom of the page.
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     if (!(layoutMeasurement.height + contentOffset.y > contentSize.height - this.bottomScrollPadding)) {
@@ -113,7 +96,7 @@ export default class CheckInListComponent extends React.Component<Props, State> 
     const { checkIns, totalCheckIns } = this.props;
     return (
       <View>
-        {_.map(checkIns, (checkIn: *, i: number) => {
+        {_.map(checkIns, (checkIn, i) => {
             return (
               <CheckInCard
                 counter={totalCheckIns - (i + 1)}

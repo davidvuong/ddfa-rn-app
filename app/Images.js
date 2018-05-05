@@ -1,4 +1,3 @@
-// @flow
 import _ from 'lodash';
 
 /* eslint-disable global-require */
@@ -31,31 +30,27 @@ export const Images = {
 /* eslint-enable */
 
 class ImageGenerator {
-  sampleImages: Array<string>;
-  imagePool: Array<string>;
-  imageCache: Object;
-
-  constructor(sampleImages: Array<string>) {
+  constructor(sampleImages) {
     this.sampleImages = sampleImages;
     this.imagePool = [];
     this.imageCache = {};
   }
 
-  get = (key: string): * => {
-    const cachedImage: ?string = this.imageCache[key];
+  get = (key) => {
+    const cachedImage = this.imageCache[key];
     if (cachedImage) {
       return cachedImage;
     }
     if (!this.imagePool.length) {
       this.imagePool = _.shuffle(_.cloneDeep(this.sampleImages));
     }
-    const newImage: string = this.imagePool.shift();
+    const newImage = this.imagePool.shift();
     this.imageCache[key] = newImage;
     return newImage;
   }
 }
 
-export function initFoodImageGenerator(): ImageGenerator {
+export function initFoodImageGenerator() {
   return new ImageGenerator([
     Images.foodImage1,
     Images.foodImage2,
@@ -74,7 +69,7 @@ export function initFoodImageGenerator(): ImageGenerator {
   ]);
 }
 
-export function initAvatarImageGenerator(): ImageGenerator {
+export function initAvatarImageGenerator() {
   return new ImageGenerator([
     Images.avatarImage1,
     Images.avatarImage2,
@@ -88,7 +83,7 @@ export function initAvatarImageGenerator(): ImageGenerator {
   ]);
 }
 
-export function getRandomAvatar(): string {
+export function getRandomAvatar() {
   return _.sample([
     Images.avatarImage1,
     Images.avatarImage2,

@@ -1,42 +1,29 @@
-// @flow
 import _ from 'lodash';
 import Promise from 'bluebird';
 
-import {
-  AuthenticationService as AuthenticationServiceT,
-} from './AuthenticationService';
-import HttpService from '../HttpService';
-
 class PhotoService {
-  host: string;
-  authenticationService: AuthenticationServiceT;
-  http: HttpService
-
-  initialize = (host: string, authenticationService: AuthenticationServiceT, httpService: HttpService) => {
+  initialize = (host, authenticationService, httpService) => {
     this.host = host;
     this.authenticationService = authenticationService;
     this.http = httpService;
   }
 
-  getUrl = (id: string): string => {
+  getUrl = (id) => {
     return `${this.host}/photos/${id}`;
   }
 
-  create = (checkInId: string, photos: Array<Blob>): Promise<string> => {
+  create = (checkInId, photos) => {
     const endpoint = `${this.host}/checkins/${checkInId}/photos`;
     const headers = {
       ...this.authenticationService.getAuthenticationHeader(),
       'Content-Type': 'multipart/form-data',
     };
     const payload = new FormData(); // eslint-disable-line no-undef
-    _.each(photos, (i: number, photo: Blob) => {
+    _.each(photos, (i, photo) => {
       payload.append('photos', photo, `photo_${i}.jpg`);
     });
-
     return this.http.post(endpoint, payload, headers)
-      .then((res: *) => {
-        return Promise.resolve(res.photos);
-      });
+      .then((res) => { return Promise.resolve(res.photos); });
   }
 }
 

@@ -1,5 +1,3 @@
-// @flow
-
 export default {
   checkedInAtText: {
     color: 'orange',
