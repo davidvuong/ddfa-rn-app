@@ -3,7 +3,6 @@ import * as React from 'react';
 import moment from 'moment';
 import {
   Left,
-  Right,
   Body,
   Thumbnail,
   Text,
@@ -16,11 +15,16 @@ import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
 export default class CheckInDetailContent extends React.Component<> {
+  shouldRenderRatings = (review) => {
+    const { foodRating, serviceRating, environmentRating } = review;
+    return !_.isNil(foodRating) && !_.isNil(serviceRating) && !_.isNil(environmentRating);
+  }
+
   renderSubText = (review) => {
     const { currency, amountPaid } = review;
     const currencySymbol = this.props.getCurrencySymbol(currency);
     if (amountPaid === 0) {
-      return <Text note>FREE ${currencySymbol}</Text>;
+      return <Text note>FREE {currencySymbol}</Text>;
     }
     return (
       <Text note>
@@ -67,13 +71,17 @@ export default class CheckInDetailContent extends React.Component<> {
               </CardItem>
             )
           }
-          <CardItem>
-            <ReviewRatings
-              foodRating={foodRating}
-              serviceRating={serviceRating}
-              environmentRating={environmentRating}
-            />
-          </CardItem>
+          {
+            !this.shouldRenderRatings(review) ? null : (
+              <CardItem>
+                <ReviewRatings
+                  foodRating={foodRating}
+                  serviceRating={serviceRating}
+                  environmentRating={environmentRating}
+                />
+              </CardItem>
+            )
+          }
         </Card>
       );
     });
