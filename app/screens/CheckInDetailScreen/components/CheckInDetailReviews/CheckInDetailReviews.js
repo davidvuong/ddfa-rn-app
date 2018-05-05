@@ -17,7 +17,7 @@ import Styles from './Styles';
 export default class CheckInDetailContent extends React.Component<> {
   shouldRenderRatings = (review) => {
     const { foodRating, serviceRating, environmentRating } = review;
-    return !_.isNil(foodRating) && !_.isNil(serviceRating) && !_.isNil(environmentRating);
+    return !_.isNil(foodRating) || !_.isNil(serviceRating) || !_.isNil(environmentRating);
   }
 
   renderSubText = (review) => {
