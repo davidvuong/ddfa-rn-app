@@ -1,24 +1,23 @@
-// @flow
 import { connect } from 'react-redux';
 
 import CacheService from '../../services/CacheService';
 import ReviewCreateComponent from './components/ReviewCreateComponent';
 import ReviewService from '../../services/Api/ReviewService';
 
-const mapStateToProps = (state: *) => {
+const mapStateToProps = (state) => {
   const { checkIn } = state;
   return {
     selectedLocation: checkIn.selectedLocation,
   };
 };
 
-const mapDispatchToProps = (dispatch: *) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     createReview: ReviewService.create,
-    getCachedReview: (checkInId: string): Promise<?Object> => {
+    getCachedReview: (checkInId) => {
       return CacheService.get(`checkIn:${checkInId}`);
     },
-    setCachedReview: (checkInId: string, value: Object): Promise<void> => {
+    setCachedReview: (checkInId, value) => {
       return CacheService.set(`checkIn:${checkInId}`, value);
     },
   };

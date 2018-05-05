@@ -1,4 +1,3 @@
-// @flow
 import _ from 'lodash';
 import * as React from 'react';
 import {
@@ -11,16 +10,7 @@ import {
 
 import Styles from './Styles';
 
-type Props = {
-  rating: ?number,
-  pricingLevel: ?number,
-  name: string,
-  address: string,
-};
-
-type State = {};
-
-export default class PlaceContentCard extends React.Component<Props, State> {
+export default class PlaceContentCard extends React.Component {
   renderBody() {
     const { rating, pricingLevel, name, address } = this.props;
     if (!rating || !pricingLevel || pricingLevel < 0) {
@@ -39,7 +29,7 @@ export default class PlaceContentCard extends React.Component<Props, State> {
         <Text style={Styles.placeRatingAndPrice}>
           {`${ratingValue} stars `}
           {
-            _.map(_.range(Math.floor(rating)), (i: number) => {
+            _.map(_.range(Math.floor(rating)), (i) => {
               return <Icon key={`star-${i}`} name="md-star" style={Styles.placeRatingStarIcon} />;
             })
           }

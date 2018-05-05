@@ -1,24 +1,7 @@
-// @flow
 import _ from 'lodash';
 import * as actions from '../actions/ActionTypes';
 
-type State = {
-  checkIns: Array<*>,
-  totalCheckIns: number,
-  nearbyCheckIns: Array<*>,
-  selectedLocation: ?{
-    checkInId: string,
-    latitude: number,
-    longitude: number,
-    rating: ?number,
-    pricingLevel: ?number,
-    name: string,
-    address: string,
-  },
-  selectedCheckIn: *,
-};
-
-const initialState: State = {
+const initialState = {
   // The location we've selected to check in.
   selectedLocation: null,
 
@@ -35,7 +18,7 @@ const initialState: State = {
   nearbyCheckIns: [],
 };
 
-export default function CheckInReducer(state: State = initialState, action: *): State {
+export default function CheckInReducer(state = initialState, action) {
   switch (action.type) {
     case actions.LIST_CHECK_INS_SUCCESS:
       return { ...state, checkIns: _.concat(state.checkIns, action.checkIns), totalCheckIns: action.count };

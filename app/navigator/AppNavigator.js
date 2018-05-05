@@ -1,4 +1,3 @@
-// @flow
 import {
   StackNavigator,
   NavigationActions,
@@ -10,7 +9,7 @@ import CheckInDetailScreen from '../screens/CheckInDetailScreen/CheckInDetailScr
 import CheckInNearbyScreen from '../screens/CheckInNearbyScreen/CheckInNearbyScreen';
 import ReviewCreateScreen from '../screens/ReviewCreateScreen/ReviewCreateScreen';
 
-export default function getNavigator(isLoggedIn: ?boolean): * {
+export default function getNavigator(isLoggedIn) {
   if (isLoggedIn === null) { return null; }
   return StackNavigator({
     Login: { screen: LoginScreen },
@@ -23,7 +22,7 @@ export default function getNavigator(isLoggedIn: ?boolean): * {
   });
 }
 
-export function navigateAndReset(routeName: string, navigation: *) {
+export function navigateAndReset(routeName, navigation) {
   return navigation.dispatch(NavigationActions.reset({
     index: 0,
     actions: [

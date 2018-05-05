@@ -1,5 +1,3 @@
-// @flow
-
 export default {
   checkInImage: {
     height: 160,

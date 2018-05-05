@@ -1,14 +1,4 @@
-// @flow
 import RNConfig from 'react-native-config';
-
-export type ApiConfig = {
-  host: string,
-  port: number,
-};
-
-export type Config = {
-  api: ApiConfig,
-};
 
 function loadUnsafe() {
   return {
@@ -17,7 +7,7 @@ function loadUnsafe() {
   };
 }
 
-export default function loadConfig(): Config {
+export default function loadConfig() {
   const env = loadUnsafe();
   return {
     api: {

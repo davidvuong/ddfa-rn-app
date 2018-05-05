@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 
 import CheckInDetailComponent from './components/CheckInDetailComponent';
@@ -11,19 +10,19 @@ import {
   setSelectedLocation,
 } from '../../actions/CheckInActions';
 
-const mapStateToProps = (state: *) => {
+const mapStateToProps = (state) => {
   const { checkIn } = state;
   return {
     checkIn: checkIn.selectedCheckIn,
   };
 };
 
-const mapDispatchToProps = (dispatch: *) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     resetSelectedCheckIn: () => {
       return dispatch(resetSelectedCheckIn());
     },
-    setSelectedLocation: (selectedLocation: *) => {
+    setSelectedLocation: (selectedLocation) => {
       return dispatch(setSelectedLocation(selectedLocation));
     },
     getCheckIn: CheckInService.get,

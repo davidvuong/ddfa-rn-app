@@ -1,18 +1,10 @@
-// @flow
 import * as React from 'react';
 import MapView from 'react-native-maps';
 
 import GeoLocationService from '../../services/GeoLocationService';
 import Styles from './Styles';
 
-type Props = {
-  latitude: number,
-  longitude: number,
-};
-
-type State = {};
-
-export default class GenericStaticMap extends React.Component<Props, State> {
+export default class GenericStaticMap extends React.Component {
   render() {
     const { latitude, longitude } = this.props;
     if (!latitude || !longitude) { return null; }

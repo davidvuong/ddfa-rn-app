@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import * as React from 'react';
 import {
@@ -14,17 +13,7 @@ import {
 
 import Styles from './Styles';
 
-type Props = {
-  checkIn: *,
-  isLast: boolean,
-  onPress: (*) => void,
-  image: *,
-  counter: number,
-};
-
-type State = {};
-
-export default class CheckInCard extends React.Component<Props, State> {
+export default class CheckInCard extends React.Component {
   render() {
     const { checkIn, isLast, onPress, image, counter } = this.props;
     return (

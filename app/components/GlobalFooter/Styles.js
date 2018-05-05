@@ -1,5 +1,3 @@
-// @flow
-
 // TODO: Share these styles with any other pages that uses a footer.
 export default {
   footerContainer: {

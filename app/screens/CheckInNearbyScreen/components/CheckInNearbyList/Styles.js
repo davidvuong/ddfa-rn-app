@@ -1,5 +1,3 @@
-// @flow
-
 export default {
   emptyCheckInsContainer: {
     flex: 1,

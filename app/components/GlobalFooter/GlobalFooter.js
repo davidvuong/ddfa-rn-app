@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 
 import {
@@ -14,17 +13,17 @@ const mapStateToProps = () => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: *) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     createCheckIn: CheckInService.create,
     logoutUser: AuthenticationService.logout,
-    setSelectedLocation: (selectedLocation: *) => {
+    setSelectedLocation: (selectedLocation) => {
       return dispatch(setSelectedLocation(selectedLocation));
     },
     resetCheckIns: () => {
       return dispatch(resetCheckIns());
     },
-    listCheckIns: (startTime: string) => {
+    listCheckIns: (startTime) => {
       return dispatch(listCheckIns(startTime));
     },
   };

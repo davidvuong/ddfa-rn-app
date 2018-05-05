@@ -1,4 +1,3 @@
-// @flow
 import Promise from 'bluebird';
 import {
   AsyncStorage,
@@ -6,17 +5,17 @@ import {
 
 /* A simple wrapper over React Native's AsyncStorage (with bluebird.Promises). */
 export default class CacheService {
-  static set = (key: string, value: Object): Promise<void> => {
-    return new Promise((resolve: *, reject: *) => {
-      AsyncStorage.setItem(key, JSON.stringify(value), (error: Error) => {
+  static set = (key, value) => {
+    return new Promise((resolve, reject) => {
+      AsyncStorage.setItem(key, JSON.stringify(value), (error) => {
         return error ? reject(error) : resolve();
       });
     });
   }
 
-  static get = (key: string): Promise<?Object> => {
-    return new Promise((resolve: *, reject: *) => {
-      AsyncStorage.getItem(key, (error: Error, item: ?string) => {
+  static get = (key) => {
+    return new Promise((resolve, reject) => {
+      AsyncStorage.getItem(key, (error, item) => {
         return error ? reject(error) : resolve(item ? JSON.parse(item) : null);
       });
     });

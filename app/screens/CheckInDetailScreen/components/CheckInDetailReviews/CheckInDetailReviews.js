@@ -1,4 +1,3 @@
-// @flow
 import _ from 'lodash';
 import * as React from 'react';
 import {
@@ -14,15 +13,8 @@ import { getRandomAvatar } from '../../../../Images';
 import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
-type Props = {
-  reviews: Array<*>,
-  getCurrencySymbol: (string) => string,
-};
-
-type State = {};
-
-export default class CheckInDetailContent extends React.Component<Props, State> {
-  renderSubText = (review: *) => {
+export default class CheckInDetailContent extends React.Component<> {
+  renderSubText = (review) => {
     const { currency, amountPaid } = review;
     if (amountPaid === 0) {
       return <Text note>FREE</Text>;
@@ -34,7 +26,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
     );
   }
 
-  renderUserDetails = (review: *) => {
+  renderUserDetails = (review) => {
     return (
       <CardItem>
         <Left>
@@ -55,7 +47,7 @@ export default class CheckInDetailContent extends React.Component<Props, State> 
 
   render() {
     const reviews = _.orderBy(this.props.reviews, ['createdAt'], ['asc']);
-    return _.map(reviews, (review: *) => {
+    return _.map(reviews, (review) => {
       const { id, comment, foodRating, serviceRating, environmentRating } = review;
       return (
         <Card style={Styles.card} key={id}>

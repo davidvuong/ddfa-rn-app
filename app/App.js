@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { Provider } from 'react-redux';
 
@@ -20,12 +19,6 @@ import CheckInService from './services/Api/CheckInService';
 import PhotoService from './services/Api/PhotoService';
 import ReviewService from './services/Api/ReviewService';
 
-type Props = {};
-
-type State = {
-  isLoggedIn: ?boolean,
-};
-
 const style = {
   content: {
     flex: 1,
@@ -34,12 +27,12 @@ const style = {
   },
 };
 
-export default class App extends React.Component<Props, State> {
+export default class App extends React.Component {
   store = ConfigureStore(getReducer());
   state = { isLoggedIn: null };
   config = loadConfig();
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     // @see: https://github.com/facebook/react-native/issues/9599
@@ -48,19 +41,19 @@ export default class App extends React.Component<Props, State> {
     }
 
     /* Initialize app services. */
-    const baseApiEndpoint: string = `${this.config.api.host}:${this.config.api.port}`;
+    const baseApiEndpoint = `${this.config.api.host}:${this.config.api.port}`;
     const httpService = new HttpService();
 
     AuthenticationService.initialize(baseApiEndpoint, httpService);
     AuthenticationService.getTokenFromStorage()
-      .then((token: string) => {
+      .then((token) => {
         CheckInService.initialize(baseApiEndpoint, AuthenticationService, httpService);
         PhotoService.initialize(baseApiEndpoint, AuthenticationService, httpService);
         ReviewService.initialize(baseApiEndpoint, AuthenticationService, httpService);
 
         return AuthenticationService.isTokenValid(token);
       })
-      .then((isLoggedIn: boolean) => {
+      .then((isLoggedIn) => {
         this.setState({ isLoggedIn });
         if (!isLoggedIn) {
           AuthenticationService.logout();

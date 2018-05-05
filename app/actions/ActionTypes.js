@@ -1,5 +1,3 @@
-// @flow
-
 export const LIST_CHECK_INS_SUCCESS = 'checkIn/LIST_CHECK_INS_SUCCESS';
 export const GET_NEARBY_CHECK_INS_SUCCESS = 'checkIn/GET_NEARBY_CHECK_INS_SUCCESS';
 
