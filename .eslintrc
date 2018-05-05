@@ -1,11 +1,9 @@
 {
   "extends": [
-    "airbnb-base",
-    "plugin:flowtype/recommended"
+    "airbnb-base"
   ],
   "parser": "babel-eslint",
   "plugins": [
-    "flowtype",
     "react"
   ],
   "env": {
@@ -17,7 +15,6 @@
   },
   "rules": {
     "import/no-named-as-default": [0],
-    "flowtype/require-parameter-type": [2],
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,
       "ignoreComments": false,
@@ -28,10 +25,5 @@
     "class-methods-use-this": [0],
     "object-curly-newline": [0],
     "react/jsx-uses-vars": [2]
-  },
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
-    }
   }
 }

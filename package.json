@@ -1,7 +1,5 @@
 {
   "name": "ddfa",
-  "version": "0.0.1",
-  "private": false,
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -11,10 +9,8 @@
     "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-react": "^7.5.1",
-    "flow-bin": "^0.64.0"
+    "eslint-plugin-react": "^7.5.1"
   },
   "scripts": {
     "start": "react-native start",
