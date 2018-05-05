@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
   return {
     createReview: ReviewService.create,
     getCachedReview: (checkInId) => {
