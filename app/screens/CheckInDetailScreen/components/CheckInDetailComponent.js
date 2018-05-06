@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 import * as React from 'react';
 import {
   Container,
@@ -15,9 +16,9 @@ import {
 } from 'react-native';
 
 import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
-import CheckInDetailPhotoGallery from './CheckInDetailPhotoGallery/CheckInDetailPhotoGallery';
 import CheckInDetailReviews from './CheckInDetailReviews/CheckInDetailReviews';
 import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
+import ImageCarousel from '../../../components/ImageCarousel/ImageCarousel';
 
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -106,10 +107,13 @@ export default class CheckInDetailComponent extends React.Component {
     // We have reviews and possible photos!
     if (detailedCheckIn && detailedCheckIn.reviews.length) {
       const { getPhotoUrl, getCurrencySymbol } = this.props;
+      const carouselImages = _.map(detailedCheckIn.photos, (photo) => {
+        return { uri: `${getPhotoUrl(photo.id)}?width=480` };
+      });
       return (
         <View>
           <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
-          <CheckInDetailPhotoGallery photos={detailedCheckIn.photos} getPhotoUrl={getPhotoUrl} />
+          <ImageCarousel images={carouselImages} />
         </View>
       );
     }
