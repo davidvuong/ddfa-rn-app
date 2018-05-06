@@ -111,7 +111,7 @@ export default class CheckInDetailComponent extends React.Component {
 
       const { getPhotoUrl, getCurrencySymbol } = this.props;
       const carouselImages = _.map(detailedCheckIn.photos, (photo) => {
-        return { uri: `${getPhotoUrl(photo.id)}?width=${imageWidth}` };
+        return { uri: `${getPhotoUrl(photo.id)}?width=1024` };
       });
       return (
         <View>
