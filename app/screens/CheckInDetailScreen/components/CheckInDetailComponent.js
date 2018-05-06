@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 import {
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 
 import CheckInDetailHeader from './CheckInDetailHeader/CheckInDetailHeader';
@@ -106,14 +107,16 @@ export default class CheckInDetailComponent extends React.Component {
 
     // We have reviews and possible photos!
     if (detailedCheckIn && detailedCheckIn.reviews.length) {
+      const imageWidth = Dimensions.get('window').width;
+
       const { getPhotoUrl, getCurrencySymbol } = this.props;
       const carouselImages = _.map(detailedCheckIn.photos, (photo) => {
-        return { uri: `${getPhotoUrl(photo.id)}?width=480` };
+        return { uri: `${getPhotoUrl(photo.id)}?width=${imageWidth}` };
       });
       return (
         <View>
           <CheckInDetailReviews reviews={detailedCheckIn.reviews} getCurrencySymbol={getCurrencySymbol} />
-          <ImageCarousel images={carouselImages} />
+          <ImageCarousel images={carouselImages} width={imageWidth} />
         </View>
       );
     }

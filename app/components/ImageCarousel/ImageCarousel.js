@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Image,
-  Dimensions,
 } from 'react-native';
 import {
   View,
@@ -13,17 +12,16 @@ import Styles from './Styles';
 export default class ImageCarousel extends React.Component {
   state = {
     activeSlide: 0,
-    carouselWidth: Dimensions.get('window').width - 20,
   };
 
   onRenderItem = ({ item }) => {
-    const style = { height: Styles.carouselHeight, width: this.state.carouselWidth };
+    const style = { height: Styles.carouselHeight, width: this.props.width };
     return <Image style={style} source={item} />;
   }
 
   render() {
     const carouselHeight = Styles.carouselHeight; // eslint-disable-line prefer-destructuring
-    const carouselWidth = this.state.carouselWidth; // eslint-disable-line prefer-destructuring
+    const carouselWidth = this.props.width; // eslint-disable-line prefer-destructuring
     return (
       <View style={Styles.container}>
         <Carousel
