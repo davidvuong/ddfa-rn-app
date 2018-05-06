@@ -35,6 +35,7 @@ class ReviewService {
     return {
       USD: '$',
       AUD: '$',
+      HKD: '$',
       CNY: '&',
       JPY: '¥',
       GBP: '£',
