@@ -31,7 +31,7 @@ export default class GlobalFooterComponent extends React.Component {
   isSpinning = (spinnerType) => {
     return !!this.state.spinners[spinnerType];
   }
-  setThenResetSpinner = (spinnerType, delay = 3000) => {
+  setThenResetSpinner = (spinnerType, delay = 1500) => {
     this.setSpinner(spinnerType, true);
     return Promise.delay(delay)
       .then(() => { this.setSpinner(spinnerType, false); });
@@ -51,7 +51,7 @@ export default class GlobalFooterComponent extends React.Component {
     if (this.isRouteActive('CheckInNearby') || this.isSpinning('nearby')) { return; }
     this.setThenResetSpinner('nearby');
 
-    const geoLocationOptions = { enableHighAccuracy: true, timeout: 5000 };
+    const geoLocationOptions = { enableHighAccuracy: true, timeout: 3000 };
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
@@ -128,7 +128,7 @@ export default class GlobalFooterComponent extends React.Component {
 
   renderCheckInButton = () => {
     if (this.state.spinners.checkIn) {
-      return <Button><ActivityIndicator color="black" /></Button>;
+      return <Button><ActivityIndicator color="white" /></Button>;
     }
     return (
       <Button vertical onPress={this.onPressCheckIn} style={Styles.checkInButton}>
@@ -139,7 +139,7 @@ export default class GlobalFooterComponent extends React.Component {
 
   renderButton = (btnName, routeName, onPress) => {
     if (this.state.spinners[btnName]) {
-      return <Button><ActivityIndicator color="black" /></Button>;
+      return <Button><ActivityIndicator color="white" /></Button>;
     }
     const style = this.isRouteActive(routeName) ? Styles.footerButtonActive : Styles.footerButton;
     return (
