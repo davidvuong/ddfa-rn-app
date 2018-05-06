@@ -141,7 +141,7 @@ export default class GlobalFooterComponent extends React.Component {
     }
     return (
       <Button vertical onPress={this.onPressCheckIn} style={Styles.checkInButton}>
-        <Icon style={Styles.checkInButtonIcon} name="md-navigate" />
+        <Icon style={Styles.checkInButtonIcon} name="md-pin" />
       </Button>
     );
   }

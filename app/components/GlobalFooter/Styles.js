@@ -33,6 +33,7 @@ export default {
   },
   buttonText: {
     fontSize: 10,
+    fontWeight: 'bold',
     color: 'white',
   },
 };
