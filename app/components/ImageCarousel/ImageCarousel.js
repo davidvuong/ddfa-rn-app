@@ -38,6 +38,7 @@ export default class ImageCarousel extends React.Component {
           activeDotIndex={this.state.activeSlide}
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
+          containerStyle={Styles.paginationContainer}
         />
       </View>
     );

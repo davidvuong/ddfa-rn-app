@@ -3,4 +3,8 @@ export default {
   container: {
     backgroundColor: 'white',
   },
+  paginationContainer: {
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
 };
