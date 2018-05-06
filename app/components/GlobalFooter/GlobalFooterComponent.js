@@ -35,34 +35,19 @@ export default class GlobalFooterComponent extends React.Component {
     return Promise.delay(delay)
       .then(() => { this.setSpinner(spinnerType, false); });
   }
-
-  /* Given a GooglePlace object, determine the location name. */
-  getLocationName = (place) => {
-    const { name, address, latitude, longitude } = place;
-    return name || address || `${latitude} ${longitude}`;
-  }
-
-  selectLocation = () => {
-    return RNGooglePlaces.openPlacePickerModal({ radius: 0.5 });
-  }
-
   isRouteActive = (routeName) => {
     return this.props.navigation.state.routeName === routeName;
   }
 
   /* Below are all `onPress` callbacks (home, nearby, checkIn, logout). */
   onPressHome = () => {
-    if (this.isRouteActive('CheckInList') || this.isSpinning('home')) {
-      return;
-    }
+    if (this.isRouteActive('CheckInList') || this.isSpinning('home')) { return; }
     this.setThenResetSpinner('home');
     navigateAndReset('CheckInList', this.props.navigation);
   }
 
   onPressNearby = () => {
-    if (this.isRouteActive('CheckInNearby') || this.isSpinning('nearby')) {
-      return;
-    }
+    if (this.isRouteActive('CheckInNearby') || this.isSpinning('nearby')) { return; }
     this.setThenResetSpinner('nearby');
 
     const geoLocationOptions = { enableHighAccuracy: true, timeout: 5000 };
@@ -74,36 +59,43 @@ export default class GlobalFooterComponent extends React.Component {
   }
 
   onPressGallery = () => {
-    if (this.isRouteActive('PhotoGallery') || this.isSpinning('photo-gallery')) {
-      return;
-    }
-    this.setThenResetSpinner('photo-gallery');
+    if (this.isRouteActive('PhotoGallery') || this.isSpinning('gallery')) { return; }
+    this.setThenResetSpinner('gallery');
     navigateAndReset('PhotoGallery', this.props.navigation);
   }
 
   onPressCheckIn = () => {
-    let googlePlace;
-
+    if (this.isSpinning('checkIn')) { return; }
     this.setThenResetSpinner('checkIn');
-    this.selectLocation()
-      .then((place) => {
-        googlePlace = place;
 
-        const { address, latitude, longitude, placeID } = place;
-        const name = this.getLocationName(place);
-        return this.props.createCheckIn(latitude, longitude, address, name, placeID);
+    const getPlaceName = (place) => {
+      const { name, address, latitude, longitude } = place;
+      return name || address || `${latitude} ${longitude}`;
+    };
+
+    RNGooglePlaces.openPlacePickerModal({ radius: 0.5 })
+      .then((place) => {
+        const locationName = getPlaceName(place);
+        const checkInPromise = this.props.createCheckIn(
+          place.latitude,
+          place.longitude,
+          place.address,
+          locationName,
+          place.placeID,
+        );
+        return Promise.all([checkInPromise, place, locationName]);
       })
-      .then((checkInId) => {
-        const { address, latitude, longitude, rating, pricingLevel } = googlePlace;
-        const name = this.getLocationName(googlePlace);
+      .then((results) => {
+        const [checkInId, place, name] = results;
+        const { address, latitude, longitude, rating, pricingLevel } = place;
         this.props.setSelectedLocation({
           checkInId,
           name,
           address,
           latitude,
           longitude,
-          rating: rating || null,
-          pricingLevel: pricingLevel || null,
+          rating: _.isNil(rating) ? null : rating,
+          pricingLevel: _.isNil(pricingLevel) ? null : pricingLevel,
         });
         this.props.navigation.navigate('ReviewCreate', {
           goBackCallback: () => {
@@ -133,15 +125,14 @@ export default class GlobalFooterComponent extends React.Component {
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
-  renderButton = (btnType, btnName, routeName, onPress) => {
-    if (this.state.spinners[btnType]) {
-      return <Button vertical><ActivityIndicator color="black" /></Button>;
+  renderButton = (btnName, routeName, onPress) => {
+    if (this.state.spinners[btnName]) {
+      return <Button><ActivityIndicator color="black" /></Button>;
     }
-
     const style = this.isRouteActive(routeName) ? Styles.footerButtonActive : Styles.footerButton;
     return (
-      <Button vertical onPress={onPress} style={style}>
-        <Text style={Styles.iconText} uppercase>{btnName}</Text>
+      <Button onPress={onPress} style={style}>
+        <Text style={Styles.buttonText} uppercase>{btnName}</Text>
       </Button>
     );
   }
@@ -150,11 +141,11 @@ export default class GlobalFooterComponent extends React.Component {
     return (
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
-          {this.renderButton('home', 'home', 'CheckInList', this.onPressHome)}
-          {this.renderButton('photo-gallery', 'gallery', 'PhotoGallery', this.onPressGallery)}
-          {this.renderButton('nearby', 'nearby', 'CheckInNearby', this.onPressNearby)}
-          {this.renderButton('checkIn', 'check-in', null, this.onPressCheckIn)}
-          {this.renderButton('logout', 'logout', null, this.onPressLogout)}
+          {this.renderButton('home', 'CheckInList', this.onPressHome)}
+          {this.renderButton('gallery', 'PhotoGallery', this.onPressGallery)}
+          {this.renderButton('nearby', 'CheckInNearby', this.onPressNearby)}
+          {this.renderButton('check-in', null, this.onPressCheckIn)}
+          {this.renderButton('logout', null, this.onPressLogout)}
         </FooterTab>
       </Footer>
     );
