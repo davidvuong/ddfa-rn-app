@@ -148,7 +148,7 @@ export default class GlobalFooterComponent extends React.Component {
 
   renderButton = (btnName, routeName, onPress) => {
     if (this.state.spinners[btnName]) {
-      return <Button><ActivityIndicator color="white" /></Button>;
+      return <Button style={Styles.footerButton}><ActivityIndicator color="white" /></Button>;
     }
     const style = this.isRouteActive(routeName) ? Styles.footerButtonActive : Styles.footerButton;
     return (

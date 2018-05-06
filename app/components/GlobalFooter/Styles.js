@@ -2,7 +2,7 @@
 
 const footerButton = {
   backgroundColor: 'rgb(63, 81, 181)',
-  height: 48,
+  height: 56,
   maxWidth: 76,
   borderRadius: 0,
   borderTopWidth: 5,
@@ -11,7 +11,7 @@ const footerButton = {
 
 export default {
   footerContainer: {
-    height: 48,
+    height: 56,
     backgroundColor: 'white',
   },
   footerTab: {
