@@ -21,6 +21,14 @@ export default class GlobalFooterComponent extends React.Component {
   state = {
     spinners: {},
   };
+  spinnerTimers = {};
+
+  componentWillUnmount() {
+    // Avoids ReactJS warnings about calling `setState` on an unmounted component.
+    _.each(this.spinnerTimers, (timer) => {
+      clearTimeout(timer);
+    });
+  }
 
   /* Wrappers over `this.state.spinners`. */
   setSpinner = (spinnerType, isSpinning) => {
@@ -33,8 +41,9 @@ export default class GlobalFooterComponent extends React.Component {
   }
   setThenResetSpinner = (spinnerType, delay = 1500) => {
     this.setSpinner(spinnerType, true);
-    return Promise.delay(delay)
-      .then(() => { this.setSpinner(spinnerType, false); });
+    this.spinnerTimers[spinnerType] = setTimeout(() => {
+      this.setSpinner(spinnerType, false);
+    }, delay);
   }
   isRouteActive = (routeName) => {
     return this.props.navigation.state.routeName === routeName;
