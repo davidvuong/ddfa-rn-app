@@ -28,6 +28,7 @@
     "react-native-config": "^0.11.5",
     "react-native-google-places": "^2.5.0",
     "react-native-maps": "^0.18.3",
+    "react-native-snap-carousel": "^3.7.0",
     "react-native-swiper": "^1.5.13",
     "react-navigation": "^1.5.4",
     "react-redux": "^5.0.6",
