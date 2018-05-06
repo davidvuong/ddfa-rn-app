@@ -96,3 +96,22 @@ export function getRandomAvatar() {
     Images.avatarImage9,
   ]);
 }
+
+export function getRandomFood() {
+  return _.sample([
+    Images.foodImage1,
+    Images.foodImage2,
+    Images.foodImage3,
+    Images.foodImage4,
+    Images.foodImage5,
+    Images.foodImage6,
+    Images.foodImage7,
+    Images.foodImage8,
+    Images.foodImage9,
+    Images.foodImage10,
+    Images.foodImage11,
+    Images.foodImage12,
+    Images.foodImage13,
+    Images.foodImage14,
+  ]);
+}
