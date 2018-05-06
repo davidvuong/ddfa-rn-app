@@ -6,6 +6,7 @@ import {
   Footer,
   FooterTab,
   Button,
+  Icon,
 } from 'native-base';
 import {
   Alert,
@@ -59,8 +60,8 @@ export default class GlobalFooterComponent extends React.Component {
   }
 
   onPressGallery = () => {
-    if (this.isRouteActive('PhotoGallery') || this.isSpinning('gallery')) { return; }
-    this.setThenResetSpinner('gallery');
+    if (this.isRouteActive('PhotoGallery') || this.isSpinning('photos')) { return; }
+    this.setThenResetSpinner('photos');
     navigateAndReset('PhotoGallery', this.props.navigation);
   }
 
@@ -125,6 +126,17 @@ export default class GlobalFooterComponent extends React.Component {
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
+  renderCheckInButton = () => {
+    if (this.state.spinners.checkIn) {
+      return <Button><ActivityIndicator color="black" /></Button>;
+    }
+    return (
+      <Button vertical onPress={this.onPressCheckIn} style={Styles.checkInButton}>
+        <Icon style={Styles.checkInButtonIcon} name="md-navigate" />
+      </Button>
+    );
+  }
+
   renderButton = (btnName, routeName, onPress) => {
     if (this.state.spinners[btnName]) {
       return <Button><ActivityIndicator color="black" /></Button>;
@@ -142,9 +154,9 @@ export default class GlobalFooterComponent extends React.Component {
       <Footer style={Styles.footerContainer}>
         <FooterTab style={Styles.footerTab}>
           {this.renderButton('home', 'CheckInList', this.onPressHome)}
-          {this.renderButton('gallery', 'PhotoGallery', this.onPressGallery)}
+          {this.renderButton('photos', 'PhotoGallery', this.onPressGallery)}
+          {this.renderCheckInButton()}
           {this.renderButton('nearby', 'CheckInNearby', this.onPressNearby)}
-          {this.renderButton('check-in', null, this.onPressCheckIn)}
           {this.renderButton('logout', null, this.onPressLogout)}
         </FooterTab>
       </Footer>
