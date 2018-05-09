@@ -6,8 +6,8 @@ import {
 
 import Styles from './Styles';
 
-export default class ReviewRatings extends React.Component {
-  renderRating = (value, label) => {
+const ReviewRatings = ({ foodRating, serviceRating, environmentRating }) => {
+  const renderRating = (value, label) => {
     if (!value) {
       return (
         <View style={Styles.ratingContainer}>
@@ -25,15 +25,14 @@ export default class ReviewRatings extends React.Component {
         <Text uppercase style={Styles.ratingLabel}>{label}</Text>
       </View>
     );
-  }
+  };
+  return (
+    <View style={Styles.container}>
+      {renderRating(foodRating, 'food')}
+      {renderRating(serviceRating, 'service')}
+      {renderRating(environmentRating, 'environ')}
+    </View>
+  );
+};
 
-  render() {
-    return (
-      <View style={Styles.container}>
-        {this.renderRating(this.props.foodRating, 'food')}
-        {this.renderRating(this.props.serviceRating, 'service')}
-        {this.renderRating(this.props.environmentRating, 'environ')}
-      </View>
-    );
-  }
-}
+export default ReviewRatings;
