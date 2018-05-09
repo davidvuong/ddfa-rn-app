@@ -1,16 +1,9 @@
+import * as React from 'react';
 import Promise from 'bluebird';
 import _ from 'lodash';
-import * as React from 'react';
 import {
   Container,
-  Header,
-  Left,
-  Right,
-  Body,
   Content,
-  Text,
-  Button,
-  Icon,
 } from 'native-base';
 import {
   Keyboard,
@@ -18,10 +11,10 @@ import {
 
 import ReviewCreateFooter from './ReviewCreateFooter/ReviewCreateFooter';
 import ReviewCreateContent from './ReviewCreateContent/ReviewCreateContent';
+import ReviewCreateHeader from './ReviewCreateHeader/ReviewCreateHeader';
 import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
 
 import navigationOptions from '../NavigationOptions';
-import Styles from '../Styles';
 
 export default class ReviewCreateComponent extends React.Component {
   static navigationOptions = navigationOptions;
@@ -95,41 +88,15 @@ export default class ReviewCreateComponent extends React.Component {
     return this.props.setCachedReview(this.props.selectedLocation.checkInId, { comment });
   }
 
-  renderHeader = () => {
-    const { isWritingComment } = this.state;
-    if (isWritingComment) {
-      return (
-        <Header>
-          <Left />
-          <Body />
-          <Right>
-            <Button transparent onPress={this.onPressDone}>
-              <Text style={Styles.headerText}>Done</Text>
-            </Button>
-          </Right>
-        </Header>
-      );
-    }
-    return (
-      <Header>
-        <Left>
-          <Button transparent onPress={() => { this.props.navigation.goBack(); }}>
-            <Icon name="arrow-back" style={Styles.headerBackIcon} />
-          </Button>
-        </Left>
-        <Body>
-          <Text style={Styles.headerText}>DDFA Review</Text>
-        </Body>
-        <Right />
-      </Header>
-    );
-  }
-
   render() {
     const { latitude, longitude } = this.props.selectedLocation;
     return (
       <Container>
-        {this.renderHeader()}
+        <ReviewCreateHeader
+          isWritingComment={this.state.isWritingComment}
+          onPressLeft={() => { this.props.navigation.goBack(); }}
+          onPressRight={this.onPressDone}
+        />
         <Content>
           <GenericStaticMap latitude={latitude} longitude={longitude} />
           <ReviewCreateContent
