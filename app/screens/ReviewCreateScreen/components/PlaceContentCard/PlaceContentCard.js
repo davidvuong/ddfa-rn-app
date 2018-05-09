@@ -10,9 +10,8 @@ import {
 
 import Styles from './Styles';
 
-export default class PlaceContentCard extends React.Component {
-  renderBody() {
-    const { rating, pricingLevel, name, address } = this.props;
+const PlaceContentCard = ({ rating, pricingLevel, name, address }) => {
+  const renderBody = () => {
     if (!rating || !pricingLevel || pricingLevel < 0) {
       return (
         <Body>
@@ -21,7 +20,6 @@ export default class PlaceContentCard extends React.Component {
         </Body>
       );
     }
-
     const ratingValue = Math.round(rating * 10) / 10;
     return (
       <Body>
@@ -38,13 +36,12 @@ export default class PlaceContentCard extends React.Component {
         <Text note>{address}</Text>
       </Body>
     );
-  }
+  };
+  return (
+    <Card>
+      <CardItem header>{renderBody()}</CardItem>
+    </Card>
+  );
+};
 
-  render() {
-    return (
-      <Card>
-        <CardItem header>{this.renderBody()}</CardItem>
-      </Card>
-    );
-  }
-}
+export default PlaceContentCard;
