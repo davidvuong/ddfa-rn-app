@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import * as React from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 import {
   Left,
@@ -14,26 +14,22 @@ import { getRandomAvatar } from '../../../../Images';
 import ReviewRatings from '../../../../components/ReviewRatings/ReviewRatings';
 import Styles from './Styles';
 
-export default class CheckInDetailContent extends React.Component<> {
-  shouldRenderRatings = (review) => {
+const CheckInDetailContent = ({ getCurrencySymbol, reviews }) => {
+  const shouldRenderRatings = (review) => {
     const { foodRating, serviceRating, environmentRating } = review;
     return !_.isNil(foodRating) || !_.isNil(serviceRating) || !_.isNil(environmentRating);
-  }
+  };
 
-  renderSubText = (review) => {
+  const renderSubText = (review) => {
     const { currency, amountPaid } = review;
-    const currencySymbol = this.props.getCurrencySymbol(currency);
+    const currencySymbol = getCurrencySymbol(currency);
     if (amountPaid === 0) {
       return <Text note>FREE {currencySymbol}</Text>;
     }
-    return (
-      <Text note>
-        {`PRICE ${currencySymbol}${amountPaid} (${currency})`}
-      </Text>
-    );
-  }
+    return <Text note>{`PRICE ${currencySymbol}${amountPaid} (${currency})`}</Text>;
+  };
 
-  renderUserDetails = (review) => {
+  const renderUserDetails = (review) => {
     return (
       <CardItem>
         <Left>
@@ -45,7 +41,7 @@ export default class CheckInDetailContent extends React.Component<> {
           }
           <Body>
             <Text>{review.user.name || review.user.username}</Text>
-            {this.renderSubText(review)}
+            {renderSubText(review)}
           </Body>
           <Text style={Styles.reviewedAtText} note>
             {moment(review.createdAt).format('DD/MM/YY, h:mmA')}
@@ -53,37 +49,37 @@ export default class CheckInDetailContent extends React.Component<> {
         </Left>
       </CardItem>
     );
-  }
+  };
 
-  render() {
-    const reviews = _.orderBy(this.props.reviews, ['createdAt'], ['asc']);
-    return _.map(reviews, (review) => {
-      const { id, comment, foodRating, serviceRating, environmentRating } = review;
-      return (
-        <Card style={Styles.card} key={id}>
-          {this.renderUserDetails(review)}
-          {
-            !comment ? null : (
-              <CardItem>
-                <Body>
-                  <Text>{comment}</Text>
-                </Body>
-              </CardItem>
-            )
-          }
-          {
-            !this.shouldRenderRatings(review) ? null : (
-              <CardItem>
-                <ReviewRatings
-                  foodRating={foodRating}
-                  serviceRating={serviceRating}
-                  environmentRating={environmentRating}
-                />
-              </CardItem>
-            )
-          }
-        </Card>
-      );
-    });
-  }
-}
+  const orderedReviews = _.orderBy(reviews, ['createdAt'], ['asc']);
+  return _.map(orderedReviews, (review) => {
+    const { id, comment, foodRating, serviceRating, environmentRating } = review;
+    return (
+      <Card style={Styles.card} key={id}>
+        {renderUserDetails(review)}
+        {
+          !comment ? null : (
+            <CardItem>
+              <Body>
+                <Text>{comment}</Text>
+              </Body>
+            </CardItem>
+          )
+        }
+        {
+          !shouldRenderRatings(review) ? null : (
+            <CardItem>
+              <ReviewRatings
+                foodRating={foodRating}
+                serviceRating={serviceRating}
+                environmentRating={environmentRating}
+              />
+            </CardItem>
+          )
+        }
+      </Card>
+    );
+  });
+};
+
+export default CheckInDetailContent;
