@@ -26,6 +26,7 @@ export const Images = {
   avatarImage8: require('./images/avatar_8.png'),
   avatarImage9: require('./images/avatar_9.png'),
   backgroundImage1: require('./images/background_image_1.jpg'),
+  imageUploadPlaceholder: require('./images/image_upload_placeholder.png'),
 };
 /* eslint-enable */
 
