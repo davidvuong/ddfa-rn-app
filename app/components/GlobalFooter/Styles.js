@@ -1,12 +1,14 @@
 // TODO: Share these styles with any other pages that uses a footer.
 
+const footerPrimaryColor = 'rgb(63, 81, 181)';
+
 const footerButton = {
-  backgroundColor: 'rgb(63, 81, 181)',
+  backgroundColor: footerPrimaryColor,
   height: 56,
   maxWidth: 76,
   borderRadius: 0,
   borderTopWidth: 5,
-  borderTopColor: 'rgb(63, 81, 181)',
+  borderTopColor: footerPrimaryColor,
 };
 
 export default {
@@ -15,25 +17,29 @@ export default {
     backgroundColor: 'white',
   },
   footerTab: {
-    backgroundColor: 'rgb(63, 81, 181)',
+    backgroundColor: footerPrimaryColor,
   },
   footerButton,
   footerButtonActive: {
     ...footerButton,
     borderTopColor: 'white',
   },
-  checkInButton: {
+  footerButtonSpinning: {
     ...footerButton,
-    alignSelf: 'center',
-    maxWidth: 70,
-  },
-  checkInButtonIcon: {
-    color: 'white',
-    fontSize: 30,
+    maxWidth: 68,
   },
   buttonText: {
     fontSize: 10,
     fontWeight: 'bold',
     color: 'white',
+  },
+  checkInButton: {
+    ...footerButton,
+    alignSelf: 'center',
+    maxWidth: 68,
+  },
+  checkInButtonIcon: {
+    color: 'white',
+    fontSize: 30,
   },
 };

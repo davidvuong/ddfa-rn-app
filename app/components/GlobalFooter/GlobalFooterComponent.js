@@ -135,20 +135,16 @@ export default class GlobalFooterComponent extends React.Component {
     Alert.alert('Exit DDFA', 'Are you sure you want to log out?', buttons);
   }
 
-  renderCheckInButton = () => {
-    if (this.state.spinners.checkIn) {
-      return <Button><ActivityIndicator color="white" /></Button>;
-    }
-    return (
-      <Button vertical onPress={this.onPressCheckIn} style={Styles.checkInButton}>
-        <Icon style={Styles.checkInButtonIcon} name="md-pin" />
-      </Button>
-    );
-  }
-
   renderButton = (btnName, routeName, onPress) => {
     if (this.state.spinners[btnName]) {
-      return <Button style={Styles.footerButton}><ActivityIndicator color="white" /></Button>;
+      return <Button style={Styles.footerButtonSpinning}><ActivityIndicator color="white" /></Button>;
+    }
+    if (btnName === 'checkIn') {
+      return (
+        <Button vertical onPress={this.onPressCheckIn} style={Styles.checkInButton}>
+          <Icon style={Styles.checkInButtonIcon} name="md-pin" />
+        </Button>
+      );
     }
     const style = this.isRouteActive(routeName) ? Styles.footerButtonActive : Styles.footerButton;
     return (
@@ -164,7 +160,7 @@ export default class GlobalFooterComponent extends React.Component {
         <FooterTab style={Styles.footerTab}>
           {this.renderButton('home', 'CheckInList', this.onPressHome)}
           {this.renderButton('photos', 'PhotoGallery', this.onPressGallery)}
-          {this.renderCheckInButton()}
+          {this.renderButton('checkIn', null, null)}
           {this.renderButton('nearby', 'CheckInNearby', this.onPressNearby)}
           {this.renderButton('logout', null, this.onPressLogout)}
         </FooterTab>
