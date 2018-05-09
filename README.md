@@ -103,5 +103,5 @@ TODO...
 
 ## Attributions
 
-Avatar Icons - https://www.flaticon.com/packs/avatar-set
-Image Upload Placeholder - https://www.flaticon.com/packs/photography-15
+- Avatar Icons - https://www.flaticon.com/packs/avatar-set
+- Image Upload Placeholder - https://www.flaticon.com/packs/photography-15
