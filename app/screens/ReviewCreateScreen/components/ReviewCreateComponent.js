@@ -9,20 +9,16 @@ import {
   Body,
   Content,
   Text,
-  Card,
-  CardItem,
   Button,
-  Input,
   Icon,
 } from 'native-base';
 import {
   Keyboard,
 } from 'react-native';
 
-import PlaceContent from './PlaceContent/PlaceContent';
 import CreateReviewFooter from './CreateReviewFooter/CreateReviewFooter';
+import ReviewCreateContent from './ReviewCreateContent/ReviewCreateContent';
 import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
-import ImageBanner from './ImageBanner/ImageBanner';
 
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -129,40 +125,6 @@ export default class ReviewCreateComponent extends React.Component {
     );
   }
 
-  renderContent = () => {
-    const { rating, pricingLevel, name, address } = this.props.selectedLocation;
-    return (
-      <Content padder>
-        <Card>
-          <CardItem>
-            <PlaceContent
-              rating={rating}
-              pricingLevel={pricingLevel}
-              name={name}
-              address={address}
-            />
-          </CardItem>
-        </Card>
-        <ImageBanner />
-        <Card>
-          <CardItem style={Styles.placeCommentItem}>
-            <Input
-              placeholder="Add any additional comments and share your experience at this restaurant..."
-              onFocus={this.onFocusComment}
-              style={Styles.commentInput}
-              onChangeText={this.onChangeTextComment}
-              maxLength={2048}
-              autoGrow
-              multiline
-              defaultValue={this.review.comment}
-              onBlur={this.onPressDone}
-            />
-          </CardItem>
-        </Card>
-      </Content>
-    );
-  }
-
   render() {
     const { latitude, longitude } = this.props.selectedLocation;
     return (
@@ -170,10 +132,16 @@ export default class ReviewCreateComponent extends React.Component {
         {this.renderHeader()}
         <Content>
           <GenericStaticMap latitude={latitude} longitude={longitude} />
-          {this.renderContent()}
+          <ReviewCreateContent
+            selectedLocation={this.props.selectedLocation}
+            defaultCommentValue={this.review.comment}
+            onCommentFocus={this.onFocusComment}
+            onCommentBlur={this.onPressDone}
+            onCommentChange={this.onChangeTextComment}
+          />
         </Content>
         {
-          this.state.isWritingComment ? null :
+          !this.state.isWritingComment &&
             <CreateReviewFooter onPress={this.onPressSubmit} status={this.state.createReviewState} />
         }
       </Container>
