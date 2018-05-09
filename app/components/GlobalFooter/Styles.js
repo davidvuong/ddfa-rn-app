@@ -25,7 +25,7 @@ export default {
   checkInButton: {
     ...footerButton,
     alignSelf: 'center',
-    maxWidth: 72,
+    maxWidth: 70,
   },
   checkInButtonIcon: {
     color: 'white',
