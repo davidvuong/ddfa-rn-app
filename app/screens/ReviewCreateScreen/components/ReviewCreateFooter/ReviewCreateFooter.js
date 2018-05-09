@@ -9,7 +9,7 @@ import {
 
 import Styles from './Styles';
 
-const CreateReviewFooter = ({ onPress, status }) => {
+const ReviewCreateFooter = ({ onPress, status }) => {
   const getButtonText = () => {
     switch (status) {
       case 'IDLE':
@@ -36,4 +36,4 @@ const CreateReviewFooter = ({ onPress, status }) => {
   );
 };
 
-export default CreateReviewFooter;
+export default ReviewCreateFooter;

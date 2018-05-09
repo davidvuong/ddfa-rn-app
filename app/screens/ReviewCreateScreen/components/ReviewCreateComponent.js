@@ -16,7 +16,7 @@ import {
   Keyboard,
 } from 'react-native';
 
-import CreateReviewFooter from './CreateReviewFooter/CreateReviewFooter';
+import ReviewCreateFooter from './ReviewCreateFooter/ReviewCreateFooter';
 import ReviewCreateContent from './ReviewCreateContent/ReviewCreateContent';
 import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
 
@@ -142,7 +142,7 @@ export default class ReviewCreateComponent extends React.Component {
         </Content>
         {
           !this.state.isWritingComment &&
-            <CreateReviewFooter onPress={this.onPressSubmit} status={this.state.createReviewState} />
+            <ReviewCreateFooter onPress={this.onPressSubmit} status={this.state.createReviewState} />
         }
       </Container>
     );
