@@ -41,7 +41,6 @@ export default class ReviewCreateComponent extends React.Component {
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
-    console.log(this);
     this.setState({ createReviewState: 'CREATING' });
     const { comment, amountPaid, currency, foodRating, environmentRating, serviceRating } = this.review;
     const checkInId = this.props.selectedLocation.checkInId; // eslint-disable-line prefer-destructuring
