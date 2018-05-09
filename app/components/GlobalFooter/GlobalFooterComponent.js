@@ -65,7 +65,7 @@ export default class GlobalFooterComponent extends React.Component {
       const { latitude, longitude } = position.coords;
       this.props.setSelectedLocation({ latitude, longitude }); // FIXME: Sharing with others.
       navigateAndReset('CheckInNearby', this.props.navigation);
-    }, (error) => { console.log(error); }, geoLocationOptions);
+    }, console.debug, geoLocationOptions);
   }
 
   onPressGallery = () => {
