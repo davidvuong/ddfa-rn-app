@@ -11,8 +11,6 @@ import {
   Text,
   Card,
   CardItem,
-  Footer,
-  FooterTab,
   Button,
   Input,
   Icon,
@@ -21,8 +19,10 @@ import {
   Keyboard,
 } from 'react-native';
 
-import PlaceContentCard from './PlaceContentCard/PlaceContentCard';
+import PlaceContent from './PlaceContent/PlaceContent';
+import CreateReviewFooter from './CreateReviewFooter/CreateReviewFooter';
 import GenericStaticMap from '../../../components/GenericStaticMap/GenericStaticMap';
+import ImageBanner from './ImageBanner/ImageBanner';
 
 import navigationOptions from '../NavigationOptions';
 import Styles from '../Styles';
@@ -52,6 +52,7 @@ export default class ReviewCreateComponent extends React.Component {
   onPressSubmit = () => {
     if (this.state.isCreatingReview) { return null; }
 
+    console.log(this);
     this.setState({ createReviewState: 'CREATING' });
     const { comment, amountPaid, currency, foodRating, environmentRating, serviceRating } = this.review;
     const checkInId = this.props.selectedLocation.checkInId; // eslint-disable-line prefer-destructuring
@@ -132,12 +133,17 @@ export default class ReviewCreateComponent extends React.Component {
     const { rating, pricingLevel, name, address } = this.props.selectedLocation;
     return (
       <Content padder>
-        <PlaceContentCard
-          rating={rating}
-          pricingLevel={pricingLevel}
-          name={name}
-          address={address}
-        />
+        <Card>
+          <CardItem>
+            <PlaceContent
+              rating={rating}
+              pricingLevel={pricingLevel}
+              name={name}
+              address={address}
+            />
+          </CardItem>
+        </Card>
+        <ImageBanner />
         <Card>
           <CardItem style={Styles.placeCommentItem}>
             <Input
@@ -157,35 +163,6 @@ export default class ReviewCreateComponent extends React.Component {
     );
   }
 
-  renderFooter = () => {
-    return (
-      <Footer style={Styles.footerContainer}>
-        <FooterTab style={Styles.footerTab}>
-          <Button onPress={this.onPressSubmit}>
-            <Text style={Styles.footerText}>
-              {
-                (() => {
-                  switch (this.state.createReviewState) {
-                    case 'IDLE':
-                      return 'Submit';
-                    case 'CREATING':
-                      return 'Submitting...';
-                    case 'CREATED':
-                      return 'Success 🎉!';
-                    case 'ERROR':
-                      return 'Failed :(';
-                    default:
-                      return 'Submit';
-                  }
-                })()
-              }
-            </Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    );
-  }
-
   render() {
     const { latitude, longitude } = this.props.selectedLocation;
     return (
@@ -195,7 +172,10 @@ export default class ReviewCreateComponent extends React.Component {
           <GenericStaticMap latitude={latitude} longitude={longitude} />
           {this.renderContent()}
         </Content>
-        {this.state.isWritingComment ? null : this.renderFooter()}
+        {
+          this.state.isWritingComment ? null :
+            <CreateReviewFooter onPress={this.onPressSubmit} status={this.state.createReviewState} />
+        }
       </Container>
     );
   }
