@@ -1,6 +1,6 @@
 # ddfa-rn-app
 
-:warning: This has been deprecated. If you're interested in the project please refer to [https://github.com/davidvuong/ddfa](davidvuong/ddfa) :warning:
+:warning: This has been deprecated. If you're interested in the project please refer to [https://github.com/davidvuong/ddfa](https://github.com/davidvuong/ddfa) :warning:
 
 **Welcome to ddfa-rn-app!**
 
