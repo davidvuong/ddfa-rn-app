@@ -1,5 +1,7 @@
 # ddfa-rn-app
 
+:warning: This has been deprecated. If you're interested in the project please refer to [https://github.com/davidvuong/ddfa](davidvuong/ddfa) :warning:
+
 **Welcome to ddfa-rn-app!**
 
 **DDFA (Double D Food Adventures)** is a mobile app I use to track of restaurants I visit with my partner. It helps us decide where to (or not to) eat, it tracks our rating (food, service, environment), our photos, etc.
